@@ -1,0 +1,88 @@
+name: flutter_boiler_plate
+description: A flutter boiler plate code for faster development time
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  dio: ^3.0.9
+  rxdart: ^0.23.1
+  toast: ^0.1.5
+  cached_network_image: ^2.0.0
+  font_awesome_flutter: ^8.7.0
+  material_design_icons_flutter: ^4.0.5045
+  provider: ^4.0.4
+  get_it: ^4.0.1
+  intl: ^0.16.0
+  easy_localization: ^2.0.1+3
+  firebase_core: ^0.4.4+3
+  flutter_secure_storage: ^3.3.1+1
+  shared_preferences: ^0.5.6+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter  
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app-icon.png"
+
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - resources/language/en-US.json
+    - resources/language/km-KH.json
+
+  fonts:
+    - family: GoogleSans
+      fonts:
+        - asset: assets/fonts/GoogleSans-Regular.ttf
+        - asset: assets/fonts/GoogleSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/GoogleSans-Medium.ttf
+          weight: 500
+  
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
