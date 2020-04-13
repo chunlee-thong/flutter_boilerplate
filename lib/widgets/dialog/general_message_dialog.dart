@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/constant/style.dart';
+import '../../constant/style.dart';
 
 class GeneralMessageDialog extends StatelessWidget {
   final String title;

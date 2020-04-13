@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/dialog/general_message_dialog.dart';
+
+import 'dialog/general_message_dialog.dart';
 
 class UIHelper {
   static Widget verticalSpace([double height = 8]) {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/pages/home_page/home_page.dart';
-import 'package:flutter_boiler_plate/utils/navigator.dart';
-
 import '../../constant/colors.dart';
+import '../home_page/home_page.dart';
+import '../../utils/navigator.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
