@@ -210,6 +210,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.0"
+  jin_widget_helper:
+    dependency: "direct main"
+    description:
+      name: jin_widget_helper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   js:
     dependency: transitive
     description:
