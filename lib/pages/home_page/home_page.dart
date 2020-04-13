@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/buttons/small_icon_button.dart';
 import '../../widgets/UI_helper.dart';
 import '../../widgets/state_widgets/connection_checker.dart';
 
@@ -30,6 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
               Switch.adaptive(
                 onChanged: (value) {},
                 value: true,
+              ),
+              SmallIconButton(
+                onTap: () {},
+                backgroundColor: Colors.red,
+                icon: Icon(Icons.add),
               ),
             ],
           ),
