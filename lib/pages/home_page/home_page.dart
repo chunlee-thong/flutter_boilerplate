@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/widgets/UI_helper.dart';
+import 'package:flutter_boiler_plate/widgets/state_widgets/connection_checker.dart';
+
+import '../../constant/colors.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -14,16 +17,27 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter Boilerplate")),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              child: Text('horse').tr(context: context, gender: 'female'),
-              onPressed: () {
-                UIHelper.showGeneralMessageDialog(context, "Hello world");
-              },
-            ),
-          ],
+        child: ConnectionChecker(
+          reactToConnectionChange: true,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                child: Text('horse').tr(context: context, gender: 'female'),
+                color: primaryColor,
+                onPressed: () async {
+                  dynamic value = await UIHelper.showGeneralMessageDialog(context, "Hello world");
+                  print("return value: $value");
+                },
+              ),
+              Card(
+                child: FlatButton(
+                  child: Text("Click me"),
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

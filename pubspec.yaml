@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^0.4.4+3
   flutter_secure_storage: ^3.3.1+1
   shared_preferences: ^0.5.6+3
+  connectivity: ^0.4.8+2
 
 dev_dependencies:
   flutter_test:

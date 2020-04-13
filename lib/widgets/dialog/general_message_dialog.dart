@@ -22,7 +22,7 @@ class GeneralMessageDialog extends StatelessWidget {
         FlatButton(
           child: Text(confirmText),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           },
         ),
       ],

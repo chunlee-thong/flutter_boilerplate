@@ -10,8 +10,8 @@ class UIHelper {
     return SizedBox(width: width);
   }
 
-  static void showGeneralMessageDialog(BuildContext context, String message) {
-    showDialog(
+  static Future<T> showGeneralMessageDialog<T>(BuildContext context, String message) {
+    return showDialog(
       context: context,
       builder: (context) => GeneralMessageDialog(
         content: message,

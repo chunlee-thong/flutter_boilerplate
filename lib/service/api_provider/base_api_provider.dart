@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class BaseApiProvider {
   final dio = Dio()
-    ..options.baseUrl = AppConstant.BASE_URL
+    ..options.baseUrl = ""
     ..options.connectTimeout = 20000
     ..options.receiveTimeout = 20000;
 
