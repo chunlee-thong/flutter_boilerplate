@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/constant/colors.dart';
-import 'package:jin_widget_helper/small_icon_button.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../widgets/UI_helper.dart';
-import '../../widgets/state_widgets/connection_checker.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
