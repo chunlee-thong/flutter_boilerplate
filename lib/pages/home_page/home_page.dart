@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/constant/colors.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-import '../../widgets/UI_helper.dart';
+import '../../widgets/UI_helper.dart' as Local;
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -10,6 +10,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var data = EasyLocalization.of(context);
@@ -24,7 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 child: Text('horse').tr(context: context, gender: 'female'),
                 onPressed: () async {
-                  dynamic value = await UIHelper.showGeneralMessageDialog(context, "Hello world");
+                  dynamic value = await Local.UIHelper.showGeneralMessageDialog(
+                      context, "Hello world");
                   print("return value: $value");
                 },
               ),
