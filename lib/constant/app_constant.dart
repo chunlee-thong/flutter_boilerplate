@@ -1,4 +1,4 @@
 class AppConstant {
-  static final String BASE_URL = "";
-  static final String APP_VERSION = "1.0.0";
+  static const String BASE_URL = "";
+  static const String APP_VERSION = "1.0.0";
 }
