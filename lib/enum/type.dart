@@ -1,1 +1,1 @@
-enum FlutterType { Beginner, Intermediate, Advanced }
+enum FlutterSkill { Beginner, Intermediate, Advanced }
