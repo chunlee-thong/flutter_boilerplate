@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -23,37 +25,28 @@ class BaseApiProvider {
   }
 
   void handleExceptionError(dynamic error) {
+    print("Exception caught: ${error.toString()}");
+    String errorMessage = "An unexpected error occur!";
+    //Dio Errpr
     if (error is DioError) {
-      String errorDescription = "Something went wrong.";
-      switch (error.type) {
-        case DioErrorType.CANCEL:
-          errorDescription = "Request cancelled";
-          break;
-        case DioErrorType.CONNECT_TIMEOUT:
-          errorDescription =
-              "Connection timeout. Please check your internet connection";
-          break;
-        case DioErrorType.DEFAULT:
-          errorDescription = "Connection failed due to internet connection";
-          break;
-        case DioErrorType.RECEIVE_TIMEOUT:
-          errorDescription = "Receive timeout";
-          break;
-        case DioErrorType.RESPONSE:
-          errorDescription =
-              "Invalid status code: ${error.response.statusCode}";
-          break;
-        case DioErrorType.SEND_TIMEOUT:
-          errorDescription = "Send Connection timeout";
-          break;
+      if (error.error is SocketException) {
+        errorMessage =
+            'Error connecting to server. Please check your internet connection or Try again later!';
+      } else if (error.type == DioErrorType.CONNECT_TIMEOUT) {
+        errorMessage =
+            "Connection timeout. Please check your internet connection!";
+      } else if (error.type == DioErrorType.RESPONSE) {
+        errorMessage = "${error.response.statusCode}: $errorMessage";
       }
+      throw errorMessage;
 
-      if (error.message.contains('SocketException')) {
-        errorDescription = 'No internet connection!';
-      }
-      throw errorDescription;
+      //Json convert error
+    } else if (error is TypeError) {
+      errorMessage = "Convertion error";
+      throw errorMessage;
+      //Error message from server
     } else {
-      throw "Something went wrong!";
+      throw error;
     }
   }
 }
