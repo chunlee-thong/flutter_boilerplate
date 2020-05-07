@@ -24,7 +24,7 @@ class BaseApiProvider {
 
   void handleExceptionError(dynamic error) {
     if (error is DioError) {
-      String errorDescription;
+      String errorDescription = "Something went wrong.";
       switch (error.type) {
         case DioErrorType.CANCEL:
           errorDescription = "Request cancelled";
