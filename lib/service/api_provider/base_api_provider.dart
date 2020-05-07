@@ -27,7 +27,7 @@ class BaseApiProvider {
   void handleExceptionError(dynamic error) {
     print("Exception caught: ${error.toString()}");
     String errorMessage = "An unexpected error occur!";
-    //Dio Errpr
+    //Dio Error
     if (error is DioError) {
       if (error.error is SocketException) {
         errorMessage =
