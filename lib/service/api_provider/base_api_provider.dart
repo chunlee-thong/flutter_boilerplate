@@ -1,27 +1,40 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class BaseApiProvider {
   final dio = Dio()
-    ..options.baseUrl = ""
+    ..options.baseUrl = AppConstant.BASE_URL
     ..options.connectTimeout = 20000
     ..options.receiveTimeout = 20000;
 
   final fss = FlutterSecureStorage();
 
   BaseApiProvider() {
-    dio.interceptors
-        .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-      print("${options.method}: ${options.path}");
-      return options;
-    }, onResponse: (Response response) async {
-      return response; // continue
-    }, onError: (DioError error) async {
-      print('Dio Error:' + error.message);
-      return error; //continue
-    }));
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (RequestOptions options) async {
+          print("${options.method}: ${options.path}");
+          return options;
+        },
+        onResponse: (Response response) async {
+          return response; // continue
+        },
+        onError: (DioError error) async {
+          print('Dio Error:' + error.message);
+          return error; //continue
+        },
+      ),
+    );
+
+    dio.interceptors.add(
+      DioCacheManager(
+        CacheConfig(baseUrl: AppConstant.BASE_URL),
+      ).interceptor,
+    );
   }
 
   void handleExceptionError(dynamic error) {

@@ -197,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.9"
+  dio_http_cache:
+    dependency: "direct main"
+    description:
+      name: dio_http_cache
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.6"
   easy_localization:
     dependency: "direct main"
     description:
@@ -392,6 +399,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  json_serializable:
+    dependency: transitive
+    description:
+      name: json_serializable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.0"
   logging:
     dependency: transitive
     description:
