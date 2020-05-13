@@ -55,7 +55,7 @@ class BaseApiProvider {
 
       //Json convert error
     } else if (error is TypeError) {
-      errorMessage = "Convertion error";
+      errorMessage = "Convertion error: $error";
       throw errorMessage;
       //Error message from server
     } else {

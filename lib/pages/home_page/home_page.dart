@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../constant/colors.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-import '../../widgets/UI_helper.dart' as Local;
+import '../../widgets/UI_helper.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 child: Text('horse').tr(context: context, gender: 'female'),
                 onPressed: () async {
-                  dynamic value = await Local.UIHelper.showGeneralMessageDialog(
+                  dynamic value = await WidgetHelper.showGeneralMessageDialog(
                       context, "Hello world");
                   print("return value: $value");
                 },
