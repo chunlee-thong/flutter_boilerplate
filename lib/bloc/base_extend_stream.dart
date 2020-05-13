@@ -1,11 +1,9 @@
-
 import 'package:rxdart/rxdart.dart';
+import 'base_repository.dart';
 
-import 'base_bloc.dart';
-
-class BaseExtendBloc<T> extends BaseBloc {
+class BaseStream<T> extends BaseRepository {
   BehaviorSubject<T> controller;
-  BaseExtendBloc() {
+  BaseStream() {
     controller = BehaviorSubject<T>();
   }
 

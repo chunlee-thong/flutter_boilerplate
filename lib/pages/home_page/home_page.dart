@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/widgets/common/loading_widget.dart';
 import '../../constant/colors.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-import '../../widgets/UI_helper.dart';
+import '../../widgets/widget_helper.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -26,23 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
+              ActionButton(
                 child: Text('horse').tr(context: context, gender: 'female'),
                 onPressed: () async {
                   dynamic value = await WidgetHelper.showGeneralMessageDialog(
                       context, "Hello world");
                   print("return value: $value");
                 },
-              ),
-              Switch.adaptive(
-                onChanged: (value) {},
-                value: true,
-              ),
-              SmallIconButton(
-                onTap: () {},
-                backgroundColor: primaryColor,
-                borderRadius: 32,
-                icon: Icon(Icons.add),
               ),
             ],
           ),
