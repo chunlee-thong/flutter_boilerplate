@@ -6,7 +6,7 @@ class WidgetHelper {
       BuildContext context, String message) {
     return showDialog(
       context: context,
-      builder: (context) => GeneralMessageDialog(
+      builder: (context) => JinSimpleDialog(
         content: message,
       ),
     );

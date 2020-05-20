@@ -4,5 +4,6 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 const Color white = Color.fromRGBO(0, 0, 0, 1);
 
-MaterialColor primaryColor = ColorUtils.hexColorToMaterialColor(0xFF9efcff);
-MaterialColor secondaryColor = ColorUtils.hexColorToMaterialColor(0xFFfaaa81);
+MaterialColor primaryColor = JinColorUtils.hexColorToMaterialColor(0xFF9efcff);
+MaterialColor secondaryColor =
+    JinColorUtils.hexColorToMaterialColor(0xFFfaaa81);
