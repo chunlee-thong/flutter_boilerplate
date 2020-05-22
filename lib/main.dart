@@ -9,6 +9,7 @@ import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
 
 GetIt getIt = GetIt.instance;
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void registerLocator() {
   //getIt.registerSingleton<DummyModel>(DummyModel());
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Boilerplate',
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         primarySwatch: primaryColor,
         accentColor: secondaryColor,

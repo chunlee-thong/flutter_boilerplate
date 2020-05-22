@@ -21,6 +21,7 @@ class BaseApiProvider {
           return options;
         },
         onResponse: (Response response) async {
+          print("Http response => ${response.data}");
           return response; // continue
         },
         onError: (DioError error) async {
@@ -37,7 +38,7 @@ class BaseApiProvider {
     );
   }
 
-  void handleExceptionError(dynamic error) {
+  String handleExceptionError(dynamic error) {
     print("Exception caught: ${error.toString()}");
     String errorMessage = "An unexpected error occur!";
     //Dio Error
@@ -51,15 +52,23 @@ class BaseApiProvider {
       } else if (error.type == DioErrorType.RESPONSE) {
         errorMessage = "${error.response.statusCode}: $errorMessage";
       }
-      throw errorMessage;
+      return errorMessage;
 
       //Json convert error
     } else if (error is TypeError) {
       errorMessage = "Convertion error: $error";
-      throw errorMessage;
+      return errorMessage;
       //Error message from server
     } else {
-      throw error;
+      return error.toString();
+    }
+  }
+
+  Future<T> request<T>(Function onHttpRequest) async {
+    try {
+      return await onHttpRequest();
+    } catch (exception) {
+      throw handleExceptionError(exception);
     }
   }
 }

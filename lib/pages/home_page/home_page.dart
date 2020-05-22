@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/common/loading_widget.dart';
-import '../../constant/colors.dart';
+import 'package:flutter_boiler_plate/service/api_provider/mock_api_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../widgets/widget_helper.dart';
 
@@ -40,11 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (data.locale == Locale('en', 'US'))
-            data.locale = Locale('km', 'KH');
-          else
-            data.locale = Locale('en', 'US');
+        onPressed: () async {
+          try {
+            Map<String, dynamic> data = await MockApiProvider().loginUser();
+          } catch (e) {
+            WidgetHelper.showGeneralMessageDialog(context, e.toString());
+          }
         },
         child: Icon(Icons.language),
       ),
