@@ -15,6 +15,14 @@ class BaseStream<T> extends BaseRepository {
     if (!controller.isClosed) controller.add(data);
   }
 
+  void operation(Function doingOperation) async {
+    try {
+      await doingOperation();
+    } catch (exception) {
+      this.stream.addError(exception.toString());
+    }
+  }
+
   void addError(dynamic error) {
     if (!controller.isClosed) controller.addError(error);
   }
