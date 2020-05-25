@@ -64,7 +64,7 @@ class BaseApiProvider {
     }
   }
 
-  Future<T> request<T>(Function onHttpRequest) async {
+  Future<T> onRequest<T>(Function onHttpRequest) async {
     try {
       return await onHttpRequest();
     } catch (exception) {

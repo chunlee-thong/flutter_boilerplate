@@ -19,6 +19,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void dispose() {
+    baseStream.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var data = EasyLocalization.of(context);
     return Scaffold(
@@ -39,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               StreamHandler(
                 stream: baseStream.stream,
+                error: (error) => Text(error, textAlign: TextAlign.center),
                 ready: (data) {
                   return Text(data.toString());
                 },
@@ -50,11 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           baseStream.operation(() async {
-            dynamic data = await MockApiProvider().loginUser();
-            baseStream.addData(data);
+            return await MockApiProvider().loginUser();
           });
         },
-        child: Icon(Icons.language),
+        child: Icon(Icons.arrow_forward),
       ),
     );
   }

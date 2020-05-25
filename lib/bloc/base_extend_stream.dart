@@ -17,9 +17,10 @@ class BaseStream<T> extends BaseRepository {
 
   void operation(Function doingOperation) async {
     try {
-      await doingOperation();
+      T data = await doingOperation();
+      this.addData(data);
     } catch (exception) {
-      this.stream.addError(exception.toString());
+      this.addError(exception.toString());
     }
   }
 
@@ -27,7 +28,8 @@ class BaseStream<T> extends BaseRepository {
     if (!controller.isClosed) controller.addError(error);
   }
 
-  void close() {
+  void dispose() async {
+    await controller.drain();
     controller.close();
   }
 }

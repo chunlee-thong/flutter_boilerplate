@@ -3,7 +3,7 @@ import 'package:flutter_boiler_plate/service/api_provider/base_api_provider.dart
 
 class MockApiProvider extends BaseApiProvider {
   Future<dynamic> loginUser() async {
-    return request(() async {
+    return onRequest(() async {
       Response response = await dio.post("/api/user/login", data: {
         "email": "chunlee@gmail.com",
         "password": "123456",
