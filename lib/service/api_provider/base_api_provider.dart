@@ -38,6 +38,14 @@ class BaseApiProvider {
     );
   }
 
+  Future<T> onRequest<T>(Function onHttpRequest) async {
+    try {
+      return await onHttpRequest();
+    } catch (exception) {
+      throw handleExceptionError(exception);
+    }
+  }
+
   String handleExceptionError(dynamic error) {
     print("Exception caught: ${error.toString()}");
     String errorMessage = "An unexpected error occur!";
@@ -61,14 +69,6 @@ class BaseApiProvider {
       //Error message from server
     } else {
       return error.toString();
-    }
-  }
-
-  Future<T> onRequest<T>(Function onHttpRequest) async {
-    try {
-      return await onHttpRequest();
-    } catch (exception) {
-      throw handleExceptionError(exception);
     }
   }
 }
