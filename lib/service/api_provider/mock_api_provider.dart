@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boiler_plate/service/api_provider/base_api_provider.dart';
+import 'base_api_provider.dart';
 
 class MockApiProvider extends BaseApiProvider {
   Future<dynamic> loginUser() async {

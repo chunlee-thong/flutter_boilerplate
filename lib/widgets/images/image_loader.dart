@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/common/loading_widget.dart';
+import '../common/loading_widget.dart';
 
 class ImageLoader extends StatelessWidget {
   final String imageUrl;
