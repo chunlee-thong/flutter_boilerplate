@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
+
 import '../../bloc/base_extend_stream.dart';
 import '../../service/api_provider/mock_api_provider.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../widgets/widget_helper.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -38,8 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ActionButton(
                 child: Text('horse').tr(context: context, gender: 'female'),
                 onPressed: () async {
-                  dynamic value = await WidgetHelper.showGeneralMessageDialog(
-                      context, "Hello world");
+                  dynamic value = await WidgetHelper.showGeneralMessageDialog(context, "Hello world");
                   print("return value: $value");
                 },
               ),
