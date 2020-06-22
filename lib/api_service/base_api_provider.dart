@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:flutter_boiler_plate/api_service/base_http_exception.dart';
 import './../constant/app_constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -12,6 +13,11 @@ class BaseApiProvider {
     ..options.receiveTimeout = 20000;
 
   final fss = FlutterSecureStorage();
+  final unexpectedErrorMessage = "An unexpected error occur!";
+  final socketErrorMessage =
+      "Error connecting to server. Please check your internet connection or Try again later!";
+  final timeOutMessage =
+      "Connection timeout. Please check your internet connection or Try agian later!";
 
   BaseApiProvider() {
     dio.interceptors.add(
@@ -41,34 +47,23 @@ class BaseApiProvider {
   Future<T> onRequest<T>(Function onHttpRequest) async {
     try {
       return await onHttpRequest();
-    } catch (exception) {
-      throw handleExceptionError(exception);
-    }
-  }
-
-  String handleExceptionError(dynamic error) {
-    print("Exception caught: ${error.toString()}");
-    String errorMessage = "An unexpected error occur!";
-    //Dio Error
-    if (error is DioError) {
-      if (error.error is SocketException) {
-        errorMessage =
-            'Error connecting to server. Please check your internet connection or Try again later!';
-      } else if (error.type == DioErrorType.CONNECT_TIMEOUT) {
-        errorMessage =
-            "Connection timeout. Please check your internet connection!";
-      } else if (error.type == DioErrorType.RESPONSE) {
-        errorMessage = "${error.response.statusCode}: $errorMessage";
+    } on TypeError catch (exception) {
+      print("Type Error Exception: ${exception.toString()}");
+      throw exception;
+    } on DioError catch (exception) {
+      print("Dio Exception catch: ${exception.toString()}");
+      if (exception.error is SocketException) {
+        throw DioErrorException(socketErrorMessage);
+      } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
+        throw DioErrorException(timeOutMessage);
+      } else if (exception.type == DioErrorType.RESPONSE) {
+        throw DioErrorException(
+            "${exception.response.statusCode}: $unexpectedErrorMessage");
+      } else {
+        throw ServerErrorException(unexpectedErrorMessage);
       }
-      return errorMessage;
-
-      //Json convert error
-    } else if (error is TypeError) {
-      errorMessage = "Convertion error: $error";
-      return errorMessage;
-      //Error message from server
-    } else {
-      return error.toString();
+    } catch (exception) {
+      throw ServerResponseException(exception.toString());
     }
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter_boiler_plate/api_service/base_http_exception.dart';
 import 'package:rxdart/rxdart.dart';
 import 'base_repository.dart';
 
@@ -15,11 +18,16 @@ class BaseStream<T> extends BaseRepository {
     if (!controller.isClosed) controller.add(data);
   }
 
-  void operation(Function doingOperation) async {
+  void operation(Function doingOperation,
+      {bool loadingOnRefesh = false}) async {
     try {
+      if (loadingOnRefesh) this.addData(null);
       T data = await doingOperation();
       this.addData(data);
-    } catch (exception) {
+    } on TypeError catch (exception) {
+      print(exception.stackTrace.toString());
+      this.addError("Convertion error occur!");
+    } on BaseHttpException catch (exception) {
       this.addError(exception.toString());
     }
   }

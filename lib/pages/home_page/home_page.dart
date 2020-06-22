@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/model/dummy_model.dart';
 import '../../api_service/mock_api_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../bloc/base_extend_stream.dart';
@@ -11,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  BaseStream<dynamic> baseStream = BaseStream();
+  BaseStream<LoginResponse> baseStream = BaseStream();
 
   @override
   void initState() {
@@ -43,11 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   print("return value: $value");
                 },
               ),
-              StreamHandler(
+              StreamHandler<LoginResponse>(
                 stream: baseStream.stream,
+                initialData: LoginResponse(message: "Not login yet"),
                 error: (error) => Text(error, textAlign: TextAlign.center),
                 ready: (data) {
-                  return Text(data.toString());
+                  return Text(data.message);
                 },
               ),
             ],
@@ -58,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () async {
           baseStream.operation(() async {
             return await MockApiProvider().loginUser();
-          });
+          }, loadingOnRefesh: true);
         },
         child: Icon(Icons.arrow_forward),
       ),
