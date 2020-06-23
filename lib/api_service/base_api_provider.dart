@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -11,6 +12,8 @@ class BaseApiProvider {
     ..options.baseUrl = AppConstant.BASE_URL
     ..options.connectTimeout = 20000
     ..options.receiveTimeout = 20000;
+  static JsonDecoder decoder = JsonDecoder();
+  static JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
   final fss = FlutterSecureStorage();
   final unexpectedErrorMessage = "An unexpected error occur!";
@@ -27,7 +30,7 @@ class BaseApiProvider {
           return options;
         },
         onResponse: (Response response) async {
-          print("Http response => ${response.data}");
+          prettyPrintJson(response.data);
           return response; // continue
         },
         onError: (DioError error) async {
@@ -41,6 +44,12 @@ class BaseApiProvider {
         CacheConfig(baseUrl: AppConstant.BASE_URL),
       ).interceptor,
     );
+  }
+
+  void prettyPrintJson(Map<String, dynamic> input) {
+    //convert map to json String
+    var prettyString = encoder.convert(input);
+    prettyString.split('\n').forEach((element) => print(element));
   }
 
   Future<T> onRequest<T>(Function onHttpRequest) async {

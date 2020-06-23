@@ -26,7 +26,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   font_awesome_flutter: ^8.8.1
   material_design_icons_flutter: ^4.0.5345
-  jin_widget_helper: ^1.3.4
+  jin_widget_helper: ^1.3.5+1
 
   ##network
   dio_http_cache: ^0.2.7
