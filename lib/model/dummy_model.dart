@@ -46,7 +46,7 @@ class Data {
   String signinMethod;
   bool verify;
   String role;
-  int id;
+  String id;
   String name;
   String email;
   String phoneNumber;

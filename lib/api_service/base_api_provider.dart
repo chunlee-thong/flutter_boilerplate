@@ -31,7 +31,6 @@ class BaseApiProvider {
           return response; // continue
         },
         onError: (DioError error) async {
-          print('Dio Error:' + error.message);
           return error; //continue
         },
       ),
@@ -48,8 +47,8 @@ class BaseApiProvider {
     try {
       return await onHttpRequest();
     } on TypeError catch (exception) {
-      print(
-          "Type Error Exception: ${exception.toString()}\nStack strace: ${exception.stackTrace.toString()}");
+      print("Type Error Exception: ${exception.toString()}");
+      print("Stack strace: ${exception.stackTrace.toString()}");
       throw exception;
     } on DioError catch (exception) {
       print("Dio Exception catch: ${exception.toString()}");
