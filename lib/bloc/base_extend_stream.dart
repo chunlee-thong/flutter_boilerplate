@@ -24,15 +24,14 @@ class BaseStream<T> extends BaseRepository {
       if (loadingOnRefesh) this.addData(null);
       T data = await doingOperation();
       this.addData(data);
-    } on TypeError catch (exception) {
-      print(exception.stackTrace.toString());
+    } on TypeError catch (_) {
       this.addError("Convertion error occur!");
     } on BaseHttpException catch (exception) {
       this.addError(exception.toString());
     }
   }
 
-  void addError(dynamic error) {
+  void addError(String error) {
     if (!controller.isClosed) controller.addError(error);
   }
 

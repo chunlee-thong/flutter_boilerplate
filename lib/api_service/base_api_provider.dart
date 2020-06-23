@@ -48,7 +48,8 @@ class BaseApiProvider {
     try {
       return await onHttpRequest();
     } on TypeError catch (exception) {
-      print("Type Error Exception: ${exception.toString()}");
+      print(
+          "Type Error Exception: ${exception.toString()}\nStack strace: ${exception.stackTrace.toString()}");
       throw exception;
     } on DioError catch (exception) {
       print("Dio Exception catch: ${exception.toString()}");
