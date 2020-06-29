@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/model/dummy_model.dart';
+import 'package:provider/provider.dart';
 import '../../api_service/mock_api_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../bloc/base_extend_stream.dart';
@@ -28,42 +29,45 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var data = EasyLocalization.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text("Flutter Boilerplate")),
-      body: Center(
-        child: ConnectionChecker(
-          reactToConnectionChange: true,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ActionButton(
-                child: Text('horse').tr(context: context, gender: 'female'),
-                onPressed: () async {
-                  dynamic value = await WidgetHelper.showGeneralMessageDialog(
-                      context, "Hello world");
-                  print("return value: $value");
-                },
-              ),
-              StreamHandler<LoginResponse>(
-                stream: baseStream.stream,
-                initialData: LoginResponse(message: "Not login yet"),
-                error: (error) => Text(error, textAlign: TextAlign.center),
-                ready: (data) {
-                  return Text(data.message);
-                },
-              ),
-            ],
+    return Provider<BaseStream<LoginResponse>>(
+      create: (_) => baseStream,
+      child: Scaffold(
+        appBar: AppBar(title: Text("Flutter Boilerplate")),
+        body: Center(
+          child: ConnectionChecker(
+            reactToConnectionChange: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                StreamHandler<LoginResponse>(
+                  stream: baseStream.stream,
+                  initialData: LoginResponse(message: "Not login yet"),
+                  error: (error) => Text(error, textAlign: TextAlign.center),
+                  ready: (data) {
+                    return Text(data.message);
+                  },
+                ),
+                LoginButton(),
+              ],
+            ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          baseStream.operation(() async {
-            return await MockApiProvider().loginUser();
-          }, loadingOnRefesh: true);
-        },
-        child: Icon(Icons.arrow_forward),
-      ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var baseStream = Provider.of<BaseStream<LoginResponse>>(context);
+    return ActionButton(
+      onPressed: () async {
+        baseStream.operation(() async {
+          return await MockApiProvider().loginUser();
+        }, loadingOnRefesh: true);
+      },
+      child: Text("Login User"),
     );
   }
 }
