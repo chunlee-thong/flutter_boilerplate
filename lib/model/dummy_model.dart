@@ -1,143 +1,121 @@
-class LoginResponse {
-  LoginResponse({
-    this.status,
-    this.message,
-    this.data,
-    this.token,
-  });
-
-  int status;
-  String message;
-  Data data;
-  String token;
-
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        status: json["status"] == null ? null : json["status"],
-        message: json["message"] == null ? null : json["message"],
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
-        token: json["token"] == null ? null : json["token"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status == null ? null : status,
-        "message": message == null ? null : message,
-        "data": data == null ? null : data.toJson(),
-        "token": token == null ? null : token,
-      };
-}
-
-class Data {
-  Data({
-    this.signinMethod,
-    this.verify,
-    this.role,
+class User {
+  User({
     this.id,
     this.name,
+    this.username,
     this.email,
-    this.phoneNumber,
-    this.profileImg,
-    this.password,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.location,
+    this.address,
+    this.phone,
+    this.website,
+    this.company,
   });
 
-  String signinMethod;
-  bool verify;
-  String role;
-  String id;
+  int id;
   String name;
+  String username;
   String email;
-  String phoneNumber;
-  String profileImg;
-  String password;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int v;
-  Location location;
+  Address address;
+  String phone;
+  String website;
+  Company company;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        signinMethod:
-            json["signin_method"] == null ? null : json["signin_method"],
-        verify: json["verify"] == null ? null : json["verify"],
-        role: json["role"] == null ? null : json["role"],
-        id: json["_id"] == null ? null : json["_id"],
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
+        username: json["username"] == null ? null : json["username"],
         email: json["email"] == null ? null : json["email"],
-        phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
-        profileImg: json["profile_img"] == null ? null : json["profile_img"],
-        password: json["password"] == null ? null : json["password"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        v: json["__v"] == null ? null : json["__v"],
-        location: json["location"] == null
-            ? null
-            : Location.fromJson(json["location"]),
+        address:
+            json["address"] == null ? null : Address.fromJson(json["address"]),
+        phone: json["phone"] == null ? null : json["phone"],
+        website: json["website"] == null ? null : json["website"],
+        company:
+            json["company"] == null ? null : Company.fromJson(json["company"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "signin_method": signinMethod == null ? null : signinMethod,
-        "verify": verify == null ? null : verify,
-        "role": role == null ? null : role,
-        "_id": id == null ? null : id,
+        "id": id == null ? null : id,
         "name": name == null ? null : name,
+        "username": username == null ? null : username,
         "email": email == null ? null : email,
-        "phone_number": phoneNumber == null ? null : phoneNumber,
-        "profile_img": profileImg == null ? null : profileImg,
-        "password": password == null ? null : password,
-        "createdAt": createdAt == null ? null : createdAt.toIso8601String(),
-        "updatedAt": updatedAt == null ? null : updatedAt.toIso8601String(),
-        "__v": v == null ? null : v,
-        "location": location == null ? null : location.toJson(),
+        "address": address == null ? null : address.toJson(),
+        "phone": phone == null ? null : phone,
+        "website": website == null ? null : website,
+        "company": company == null ? null : company.toJson(),
       };
 }
 
-class Location {
-  Location({
-    this.id,
-    this.latitude,
-    this.longitude,
-    this.address,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
+class Address {
+  Address({
+    this.street,
+    this.suite,
+    this.city,
+    this.zipcode,
+    this.geo,
   });
 
-  String id;
-  double latitude;
-  double longitude;
-  String address;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int v;
+  String street;
+  String suite;
+  String city;
+  String zipcode;
+  Geo geo;
 
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-        id: json["_id"] == null ? null : json["_id"],
-        latitude: json["latitude"] == null ? null : json["latitude"].toDouble(),
-        longitude:
-            json["longitude"] == null ? null : json["longitude"].toDouble(),
-        address: json["address"] == null ? null : json["address"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        v: json["__v"] == null ? null : json["__v"],
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
+        street: json["street"] == null ? null : json["street"],
+        suite: json["suite"] == null ? null : json["suite"],
+        city: json["city"] == null ? null : json["city"],
+        zipcode: json["zipcode"] == null ? null : json["zipcode"],
+        geo: json["geo"] == null ? null : Geo.fromJson(json["geo"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id == null ? null : id,
-        "latitude": latitude == null ? null : latitude,
-        "longitude": longitude == null ? null : longitude,
-        "address": address == null ? null : address,
-        "createdAt": createdAt == null ? null : createdAt.toIso8601String(),
-        "updatedAt": updatedAt == null ? null : updatedAt.toIso8601String(),
-        "__v": v == null ? null : v,
+        "street": street == null ? null : street,
+        "suite": suite == null ? null : suite,
+        "city": city == null ? null : city,
+        "zipcode": zipcode == null ? null : zipcode,
+        "geo": geo == null ? null : geo.toJson(),
+      };
+}
+
+class Geo {
+  Geo({
+    this.lat,
+    this.lng,
+  });
+
+  String lat;
+  String lng;
+
+  factory Geo.fromJson(Map<String, dynamic> json) => Geo(
+        lat: json["lat"] == null ? null : json["lat"],
+        lng: json["lng"] == null ? null : json["lng"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat == null ? null : lat,
+        "lng": lng == null ? null : lng,
+      };
+}
+
+class Company {
+  Company({
+    this.name,
+    this.catchPhrase,
+    this.bs,
+  });
+
+  String name;
+  String catchPhrase;
+  String bs;
+
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
+        name: json["name"] == null ? null : json["name"],
+        catchPhrase: json["catchPhrase"] == null ? null : json["catchPhrase"],
+        bs: json["bs"] == null ? null : json["bs"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name == null ? null : name,
+        "catchPhrase": catchPhrase == null ? null : catchPhrase,
+        "bs": bs == null ? null : bs,
       };
 }

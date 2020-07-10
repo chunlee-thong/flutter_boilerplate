@@ -18,8 +18,10 @@ class BaseStream<T> extends BaseRepository {
     if (!controller.isClosed) controller.add(data);
   }
 
-  void operation(Function doingOperation,
-      {bool loadingOnRefesh = false}) async {
+  void operation(
+    Function doingOperation, {
+    bool loadingOnRefesh = false,
+  }) async {
     try {
       if (loadingOnRefesh) this.addData(null);
       T data = await doingOperation();

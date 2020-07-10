@@ -46,7 +46,7 @@ class BaseApiProvider {
     );
   }
 
-  void prettyPrintJson(Map<String, dynamic> input) {
+  void prettyPrintJson(dynamic input) {
     //convert map to json String
     var prettyString = encoder.convert(input);
     prettyString.split('\n').forEach((element) => print(element));
