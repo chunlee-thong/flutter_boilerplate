@@ -1,7 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter_boiler_plate/api_service/base_http_exception.dart';
 import 'package:rxdart/rxdart.dart';
+
+import '../api_service/base_http_exception.dart';
 import 'base_repository.dart';
 
 class BaseStream<T> extends BaseRepository {

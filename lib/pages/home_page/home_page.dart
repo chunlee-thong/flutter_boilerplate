@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/api_service/mock_api_provider.dart';
-import 'package:flutter_boiler_plate/constant/resource_path.dart';
-import 'package:flutter_boiler_plate/model/dummy_model.dart';
-import 'package:flutter_boiler_plate/widgets/common/loading_widget.dart';
-import 'package:provider/provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:provider/provider.dart';
+
+import '../../api_service/mock_api_provider.dart';
 import '../../bloc/base_extend_stream.dart';
+import '../../constant/resource_path.dart';
+import '../../model/dummy_model.dart';
+import '../../widgets/common/loading_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   @override

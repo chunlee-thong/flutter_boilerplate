@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boiler_plate/model/dummy_model.dart';
+
+import '../model/dummy_model.dart';
 import 'base_api_provider.dart';
 
 class MockApiProvider extends BaseApiProvider {

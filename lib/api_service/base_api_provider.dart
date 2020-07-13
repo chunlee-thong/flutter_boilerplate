@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter_boiler_plate/api_service/base_http_exception.dart';
-import './../constant/app_constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import './../constant/app_constant.dart';
+import '../api_service/base_http_exception.dart';
 
 class BaseApiProvider {
   final dio = Dio()
@@ -17,10 +18,8 @@ class BaseApiProvider {
 
   final fss = FlutterSecureStorage();
   final unexpectedErrorMessage = "An unexpected error occur!";
-  final socketErrorMessage =
-      "Error connecting to server. Please check your internet connection or Try again later!";
-  final timeOutMessage =
-      "Connection timeout. Please check your internet connection or Try agian later!";
+  final socketErrorMessage = "Error connecting to server. Please check your internet connection or Try again later!";
+  final timeOutMessage = "Connection timeout. Please check your internet connection or Try agian later!";
 
   BaseApiProvider() {
     dio.interceptors.add(
@@ -66,8 +65,7 @@ class BaseApiProvider {
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
         throw DioErrorException(timeOutMessage);
       } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException(
-            "${exception.response.statusCode}: $unexpectedErrorMessage");
+        throw DioErrorException("${exception.response.statusCode}: $unexpectedErrorMessage");
       } else {
         throw ServerErrorException(unexpectedErrorMessage);
       }
