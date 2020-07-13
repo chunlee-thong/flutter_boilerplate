@@ -1,9 +1,9 @@
-class R{
- static Images images = Images();
+class R {
+  static Images images = Images();
 }
+
 class Images {
-String appicon = "app-icon.png";
+  String appicon = "assets/images/app-icon.png";
 
-String pin = "pin.png";
-
+  String pin = "assets/images/pin.png";
 }
