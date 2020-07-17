@@ -3,7 +3,7 @@ class R {
 }
 
 class Images {
-  String appicon = "assets/images/app-icon.png";
+  String APP_ICON = "assets/images/app-icon.png";
 
-  String pin = "assets/images/pin.png";
+  String PIN_HELLO_NICE = "assets/images/pin hello_nice.png";
 }

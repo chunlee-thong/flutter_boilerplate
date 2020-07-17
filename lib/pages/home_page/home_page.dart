@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text("Flutter Boilerplate"),
           actions: <Widget>[
             IconButton(
-              icon: Image.asset(R.images.appicon),
+              icon: Image.asset(R.images.APP_ICON),
               onPressed: () {},
             )
           ],
