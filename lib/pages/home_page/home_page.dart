@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   BaseStream<List<User>> baseStream = BaseStream();
+
+  bool isLike = false;
 
   Future fetchUsers() async {
     baseStream.operation(() async {
@@ -62,6 +65,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   final user = data[index];
                   return ListTile(
+                    leading: IconToggle(
+                      selectedIconData: Octicons.thumbsup,
+                      unselectedIconData: Octicons.thumbsdown,
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      value: isLike,
+                      onChanged: (value) {
+                        setState(() {
+                          isLike = value;
+                        });
+                      },
+                    ),
                     title: Text(user.name),
                     subtitle: Text(user.email),
                     trailing: Text(user.company.name),
