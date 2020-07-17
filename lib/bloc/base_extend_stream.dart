@@ -18,7 +18,7 @@ class BaseStream<T> extends BaseRepository {
   }
 
   void operation(
-    Function doingOperation, {
+    Future<T> Function() doingOperation, {
     bool loadingOnRefesh = false,
   }) async {
     try {
