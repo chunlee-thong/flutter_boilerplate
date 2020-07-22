@@ -18,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   BaseStream<List<User>> baseStream = BaseStream();
 
   Future fetchUsers() async {
-    baseStream.operation(() async {
+    baseStream.asyncOperation(() async {
       return MockApiProvider().fetchUserList();
     });
   }
