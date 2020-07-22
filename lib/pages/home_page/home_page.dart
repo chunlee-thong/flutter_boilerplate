@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isLike = false;
 
   Future fetchUsers() async {
-    baseStream.operation(() async {
+    baseStream.asyncOperation(() async {
       return MockApiProvider().fetchUserList();
     });
   }

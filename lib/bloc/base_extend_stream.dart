@@ -4,20 +4,23 @@ import '../api_service/base_http_exception.dart';
 import 'base_repository.dart';
 
 class BaseStream<T> extends BaseRepository {
-  BehaviorSubject<T> controller;
-  BaseStream() {
-    controller = BehaviorSubject<T>();
+  BehaviorSubject<T> _controller;
+  BaseStream([T initialData]) {
+    _controller = BehaviorSubject<T>();
+    if (initialData != null) {
+      this.addData(initialData);
+    }
   }
 
-  BehaviorSubject<T> get stream => controller.stream;
+  BehaviorSubject<T> get stream => _controller.stream;
 
-  bool get hasData => controller.hasValue;
+  bool get hasData => _controller.hasValue;
 
   void addData(T data) {
-    if (!controller.isClosed) controller.add(data);
+    if (!_controller.isClosed) _controller.add(data);
   }
 
-  void operation(
+  Future<void> asyncOperation(
     Future<T> Function() doingOperation, {
     bool loadingOnRefesh = false,
   }) async {
@@ -26,18 +29,18 @@ class BaseStream<T> extends BaseRepository {
       T data = await doingOperation();
       this.addData(data);
     } on TypeError catch (_) {
-      this.addError("Convertion error occur!");
+      this.addError("Something went wrong!");
     } on BaseHttpException catch (exception) {
       this.addError(exception.toString());
     }
   }
 
   void addError(String error) {
-    if (!controller.isClosed) controller.addError(error);
+    if (!_controller.isClosed) _controller.addError(error);
   }
 
   void dispose() async {
-    await controller.drain();
-    controller.close();
+    await _controller.drain();
+    _controller.close();
   }
 }
