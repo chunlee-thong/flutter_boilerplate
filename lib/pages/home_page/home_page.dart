@@ -40,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var data = EasyLocalization.of(context);
     return Provider<BaseStream<List<User>>>(
       create: (_) => baseStream,
       child: Scaffold(

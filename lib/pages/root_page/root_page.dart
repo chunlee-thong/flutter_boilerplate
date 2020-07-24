@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/pages/counter_page/counter_page.dart';
 import 'package:flutter_boiler_plate/pages/home_page/home_page.dart';
 import 'package:flutter_boiler_plate/provider/bottom_navigation_provider.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   List<Widget> get pages => [
         MyHomePage(),
-        Container(),
+        CounterPage(),
         Container(),
         Container(),
       ];

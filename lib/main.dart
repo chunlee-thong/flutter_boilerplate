@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/bloc/counter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
 
@@ -26,23 +28,28 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Boilerplate',
-      navigatorKey: navigatorKey,
-      theme: ThemeData(
-        primarySwatch: primaryColor,
-        accentColor: secondaryColor,
-        fontFamily: "GoogleSans",
-      ),
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        EasyLocalization.of(context).delegate,
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => CounterBloc()),
       ],
-      supportedLocales: EasyLocalization.of(context).supportedLocales,
-      locale: EasyLocalization.of(context).locale,
-      home: SplashScreenPage(),
+      child: MaterialApp(
+        title: 'Flutter Boilerplate',
+        navigatorKey: navigatorKey,
+        theme: ThemeData(
+          primarySwatch: primaryColor,
+          accentColor: secondaryColor,
+          fontFamily: "GoogleSans",
+        ),
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          EasyLocalization.of(context).delegate,
+        ],
+        supportedLocales: EasyLocalization.of(context).supportedLocales,
+        locale: EasyLocalization.of(context).locale,
+        home: SplashScreenPage(),
+      ),
     );
   }
 }
