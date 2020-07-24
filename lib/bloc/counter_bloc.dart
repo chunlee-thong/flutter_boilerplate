@@ -6,9 +6,8 @@ class CounterBloc extends BaseStream<int> {
   int get count => _count;
 
   void increment() {
-    super.asyncOperation(() async {
-      return await 10;
-    });
+    _count++;
+    addData(_count);
   }
 
   void decrement() {
