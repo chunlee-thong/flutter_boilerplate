@@ -40,7 +40,6 @@ class BaseStream<T> extends BaseRepository {
   }
 
   void dispose() async {
-    await _controller.drain();
     _controller.close();
   }
 }

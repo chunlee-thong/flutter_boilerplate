@@ -2,7 +2,7 @@ import 'dart:io';
 
 File resourceClass = File("../lib/constant/resource_path.dart");
 String classData =
-    "class R{\n static Images images = Images();\n}\nclass Images {";
+    "class R {\n static Images images = Images();\n}\nclass Images {";
 
 void main() {
   generateFile();
@@ -27,5 +27,5 @@ String generateImageAssetsClass(String path) {
       .split(".")
       .first
       .toUpperCase();
-  return '\nString $imageFieldName = "assets/images/$imageName";\n';
+  return '\n  final String $imageFieldName = "assets/images/$imageName";';
 }

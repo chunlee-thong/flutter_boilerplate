@@ -1,15 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import './api_service/mock_api_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
 
 GetIt getIt = GetIt.instance;
-final navigatorKey = GlobalKey<NavigatorState>();
 
 void registerLocator() {
-  //getIt.registerSingleton<DummyModel>(DummyModel());
+  getIt.registerSingleton<MockApiProvider>(MockApiProvider());
 }
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Boilerplate',
-      navigatorKey: navigatorKey,
+      navigatorKey: JinNavigator.navigatorKey,
       theme: ThemeData(
         primarySwatch: primaryColor,
         accentColor: secondaryColor,
