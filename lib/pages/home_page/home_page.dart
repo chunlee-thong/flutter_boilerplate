@@ -1,14 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
+import '../../bloc/base_stream_consumer.dart';
 
-import '../../api_service/mock_api_provider.dart';
-import '../../bloc/base_extend_stream.dart';
+import '../../bloc/base_stream.dart';
 import '../../constant/resource_path.dart';
-import '../../model/dummy_model.dart';
-import '../../widgets/common/loading_widget.dart';
+import '../../model/response/user_model.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -18,11 +16,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   BaseStream<List<User>> baseStream = BaseStream();
 
-  bool isLike = false;
-
-  Future fetchUsers() async {
-    baseStream.asyncOperation(() async {
-      return MockApiProvider().fetchUserList();
+  Future<void> fetchUsers() async {
+    await baseStream.asyncOperation(() async {
+      return await baseStream.mockApiProvider.fetchUserList();
     });
   }
 
@@ -90,6 +86,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class HomePageBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BaseStreamConsumer<List<User>>(
+      builder: (context, users) {
+        return ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (BuildContext context, int index) {
+            final user = users[index];
+            return ListTile(
+              title: Text(user.name),
+              subtitle: Text(user.email),
+              trailing: Text(user.company.name),
+            );
+          },
+        );
+      },
     );
   }
 }
