@@ -76,9 +76,12 @@ class HomePageBody extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final user = users[index];
             return ListTile(
-              title: Text(user.name),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(user.avatar),
+              ),
+              onTap: () {},
+              title: Text("${user.firstName} ${user.lastName}"),
               subtitle: Text(user.email),
-              trailing: Text(user.company.name),
             );
           },
         );

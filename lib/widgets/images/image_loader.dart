@@ -22,8 +22,8 @@ class ImageLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      width: width,
-      height: height,
+      width: width ?? null,
+      height: height ?? null,
       fit: fit,
       errorWidget: (context, err, obj) {
         if (error != null) return error;
