@@ -41,24 +41,9 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         EasyLocalization.of(context).delegate,
       ],
-      child: MaterialApp(
-        title: 'Flutter Boilerplate',
-        navigatorKey: navigatorKey,
-        theme: ThemeData(
-          primarySwatch: primaryColor,
-          accentColor: secondaryColor,
-          fontFamily: "GoogleSans",
-        ),
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          EasyLocalization.of(context).delegate,
-        ],
-        supportedLocales: EasyLocalization.of(context).supportedLocales,
-        locale: EasyLocalization.of(context).locale,
-        home: SplashScreenPage(),
-      ),
+      supportedLocales: EasyLocalization.of(context).supportedLocales,
+      locale: EasyLocalization.of(context).locale,
+      home: SplashScreenPage(),
     );
   }
 }
