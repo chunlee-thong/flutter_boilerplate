@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 import '../../bloc/base_stream_consumer.dart';
@@ -52,6 +53,10 @@ class _MyHomePageState extends State<MyHomePage>
         body: ConnectionChecker(
           reactToConnectionChange: true,
           child: HomePageBody(),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(FlutterIcons.like1_ant),
         ),
       ),
     );

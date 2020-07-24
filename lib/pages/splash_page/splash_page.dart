@@ -28,7 +28,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       body: Center(
         child: Text(
           "Loading...",
-          style: TextStyle(fontSize: 32, color: Colors.black),
+          style: TextStyle(fontSize: 32, color: Colors.white),
         ),
       ),
     );
