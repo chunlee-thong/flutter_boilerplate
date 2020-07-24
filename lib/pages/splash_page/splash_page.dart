@@ -12,7 +12,7 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   void onSplashing() async {
     await Future.delayed(const Duration(seconds: 1));
-    PageNavigator.pushReplacement(context, RootPage());
+    PageNavigator.pushReplacement(context, RootPage(startPageIndex: 0));
   }
 
   @override

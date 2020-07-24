@@ -12,7 +12,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with AutomaticKeepAliveClientMixin {
   BaseStream<List<User>> baseStream = BaseStream();
 
   Future<void> fetchUsers() async {
@@ -54,6 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class HomePageBody extends StatelessWidget {

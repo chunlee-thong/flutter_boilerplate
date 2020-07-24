@@ -43,13 +43,10 @@ class _RootPageState extends State<RootPage> {
             return true;
           },
           child: Scaffold(
-            body: PageView.builder(
-              itemCount: pages.length,
+            body: PageView(
               controller: state.pageController,
               physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return pages[index];
-              },
+              children: pages,
             ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: state.currentIndex,
