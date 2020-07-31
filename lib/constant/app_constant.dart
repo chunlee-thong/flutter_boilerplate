@@ -5,5 +5,5 @@ class AppConstant {
   static const String APP_VERSION = "1.0.0";
 }
 
-final EN_LOCALE = Locale('en', 'US');
-final KH_LOCALE = Locale('km', 'KH');
+const EN_LOCALE = Locale('en', 'US');
+const KH_LOCALE = Locale('km', 'KH');

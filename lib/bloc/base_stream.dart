@@ -20,18 +20,21 @@ class BaseStream<T> extends BaseRepository {
     if (!_controller.isClosed) _controller.add(data);
   }
 
-  Future<void> asyncOperation(
+  Future<T> asyncOperation(
     Future<T> Function() doingOperation, {
-    bool loadingOnRefesh = false,
+    bool loadingOnRefresh = false,
   }) async {
     try {
-      if (loadingOnRefesh) this.addData(null);
+      if (loadingOnRefresh) this.addData(null);
       T data = await doingOperation();
       this.addData(data);
+      return data;
     } on TypeError catch (_) {
       this.addError("Something went wrong!");
+      return null;
     } on BaseHttpException catch (exception) {
       this.addError(exception.toString());
+      return null;
     }
   }
 
