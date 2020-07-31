@@ -34,14 +34,14 @@ A flutter boiler plate code for faster development time
 
 ### model
 
-    - response: contain your mapping response model from api here
-    - request: contain your own mode class to request api
+    - response:  your mapping response model from api here
+    - request:  your own model class to request api
     - save your common user data model
 
 ### pages
 
     - Each page has their own folder
-    - Each folder has a page file and a widgets folder that contains a widget that only use in that [age]
+    - Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
 
 ### provider
 
@@ -49,11 +49,15 @@ A flutter boiler plate code for faster development time
 
 ### service
 
-    - create your service class
+    - service provider class such as: ImagePickerService ,DialogService, NavigationService.....
 
 ### utils
 
+    - utility function or class
+
 ### widgets
+
+    - global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
 
 ## assets
 
