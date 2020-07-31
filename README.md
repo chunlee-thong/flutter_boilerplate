@@ -18,46 +18,46 @@ A flutter boiler plate code for faster development time
 
 ### api_service
 
-    - create your api service class which extends BaseApiProvider here
+- create your api service class which extends BaseApiProvider here
 
 ### bloc
 
-    - create your own bloc or use existing BaseStream and BaseStreamConsumer to consume your Rest Api with stream
+- create your own bloc or use existing BaseStream and BaseStreamConsumer to consume your Rest Api with stream
 
 ### constant
 
-    - contain your constant file here such as TextStyle, Height, Dimension,.....
+- contain your constant file here such as TextStyle, Height, Dimension,.....
 
 ### enum
 
-    - create your enum here
+- create your enum here
 
 ### model
 
-    - response:  your mapping response model from api here
-    - request:  your own model class to request api
-    - save your common user data model
+- response: your mapping response model from api here
+- request: your own model class to request api
+- save your common user data model
 
 ### pages
 
-    - Each page has their own folder
-    - Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
+- Each page has their own folder
+- Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
 
 ### provider
 
-    - contain your provider classes
+- contain your provider classes
 
 ### service
 
-    - service provider class such as: ImagePickerService ,DialogService, NavigationService.....
+- service provider class such as: ImagePickerService ,DialogService, NavigationService.....
 
 ### utils
 
-    - utility function or class
+- utility function or class
 
 ### widgets
 
-    - global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
+- global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
 
 ## assets
 
