@@ -31,7 +31,7 @@ class BaseApiProvider {
           return options;
         },
         onResponse: (Response response) async {
-          prettyPrintJson(response.data);
+          //prettyPrintJson(response.data);
           return response; // continue
         },
         onError: (DioError error) async {
