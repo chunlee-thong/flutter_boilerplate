@@ -18,8 +18,10 @@ class BaseApiProvider {
 
   final fss = FlutterSecureStorage();
   final unexpectedErrorMessage = "An unexpected error occur!";
-  final socketErrorMessage = "Error connecting to server. Please check your internet connection or Try again later!";
-  final timeOutMessage = "Connection timeout. Please check your internet connection or Try agian later!";
+  final socketErrorMessage =
+      "Error connecting to server. Please check your internet connection or Try again later!";
+  final timeOutMessage =
+      "Connection timeout. Please check your internet connection or Try agian later!";
 
   BaseApiProvider() {
     dio.interceptors.add(
@@ -29,7 +31,7 @@ class BaseApiProvider {
           return options;
         },
         onResponse: (Response response) async {
-          prettyPrintJson(response.data);
+          //prettyPrintJson(response.data);
           return response; // continue
         },
         onError: (DioError error) async {
@@ -65,7 +67,8 @@ class BaseApiProvider {
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
         throw DioErrorException(timeOutMessage);
       } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException("${exception.response.statusCode}: $unexpectedErrorMessage");
+        throw DioErrorException(
+            "${exception.response.statusCode}: $unexpectedErrorMessage");
       } else {
         throw ServerErrorException(unexpectedErrorMessage);
       }

@@ -23,17 +23,28 @@ class BaseStream<T> extends BaseRepository {
   Future<T> asyncOperation(
     Future<T> Function() doingOperation, {
     bool loadingOnRefresh = false,
+    Function(T) onDone,
+    Function(String) onError,
   }) async {
     try {
       if (loadingOnRefresh) this.addData(null);
       T data = await doingOperation();
+      if (onDone != null) onDone(data);
       this.addData(data);
       return data;
     } on TypeError catch (_) {
-      this.addError("Something went wrong!");
+      if (onError != null) {
+        onError("Something went wrong");
+      } else {
+        this.addError("Something went wrong!");
+      }
       return null;
     } on BaseHttpException catch (exception) {
-      this.addError(exception.toString());
+      if (onError != null) {
+        onError(exception.toString());
+      } else {
+        this.addError(exception.toString());
+      }
       return null;
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/images/image_loader.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 import '../../bloc/base_stream_consumer.dart';
