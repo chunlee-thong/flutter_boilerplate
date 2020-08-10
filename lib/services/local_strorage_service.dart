@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class FSS {
+class LocalStorage {
   static const FlutterSecureStorage fss = FlutterSecureStorage();
-
+  static SharedPreferences sharedPreferences;
   static const String TOKEN_KEY = "key.token";
 
   static Future<String> getToken() async {
