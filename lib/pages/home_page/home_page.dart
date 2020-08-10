@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
-import '../../bloc/base_stream_consumer.dart';
+import '../../widgets/base_stream_consumer.dart';
 
-import '../../bloc/base_stream.dart';
+import '../../repository/base_stream.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage>
         ),
         body: ConnectionChecker(
           reactToConnectionChange: true,
-          child: HomePageBody(),
+          child: UserList(),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage>
   bool get wantKeepAlive => true;
 }
 
-class HomePageBody extends StatelessWidget {
+class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStreamConsumer<List<User>>(

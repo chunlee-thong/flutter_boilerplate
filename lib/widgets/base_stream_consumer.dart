@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './base_stream.dart';
-import '../widgets/common/loading_widget.dart';
+import '../repository/base_stream.dart';
+import 'common/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class BaseStreamConsumer<T> extends StatelessWidget {
