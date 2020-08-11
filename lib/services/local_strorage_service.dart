@@ -11,7 +11,7 @@ class LocalStorage {
     return await fss.read(key: TOKEN_KEY);
   }
 
-  static Future<void> write({
+  static Future<void> save({
     @required String key,
     @required String value,
   }) async {

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/api_service/mock_api_provider.dart';
+import 'package:flutter_boiler_plate/main.dart';
+import 'package:flutter_boiler_plate/model/response/user_model.dart';
 import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
+import 'package:flutter_boiler_plate/services/local_strorage_service.dart';
+import 'package:flutter_boiler_plate/widgets/ui_helper.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,15 +14,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
+  MockApiProvider mockApiProvider = getIt<MockApiProvider>();
   final isLoading = false.obs<bool>();
   TextEditingController emailTC;
   TextEditingController passwordTC;
 
   void onLogin() async {
-    handleLoading();
-    await Future.delayed(Duration(seconds: 1));
     if (formKey.currentState.validate()) {
-      PageNavigator.pushReplacement(context, RootPage());
+      handleLoading();
+      try {
+        String token = await mockApiProvider.loginUser(email: emailTC.text, password: passwordTC.text);
+        LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: token);
+        PageNavigator.pushReplacement(context, RootPage());
+      } catch (e) {
+        UIHelper.showGeneralMessageDialog(context, e.toString());
+      } finally {
+        handleLoading();
+      }
     }
   }
 
@@ -50,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             TextFormField(
               keyboardType: TextInputType.emailAddress,
+              validator: (value) => JinFormValidator.validateEmail(value),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Email",
@@ -58,6 +72,8 @@ class _LoginPageState extends State<LoginPage> {
             SpaceY(16),
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
+              validator: (value) => JinFormValidator.validatePassword(value),
+              obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Password",

@@ -14,4 +14,14 @@ class MockApiProvider extends BaseApiProvider {
         throw response.data['message'];
     });
   }
+
+  Future<String> loginUser({String email, String password}) async {
+    return onRequest(() async {
+      Response response = await dio.post("/api/user/login");
+      if (response.statusCode == 200 && response.data["status"] == 1) {
+        return response.data['data']["token"];
+      } else
+        throw response.data['message'];
+    });
+  }
 }
