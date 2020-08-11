@@ -67,7 +67,7 @@ class UserList extends StatelessWidget {
             final user = users[index];
             return ListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(user.avatar),
+                child: Icon(Icons.person),
               ),
               onTap: () {},
               title: Text("${user.firstName} ${user.lastName}"),
