@@ -14,8 +14,15 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordTC;
 
   void onLogin() async {
+    handleLoading();
     await Future.delayed(Duration(seconds: 1));
-    PageNavigator.pushReplacement(context, RootPage());
+    if (formKey.currentState.validate()) {
+      PageNavigator.pushReplacement(context, RootPage());
+    }
+  }
+
+  void handleLoading() {
+    isLoading.value = !isLoading.value;
   }
 
   @override
