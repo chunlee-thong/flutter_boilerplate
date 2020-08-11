@@ -18,6 +18,6 @@ class User {
         email: json["email"] == null ? null : json["email"],
         firstName: json["first_name"] == null ? null : json["first_name"],
         lastName: json["last_name"] == null ? null : json["last_name"],
-        avatar: json["avatar"] == null ? null : json["avatar"],
+        avatar: json["profile_img"] == null ? null : json["profile_img"],
       );
 }
