@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/api_service/mock_api_provider.dart';
+import 'package:flutter_boiler_plate/constant/colors.dart';
 import 'package:flutter_boiler_plate/main.dart';
 import 'package:flutter_boiler_plate/model/response/user_model.dart';
 import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
@@ -23,7 +24,10 @@ class _LoginPageState extends State<LoginPage> {
     if (formKey.currentState.validate()) {
       handleLoading();
       try {
-        String token = await mockApiProvider.loginUser(email: emailTC.text, password: passwordTC.text);
+        String token = await mockApiProvider.loginUser(
+          email: emailTC.text.trim(),
+          password: passwordTC.text.trim(),
+        );
         LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: token);
         PageNavigator.pushReplacement(context, RootPage());
       } catch (e) {
@@ -63,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             TextFormField(
               keyboardType: TextInputType.emailAddress,
+              controller: emailTC,
               validator: (value) => JinFormValidator.validateEmail(value),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -72,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
             SpaceY(16),
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
+              controller: passwordTC,
               validator: (value) => JinFormValidator.validatePassword(value),
               obscureText: true,
               decoration: InputDecoration(
@@ -81,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ActionButton(
               onPressed: onLogin,
+              color: secondaryColor,
               isLoading: isLoading,
               child: Text("LOGIN"),
             ),
