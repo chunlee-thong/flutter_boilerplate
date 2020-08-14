@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_boiler_plate/pages/dummy_page/dummy_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/base_stream_consumer.dart';
+import '../../widgets/state_widgets/base_stream_consumer.dart';
 
-import '../../repository/base_stream.dart';
+import '../../services/base_stream.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 
@@ -13,13 +13,12 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with AutomaticKeepAliveClientMixin {
+class _MyHomePageState extends State<MyHomePage> {
   BaseStream<List<User>> baseStream = BaseStream();
 
   Future<void> fetchUsers() async {
     await baseStream.asyncOperation(() async {
-      return await baseStream.mockApiProvider.fetchUserList();
+      return baseStream.mockApiProvider.fetchUserList();
     });
   }
 
@@ -37,7 +36,6 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Provider<BaseStream<List<User>>>(
       create: (_) => baseStream,
       child: Scaffold(
@@ -46,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
           actions: <Widget>[
             IconButton(
               icon: Image.asset(R.images.APP_ICON),
-              onPressed: () {},
+              onPressed: () => JinNavigator.push(DummyPage()),
             )
           ],
         ),
@@ -54,16 +52,9 @@ class _MyHomePageState extends State<MyHomePage>
           reactToConnectionChange: true,
           child: UserList(),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(FlutterIcons.like1_ant),
-        ),
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class UserList extends StatelessWidget {
