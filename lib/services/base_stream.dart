@@ -1,7 +1,6 @@
 import 'package:rxdart/rxdart.dart';
-
 import '../api_service/base_http_exception.dart';
-import 'base_repository.dart';
+import '../repository/base_repository.dart';
 
 class BaseStream<T> extends BaseRepository {
   BehaviorSubject<T> _controller;
@@ -16,6 +15,8 @@ class BaseStream<T> extends BaseRepository {
 
   bool get hasData => _controller.hasValue;
 
+  T get value => _controller.value;
+
   void addData(T data) {
     if (!_controller.isClosed) _controller.add(data);
   }
@@ -23,8 +24,8 @@ class BaseStream<T> extends BaseRepository {
   Future<T> asyncOperation(
     Future<T> Function() doingOperation, {
     bool loadingOnRefresh = false,
-    Function(T) onDone,
-    Function(String) onError,
+    void Function(T) onDone,
+    void Function(String) onError,
   }) async {
     try {
       if (loadingOnRefresh) this.addData(null);
