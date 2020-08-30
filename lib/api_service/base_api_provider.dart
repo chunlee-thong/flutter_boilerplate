@@ -17,9 +17,6 @@ class BaseApiProvider {
   static JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
   final fss = FlutterSecureStorage();
-  final unexpectedErrorMessage = "An unexpected error occur!";
-  final socketErrorMessage = "Error connecting to server. Please check your internet connection or Try again later!";
-  final timeOutMessage = "Connection timeout. Please check your internet connection or Try agian later!";
 
   BaseApiProvider() {
     dio.interceptors.add(
@@ -56,20 +53,22 @@ class BaseApiProvider {
       return await onHttpRequest();
     } on TypeError catch (exception) {
       print("Type Error Exception: ${exception.toString()}");
-      print("Stack strace: ${exception.stackTrace.toString()}");
+      print("Stack trace: ${exception.stackTrace.toString()}");
       throw exception;
     } on DioError catch (exception) {
-      print("Dio Exception catch: ${exception.toString()}");
+      print("Dio Exception: ${exception.toString()}");
       if (exception.error is SocketException) {
         throw DioErrorException(socketErrorMessage);
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
         throw DioErrorException(timeOutMessage);
       } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException("${exception.response.statusCode}: $unexpectedErrorMessage");
+        throw DioErrorException(
+            "${exception.response.statusCode}: $unexpectedErrorMessage");
       } else {
         throw ServerErrorException(unexpectedErrorMessage);
       }
     } catch (exception) {
+      print("Server error message: $exception");
       throw ServerResponseException(exception.toString());
     }
   }
