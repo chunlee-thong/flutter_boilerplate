@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/pages/dummy_page/dummy_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +6,7 @@ import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 import '../../services/base_stream.dart';
 import '../../widgets/state_widgets/base_stream_consumer.dart';
+import '../dummy_page/dummy_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
