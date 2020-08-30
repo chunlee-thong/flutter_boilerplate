@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +14,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with AutomaticKeepAliveClientMixin {
+class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
   BaseStream<List<User>> baseStream = BaseStream();
 
   Future<void> fetchUsers() async {
