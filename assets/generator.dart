@@ -1,8 +1,7 @@
 import 'dart:io';
 
 File resourceClass = File("../lib/constant/resource_path.dart");
-String classData =
-    "class R {\n static Images images = Images();\n}\nclass Images {";
+String classData = "class ImageAssets {";
 
 void main() {
   generateFile();
@@ -22,10 +21,6 @@ void generateFile() async {
 
 String generateImageAssetsClass(String path) {
   final String imageName = path.split("/").last.replaceAll("%20", " ");
-  final String imageFieldName = imageName
-      .replaceAll(RegExp(r'[-\s+\b|\b\s]'), "_")
-      .split(".")
-      .first
-      .toUpperCase();
-  return '\n  final String $imageFieldName = "assets/images/$imageName";';
+  final String imageFieldName = imageName.replaceAll(RegExp(r'[-\s+\b|\b\s]'), "_").split(".").first.toUpperCase();
+  return '\n  static const String $imageFieldName = "assets/images/$imageName";';
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/pages/dummy_page.dart';
+import 'package:flutter_boiler_plate/pages/dummy_page/dummy_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/state_widgets/base_stream_consumer.dart';
 
-import '../../services/base_stream.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
+import '../../services/base_stream.dart';
+import '../../widgets/state_widgets/base_stream_consumer.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text("Flutter Boilerplate"),
           actions: <Widget>[
             IconButton(
-              icon: Image.asset(R.images.APP_ICON),
+              icon: Image.asset(ImageAssets.APP_ICON),
               onPressed: () => JinNavigator.push(DummyPage()),
             )
           ],

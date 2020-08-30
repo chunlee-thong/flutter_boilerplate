@@ -7,3 +7,7 @@ class AppConstant {
 
 const EN_LOCALE = Locale('en', 'US');
 const KH_LOCALE = Locale('km', 'KH');
+
+const unexpectedErrorMessage = "An unexpected error occur!";
+const socketErrorMessage = "Error connecting to server. Please check your internet connection or Try again later!";
+const timeOutMessage = "Connection timeout. Please check your internet connection or Try again later!";
