@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/enum/type.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './../constant/app_constant.dart';
@@ -48,9 +50,38 @@ class BaseApiProvider {
     prettyString.split('\n').forEach((element) => print(element));
   }
 
-  Future<T> onRequest<T>(Function onHttpRequest) async {
+  Future<T> onRequest<T>({
+    @required T Function(dynamic) onSuccess,
+    @required HttpMethod method,
+    Map<String, dynamic> queryParams,
+    Map<String, dynamic> data,
+    FormData formData,
+    @required String path,
+  }) async {
     try {
-      return await onHttpRequest();
+      Response response;
+      switch (method) {
+        case HttpMethod.GET:
+          response = await dio.get(path, queryParameters: queryParams);
+          break;
+        case HttpMethod.POST:
+          response = await dio.post(path, queryParameters: queryParams, data: data);
+          break;
+        case HttpMethod.PUT:
+          response = await dio.put(path, queryParameters: queryParams, data: data);
+          break;
+        case HttpMethod.DELETE:
+          response = await dio.delete(path, queryParameters: queryParams, data: data);
+          break;
+        case HttpMethod.PATCH:
+          response = await dio.patch(path, queryParameters: queryParams, data: data);
+          break;
+      }
+      if (response.data['status'] == 1) {
+        return onSuccess(response.data);
+      } else {
+        throw response.data['message'];
+      }
     } on TypeError catch (exception) {
       print("Type Error Exception: ${exception.toString()}");
       print("Stack trace: ${exception.stackTrace.toString()}");
