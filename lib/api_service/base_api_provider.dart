@@ -53,10 +53,10 @@ class BaseApiProvider {
   Future<T> onRequest<T>({
     @required T Function(dynamic) onSuccess,
     @required HttpMethod method,
-    Map<String, dynamic> queryParams,
-    Map<String, dynamic> data,
-    FormData formData,
     @required String path,
+    Map<String, dynamic> queryParams = const {},
+    Map<String, dynamic> data = const {},
+    FormData formData,
   }) async {
     try {
       Response response;
@@ -65,16 +65,32 @@ class BaseApiProvider {
           response = await dio.get(path, queryParameters: queryParams);
           break;
         case HttpMethod.POST:
-          response = await dio.post(path, queryParameters: queryParams, data: data);
+          response = await dio.post(
+            path,
+            queryParameters: queryParams,
+            data: formData ?? data,
+          );
           break;
         case HttpMethod.PUT:
-          response = await dio.put(path, queryParameters: queryParams, data: data);
+          response = await dio.put(
+            path,
+            queryParameters: queryParams,
+            data: formData ?? data,
+          );
           break;
         case HttpMethod.DELETE:
-          response = await dio.delete(path, queryParameters: queryParams, data: data);
+          response = await dio.delete(
+            path,
+            queryParameters: queryParams,
+            data: formData ?? data,
+          );
           break;
         case HttpMethod.PATCH:
-          response = await dio.patch(path, queryParameters: queryParams, data: data);
+          response = await dio.patch(
+            path,
+            queryParameters: queryParams,
+            data: formData ?? data,
+          );
           break;
       }
       if (response.data['status'] == 1) {
@@ -93,7 +109,8 @@ class BaseApiProvider {
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
         throw DioErrorException(timeOutMessage);
       } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException("${exception.response.statusCode}: $unexpectedErrorMessage");
+        throw DioErrorException(
+            "${exception.response.statusCode}: $unexpectedErrorMessage");
       } else {
         throw ServerErrorException(unexpectedErrorMessage);
       }
