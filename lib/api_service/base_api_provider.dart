@@ -22,7 +22,13 @@ class BaseApiProvider {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          print("${options.method}: ${options.path}, data: ${options.data}");
+          if (options.method == "GET") {
+            print(
+                "${options.method}: ${options.path}, query: ${options.queryParameters}");
+          } else {
+            print("${options.method}: ${options.path}, data: ${options.data},"
+                " query: ${options.queryParameters}");
+          }
           return options;
         },
         onResponse: (Response response) async {

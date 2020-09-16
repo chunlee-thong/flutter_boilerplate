@@ -19,6 +19,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> fetchUsers() async {
     await baseStream.asyncOperation(() async {
       return baseStream.mockApiProvider.fetchUserList();
+    }, onError: (error) {
+      print(error);
     });
   }
 
