@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class BaseStreamConsumer<T> extends StatelessWidget {
   final Widget Function(BuildContext, T) builder;
   final Widget onEmpty;
-  final Widget Function(String) onError;
+  final Widget Function(dynamic) onError;
 
   const BaseStreamConsumer({
     Key key,
