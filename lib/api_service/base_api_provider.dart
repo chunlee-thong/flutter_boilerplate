@@ -22,7 +22,13 @@ class BaseApiProvider {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          print("${options.method}: ${options.path}");
+          if (options.method == "GET") {
+            print(
+                "${options.method}: ${options.path}, query: ${options.queryParameters}");
+          } else {
+            print("${options.method}: ${options.path}, data: ${options.data},"
+                " query: ${options.queryParameters}");
+          }
           return options;
         },
         onResponse: (Response response) async {
@@ -62,7 +68,8 @@ class BaseApiProvider {
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
         throw DioErrorException(timeOutMessage);
       } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException("${exception.response.statusCode}: $unexpectedErrorMessage");
+        throw DioErrorException(
+            "${exception.response.statusCode}: $unexpectedErrorMessage");
       } else {
         throw ServerErrorException(unexpectedErrorMessage);
       }

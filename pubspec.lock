@@ -161,7 +161,7 @@ packages:
       name: connectivity
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.9"
+    version: "0.4.9+2"
   connectivity_for_web:
     dependency: transitive
     description:
@@ -412,7 +412,7 @@ packages:
       name: jin_widget_helper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.3"
+    version: "1.4.6"
   js:
     dependency: transitive
     description:
