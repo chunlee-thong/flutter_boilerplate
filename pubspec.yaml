@@ -48,8 +48,7 @@ flutter:
 
   assets:
     - assets/images/
-    - resources/language/en-US.json
-    - resources/language/km-KH.json
+    - assets/languages/
 
   fonts:
     - family: GoogleSans
