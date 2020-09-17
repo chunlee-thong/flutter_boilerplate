@@ -1,3 +1,4 @@
+import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:rxdart/rxdart.dart';
 import '../api_service/base_http_exception.dart';
 import '../repository/base_repository.dart';
@@ -35,9 +36,10 @@ class BaseStream<T> extends BaseRepository {
       return data;
     } on TypeError catch (_) {
       if (onError != null) {
-        onError("Something went wrong");
+        onError(ErrorMessage.UNEXPECTED_ERROR);
+        this.addError(ErrorMessage.UNEXPECTED_ERROR);
       } else {
-        this.addError("Something went wrong!");
+        this.addError(ErrorMessage.UNEXPECTED_ERROR);
       }
       return null;
     } on BaseHttpException catch (exception) {
