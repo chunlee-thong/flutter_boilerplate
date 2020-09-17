@@ -7,6 +7,13 @@ class LocalStorage {
   static SharedPreferences sharedPreferences;
   static const String TOKEN_KEY = "key.token";
 
+  //Prevent initizlization
+  LocalStorage._();
+
+  static Future<void> initialize() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
+
   static Future<String> getToken() async {
     return await fss.read(key: TOKEN_KEY);
   }
