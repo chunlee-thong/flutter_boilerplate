@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './../constant/app_constant.dart';
 import '../api_service/base_http_exception.dart';
@@ -15,8 +14,6 @@ class BaseApiProvider {
     ..options.receiveTimeout = 20000;
   static JsonDecoder decoder = JsonDecoder();
   static JsonEncoder encoder = JsonEncoder.withIndent('  ');
-
-  final fss = FlutterSecureStorage();
 
   BaseApiProvider() {
     dio.interceptors.add(
@@ -64,14 +61,14 @@ class BaseApiProvider {
     } on DioError catch (exception) {
       print("Dio Exception: ${exception.toString()}");
       if (exception.error is SocketException) {
-        throw DioErrorException(socketErrorMessage);
+        throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-        throw DioErrorException(timeOutMessage);
+        throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
       } else if (exception.type == DioErrorType.RESPONSE) {
         throw DioErrorException(
-            "${exception.response.statusCode}: $unexpectedErrorMessage");
+            "${exception.response.statusCode}: ${ErrorMessage.UNEXPECTED_ERROR}");
       } else {
-        throw ServerErrorException(unexpectedErrorMessage);
+        throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
       }
     } catch (exception) {
       print("Server error message: $exception");

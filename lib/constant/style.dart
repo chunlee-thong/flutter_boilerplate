@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 
 //custom textStyle
-const TextStyle headerStyle =
-    TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
-const TextStyle subHeaderStyle =
-    TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
-const TextStyle titleStyle =
-    TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-const TextStyle subtitleStyle =
-    TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-const TextStyle normalStyle = TextStyle(fontSize: 14);
-const TextStyle captionStyle = TextStyle(fontSize: 12);
+const TextStyle headerStyle = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+);
+const TextStyle subHeaderStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+);
+const TextStyle titleStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+const TextStyle subtitleStyle = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
+const TextStyle normalStyle = TextStyle(
+  fontSize: 14,
+);
+const TextStyle captionStyle = TextStyle(
+  fontSize: 12,
+);
 
 //material textStyle
 
