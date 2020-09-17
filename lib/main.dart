@@ -20,7 +20,7 @@ void main() {
     EasyLocalization(
       child: MyApp(),
       supportedLocales: [EN_LOCALE, KH_LOCALE],
-      path: 'resources/language',
+      path: AppConstant.LANGUAGE_PATH,
       fallbackLocale: EN_LOCALE,
     ),
   );

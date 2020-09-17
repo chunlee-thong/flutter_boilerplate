@@ -4,6 +4,7 @@ class AppConstant {
   static const String BASE_URL =
       "https://chunlee-node-api-boilerplate.herokuapp.com";
   static const String APP_VERSION = "1.0.0";
+  static const String LANGUAGE_PATH = "assets/languages";
 }
 
 const EN_LOCALE = Locale('en', 'US');
