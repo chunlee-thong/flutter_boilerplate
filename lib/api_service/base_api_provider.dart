@@ -3,10 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/enum/type.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import './../constant/app_constant.dart';
 import '../api_service/base_http_exception.dart';
 
@@ -18,13 +14,17 @@ class BaseApiProvider {
   static JsonDecoder decoder = JsonDecoder();
   static JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
-  final fss = FlutterSecureStorage();
-
   BaseApiProvider() {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          print("${options.method}: ${options.path}");
+          if (options.method == "GET") {
+            print(
+                "${options.method}: ${options.path}, query: ${options.queryParameters}");
+          } else {
+            print("${options.method}: ${options.path}, data: ${options.data},"
+                " query: ${options.queryParameters}");
+          }
           return options;
         },
         onResponse: (Response response) async {
@@ -105,18 +105,15 @@ class BaseApiProvider {
     } on DioError catch (exception) {
       print("Dio Exception: ${exception.toString()}");
       if (exception.error is SocketException) {
-        throw DioErrorException(socketErrorMessage);
+        throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
       } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-        throw DioErrorException(timeOutMessage);
+        throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
       } else if (exception.type == DioErrorType.RESPONSE) {
         throw DioErrorException(
-            "${exception.response.statusCode}: $unexpectedErrorMessage");
+            "${exception.response.statusCode}: ${ErrorMessage.UNEXPECTED_ERROR}");
       } else {
-        throw ServerErrorException(unexpectedErrorMessage);
+        throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
       }
     } catch (exception) {
       print("Server error message: $exception");
       throw ServerResponseException(exception.toString());
-    }
-  }
-}
