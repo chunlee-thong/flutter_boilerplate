@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 import '../model/response/user_model.dart';
-import 'base_api_provider.dart';
+import 'base_api_service.dart';
 
-class MockApiProvider extends BaseApiProvider {
+class MockApiService extends BaseApiService {
   Future<List<User>> fetchUserList() async {
     return onRequest(() async {
       Response response = await dio.get("/api/user/all_users");

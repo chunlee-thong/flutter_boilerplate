@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import './api_service/mock_api_provider.dart';
+import 'api_service/mock_api_service.dart';
 import './constant/app_constant.dart';
 import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
@@ -11,7 +11,7 @@ import 'pages/splash_page/splash_page.dart';
 GetIt getIt = GetIt.instance;
 
 void registerLocator() {
-  getIt.registerSingleton<MockApiProvider>(MockApiProvider());
+  getIt.registerSingleton<MockApiService>(MockApiService());
 }
 
 void main() {

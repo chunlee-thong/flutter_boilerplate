@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 
-import './../constant/app_constant.dart';
-import '../api_service/base_http_exception.dart';
+import '../constant/app_constant.dart';
+import 'base_http_exception.dart';
 
-class BaseApiProvider {
+class BaseApiService {
   final dio = Dio()
     ..options.baseUrl = AppConstant.BASE_URL
     ..options.connectTimeout = 20000
@@ -15,7 +15,7 @@ class BaseApiProvider {
   static JsonDecoder decoder = JsonDecoder();
   static JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
-  BaseApiProvider() {
+  BaseApiService() {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
