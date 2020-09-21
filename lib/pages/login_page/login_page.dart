@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/api_service/mock_api_provider.dart';
+import 'package:flutter_boiler_plate/api_service/mock_api_service.dart';
 import 'package:flutter_boiler_plate/constant/colors.dart';
 import 'package:flutter_boiler_plate/main.dart';
-import 'package:flutter_boiler_plate/model/response/user_model.dart';
 import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
 import 'package:flutter_boiler_plate/services/local_strorage_service.dart';
 import 'package:flutter_boiler_plate/widgets/ui_helper.dart';
@@ -15,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
-  MockApiProvider mockApiProvider = getIt<MockApiProvider>();
+  MockApiService mockApiService = getIt<MockApiService>();
   final isLoading = false.obs<bool>();
   TextEditingController emailTC;
   TextEditingController passwordTC;
@@ -24,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     if (formKey.currentState.validate()) {
       handleLoading();
       try {
-        String token = await mockApiProvider.loginUser(
+        String token = await mockApiService.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
         );
