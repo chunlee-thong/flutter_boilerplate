@@ -1,6 +1,6 @@
-import '../api_service/mock_api_provider.dart';
+import '../api_service/mock_api_service.dart';
 import '../main.dart';
 
 class BaseRepository {
-  MockApiProvider mockApiProvider = getIt<MockApiProvider>();
+  MockApiService mockApiService = getIt<MockApiService>();
 }
