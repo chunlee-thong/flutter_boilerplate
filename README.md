@@ -18,7 +18,7 @@ A flutter boiler plate code for faster development time
 
 ### api_service
 
-- create your api service class which extends BaseApiProvider here
+- create your api service class which extends BaseApiService here
 
 ### bloc
 
@@ -64,10 +64,12 @@ A flutter boiler plate code for faster development time
 - fonts
   > this is where you keep your font
 - images
+
   > this is where you keep your image asset
+
+- language
+
+  > this is where you keep your localization file
+
 - generator
-  > run this file with **dart generator.dart** to generate class R and Image to access your images path, Example usage: Image.asset(R.images.icon)
-
-## resources/language
-
-- this is where you keep your localization file
+  > run this file with **dart generator.dart** to generate ImageAssets class to access your images path, Example usage: Image.asset(ImageAssets.icon)

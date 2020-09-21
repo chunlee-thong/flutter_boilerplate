@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
 
   Future<void> fetchUsers() async {
     await baseStream.asyncOperation(() async {
-      return baseStream.mockApiProvider.fetchUserList();
+      return baseStream.mockApiService.fetchUserList();
     }, onError: (error) {
       print(error);
     });
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
           actions: <Widget>[
             IconButton(
               icon: Image.asset(ImageAssets.APP_ICON),
-              onPressed: () => JinNavigator.push(DummyPage()),
+              onPressed: () => PageNavigator.push(context, DummyPage()),
             )
           ],
         ),
