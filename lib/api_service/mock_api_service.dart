@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import '../constant/config.dart';
-
 import '../model/response/user_model.dart';
 import 'base_api_service.dart';
 

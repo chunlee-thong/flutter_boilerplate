@@ -24,7 +24,7 @@ class ImageLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: JinWidget.radius(),
+      borderRadius: JinWidget.radius(radius),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         width: width ?? null,
