@@ -1,4 +1,4 @@
-import 'package:flutter_boiler_plate/constant/app_constant.dart';
+import '../constant/app_constant.dart';
 import 'package:rxdart/rxdart.dart';
 import '../api_service/base_http_exception.dart';
 import '../repository/base_repository.dart';
