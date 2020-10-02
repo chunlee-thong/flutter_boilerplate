@@ -28,6 +28,10 @@ class BaseStream<T> extends BaseRepository {
     void Function(T) onDone,
     void Function(dynamic) onError,
   }) async {
+    bool shouldAddError = true;
+    if (this._controller.hasValue) {
+      shouldAddError = loadingOnRefresh == true;
+    }
     try {
       if (loadingOnRefresh) this.addData(null);
       T data = await doingOperation();
@@ -35,20 +39,16 @@ class BaseStream<T> extends BaseRepository {
       this.addData(data);
       return data;
     } on TypeError catch (_) {
-      if (onError != null) {
-        onError(ErrorMessage.UNEXPECTED_ERROR);
-        this.addError(ErrorMessage.UNEXPECTED_ERROR);
-      } else {
-        this.addError(ErrorMessage.UNEXPECTED_ERROR);
-      }
+      onError?.call(ErrorMessage.UNEXPECTED_ERROR);
+      if (shouldAddError) this.addError(ErrorMessage.UNEXPECTED_ERROR);
       return null;
     } on BaseHttpException catch (exception) {
-      if (onError != null) {
-        this.addError(exception);
-        onError(exception);
-      } else {
-        this.addError(exception);
-      }
+      onError?.call(exception);
+      if (shouldAddError) this.addError(exception);
+      return null;
+    } catch (exception) {
+      onError?.call(exception);
+      if (shouldAddError) this.addError(exception);
       return null;
     }
   }

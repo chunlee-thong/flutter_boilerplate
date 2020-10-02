@@ -3,13 +3,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:flutter/material.dart';
+import '../constant/config.dart';
 
 import '../constant/app_constant.dart';
 import 'base_http_exception.dart';
 
 class BaseApiService {
   final dio = Dio()
-    ..options.baseUrl = AppConstant.BASE_URL
+    ..options.baseUrl = Config.BASE_URL
     ..options.connectTimeout = 20000
     ..options.receiveTimeout = 20000;
   static JsonDecoder decoder = JsonDecoder();
@@ -19,13 +21,9 @@ class BaseApiService {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          if (options.method == "GET") {
-            print(
-                "${options.method}: ${options.path}, query: ${options.queryParameters}");
-          } else {
-            print("${options.method}: ${options.path}, data: ${options.data},"
-                " query: ${options.queryParameters}");
-          }
+          print("${options.method}: ${options.path},"
+              "query: ${options.queryParameters},"
+              "data: ${options.data}");
           return options;
         },
         onResponse: (Response response) async {
@@ -40,39 +38,80 @@ class BaseApiService {
 
     dio.interceptors.add(
       DioCacheManager(
-        CacheConfig(baseUrl: AppConstant.BASE_URL),
+        CacheConfig(baseUrl: Config.BASE_URL),
       ).interceptor,
     );
   }
 
-  void prettyPrintJson(dynamic input) {
-    //convert map to json String
-    var prettyString = encoder.convert(input);
-    prettyString.split('\n').forEach((element) => print(element));
+  Future<T> onRequest<T>({
+    @required String path,
+    @required String method,
+    @required T Function(Response) onSuccess,
+    Map<String, dynamic> query = const {},
+    dynamic data = const {},
+    bool requiredToken = false,
+  }) async {
+    try {
+      final httpOption = Options(method: method);
+      if (requiredToken) {
+        httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
+      }
+      Response response = await dio.request(
+        path,
+        options: httpOption,
+        queryParameters: query,
+        data: data,
+      );
+      if (response.statusCode >= 200 &&
+          response.statusCode < 300 &&
+          response.data['status'] == 1) {
+        return onSuccess(response);
+      } else {
+        throw response.data['message'];
+      }
+    } on TypeError catch (exception) {
+      onTypeError(exception);
+      return null;
+    } on DioError catch (exception) {
+      onDioError(exception);
+      return null;
+    } catch (exception) {
+      onServerErrorMessage(exception);
+      return null;
+    }
   }
 
-  Future<T> onRequest<T>(Function onHttpRequest) async {
-    try {
-      return await onHttpRequest();
-    } on TypeError catch (exception) {
-      print("Type Error Exception: ${exception.toString()}");
-      print("Stack trace: ${exception.stackTrace.toString()}");
-      throw exception;
-    } on DioError catch (exception) {
-      print("Dio Exception: ${exception.toString()}");
-      if (exception.error is SocketException) {
-        throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
-      } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-        throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
-      } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException(
-            "${exception.response.statusCode}: ${ErrorMessage.UNEXPECTED_ERROR}");
-      } else {
-        throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
-      }
-    } catch (exception) {
-      print("Server error message: $exception");
-      throw ServerResponseException(exception.toString());
+  void onTypeError(dynamic exception) {
+    print("Type error Stack trace: ${exception.stackTrace.toString()}");
+    throw exception;
+  }
+
+  void onDioError(DioError exception) {
+    print("Dio Exception: ${exception.toString()}");
+    if (exception.error is SocketException) {
+      ///Socket exception mostly from internet connection or host
+      throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
+    } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
+      ///Connection timeout due to internet connection or server
+      throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
+    } else if (exception.type == DioErrorType.RESPONSE) {
+      ///Error provided by server
+      int code = exception.response.statusCode;
+      String serverMessage =
+          exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+      throw DioErrorException("$code: $serverMessage");
+    } else {
+      throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
     }
+  }
+
+  void onServerErrorMessage(dynamic exception) {
+    print("Server error message: $exception");
+    throw ServerResponseException(exception.toString());
+  }
+
+  void prettyPrintJson(dynamic input) {
+    var prettyString = encoder.convert(input);
+    prettyString.split('\n').forEach((element) => print(element));
   }
 }
