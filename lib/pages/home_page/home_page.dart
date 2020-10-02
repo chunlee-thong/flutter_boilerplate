@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
+import '../../widgets/ui_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/resource_path.dart';
@@ -14,15 +15,16 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with AutomaticKeepAliveClientMixin {
   BaseStream<List<User>> baseStream = BaseStream();
 
-  Future<void> fetchUsers() async {
+  Future<void> fetchUsers([bool loading = false]) async {
     await baseStream.asyncOperation(() async {
       return baseStream.mockApiService.fetchUserList();
     }, onError: (error) {
-      print(error);
-    });
+      UIHelper.showGeneralMessageDialog(context, error.toString());
+    }, loadingOnRefresh: loading);
   }
 
   @override
@@ -54,7 +56,10 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
         ),
         body: ConnectionChecker(
           reactToConnectionChange: true,
-          child: UserList(),
+          child: RefreshIndicator(
+            onRefresh: () => fetchUsers(true),
+            child: UserList(),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
