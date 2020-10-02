@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
             ActionButton(
               onPressed: onLogin,
               color: secondaryColor,
-              isLoading: isLoading,
+              loadingNotifier: isLoading,
               child: Text("LOGIN"),
             ),
           ],
