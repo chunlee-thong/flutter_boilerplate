@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/widgets/ui_helper.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +17,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   BaseStream<List<User>> baseStream = BaseStream();
 
-  Future<void> fetchUsers() async {
+  Future<void> fetchUsers([bool loading = false]) async {
     await baseStream.asyncOperation(() async {
       return baseStream.mockApiService.fetchUserList();
     }, onError: (error) {
-      print(error);
-    });
+      UIHelper.showGeneralMessageDialog(context, error.toString());
+    }, loadingOnRefresh: loading);
   }
 
   @override
@@ -52,7 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: ConnectionChecker(
           reactToConnectionChange: true,
-          child: UserList(),
+          child: RefreshIndicator(
+            onRefresh: () => fetchUsers(true),
+            child: UserList(),
+          ),
         ),
       ),
     );

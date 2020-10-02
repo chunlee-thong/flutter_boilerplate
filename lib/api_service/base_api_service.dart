@@ -19,13 +19,9 @@ class BaseApiService {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          if (options.method == "GET") {
-            print(
-                "${options.method}: ${options.path}, query: ${options.queryParameters}");
-          } else {
-            print("${options.method}: ${options.path}, data: ${options.data},"
-                " query: ${options.queryParameters}");
-          }
+          print("${options.method}: ${options.path},"
+              "query: ${options.queryParameters},"
+              "data: ${options.data}");
           return options;
         },
         onResponse: (Response response) async {
@@ -46,7 +42,6 @@ class BaseApiService {
   }
 
   void prettyPrintJson(dynamic input) {
-    //convert map to json String
     var prettyString = encoder.convert(input);
     prettyString.split('\n').forEach((element) => print(element));
   }
@@ -55,24 +50,38 @@ class BaseApiService {
     try {
       return await onHttpRequest();
     } on TypeError catch (exception) {
-      print("Type Error Exception: ${exception.toString()}");
-      print("Stack trace: ${exception.stackTrace.toString()}");
-      throw exception;
+      onTypeError(exception);
+      return null;
     } on DioError catch (exception) {
-      print("Dio Exception: ${exception.toString()}");
-      if (exception.error is SocketException) {
-        throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
-      } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-        throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
-      } else if (exception.type == DioErrorType.RESPONSE) {
-        throw DioErrorException(
-            "${exception.response.statusCode}: ${ErrorMessage.UNEXPECTED_ERROR}");
-      } else {
-        throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
-      }
+      onDioError(exception);
+      return null;
     } catch (exception) {
-      print("Server error message: $exception");
-      throw ServerResponseException(exception.toString());
+      onServerErrorMessage(exception);
+      return null;
     }
+  }
+
+  void onTypeError(dynamic exception) {
+    print("Type error Stack trace: ${exception.stackTrace.toString()}");
+    throw exception;
+  }
+
+  void onDioError(dynamic exception) {
+    print("Dio Exception: ${exception.toString()}");
+    if (exception.error is SocketException) {
+      throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
+    } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
+      throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
+    } else if (exception.type == DioErrorType.RESPONSE) {
+      throw DioErrorException(
+          "${exception.response.statusCode}: ${ErrorMessage.UNEXPECTED_ERROR}");
+    } else {
+      throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
+    }
+  }
+
+  void onServerErrorMessage(dynamic exception) {
+    print("Server error message: $exception");
+    throw ServerResponseException(exception.toString());
   }
 }
