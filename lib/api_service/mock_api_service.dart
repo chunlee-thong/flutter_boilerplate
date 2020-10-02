@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boiler_plate/constant/config.dart';
+import '../constant/config.dart';
 
 import '../model/response/user_model.dart';
 import 'base_api_service.dart';
@@ -17,15 +17,16 @@ class MockApiService extends BaseApiService {
   }
 
   Future<String> loginUser({String email, String password}) async {
-    return onRequest(() async {
-      Response response = await dio.post("/api/user/login", data: {
+    return onRequest(
+      path: "/api/user/login",
+      method: HttpMethod.POST,
+      data: {
         "email": email,
         "password": password,
-      });
-      if (response.statusCode == 200 && response.data["status"] == 1) {
+      },
+      onSuccess: (response) {
         return response.data['data']["token"];
-      } else
-        throw response.data['message'];
-    });
+      },
+    );
   }
 }
