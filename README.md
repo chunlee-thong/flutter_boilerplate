@@ -2,11 +2,11 @@
 
 A flutter boiler plate code for faster development time
 
-# [DEV'S NOTE ONLY] Branch management
+### [DEV'S NOTE ONLY] Branch management
 
-1. Any new change will be made in [master] branch first
-2. After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
-3. \*\*Never merge any branch to master
+- Any new change will be made in [master] branch first
+- After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
+- > Never merge any branch to master
 
 # Getting Started
 
