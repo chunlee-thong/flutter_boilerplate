@@ -6,7 +6,7 @@ A flutter boiler plate code for faster development time
 
 - Any new change will be made in [master] branch first
 - After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
-- > Never merge any branch to master
+- **Must not merge any branch to master**
 
 # Getting Started
 
