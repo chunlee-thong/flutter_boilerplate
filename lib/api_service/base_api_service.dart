@@ -10,36 +10,35 @@ import '../constant/app_constant.dart';
 import 'base_http_exception.dart';
 
 class BaseApiService {
-  final dio = Dio()
-    ..options.baseUrl = Config.BASE_URL
-    ..options.connectTimeout = 20000
-    ..options.receiveTimeout = 20000;
+  final dio = Dio();
+  final BaseOptions options = BaseOptions(
+    baseUrl: Config.BASE_URL,
+    connectTimeout: 20000,
+    receiveTimeout: 20000,
+  );
   static JsonDecoder decoder = JsonDecoder();
   static JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
-  BaseApiService() {
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (RequestOptions options) async {
-          print("${options.method}: ${options.path},"
-              "query: ${options.queryParameters},"
-              "data: ${options.data}");
-          return options;
-        },
-        onResponse: (Response response) async {
-          //prettyPrintJson(response.data);
-          return response; // continue
-        },
-        onError: (DioError error) async {
-          return error; //continue
-        },
-      ),
-    );
+  InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
+    onRequest: (RequestOptions options) async {
+      print("${options.method}: ${options.path},"
+          "query: ${options.queryParameters},"
+          "data: ${options.data}");
+      return options;
+    },
+    onResponse: (Response response) async {
+      //prettyPrintJson(response.data);
+      return response; // continue
+    },
+    onError: (DioError error) async {
+      return error; //continue
+    },
+  );
 
+  BaseApiService() {
+    dio.interceptors.add(defaultInterceptor);
     dio.interceptors.add(
-      DioCacheManager(
-        CacheConfig(baseUrl: Config.BASE_URL),
-      ).interceptor,
+      DioCacheManager(CacheConfig(baseUrl: Config.BASE_URL)).interceptor,
     );
   }
 
