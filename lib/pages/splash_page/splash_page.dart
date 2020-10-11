@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/pages/login_page/login_page.dart';
-import '../../pages/root_page/root_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/colors.dart';

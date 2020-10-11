@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import '../../widgets/ui_helper.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Provider<BaseStream<List<User>>>(
       create: (_) => baseStream,
       child: Scaffold(
