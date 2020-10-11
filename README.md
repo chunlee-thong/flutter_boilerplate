@@ -2,6 +2,12 @@
 
 A flutter boiler plate code for faster development time
 
+### [DEV'S NOTE ONLY] Branch management
+
+- Any new change will be made in [master] branch first
+- After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
+- **Must not merge any branch to master**
+
 # Getting Started
 
 1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
