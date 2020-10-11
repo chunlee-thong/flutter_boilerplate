@@ -54,7 +54,7 @@ class BaseStream<T> extends BaseRepository {
   }
 
   void addError(dynamic error) {
-    if (!_controller.isClosed) _controller.addError(error.toString());
+    if (!_controller.isClosed) _controller.addError(error);
   }
 
   void dispose() async {
