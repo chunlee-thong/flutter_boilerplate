@@ -36,6 +36,7 @@ class BaseApiService {
   );
 
   BaseApiService() {
+    dio.options = options;
     dio.interceptors.add(defaultInterceptor);
     dio.interceptors.add(
       DioCacheManager(CacheConfig(baseUrl: Config.BASE_URL)).interceptor,
