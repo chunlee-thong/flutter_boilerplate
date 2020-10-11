@@ -57,19 +57,19 @@ class _RootPageState extends State<RootPage> {
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  title: Text("Home"),
+                  label: "Home",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.assessment),
-                  title: Text("Report"),
+                  label: "Report",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.map),
-                  title: Text("Map"),
+                  label: "Map",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.settings),
-                  title: Text("Setting"),
+                  label: "Setting",
                 )
               ],
             ),
