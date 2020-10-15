@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../pages/root_page/root_page.dart';
+import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
+import 'package:flutter_boiler_plate/services/local_strorage_service.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-
 import '../../constant/colors.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -11,6 +11,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   void onSplashing() async {
+    await LocalStorage.initialize();
     await Future.delayed(const Duration(seconds: 1));
     PageNavigator.pushReplacement(context, RootPage(startPageIndex: 0));
   }
