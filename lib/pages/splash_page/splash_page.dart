@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
-import 'package:flutter_boiler_plate/services/local_strorage_service.dart';
+import '../../pages/root_page/root_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
+import '../../services/local_strorage_service.dart';
 import '../../constant/colors.dart';
 
 class SplashScreenPage extends StatefulWidget {

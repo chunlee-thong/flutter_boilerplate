@@ -1,6 +1,6 @@
-import 'package:flutter_boiler_plate/model/response/user_model.dart';
-import 'package:flutter_boiler_plate/repository/base_repository.dart';
-import 'package:flutter_boiler_plate/services/base_stream.dart';
+import './../model/response/user_model.dart';
+import './../repository/base_repository.dart';
+import './../services/base_stream.dart';
 
 class UserBloc extends BaseRepository {
   int currentPage = 1;
