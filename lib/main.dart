@@ -1,20 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import './utils/hive_db_adapter.dart';
+import './utils/service_locator.dart';
+import 'package:hive/hive.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-
-import 'api_service/mock_api_service.dart';
 import './constant/app_constant.dart';
 import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-GetIt getIt = GetIt.instance;
-
-void registerLocator() {
-  getIt.registerSingleton<MockApiService>(MockApiService());
-}
-
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  registerHiveAdapter();
   registerLocator();
   return runApp(
     EasyLocalization(

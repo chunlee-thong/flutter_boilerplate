@@ -17,6 +17,8 @@ dependencies:
   easy_localization: ^2.3.3
   flutter_secure_storage: ^3.3.5
   shared_preferences: ^0.5.12
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
   ##UI
   cupertino_icons: ^1.0.0
   flutter_launcher_icons: ^0.8.1
@@ -30,8 +32,8 @@ dependencies:
   dio: ^3.0.10
 
 dev_dependencies:
-  hive_generator: any
-  build_runner: any
+  hive_generator: ^0.8.1
+  build_runner: ^1.10.3
   flutter_test:
     sdk: flutter
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/ui_helper.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
+import './../dummy_page/dummy_page.dart';
+import '../../widgets/ui_helper.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 import '../../services/base_stream.dart';
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Image.asset(ImageAssets.APP_ICON),
-            onPressed: () {},
+            onPressed: () => PageNavigator.push(context, DummyPage()),
           )
         ],
       ),
