@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/provider/bottom_navigation_provider.dart';
+import '../../../provider/bottom_navigation_provider.dart';
 import 'package:provider/provider.dart';
 
 class RootBottonNavigation extends StatelessWidget {
