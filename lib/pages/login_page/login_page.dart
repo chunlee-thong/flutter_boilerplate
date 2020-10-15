@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/api_service/mock_api_service.dart';
-import 'package:flutter_boiler_plate/constant/colors.dart';
-import 'package:flutter_boiler_plate/main.dart';
-import 'package:flutter_boiler_plate/pages/root_page/root_page.dart';
-import 'package:flutter_boiler_plate/services/local_strorage_service.dart';
-import 'package:flutter_boiler_plate/widgets/ui_helper.dart';
+import '../../api_service/mock_api_service.dart';
+import '../../constant/colors.dart';
+import '../../pages/root_page/root_page.dart';
+import '../../services/local_strorage_service.dart';
+import '../../utils/service_locator.dart';
+import '../../widgets/ui_helper.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 class LoginPage extends StatefulWidget {
