@@ -18,6 +18,8 @@ A flutter boiler plate code for faster development time
 
 1. if you want to generate app icon,replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
 
+2. run **flutter packages pub run build_runner build** to generate Hive TypeAdapter model
+
 # Project folder structure
 
 ## lib
@@ -42,6 +44,7 @@ A flutter boiler plate code for faster development time
 
 - response: your mapping response model from api here
 - request: your own model class to request api
+- db: model for hive or any database's model
 - save your common user data model
 
 ### pages
