@@ -1,4 +1,4 @@
-import 'package:flutter_boiler_plate/model/response/pagination.dart';
+import 'pagination.dart';
 
 class UserResponse {
   List<User> users;
