@@ -2,6 +2,12 @@
 
 A flutter boiler plate code for faster development time
 
+### [DEV'S NOTE ONLY] Branch management
+
+- Any new change will be made in [master] branch first
+- After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
+- **Must not merge any branch to master**
+
 # Getting Started
 
 1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
@@ -18,7 +24,7 @@ A flutter boiler plate code for faster development time
 
 ### api_service
 
-- create your api service class which extends BaseApiProvider here
+- create your api service class which extends BaseApiService here
 
 ### bloc
 
@@ -64,10 +70,12 @@ A flutter boiler plate code for faster development time
 - fonts
   > this is where you keep your font
 - images
+
   > this is where you keep your image asset
+
+- language
+
+  > this is where you keep your localization file
+
 - generator
-  > run this file with **dart generator.dart** to generate class R and Image to access your images path, Example usage: Image.asset(R.images.icon)
-
-## resources/language
-
-- this is where you keep your localization file
+  > run this file with **dart generator.dart** to generate ImageAssets class to access your images path, Example usage: Image.asset(ImageAssets.icon)

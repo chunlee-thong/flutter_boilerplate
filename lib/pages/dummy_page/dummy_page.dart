@@ -1,59 +1,54 @@
 import 'package:flutter/material.dart';
-import '../../bloc/another_counter_bloc.dart';
-import '../../widgets/state_widgets/extend_stream_consumer.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_boiler_plate/bloc/users_bloc.dart';
+import 'package:flutter_boiler_plate/model/response/user_model.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 class DummyPage extends StatefulWidget {
+  DummyPage({Key key}) : super(key: key);
   @override
   _DummyPageState createState() => _DummyPageState();
 }
 
 class _DummyPageState extends State<DummyPage> {
-  AnotherCounterBloc anotherCounterBloc;
-
-  void initial() {
-    anotherCounterBloc.asyncOperation(() async {
-      await Future.delayed(Duration(seconds: 3));
-      return Future.value(10);
-    });
-  }
+  UserBloc userBloc;
 
   @override
   void initState() {
-    anotherCounterBloc = AnotherCounterBloc();
-    initial();
+    userBloc = UserBloc()..fetchUsers();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello"),
-      ),
-      body: Provider<AnotherCounterBloc>(
-        create: (context) => anotherCounterBloc,
-        child: Center(
-          child: CounterData(),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          anotherCounterBloc.incrementByValue(100);
+      appBar: AppBar(title: Text("Fetch all users with pagination")),
+      body: StreamHandler<UserResponse>(
+        stream: userBloc.userController.stream,
+        ready: (UserResponse data) {
+          return PaginatedListView(
+            itemCount: data.users.length,
+            padding: EdgeInsets.zero,
+            onGetMoreData: () => userBloc.fetchUsers(),
+            hasMoreData: userBloc.currentPage <= data.pagination.totalPage,
+            itemBuilder: (context, index) {
+              final user = data.users[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.person),
+                ),
+                onTap: () {},
+                title: Text("${user.firstName} ${user.lastName}"),
+                subtitle: Text(user.email),
+              );
+            },
+          );
         },
-        child: Icon(Icons.add),
       ),
-    );
-  }
-}
-
-class CounterData extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ExtendStreamConsumer<AnotherCounterBloc, int>(
-      builder: (context, count) {
-        return Text('$count');
-      },
     );
   }
 }

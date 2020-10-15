@@ -1,3 +1,21 @@
+import 'package:flutter_boiler_plate/model/response/pagination.dart';
+
+class UserResponse {
+  List<User> users;
+  Pagination pagination;
+
+  UserResponse({this.pagination, this.users});
+
+  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
+        users: json["data"] == null
+            ? null
+            : List<User>.from(json["data"].map((x) => User.fromJson(x))),
+        pagination: json["pagination"] == null
+            ? null
+            : Pagination.fromJson(json["pagination"]),
+      );
+}
+
 class User {
   User({
     this.id,
