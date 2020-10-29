@@ -1,9 +1,10 @@
 abstract class BaseHttpException {}
 
 class DioErrorException extends BaseHttpException {
+  final int code;
   final String message;
 
-  DioErrorException(this.message);
+  DioErrorException(this.message, {this.code = 200});
   @override
   String toString() {
     return this.message;

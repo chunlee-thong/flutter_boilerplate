@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
-import '../constant/config.dart';
 
 import '../constant/app_constant.dart';
+import '../constant/config.dart';
+import '../utils/logger.dart';
 import 'base_http_exception.dart';
 
 class BaseApiService {
@@ -21,7 +22,7 @@ class BaseApiService {
 
   InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     onRequest: (RequestOptions options) async {
-      print("${options.method}: ${options.path},"
+      httpLog("${options.method}: ${options.path},"
           "query: ${options.queryParameters},"
           "data: ${options.data}");
       return options;
@@ -82,12 +83,12 @@ class BaseApiService {
   }
 
   void onTypeError(dynamic exception) {
-    print("Type error Stack trace: ${exception.stackTrace.toString()}");
+    errorLog("Type error Stack trace: ${exception.stackTrace.toString()}");
     throw exception;
   }
 
   void onDioError(DioError exception) {
-    print("Dio Exception: ${exception.toString()}");
+    errorLog("Dio Exception: ${exception.toString()}");
     if (exception.error is SocketException) {
       ///Socket exception mostly from internet connection or host
       throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
@@ -99,14 +100,14 @@ class BaseApiService {
       int code = exception.response.statusCode;
       String serverMessage =
           exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
-      throw DioErrorException("$code: $serverMessage");
+      throw DioErrorException("$code: $serverMessage", code: code);
     } else {
       throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
     }
   }
 
   void onServerErrorMessage(dynamic exception) {
-    print("Server error message: $exception");
+    errorLog("Server error message: $exception");
     throw ServerResponseException(exception.toString());
   }
 
