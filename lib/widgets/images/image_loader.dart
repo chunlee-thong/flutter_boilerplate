@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+
 import '../common/loading_widget.dart';
 
 class ImageLoader extends StatelessWidget {
@@ -10,7 +10,7 @@ class ImageLoader extends StatelessWidget {
   final Widget error;
   final double width;
   final double height;
-  final double radius;
+  final BorderRadius radius;
   const ImageLoader({
     Key key,
     @required this.imageUrl,
@@ -19,12 +19,12 @@ class ImageLoader extends StatelessWidget {
     this.error,
     this.width,
     this.height,
-    this.radius = 0.0,
+    this.radius = BorderRadius.zero,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: JinWidget.radius(radius),
+      borderRadius: radius,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         width: width ?? null,
