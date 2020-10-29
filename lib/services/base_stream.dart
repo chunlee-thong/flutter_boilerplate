@@ -1,6 +1,7 @@
-import '../constant/app_constant.dart';
 import 'package:rxdart/rxdart.dart';
+
 import '../api_service/base_http_exception.dart';
+import '../constant/app_constant.dart';
 import '../repository/base_repository.dart';
 
 class BaseStream<T> extends BaseRepository {
@@ -35,7 +36,7 @@ class BaseStream<T> extends BaseRepository {
     try {
       if (loadingOnRefresh) this.addData(null);
       T data = await doingOperation();
-      if (onDone != null) onDone(data);
+      onDone?.call(data);
       this.addData(data);
       return data;
     } on TypeError catch (_) {
