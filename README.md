@@ -1,17 +1,17 @@
 # flutter_boiler_plate
 
-A flutter boiler plate code for faster development time
+A flutter boiler plate code initial project setup
 
 ### [DEV'S NOTE ONLY] Branch management
 
 - Any new change will be made in [master] branch first
-- After change done, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
+- After change has been push, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
 - **Must not merge any branch to master**
 
 # Getting Started
 
 1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
-2. copy folder **assets**, **lib**,**resources**, and **pubspec.yaml** from this project to your newly created project and replace all file
+2. copy folder **assets**, **lib**, and **pubspec.yaml** from this project to your newly created project and replace all file
 3. run **flutter pub get**
 
 # App Icon
@@ -58,7 +58,7 @@ A flutter boiler plate code for faster development time
 
 ### service
 
-- service provider class such as: ImagePickerService ,DialogService, NavigationService.....
+- service provider class such as: ImagePickerService, DialogService, NavigationService.....
 
 ### utils
 

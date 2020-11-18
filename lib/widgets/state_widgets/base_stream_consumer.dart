@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../services/base_stream.dart';
 import '../common/loading_widget.dart';
-import 'package:provider/provider.dart';
 
 class BaseStreamConsumer<T> extends StatelessWidget {
   final Widget Function(BuildContext, T) builder;
