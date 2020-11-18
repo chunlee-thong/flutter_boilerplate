@@ -12,7 +12,8 @@ class LoadingWidget extends StatelessWidget {
       child: Platform.isIOS
           ? CupertinoActivityIndicator()
           : CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(color ?? Theme.of(context).accentColor),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  color ?? Theme.of(context).accentColor),
             ),
     );
   }

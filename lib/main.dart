@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
+
+import './constant/app_constant.dart';
 import './utils/hive_db_adapter.dart';
 import './utils/service_locator.dart';
-import 'package:hive/hive.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
-import './constant/app_constant.dart';
 import 'constant/colors.dart';
 import 'pages/splash_page/splash_page.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   await Hive.initFlutter();

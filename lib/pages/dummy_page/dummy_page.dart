@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
+
 import '../../bloc/users_bloc.dart';
 import '../../model/response/user_model.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);
