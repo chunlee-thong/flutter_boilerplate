@@ -23,21 +23,25 @@ class ImageLoader extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: radius,
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        width: width ?? null,
-        height: height ?? null,
-        fit: fit,
-        errorWidget: (context, err, obj) {
-          if (error != null) return error;
-          return Icon(Icons.error_outline);
-        },
-        placeholder: (context, data) {
-          if (loading != null) return loading;
-          return LoadingWidget();
-        },
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ClipRRect(
+        borderRadius: radius,
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          width: width,
+          height: height,
+          fit: fit,
+          errorWidget: (context, err, obj) {
+            if (error != null) return error;
+            return Icon(Icons.error_outline);
+          },
+          placeholder: (context, data) {
+            if (loading != null) return loading;
+            return LoadingWidget();
+          },
+        ),
       ),
     );
   }

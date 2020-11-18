@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../pages/root_page/root_page.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
-import '../../services/local_strorage_service.dart';
+
 import '../../constant/colors.dart';
+import '../../pages/root_page/root_page.dart';
+import '../../services/local_strorage_service.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override

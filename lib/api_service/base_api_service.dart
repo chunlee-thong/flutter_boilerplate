@@ -51,13 +51,15 @@ class BaseApiService {
     Map<String, dynamic> query = const {},
     dynamic data = const {},
     bool requiredToken = false,
+    Dio dioClient,
   }) async {
     try {
       final httpOption = Options(method: method);
       if (requiredToken) {
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
-      Response response = await dio.request(
+      if (dioClient == null) dioClient = this.dio;
+      Response response = await dioClient.request(
         path,
         options: httpOption,
         queryParameters: query,
