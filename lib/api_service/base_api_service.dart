@@ -1,47 +1,17 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/app_constant.dart';
-import '../constant/config.dart';
 import '../utils/logger.dart';
 import 'base_http_exception.dart';
+import 'http_client.dart';
 
 class BaseApiService {
-  final dio = Dio();
-  final BaseOptions options = BaseOptions(
-    baseUrl: Config.BASE_URL,
-    connectTimeout: 20000,
-    receiveTimeout: 20000,
-  );
-  static JsonDecoder decoder = JsonDecoder();
-  static JsonEncoder encoder = JsonEncoder.withIndent('  ');
-
-  InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
-    onRequest: (RequestOptions options) async {
-      httpLog("${options.method}: ${options.path},"
-          "query: ${options.queryParameters},"
-          "data: ${options.data}");
-      return options;
-    },
-    onResponse: (Response response) async {
-      //prettyPrintJson(response.data);
-      return response; // continue
-    },
-    onError: (DioError error) async {
-      return error; //continue
-    },
-  );
-
-  BaseApiService() {
-    dio.options = options;
-    dio.interceptors.add(defaultInterceptor);
-    dio.interceptors.add(
-      DioCacheManager(CacheConfig(baseUrl: Config.BASE_URL)).interceptor,
-    );
+  Dio dio;
+  BaseApiService({Dio dio}) {
+    this.dio = dio ?? defaultDioClient;
   }
 
   Future<T> onRequest<T>({
@@ -51,15 +21,13 @@ class BaseApiService {
     Map<String, dynamic> query = const {},
     dynamic data = const {},
     bool requiredToken = false,
-    Dio dioClient,
   }) async {
     try {
       final httpOption = Options(method: method);
       if (requiredToken) {
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
-      if (dioClient == null) dioClient = this.dio;
-      Response response = await dioClient.request(
+      Response response = await dio.request(
         path,
         options: httpOption,
         queryParameters: query,
@@ -83,38 +51,33 @@ class BaseApiService {
       return null;
     }
   }
+}
 
-  void onTypeError(dynamic exception) {
-    errorLog("Type error Stack trace: ${exception.stackTrace.toString()}");
-    throw exception;
-  }
+void onTypeError(dynamic exception) {
+  errorLog("Type error Stack trace: ${exception.stackTrace.toString()}");
+  throw exception;
+}
 
-  void onDioError(DioError exception) {
-    errorLog("Dio Exception: ${exception.toString()}");
-    if (exception.error is SocketException) {
-      ///Socket exception mostly from internet connection or host
-      throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
-    } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-      ///Connection timeout due to internet connection or server
-      throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
-    } else if (exception.type == DioErrorType.RESPONSE) {
-      ///Error provided by server
-      int code = exception.response.statusCode;
-      String serverMessage =
-          exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
-      throw DioErrorException("$code: $serverMessage", code: code);
-    } else {
-      throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
-    }
+void onDioError(DioError exception) {
+  errorLog("Dio Exception: ${exception.toString()}");
+  if (exception.error is SocketException) {
+    ///Socket exception mostly from internet connection or host
+    throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
+  } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
+    ///Connection timeout due to internet connection or server
+    throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
+  } else if (exception.type == DioErrorType.RESPONSE) {
+    ///Error provided by server
+    int code = exception.response.statusCode;
+    String serverMessage =
+        exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+    throw DioErrorException("$code: $serverMessage", code: code);
+  } else {
+    throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }
+}
 
-  void onServerErrorMessage(dynamic exception) {
-    errorLog("Server error message: $exception");
-    throw ServerResponseException(exception.toString());
-  }
-
-  void prettyPrintJson(dynamic input) {
-    var prettyString = encoder.convert(input);
-    prettyString.split('\n').forEach((element) => print(element));
-  }
+void onServerErrorMessage(dynamic exception) {
+  errorLog("Server error message: $exception");
+  throw ServerResponseException(exception.toString());
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './../dummy_page/dummy_page.dart';
+import '../../api_service/index.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 import '../../services/base_stream.dart';
@@ -17,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> fetchUsers([bool loading = false]) async {
     await userController.asyncOperation(() async {
-      return userController.mockApiService.fetchUserList();
+      return mockApiService.fetchUserList();
     }, onError: (error) {
       UIHelper.showGeneralMessageDialog(context, error.toString());
     }, loadingOnRefresh: loading);

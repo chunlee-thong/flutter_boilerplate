@@ -1,8 +1,8 @@
 import './../model/response/user_model.dart';
-import './../repository/base_repository.dart';
 import './../services/base_stream.dart';
+import '../api_service/index.dart';
 
-class UserBloc extends BaseRepository {
+class UserBloc {
   int currentPage = 1;
   BaseStream<UserResponse> userController = BaseStream();
 
@@ -18,5 +18,9 @@ class UserBloc extends BaseRepository {
       currentPage += 1;
       return response;
     }, onError: (error) {}, loadingOnRefresh: loading);
+  }
+
+  void dispose() {
+    userController.dispose();
   }
 }
