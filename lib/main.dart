@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './constant/app_constant.dart';
+import './constant/config.dart';
 import './utils/hive_db_adapter.dart';
 import './utils/service_locator.dart';
 import 'constant/colors.dart';
@@ -28,12 +29,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Boilerplate',
+      title: Config.APP_NAME,
       navigatorKey: JinNavigator.navigatorKey,
       theme: ThemeData(
         primarySwatch: primaryColor,
         accentColor: secondaryColor,
-        fontFamily: "GoogleSans",
+        fontFamily: Config.FONT_NAME,
       ),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,

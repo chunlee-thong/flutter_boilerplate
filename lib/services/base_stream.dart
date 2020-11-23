@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:rxdart/rxdart.dart';
 
 import '../api_service/base_http_exception.dart';
 import '../constant/app_constant.dart';
-import '../repository/base_repository.dart';
 
-class BaseStream<T> extends BaseRepository {
+class BaseStream<T> {
   BehaviorSubject<T> _controller;
   BaseStream([T initialData]) {
     _controller = BehaviorSubject<T>();
