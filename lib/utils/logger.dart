@@ -1,11 +1,11 @@
-void httpLog([String log, String additional = ""]) {
+void httpLog([dynamic log, dynamic additional = ""]) {
   print("Http Log: $log $additional");
 }
 
-void infoLog([String log, String additional = ""]) {
+void infoLog([dynamic log, dynamic additional = ""]) {
   print("Info Log: $log $additional");
 }
 
-void errorLog([String log, String additional = ""]) {
+void errorLog([dynamic log, dynamic additional = ""]) {
   print("Error Log: $log $additional");
 }
