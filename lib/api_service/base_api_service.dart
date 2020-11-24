@@ -19,27 +19,33 @@ class BaseApiService {
     @required String method,
     @required T Function(Response) onSuccess,
     Map<String, dynamic> query = const {},
+    Map<String, dynamic> headers = const {},
     dynamic data = const {},
     bool requiredToken = false,
+    bool ignoreResponse = false,
   }) async {
     try {
       final httpOption = Options(method: method);
       if (requiredToken) {
-        httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
+        headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
+      httpOption.headers = headers;
       Response response = await dio.request(
         path,
         options: httpOption,
         queryParameters: query,
         data: data,
       );
-      if (response.statusCode >= 200 &&
-          response.statusCode < 300 &&
-          response.data['status'] == 1) {
-        return onSuccess(response);
-      } else {
-        throw response.data['message'];
+      if (ignoreResponse == false) {
+        if (response.statusCode >= 200 &&
+            response.statusCode < 300 &&
+            response.data['status'] == 1) {
+          return onSuccess(response);
+        } else {
+          throw response.data['message'];
+        }
       }
+      return null;
     } on TypeError catch (exception) {
       onTypeError(exception);
       return null;

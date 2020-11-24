@@ -8,8 +8,8 @@ import '../utils/logger.dart';
 
 final BaseOptions options = BaseOptions(
   baseUrl: Config.BASE_URL,
-  connectTimeout: 20000,
-  receiveTimeout: 20000,
+  connectTimeout: 25000,
+  receiveTimeout: 25000,
 );
 
 final defaultDioClient = Dio()
