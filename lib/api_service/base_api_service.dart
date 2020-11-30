@@ -27,9 +27,9 @@ class BaseApiService {
     try {
       final httpOption = Options(method: method);
       if (requiredToken) {
-        headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
+        httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
-      httpOption.headers = headers;
+      httpOption.headers.addAll(headers);
       Response response = await dio.request(
         path,
         options: httpOption,
