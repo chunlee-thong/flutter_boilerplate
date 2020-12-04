@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../constant/app_constant.dart';
 import '../utils/logger.dart';
-import 'base_http_exception.dart';
 import 'http_client.dart';
+import 'http_exception.dart';
 
 class BaseApiService {
   Dio dio;
@@ -47,24 +47,24 @@ class BaseApiService {
       }
       return null;
     } on TypeError catch (exception) {
-      onTypeError(exception);
+      _onTypeError(exception);
       return null;
     } on DioError catch (exception) {
-      onDioError(exception);
+      _onDioError(exception);
       return null;
     } catch (exception) {
-      onServerErrorMessage(exception);
+      _onServerErrorMessage(exception);
       return null;
     }
   }
 }
 
-void onTypeError(dynamic exception) {
+void _onTypeError(dynamic exception) {
   errorLog("Type error Stack trace: ${exception.stackTrace.toString()}");
   throw exception;
 }
 
-void onDioError(DioError exception) {
+void _onDioError(DioError exception) {
   errorLog("Dio Exception: ${exception.toString()}");
   if (exception.error is SocketException) {
     ///Socket exception mostly from internet connection or host
@@ -83,7 +83,7 @@ void onDioError(DioError exception) {
   }
 }
 
-void onServerErrorMessage(dynamic exception) {
+void _onServerErrorMessage(dynamic exception) {
   errorLog("Server error message: $exception");
   throw ServerResponseException(exception.toString());
 }

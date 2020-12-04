@@ -15,7 +15,9 @@ class UserBloc {
       if (userController.hasData) {
         response.users = [...userController.value.users, ...response.users];
       }
-      currentPage += 1;
+      if (response.users.isNotEmpty) {
+        currentPage += 1;
+      }
       return response;
     }, onError: (error) {}, loadingOnRefresh: loading);
   }

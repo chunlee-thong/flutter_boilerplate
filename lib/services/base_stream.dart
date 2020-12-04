@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
 
-import '../api_service/base_http_exception.dart';
+import '../api_service/http_exception.dart';
 import '../constant/app_constant.dart';
 
 class BaseStream<T> {
@@ -32,10 +32,10 @@ class BaseStream<T> {
   }) async {
     bool shouldAddError = true;
     if (this._controller.hasValue) {
-      shouldAddError = loadingOnRefresh == true;
+      shouldAddError = loadingOnRefresh;
     }
     try {
-      if (loadingOnRefresh) this.addData(null);
+      if (shouldAddError) this.addData(null);
       T data = await doingOperation();
       onDone?.call(data);
       this.addData(data);
