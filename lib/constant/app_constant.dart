@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppConstant {
   static const String LANGUAGE_PATH = "assets/languages";
   // ignore: non_constant_identifier_names
-  static String TOKEN = "";
+  static String TOKEN;
 }
 
 const EN_LOCALE = Locale('en', 'US');

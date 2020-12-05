@@ -32,22 +32,25 @@ class _DummyPageState extends State<DummyPage> {
       body: StreamHandler<UserResponse>(
         stream: userBloc.userController.stream,
         ready: (UserResponse data) {
-          return PaginatedListView(
-            itemCount: data.users.length,
-            padding: EdgeInsets.zero,
-            onGetMoreData: () => userBloc.fetchUsers(),
-            hasMoreData: userBloc.currentPage <= data.pagination.totalPage,
-            itemBuilder: (context, index) {
-              final user = data.users[index];
-              return ListTile(
-                leading: CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
-                onTap: () {},
-                title: Text("${user.firstName} ${user.lastName}"),
-                subtitle: Text(user.email),
-              );
-            },
+          return RefreshIndicator(
+            onRefresh: () => userBloc.fetchUsers(true),
+            child: PaginatedListView(
+              itemCount: data.users.length,
+              padding: EdgeInsets.zero,
+              onGetMoreData: () => userBloc.fetchUsers(),
+              hasMoreData: userBloc.currentPage <= data.pagination.totalPage,
+              itemBuilder: (context, index) {
+                final user = data.users[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.person),
+                  ),
+                  onTap: () {},
+                  title: Text("${user.firstName} ${user.lastName}"),
+                  subtitle: Text(user.email),
+                );
+              },
+            ),
           );
         },
       ),
