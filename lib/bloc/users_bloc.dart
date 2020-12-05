@@ -7,6 +7,9 @@ class UserBloc {
   BaseStream<UserResponse> userController = BaseStream();
 
   Future<void> fetchUsers([bool loading = false]) async {
+    if (loading) {
+      currentPage = 1;
+    }
     await userController.asyncOperation(() async {
       UserResponse response = await mockApiService.fetchUserList(
         count: 10,

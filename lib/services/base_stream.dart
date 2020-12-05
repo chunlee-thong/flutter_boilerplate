@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_boiler_plate/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../api_service/http_exception.dart';
@@ -16,7 +17,7 @@ class BaseStream<T> {
 
   BehaviorSubject<T> get stream => _controller.stream;
 
-  bool get hasData => _controller.hasValue;
+  bool get hasData => _controller.hasValue && _controller.value != null;
 
   T get value => _controller.value;
 
@@ -35,7 +36,7 @@ class BaseStream<T> {
       shouldAddError = loadingOnRefresh;
     }
     try {
-      if (shouldAddError) this.addData(null);
+      if (loadingOnRefresh) this.addData(null);
       T data = await doingOperation();
       onDone?.call(data);
       this.addData(data);
@@ -56,7 +57,10 @@ class BaseStream<T> {
   }
 
   void addError(dynamic error) {
-    if (!_controller.isClosed) _controller.addError(error);
+    if (!_controller.isClosed) {
+      errorLog(error);
+      _controller.sink.addError(error);
+    }
   }
 
   void dispose() async {
