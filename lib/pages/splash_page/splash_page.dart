@@ -3,7 +3,7 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/colors.dart';
 import '../../services/local_storage_service.dart';
-import '../root_page/root_page.dart';
+import '../login_page/login_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
