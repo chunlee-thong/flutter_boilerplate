@@ -6,7 +6,6 @@ import '../../api_service/index.dart';
 import '../../constant/resource_path.dart';
 import '../../model/response/user_model.dart';
 import '../../services/base_stream.dart';
-import '../../widgets/ui_helper.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -19,8 +18,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> fetchUsers([bool loading = false]) async {
     await userController.asyncOperation(() async {
       return mockApiService.fetchUserList();
-    }, onError: (error) {
-      UIHelper.showGeneralMessageDialog(context, error.toString());
     }, loadingOnRefresh: loading);
   }
 
@@ -48,30 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: ConnectionChecker(
-        reactToConnectionChange: true,
-        child: StreamHandler<UserResponse>(
-          stream: userController.stream,
-          ready: (UserResponse response) {
-            return RefreshIndicator(
-              onRefresh: () => fetchUsers(true),
-              child: ListView.builder(
-                itemCount: response.users.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final user = response.users[index];
-                  return ListTile(
-                    leading: CircleAvatar(
-                      child: Icon(Icons.person),
-                    ),
-                    onTap: () {},
-                    title: Text("${user.firstName} ${user.lastName}"),
-                    subtitle: Text(user.email),
-                  );
-                },
-              ),
-            );
-          },
-        ),
+      body: StreamHandler<UserResponse>(
+        stream: userController.stream,
+        ready: (UserResponse response) {
+          return RefreshIndicator(
+            onRefresh: () => fetchUsers(true),
+            child: ListView.builder(
+              itemCount: response.users.length,
+              itemBuilder: (BuildContext context, int index) {
+                final user = response.users[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.person),
+                  ),
+                  onTap: () {},
+                  title: Text("${user.firstName} ${user.lastName}"),
+                  subtitle: Text(user.email),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

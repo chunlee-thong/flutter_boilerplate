@@ -4,14 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
   static const FlutterSecureStorage _fss = FlutterSecureStorage();
-  static SharedPreferences sharedPreferences;
+  static SharedPreferences _sharedPreferences;
   static const String TOKEN_KEY = "key.token";
 
   //Prevent initialization
   LocalStorage._();
 
   static Future<void> initialize() async {
-    sharedPreferences = await SharedPreferences.getInstance();
+    _sharedPreferences = await SharedPreferences.getInstance();
   }
 
   static Future<String> getToken() async {

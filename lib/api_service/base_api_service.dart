@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../constant/app_constant.dart';
 import '../utils/logger.dart';
-import 'base_http_exception.dart';
 import 'http_client.dart';
+import 'http_exception.dart';
 
 class BaseApiService {
   Dio dio;
@@ -24,22 +24,21 @@ class BaseApiService {
     bool requiredToken = false,
     bool ignoreResponse = false,
   }) async {
+    Response response;
     try {
       final httpOption = Options(method: method);
       if (requiredToken) {
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
       httpOption.headers.addAll(headers);
-      Response response = await dio.request(
+      response = await dio.request(
         path,
         options: httpOption,
         queryParameters: query,
         data: data,
       );
       if (ignoreResponse == false) {
-        if (response.statusCode >= 200 &&
-            response.statusCode < 300 &&
-            response.data['status'] == 1) {
+        if (response.data['status'] == 1 || response.data['status'] == true) {
           return onSuccess(response);
         } else {
           throw response.data['message'];
@@ -47,25 +46,28 @@ class BaseApiService {
       }
       return null;
     } on TypeError catch (exception) {
-      onTypeError(exception);
+      _onTypeError(exception);
+      return null;
+    } on NoSuchMethodError catch (exception) {
+      _onTypeError(exception);
       return null;
     } on DioError catch (exception) {
-      onDioError(exception);
+      _onDioError(exception);
       return null;
     } catch (exception) {
-      onServerErrorMessage(exception);
+      _onServerErrorMessage(exception, response);
       return null;
     }
   }
 }
 
-void onTypeError(dynamic exception) {
-  errorLog("Type error Stack trace: ${exception.stackTrace.toString()}");
+void _onTypeError(dynamic exception) {
+  errorLog("Error Stack trace: ${exception.stackTrace.toString()}");
   throw exception;
 }
 
-void onDioError(DioError exception) {
-  errorLog("Dio Exception: ${exception.toString()}");
+void _onDioError(DioError exception) {
+  errorLog("Dio error :=> ${exception.request.path}, ${exception.toString()}");
   if (exception.error is SocketException) {
     ///Socket exception mostly from internet connection or host
     throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
@@ -83,7 +85,7 @@ void onDioError(DioError exception) {
   }
 }
 
-void onServerErrorMessage(dynamic exception) {
-  errorLog("Server error message: $exception");
+void _onServerErrorMessage(dynamic exception, Response response) {
+  errorLog("Server error: ${response.request.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }
