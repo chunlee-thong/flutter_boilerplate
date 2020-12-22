@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter_boiler_plate/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../api_service/http_exception.dart';
 import '../constant/app_constant.dart';
+import '../utils/logger.dart';
 
 class BaseStream<T> {
   BehaviorSubject<T> _controller;
