@@ -78,7 +78,8 @@ class _LoginPageState extends State<LoginPage> {
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) => JinFormValidator.validatePassword(value),
+              validator: (value) =>
+                  JinFormValidator.validateField(value, 'password'),
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
