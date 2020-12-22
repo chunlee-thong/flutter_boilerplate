@@ -10,22 +10,22 @@ dependencies:
   flutter:
     sdk: flutter
   ##utils
-  rxdart: ^0.24.1
-  provider: ^4.3.2+2
-  flutter_bloc: ^6.0.6
-  get_it: ^5.0.1
+  rxdart: ^0.25.0
+  provider: ^4.3.2+3
+  flutter_bloc: ^6.1.1
+  get_it: ^5.0.3
   easy_localization: ^2.3.3
   flutter_secure_storage: ^3.3.5
-  shared_preferences: ^0.5.12
+  shared_preferences: ^0.5.12+4
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
   ##UI
   cupertino_icons: ^1.0.0
   flutter_launcher_icons: ^0.8.1
   toast: ^0.1.5
-  cached_network_image: ^2.3.3
+  cached_network_image: ^2.5.0
   flutter_icons: ^1.1.0
-  jin_widget_helper: ^1.5.3+1
+  jin_widget_helper: ^1.6.1
 
   ##network
   dio_http_cache: ^0.2.11
