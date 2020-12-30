@@ -1,11 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/constant/app_constant.dart';
+import 'package:flutter_boiler_plate/constant/locale_keys.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './../dummy_page/dummy_page.dart';
-import '../../api_service/index.dart';
-import '../../constant/resource_path.dart';
-import '../../model/response/user_model.dart';
-import '../../services/base_stream.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,25 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  BaseStream<UserResponse> userController = BaseStream();
-
-  Future<void> fetchUsers([bool loading = false]) async {
-    await userController.asyncOperation(() async {
-      return mockApiService.fetchUserList();
-    }, loadingOnRefresh: loading);
-  }
-
-  @override
-  void initState() {
-    fetchUsers();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    userController.dispose();
-    super.dispose();
-  }
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,32 +21,31 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Flutter Boilerplate"),
         actions: <Widget>[
           IconButton(
-            icon: Image.asset(ImageAssets.APP_ICON),
+            icon: Icon(Icons.help_center),
             onPressed: () => PageNavigator.push(context, DummyPage()),
           )
         ],
       ),
-      body: StreamHandler<UserResponse>(
-        stream: userController.stream,
-        ready: (UserResponse response) {
-          return RefreshIndicator(
-            onRefresh: () => fetchUsers(true),
-            child: ListView.builder(
-              itemCount: response.users.length,
-              itemBuilder: (BuildContext context, int index) {
-                final user = response.users[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    child: Icon(Icons.person),
-                  ),
-                  onTap: () {},
-                  title: Text("${user.firstName} ${user.lastName}"),
-                  subtitle: Text(user.email),
-                );
-              },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              tr(LocaleKeys.you_have_click, args: ["$count"]),
             ),
-          );
-        },
+            RaisedButton(
+              onPressed: () {
+                context.locale =
+                    context.locale == KH_LOCALE ? EN_LOCALE : KH_LOCALE;
+              },
+              child: Text("Change Locale"),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() => count++),
+        child: Icon(Icons.add),
       ),
     );
   }

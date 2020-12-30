@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import '../../constant/colors.dart';
+import '../../constant/theme.dart';
 import '../../services/local_storage_service.dart';
 import '../home_page/home_page.dart';
 
@@ -26,7 +26,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: AppColor.primaryColor,
       body: Center(
         child: Text(
           "Loading...",

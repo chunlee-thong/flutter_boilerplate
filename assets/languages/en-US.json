@@ -1,11 +1,3 @@
 {
-    "status": "Success",
-    "message": "I give this arg {}",
-    "amount": "ten",
-    "title": "New Localization",
-    "horse": "horse",
-    "data": {
-        "name": "Chunlee",
-        "age": "32"
-    }
+  "you-have-click": "You have clicked this button {} times"
 }
