@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/provider/theme_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/theme.dart';
@@ -13,6 +14,7 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   void onSplashing() async {
     await LocalStorage.initialize();
+    ThemeProvider.getProvider(context).initializeTheme();
     await Future.delayed(const Duration(seconds: 1));
     PageNavigator.pushReplacement(context, MyHomePage());
   }

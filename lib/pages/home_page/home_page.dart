@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:flutter_boiler_plate/constant/locale_keys.dart';
+import 'package:flutter_boiler_plate/provider/theme_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './../dummy_page/dummy_page.dart';
@@ -30,9 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              tr(LocaleKeys.you_have_click, args: ["$count"]),
-            ),
+            Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             RaisedButton(
               onPressed: () {
                 context.locale =
@@ -44,7 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => count++),
+        onPressed: () {
+          ThemeProvider.getProvider(context).switchTheme();
+        },
         child: Icon(Icons.add),
       ),
     );

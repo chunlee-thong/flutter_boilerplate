@@ -13,6 +13,7 @@ A flutter boiler plate code initial project setup
 1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
 2. copy folder **assets**, **lib**, and **pubspec.yaml** from this project to your newly created project and replace all file
 3. run **flutter pub get**
+4. In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage
 
 # App Icon
 
