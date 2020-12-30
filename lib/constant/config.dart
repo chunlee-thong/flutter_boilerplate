@@ -2,7 +2,8 @@ class Config {
   static const String BASE_URL =
       "https://chunlee-node-api-boilerplate.herokuapp.com";
   static const String APP_VERSION = "1.0.0";
-  static const String FONT_NAME = "GoogleSans";
+  static const String EN_FONT_NAME = "GoogleSans";
+  static const String KH_FONT_NAME = "PreahVihear";
   static const String APP_NAME = "Flutter";
 }
 
