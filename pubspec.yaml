@@ -60,3 +60,7 @@ flutter:
           weight: 700
         - asset: assets/fonts/GoogleSans-Medium.ttf
           weight: 500
+
+    - family: PreahVihear
+      fonts:
+        - asset: assets/fonts/Preahvihear-Regular.ttf
