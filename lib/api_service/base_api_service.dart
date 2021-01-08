@@ -21,7 +21,7 @@ class BaseApiService {
     Map<String, dynamic> query = const {},
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
-    bool requiredToken = false,
+    bool requiredToken = true,
     bool ignoreResponse = false,
   }) async {
     Response response;

@@ -27,16 +27,16 @@ class BaseStream<T> {
 
   Future<T> asyncOperation(
     Future<T> Function() doingOperation, {
-    bool loadingOnRefresh = false,
+    bool resetStream = false,
     void Function(T) onDone,
     void Function(dynamic) onError,
   }) async {
     bool shouldAddError = true;
     if (this._controller.hasValue) {
-      shouldAddError = loadingOnRefresh;
+      shouldAddError = resetStream;
     }
     try {
-      if (loadingOnRefresh) this.addData(null);
+      if (resetStream) this.addData(null);
       T data = await doingOperation();
       onDone?.call(data);
       this.addData(data);

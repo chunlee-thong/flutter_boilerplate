@@ -6,7 +6,7 @@ import 'config.dart';
 class AppColor {
   static final MaterialColor primaryColor =
       JinColorUtils.hexColorToMaterialColor(0xFF9efcff);
-  static final MaterialColor secondaryColor =
+  static final MaterialColor accentColor =
       JinColorUtils.hexColorToMaterialColor(0xFFfaaa81);
 }
 
@@ -17,9 +17,9 @@ ThemeData _buildLightTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
     primarySwatch: AppColor.primaryColor,
-    accentColor: AppColor.secondaryColor,
+    accentColor: AppColor.accentColor,
     tabBarTheme: TabBarTheme(
-      labelColor: AppColor.secondaryColor,
+      labelColor: AppColor.accentColor,
       unselectedLabelColor: Colors.grey,
     ),
     buttonColor: AppColor.primaryColor,
@@ -33,8 +33,8 @@ ThemeData _buildDarkTheme() {
     brightness: Brightness.dark,
     primarySwatch: AppColor.primaryColor,
     primaryColorDark: AppColor.primaryColor,
-    accentColor: AppColor.secondaryColor,
-    toggleableActiveColor: AppColor.secondaryColor,
+    accentColor: AppColor.accentColor,
+    toggleableActiveColor: AppColor.accentColor,
     buttonTheme: ButtonThemeData(
       buttonColor: AppColor.primaryColor,
       textTheme: ButtonTextTheme.primary,

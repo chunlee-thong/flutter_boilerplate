@@ -6,8 +6,8 @@ class AppConstant {
   static String TOKEN;
 }
 
-const EN_LOCALE = Locale('en', 'US');
-const KH_LOCALE = Locale('km', 'KH');
+const Locale EN_LOCALE = Locale('en', 'US');
+const Locale KH_LOCALE = Locale('km', 'KH');
 
 class ErrorMessage {
   static const UNEXPECTED_ERROR = "An unexpected error occur!";

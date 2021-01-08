@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/provider/theme_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import '../../constant/theme.dart';
+import '../../constant/color_theme.dart';
+import '../../provider/theme_provider.dart';
 import '../../services/local_storage_service.dart';
 import '../home_page/home_page.dart';
 

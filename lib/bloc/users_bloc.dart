@@ -22,7 +22,7 @@ class UserBloc {
         currentPage += 1;
       }
       return response;
-    }, onError: (error) {}, loadingOnRefresh: loading);
+    }, onError: (error) {}, resetStream: loading);
   }
 
   void dispose() {
