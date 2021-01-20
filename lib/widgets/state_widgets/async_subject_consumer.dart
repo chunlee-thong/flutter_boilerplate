@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/base_stream.dart';
+import '../../services/async_subject.dart';
 import '../common/loading_widget.dart';
 
-class BaseStreamConsumer<T> extends StatelessWidget {
+class AsyncSubjectConsumer<T> extends StatelessWidget {
   final Widget Function(BuildContext, T) builder;
   final Widget onEmpty;
   final Widget Function(dynamic) onError;
 
-  const BaseStreamConsumer({
+  const AsyncSubjectConsumer({
     Key key,
     @required this.builder,
     this.onEmpty,
@@ -17,9 +17,9 @@ class BaseStreamConsumer<T> extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final baseStream = Provider.of<BaseStream<T>>(context, listen: false);
+    final subject = Provider.of<AsyncSubject<T>>(context, listen: false);
     return StreamBuilder<T>(
-      stream: baseStream.stream,
+      stream: subject.stream,
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         if (snapshot.hasData) {
           return builder(context, snapshot.data);

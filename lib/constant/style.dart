@@ -31,6 +31,9 @@ const TextStyle captionStyle = TextStyle(
 extension styleExtension on TextStyle {
   TextStyle get black => this.apply(color: Colors.black);
   TextStyle get white => this.apply(color: Colors.white);
+  TextStyle get red => this.apply(color: Colors.red);
+  TextStyle get grey => this.apply(color: Colors.grey);
+  TextStyle get green => this.apply(color: Colors.green);
   TextStyle get primary => this.apply(color: AppColor.primaryColor);
   TextStyle get accent => this.apply(color: AppColor.accentColor);
 }

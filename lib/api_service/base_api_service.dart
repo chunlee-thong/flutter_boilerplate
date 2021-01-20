@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/constant/config.dart';
 
 import '../constant/app_constant.dart';
 import '../utils/logger.dart';
@@ -16,13 +17,14 @@ class BaseApiService {
 
   Future<T> onRequest<T>({
     @required String path,
-    @required String method,
     @required T Function(Response) onSuccess,
+    String method = HttpMethod.GET,
     Map<String, dynamic> query = const {},
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
     bool requiredToken = true,
     bool ignoreResponse = false,
+    Dio customDioClient,
   }) async {
     Response response;
     try {
@@ -31,12 +33,22 @@ class BaseApiService {
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
       httpOption.headers.addAll(headers);
-      response = await dio.request(
-        path,
-        options: httpOption,
-        queryParameters: query,
-        data: data,
-      );
+      if (customDioClient != null) {
+        response = await customDioClient.request(
+          path,
+          options: httpOption,
+          queryParameters: query,
+          data: data,
+        );
+      } else {
+        response = await dio.request(
+          path,
+          options: httpOption,
+          queryParameters: query,
+          data: data,
+        );
+      }
+
       if (ignoreResponse == false) {
         if (response.data['status'] == 1 || response.data['status'] == true) {
           return onSuccess(response);
@@ -77,8 +89,7 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error provided by server
     int code = exception.response.statusCode;
-    String serverMessage =
-        exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+    String serverMessage = exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
   } else {
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);

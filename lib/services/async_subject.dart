@@ -6,9 +6,9 @@ import '../api_service/http_exception.dart';
 import '../constant/app_constant.dart';
 import '../utils/logger.dart';
 
-class BaseStream<T> {
+class AsyncSubject<T> {
   BehaviorSubject<T> _controller;
-  BaseStream([T initialData]) {
+  AsyncSubject([T initialData]) {
     _controller = BehaviorSubject<T>();
     if (initialData != null) {
       this.addData(initialData);

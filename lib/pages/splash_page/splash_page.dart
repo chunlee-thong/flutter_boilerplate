@@ -16,7 +16,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     await LocalStorage.initialize();
     ThemeProvider.getProvider(context).initializeTheme();
     await Future.delayed(const Duration(seconds: 1));
-    PageNavigator.pushReplacement(context, MyHomePage());
+    PageNavigator.pushReplacement(context, HomePage());
   }
 
   @override

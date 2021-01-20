@@ -9,9 +9,7 @@ class UIHelper {
   ) {
     return showDialog(
       context: context,
-      builder: (context) => JinSimpleDialog(
-        content: message,
-      ),
+      builder: (context) => JinSimpleDialog(content: message),
     );
   }
 
