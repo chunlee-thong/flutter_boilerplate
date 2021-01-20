@@ -1,18 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/constant/app_constant.dart';
-import 'package:flutter_boiler_plate/constant/locale_keys.dart';
-import 'package:flutter_boiler_plate/provider/theme_provider.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './../dummy_page/dummy_page.dart';
+import '../../constant/app_constant.dart';
+import '../../constant/locale_keys.dart';
+import '../../provider/theme_provider.dart';
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   int count = 0;
 
   @override
