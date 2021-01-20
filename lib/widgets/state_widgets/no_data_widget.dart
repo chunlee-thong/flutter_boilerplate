@@ -29,8 +29,10 @@ class NoDataWidget extends StatelessWidget {
               SmallIconButton(
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                icon:
-                    Icon(FlutterIcons.refresh_faw, color: context.primaryColor),
+                icon: Icon(
+                  FlutterIcons.refresh_faw,
+                  color: context.primaryColor,
+                ),
               ),
           ],
         ),

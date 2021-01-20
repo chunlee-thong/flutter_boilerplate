@@ -5,6 +5,11 @@ class SimpleTextField extends StatelessWidget {
   final String hint;
   final Widget prefixIcon;
   final String Function(String) validator;
+  final double marginBottom;
+  final TextInputType textInputType;
+  final TextCapitalization textCapitalization;
+  final VoidCallback onTap;
+  final bool isRequired;
   final bool obsecure;
 
   const SimpleTextField({
@@ -14,15 +19,23 @@ class SimpleTextField extends StatelessWidget {
     this.prefixIcon,
     this.validator,
     this.obsecure = false,
+    this.isRequired,
+    this.marginBottom = 12,
+    this.textInputType = TextInputType.text,
+    this.textCapitalization = TextCapitalization.none,
+    this.onTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
+        keyboardType: textInputType,
+        textCapitalization: textCapitalization,
         controller: controller,
+        autocorrect: false,
         obscureText: obsecure,
-        validator: validator,
+        validator: isRequired ? validator : null,
         decoration: InputDecoration(
           hintText: hint,
           border: OutlineInputBorder(),

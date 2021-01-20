@@ -1,10 +1,10 @@
 import './../model/response/user_model.dart';
-import './../services/base_stream.dart';
+import './../services/async_subject.dart';
 import '../api_service/index.dart';
 
 class UserBloc {
   int currentPage = 1;
-  BaseStream<UserResponse> userController = BaseStream();
+  AsyncSubject<UserResponse> userController = AsyncSubject();
 
   Future<void> fetchUsers([bool loading = false]) async {
     if (loading) {
@@ -22,7 +22,7 @@ class UserBloc {
         currentPage += 1;
       }
       return response;
-    }, onError: (error) {}, loadingOnRefresh: loading);
+    }, onError: (error) {}, resetStream: loading);
   }
 
   void dispose() {

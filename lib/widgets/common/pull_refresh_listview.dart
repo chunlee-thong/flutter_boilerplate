@@ -48,7 +48,9 @@ class PullRefreshListViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     if (itemCount == 0) {
       return onEmpty ??
-          NoDataWidget(onRefresh: hasRefreshButtonWhenEmpty ? onRefresh : null);
+          NoDataWidget(
+            onRefresh: hasRefreshButtonWhenEmpty ? onRefresh : null,
+          );
     }
     return RefreshIndicator(
       onRefresh: onRefresh ?? () async {},
