@@ -12,7 +12,7 @@ import 'http_exception.dart';
 class BaseApiService {
   Dio dio;
   BaseApiService({Dio dio}) {
-    this.dio = dio ?? defaultDioClient;
+    this.dio = dio ?? BaseHttpClient.defaultDioClient;
   }
 
   Future<T> onRequest<T>({
@@ -89,7 +89,8 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error provided by server
     int code = exception.response.statusCode;
-    String serverMessage = exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+    String serverMessage =
+        exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
   } else {
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);

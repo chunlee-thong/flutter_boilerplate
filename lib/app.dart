@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
+import './api_service/http_client.dart';
 import 'constant/app_constant.dart';
 import 'constant/color_theme.dart';
 import 'constant/config.dart';
@@ -15,6 +16,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    BaseHttpClient.init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return EasyLocalization(
