@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/mock_api_service.dart';
-import '../../constant/colors.dart';
+import '../../constant/color_theme.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/local_storage_service.dart';
 import '../../utils/service_locator.dart';
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ActionButton(
               onPressed: onLogin,
-              color: secondaryColor,
+              color: AppColor.primaryColor,
               loadingNotifier: isLoading,
               child: Text("LOGIN"),
             ),
