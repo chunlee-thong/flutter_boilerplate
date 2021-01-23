@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../pages/home_page/home_page.dart';
 import '../../provider/bottom_navigation_provider.dart';
-import 'package:provider/provider.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
@@ -13,7 +14,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   List<Widget> get pages => [
-        MyHomePage(),
+        HomePage(),
         Container(),
         Container(),
         Container(),
