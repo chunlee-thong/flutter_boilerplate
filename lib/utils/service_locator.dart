@@ -5,5 +5,5 @@ import './../api_service/mock_api_service.dart';
 GetIt getIt = GetIt.instance;
 
 void registerLocator() {
-  getIt.registerSingleton<MockApiService>(MockApiService());
+  getIt.registerLazySingleton<MockApiService>(() => MockApiService());
 }
