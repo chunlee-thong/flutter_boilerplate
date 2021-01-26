@@ -1,5 +1,5 @@
 import '../constant/config.dart';
-import '../model/response/user_model.dart';
+import '../models/response/user_model.dart';
 import 'base_api_service.dart';
 
 class MockApiService extends BaseApiService {

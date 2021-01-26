@@ -4,6 +4,8 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'config.dart';
 
 class AppColor {
+  static const Color primary = const Color(0xFF9efcff);
+  static const Color accent = const Color(0xFFfaaa81);
   static final MaterialColor primaryColor =
       JinColorUtils.hexColorToMaterialColor(0xFF9efcff);
   static final MaterialColor accentColor =

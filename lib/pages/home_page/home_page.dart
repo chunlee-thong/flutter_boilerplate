@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/widgets/dialog/language_picker_dialog.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import './../dummy_page/dummy_page.dart';
-import '../../constant/app_constant.dart';
 import '../../constant/locale_keys.dart';
 import '../../provider/theme_provider.dart';
 
@@ -34,8 +34,9 @@ class _HomePageState extends State<HomePage> {
             Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             RaisedButton(
               onPressed: () {
-                context.locale =
-                    context.locale == KH_LOCALE ? EN_LOCALE : KH_LOCALE;
+                showDialog(
+                    context: context,
+                    builder: (contet) => LanguagePickerDialog());
               },
               child: Text("Change Locale"),
             ),

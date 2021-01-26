@@ -28,7 +28,7 @@ class AsyncSubject<T> {
   Future<T> asyncOperation(
     Future<T> Function() doingOperation, {
     bool resetStream = false,
-    void Function(T) onDone,
+    T Function(T) onDone,
     void Function(dynamic) onError,
   }) async {
     bool shouldAddError = true;
@@ -38,7 +38,7 @@ class AsyncSubject<T> {
     try {
       if (resetStream) this.addData(null);
       T data = await doingOperation();
-      onDone?.call(data);
+      data = onDone?.call(data);
       this.addData(data);
       return data;
     } on TypeError catch (_) {

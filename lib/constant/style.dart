@@ -34,8 +34,8 @@ extension styleExtension on TextStyle {
   TextStyle get red => this.apply(color: Colors.red);
   TextStyle get grey => this.apply(color: Colors.grey);
   TextStyle get green => this.apply(color: Colors.green);
-  TextStyle get primary => this.apply(color: AppColor.primaryColor);
-  TextStyle get accent => this.apply(color: AppColor.accentColor);
+  TextStyle get primary => this.apply(color: AppColor.primary);
+  TextStyle get accent => this.apply(color: AppColor.accent);
 }
 
 //material textStyle
