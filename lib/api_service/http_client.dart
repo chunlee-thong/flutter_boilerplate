@@ -7,7 +7,7 @@ import '../constant/config.dart';
 import '../utils/logger.dart';
 
 class BaseHttpClient {
-  static Dio defaultDioClient;
+  static Dio dio;
 
   static void init() {
     final BaseOptions options = BaseOptions(
@@ -16,7 +16,7 @@ class BaseHttpClient {
       receiveTimeout: 25000,
     );
 
-    defaultDioClient = Dio()
+    dio = Dio()
       ..options = options
       ..interceptors.add(defaultInterceptor)
       ..interceptors.add(

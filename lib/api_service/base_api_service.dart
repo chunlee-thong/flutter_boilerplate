@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/constant/config.dart';
 
 import '../constant/app_constant.dart';
+import '../constant/config.dart';
 import '../utils/logger.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
@@ -12,7 +12,7 @@ import 'http_exception.dart';
 class BaseApiService {
   Dio dio;
   BaseApiService({Dio dio}) {
-    this.dio = dio ?? BaseHttpClient.defaultDioClient;
+    this.dio = dio ?? BaseHttpClient.dio;
   }
 
   Future<T> onRequest<T>({

@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
   @override
   void initState() {
     BaseHttpClient.init();
@@ -25,10 +26,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return EasyLocalization(
-      supportedLocales: [EN_LOCALE, KH_LOCALE],
       path: AppConstant.LANGUAGE_PATH,
-      fallbackLocale: EN_LOCALE,
-      startLocale: EN_LOCALE,
+      supportedLocales: languages,
+      fallbackLocale: languages.first,
+      startLocale: languages.first,
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
