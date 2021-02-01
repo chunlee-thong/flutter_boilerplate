@@ -24,7 +24,7 @@ class NoDataWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(message, style: subtitleStyle),
+            Text(message, style: kSubtitleStyle),
             if (onRefresh != null)
               SmallIconButton(
                 onTap: () => onRefresh?.call(),

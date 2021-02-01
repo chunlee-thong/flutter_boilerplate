@@ -28,7 +28,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      backgroundColor: AppColor.materialPrimary,
       body: Center(
         child: Text(
           "Loading...",

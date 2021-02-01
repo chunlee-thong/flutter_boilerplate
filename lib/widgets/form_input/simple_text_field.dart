@@ -19,7 +19,7 @@ class SimpleTextField extends StatelessWidget {
     this.prefixIcon,
     this.validator,
     this.obsecure = false,
-    this.isRequired = false,
+    this.isRequired = true,
     this.marginBottom = 12,
     this.textInputType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,

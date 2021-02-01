@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'color_theme.dart';
 
 //custom textStyle
-const TextStyle headerStyle = TextStyle(
+const TextStyle kHeaderStyle = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.bold,
 );
-const TextStyle subHeaderStyle = TextStyle(
+const TextStyle kSubHeaderStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
 );
-const TextStyle titleStyle = TextStyle(
+const TextStyle kTitleStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
 );
-const TextStyle subtitleStyle = TextStyle(
+const TextStyle kSubtitleStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w500,
 );
-const TextStyle normalStyle = TextStyle(
+const TextStyle kNormalStyle = TextStyle(
   fontSize: 14,
 );
-const TextStyle captionStyle = TextStyle(
+const TextStyle kCaptionStyle = TextStyle(
   fontSize: 12,
 );
 
@@ -36,6 +36,7 @@ extension styleExtension on TextStyle {
   TextStyle get green => this.apply(color: Colors.green);
   TextStyle get primary => this.apply(color: AppColor.primary);
   TextStyle get accent => this.apply(color: AppColor.accent);
+  TextStyle get underline => this.apply(decoration: TextDecoration.underline);
 }
 
 //material textStyle
