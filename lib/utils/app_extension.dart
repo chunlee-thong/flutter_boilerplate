@@ -1,3 +1,5 @@
+import 'dart:io';
+
 extension MapExtension on Map {
   void addIfNotNull(dynamic key, dynamic data) {
     if (data != null) this.putIfAbsent(key, () => data);
@@ -8,4 +10,8 @@ extension MapExtension on Map {
       return this[key];
     }
   }
+}
+
+extension FileExtensionMethod on FileSystemEntity {
+  String get name => this.path.split("/").last;
 }

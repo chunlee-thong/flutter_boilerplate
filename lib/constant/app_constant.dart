@@ -8,8 +8,8 @@ class AppConstant {
   static String TOKEN;
 }
 
-const Locale _EN_LOCALE = Locale('en', 'US');
-const Locale _KH_LOCALE = Locale('km', 'KH');
+const Locale EN_LOCALE = Locale('en', 'US');
+const Locale KH_LOCALE = Locale('km', 'KH');
 
 class ErrorMessage {
   static const UNEXPECTED_ERROR = "An unexpected error occur!";
@@ -20,6 +20,6 @@ class ErrorMessage {
 }
 
 const List<LanguageModel> APP_LOCALES = [
-  const LanguageModel(_EN_LOCALE, "English"),
-  const LanguageModel(_KH_LOCALE, "ខ្មែរ"),
+  const LanguageModel(EN_LOCALE, "English"),
+  const LanguageModel(KH_LOCALE, "ខ្មែរ"),
 ];

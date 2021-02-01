@@ -6,9 +6,9 @@ import 'config.dart';
 class AppColor {
   static const Color primary = const Color(0xFF9efcff);
   static const Color accent = const Color(0xFFfaaa81);
-  static final MaterialColor primaryColor =
+  static final MaterialColor materialPrimary =
       JinColorUtils.hexColorToMaterialColor(0xFF9efcff);
-  static final MaterialColor accentColor =
+  static final MaterialColor materialAccent =
       JinColorUtils.hexColorToMaterialColor(0xFFfaaa81);
 }
 
@@ -18,13 +18,13 @@ final ThemeData kDarkTheme = _buildDarkTheme();
 ThemeData _buildLightTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: AppColor.primaryColor,
-    accentColor: AppColor.accentColor,
+    primarySwatch: AppColor.materialPrimary,
+    accentColor: AppColor.materialAccent,
     tabBarTheme: TabBarTheme(
-      labelColor: AppColor.accentColor,
+      labelColor: AppColor.materialAccent,
       unselectedLabelColor: Colors.grey,
     ),
-    buttonColor: AppColor.primaryColor,
+    buttonColor: AppColor.materialPrimary,
     fontFamily: Config.EN_FONT_NAME,
   );
   return base;
@@ -33,12 +33,12 @@ ThemeData _buildLightTheme() {
 ThemeData _buildDarkTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: AppColor.primaryColor,
-    primaryColorDark: AppColor.primaryColor,
-    accentColor: AppColor.accentColor,
-    toggleableActiveColor: AppColor.accentColor,
+    primarySwatch: AppColor.materialPrimary,
+    primaryColorDark: AppColor.materialPrimary,
+    accentColor: AppColor.materialAccent,
+    toggleableActiveColor: AppColor.materialAccent,
     buttonTheme: ButtonThemeData(
-      buttonColor: AppColor.primaryColor,
+      buttonColor: AppColor.materialPrimary,
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: Config.EN_FONT_NAME,

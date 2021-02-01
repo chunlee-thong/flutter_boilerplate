@@ -14,7 +14,7 @@ class LanguagePickerDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            child: Text("Change Languages", style: subtitleStyle.medium),
+            child: Text("Change Languages", style: kSubtitleStyle.medium),
             padding: const EdgeInsets.all(16),
           ),
           Divider(height: 0),
