@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/api_service/index.dart';
-import 'package:flutter_boiler_plate/services/async_subject.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
+import '../../api_service/index.dart';
 import '../../models/response/user_model.dart';
+import '../../services/async_subject.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);
