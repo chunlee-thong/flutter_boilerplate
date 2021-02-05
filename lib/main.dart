@@ -7,6 +7,7 @@ import './utils/service_locator.dart';
 import 'app.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   registerHiveAdapter();
   registerLocator();
