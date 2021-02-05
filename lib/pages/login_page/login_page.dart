@@ -2,27 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/mock_api_service.dart';
-import '../../constant/color_theme.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/local_storage_service.dart';
 import '../../utils/service_locator.dart';
-import '../../widgets/ui_helper.dart';
+import '../../widgets/buttons/primary_button.dart';
+import '../../widgets/common/ui_helper.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final formKey = GlobalKey<FormState>();
+class _LoginPageState extends State<LoginPage> with FormPageMixin {
   MockApiService mockApiService = getIt<MockApiService>();
-  final isLoading = false.obs<bool>();
   TextEditingController emailTC;
   TextEditingController passwordTC;
 
   void onLogin() async {
     if (formKey.currentState.validate()) {
-      handleLoading();
       try {
         String token = await mockApiService.loginUser(
           email: emailTC.text.trim(),
@@ -32,14 +29,8 @@ class _LoginPageState extends State<LoginPage> {
         PageNavigator.pushReplacement(context, RootPage());
       } catch (e) {
         UIHelper.showGeneralMessageDialog(context, e.toString());
-      } finally {
-        handleLoading();
       }
     }
-  }
-
-  void handleLoading() {
-    isLoading.value = !isLoading.value;
   }
 
   @override
@@ -52,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     emailTC.dispose();
-    isLoading.dispose();
     passwordTC.dispose();
     super.dispose();
   }
@@ -78,18 +68,15 @@ class _LoginPageState extends State<LoginPage> {
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) =>
-                  JinFormValidator.validateField(value, 'password'),
+              validator: (value) => JinFormValidator.validateField(value, 'password'),
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Password",
               ),
             ),
-            ActionButton(
+            PrimaryButton(
               onPressed: onLogin,
-              color: AppColor.primary,
-              loadingNotifier: isLoading,
               child: Text("LOGIN"),
             ),
           ],
