@@ -3,7 +3,7 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user_model.dart';
-import '../../services/async_subject.dart';
+import '../../services/async_subject_controller.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);
@@ -12,7 +12,7 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  AsyncSubject<UserResponse> userController = AsyncSubject();
+  AsyncSubjectController<UserResponse> userController = AsyncSubjectController();
   int currentPage = 1;
   int totalPage = 10;
 
@@ -25,7 +25,7 @@ class _DummyPageState extends State<DummyPage> {
         count: 10,
         page: currentPage,
       ),
-      onDone: (response) {
+      onSuccess: (response) {
         if (userController.hasData) {
           response.users = [...userController.value.users, ...response.users];
         }

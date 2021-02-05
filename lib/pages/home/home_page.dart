@@ -2,9 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import './../dummy_page/dummy_page.dart';
+import './../dummy/dummy_page.dart';
 import '../../constant/locale_keys.dart';
-import '../../provider/theme_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/common/ui_helper.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,10 +15,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int count = 0;
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text("Flutter Boilerplate"),
         actions: <Widget>[
@@ -34,9 +37,7 @@ class _HomePageState extends State<HomePage> {
             Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             RaisedButton(
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (contet) => LanguagePickerDialog());
+                showDialog(context: context, builder: (context) => LanguagePickerDialog());
               },
               child: Text("Change Locale"),
             ),
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ThemeProvider.getProvider(context).switchTheme();
+          UIHelper.showSnackBar(scaffoldKey, "Theme changed");
         },
         child: Icon(Icons.add),
       ),

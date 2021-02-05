@@ -426,7 +426,7 @@ packages:
       name: jin_widget_helper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.7.1"
   js:
     dependency: transitive
     description:
