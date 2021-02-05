@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'color_theme.dart';
+import 'app_theme_color.dart';
 
 //custom textStyle
 const TextStyle kHeaderStyle = TextStyle(
@@ -39,8 +39,7 @@ extension styleExtension on TextStyle {
   TextStyle get underline => this.apply(decoration: TextDecoration.underline);
 }
 
-//material textStyle
-
+///material textStyle
 class MTS {
   static const TextStyle h1 = TextStyle(
     fontSize: 96,

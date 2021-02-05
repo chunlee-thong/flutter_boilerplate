@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
+import '../../constant/app_theme_color.dart';
 import '../../constant/style.dart';
 
 class NoDataWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class NoDataWidget extends StatelessWidget {
   const NoDataWidget({
     Key key,
     this.verticalMargin = 0.0,
-    this.message = "No data",
+    this.message = "There is nothing here!",
     this.onRefresh,
   }) : super(key: key);
   @override
@@ -24,7 +25,9 @@ class NoDataWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(message, style: kSubtitleStyle),
+            buildImage(),
+            SpaceY(),
+            Text(message, style: kSubtitleStyle.normal),
             if (onRefresh != null)
               SmallIconButton(
                 onTap: () => onRefresh?.call(),
@@ -37,6 +40,14 @@ class NoDataWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildImage() {
+    return Icon(
+      FlutterIcons.cloud_off_mdi,
+      size: 54,
+      color: AppColor.accent,
     );
   }
 }

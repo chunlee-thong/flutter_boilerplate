@@ -6,9 +6,13 @@ import '../api_service/http_exception.dart';
 import '../constant/app_constant.dart';
 import '../utils/logger.dart';
 
-class AsyncSubject<T> {
+///Previously call [BaseStream] or [BaseExtendBloc]
+///[AsyncSubjectController] is a wrap around bloc pattern that use [rxdart]
+///[AsyncSubjectController] provide a method [asyncOperation] to handle or call async function associated with rxdart's [BehaviorSubject]
+///
+class AsyncSubjectController<T> {
   BehaviorSubject<T> _controller;
-  AsyncSubject([T initialData]) {
+  AsyncSubjectController([T initialData]) {
     _controller = BehaviorSubject<T>();
     if (initialData != null) {
       this.addData(initialData);
@@ -26,9 +30,19 @@ class AsyncSubject<T> {
   }
 
   Future<T> asyncOperation(
+    ///A future function that return the type of T
     Future<T> Function() doingOperation, {
+
+    /// if [reloading] is true, reload the controller to initial state
     bool resetStream = false,
-    T Function(T) onDone,
+
+    /// A function that call after [asyncOperation] is success
+    T Function(T) onSuccess,
+
+    /// A function that call after everything is done
+    void Function() onDone,
+
+    /// A function that call after there is an error
     void Function(dynamic) onError,
   }) async {
     bool shouldAddError = true;
@@ -38,7 +52,7 @@ class AsyncSubject<T> {
     try {
       if (resetStream) this.addData(null);
       T data = await doingOperation();
-      data = onDone?.call(data);
+      data = onSuccess?.call(data);
       this.addData(data);
       return data;
     } on TypeError catch (_) {
@@ -53,6 +67,8 @@ class AsyncSubject<T> {
       onError?.call(exception);
       if (shouldAddError) this.addError(exception);
       return null;
+    } finally {
+      onDone?.call();
     }
   }
 
