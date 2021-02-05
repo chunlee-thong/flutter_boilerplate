@@ -1,4 +1,4 @@
-import '../constant/config.dart';
+import '../constant/app_config.dart';
 import '../models/response/user_model.dart';
 import 'base_api_service.dart';
 

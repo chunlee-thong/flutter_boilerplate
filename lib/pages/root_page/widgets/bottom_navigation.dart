@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../provider/bottom_navigation_provider.dart';
 import 'package:provider/provider.dart';
 
-class RootBottonNavigation extends StatelessWidget {
+import '../../../providers/bottom_navigation_provider.dart';
+
+class RootBottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<BottomNavigationProvider>(context);

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../pages/home_page/home_page.dart';
-import '../../provider/bottom_navigation_provider.dart';
+import '../../pages/home/home_page.dart';
+import '../../providers/bottom_navigation_provider.dart';
+import 'widgets/bottom_navigation.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
@@ -49,31 +50,7 @@ class _RootPageState extends State<RootPage> {
               physics: NeverScrollableScrollPhysics(),
               children: pages,
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: state.currentIndex,
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) {
-                state.changeIndex(index);
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: "Home",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.assessment),
-                  label: "Report",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.map),
-                  label: "Map",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: "Setting",
-                )
-              ],
-            ),
+            bottomNavigationBar: RootBottomNavigation(),
           ),
         ),
       ),

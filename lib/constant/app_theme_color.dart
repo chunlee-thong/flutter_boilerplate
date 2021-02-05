@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import 'config.dart';
+import 'app_config.dart';
 
 class AppColor {
   static const Color primary = const Color(0xFF9efcff);
   static const Color accent = const Color(0xFFfaaa81);
-  static final MaterialColor materialPrimary =
-      JinColorUtils.hexColorToMaterialColor(0xFF9efcff);
-  static final MaterialColor materialAccent =
-      JinColorUtils.hexColorToMaterialColor(0xFFfaaa81);
+  static final MaterialColor materialPrimary = JinColorUtils.hexColorToMaterialColor(primary.value);
+  static final MaterialColor materialAccent = JinColorUtils.hexColorToMaterialColor(accent.value);
 }
 
 final ThemeData kLightTheme = _buildLightTheme();
@@ -25,7 +23,7 @@ ThemeData _buildLightTheme() {
       unselectedLabelColor: Colors.grey,
     ),
     buttonColor: AppColor.materialPrimary,
-    fontFamily: Config.EN_FONT_NAME,
+    fontFamily: AppConfig.EN_FONT_NAME,
   );
   return base;
 }
@@ -41,7 +39,7 @@ ThemeData _buildDarkTheme() {
       buttonColor: AppColor.materialPrimary,
       textTheme: ButtonTextTheme.primary,
     ),
-    fontFamily: Config.EN_FONT_NAME,
+    fontFamily: AppConfig.EN_FONT_NAME,
   );
   return base;
 }
