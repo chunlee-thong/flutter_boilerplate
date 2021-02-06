@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/async_future_controller.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
+import 'error_widget.dart';
 
 class AsyncFutureControllerBuilder<T> extends StatefulWidget {
   final AsyncFutureController<T> futureController;
@@ -50,22 +51,10 @@ class _AsyncFutureControllerBuilderState<T> extends State<AsyncFutureControllerB
       if (widget.error != null) {
         return widget.error(widget.futureController.error);
       }
-      return buildDefaultError();
+      return CustomErrorWidget(message: widget.futureController.error);
     } else if (widget.loading != null) {
       return widget.loading;
     }
     return LoadingWidget();
-  }
-
-  Widget buildDefaultError() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Center(
-        child: Text(
-          widget.futureController.error.toString(),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
   }
 }

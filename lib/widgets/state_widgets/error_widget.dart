@@ -3,12 +3,13 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/style.dart';
+import '../common/ellipsis_text.dart';
 
-class ErrorWidget extends StatelessWidget {
+class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
-  final String message;
+  final dynamic message;
   final Future<void> Function() onRefresh;
-  const ErrorWidget({
+  const CustomErrorWidget({
     Key key,
     @required this.message,
     this.verticalMargin = 0.0,
@@ -25,8 +26,13 @@ class ErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             buildImage(),
-            SpaceY(),
-            Text(message, style: kSubtitleStyle.normal),
+            SpaceY(16),
+            EllipsisText(
+              message.toString(),
+              style: kSubtitleStyle.normal,
+              maxLines: 4,
+              textAlign: TextAlign.center,
+            ),
             if (onRefresh != null)
               SmallIconButton(
                 onTap: () => onRefresh?.call(),
