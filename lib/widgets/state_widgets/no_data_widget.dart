@@ -26,7 +26,7 @@ class NoDataWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             buildImage(),
-            SpaceY(),
+            SpaceY(16),
             Text(message, style: kSubtitleStyle.normal),
             if (onRefresh != null)
               SmallIconButton(
