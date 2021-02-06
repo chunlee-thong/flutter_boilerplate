@@ -3,7 +3,8 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user_model.dart';
-import '../../services/async_subject_controller.dart';
+import '../../services/async_future_controller.dart';
+import '../../widgets/state_widgets/async_future_controller_builder.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);
@@ -12,7 +13,7 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  AsyncSubjectController<UserResponse> userController = AsyncSubjectController();
+  AsyncFutureController<UserResponse> userController = AsyncFutureController();
   int currentPage = 1;
   int totalPage = 10;
 
@@ -27,7 +28,7 @@ class _DummyPageState extends State<DummyPage> {
       ),
       onSuccess: (response) {
         if (userController.hasData) {
-          response.users = [...userController.value.users, ...response.users];
+          response.users = [...userController.data.users, ...response.users];
         }
         if (response.users.isNotEmpty) {
           currentPage += 1;
@@ -35,7 +36,7 @@ class _DummyPageState extends State<DummyPage> {
         totalPage = response.pagination.totalPage;
         return response;
       },
-      resetStream: reload,
+      reloading: reload,
     );
   }
 
@@ -54,9 +55,9 @@ class _DummyPageState extends State<DummyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Fetch all users with pagination")),
-      body: StreamHandler<UserResponse>(
-        stream: userController.stream,
-        ready: (UserResponse data) {
+      body: AsyncFutureControllerBuilder<UserResponse>(
+        futureController: userController,
+        ready: (context, UserResponse data) {
           return RefreshIndicator(
             onRefresh: () => fetchData(true),
             child: PaginatedListView(

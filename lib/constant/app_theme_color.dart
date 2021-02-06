@@ -4,8 +4,8 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'app_config.dart';
 
 class AppColor {
-  static const Color primary = const Color(0xFF9efcff);
-  static const Color accent = const Color(0xFFfaaa81);
+  static const Color primary = const Color(0xFF60c5ba);
+  static const Color accent = const Color(0xFFef5285);
   static final MaterialColor materialPrimary = JinColorUtils.hexColorToMaterialColor(primary.value);
   static final MaterialColor materialAccent = JinColorUtils.hexColorToMaterialColor(accent.value);
 }
@@ -22,7 +22,11 @@ ThemeData _buildLightTheme() {
       labelColor: AppColor.materialAccent,
       unselectedLabelColor: Colors.grey,
     ),
-    buttonColor: AppColor.materialPrimary,
+    buttonColor: AppColor.primary,
+    buttonTheme: ButtonThemeData(
+      buttonColor: AppColor.materialPrimary,
+      textTheme: ButtonTextTheme.primary,
+    ),
     fontFamily: AppConfig.EN_FONT_NAME,
   );
   return base;
