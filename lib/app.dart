@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
 
-import './api_service/http_client.dart';
 import 'constant/app_config.dart';
 import 'constant/app_constant.dart';
 import 'constant/app_theme_color.dart';
@@ -19,7 +18,6 @@ class _MyAppState extends State<MyApp> {
   List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
   @override
   void initState() {
-    BaseHttpClient.init();
     super.initState();
   }
 
