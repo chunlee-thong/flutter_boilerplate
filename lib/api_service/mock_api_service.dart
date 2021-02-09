@@ -7,7 +7,7 @@ class MockApiService extends BaseApiService {
   MockApiService() : super(dio: null);
   Future<UserResponse> fetchUserList({int page = 1, int count = 99999}) async {
     return onRequest(
-      path: "/api/user/all_users3",
+      path: "/api/user/all",
       query: {
         "page": page,
         "count": count,
