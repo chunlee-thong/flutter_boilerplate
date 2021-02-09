@@ -7,12 +7,12 @@ import '../constant/app_constant.dart';
 import '../utils/logger.dart';
 
 ///Previously call [BaseStream] or [BaseExtendBloc]
-///[AsyncSubjectController] is a wrap around bloc pattern that use [rxdart]
-///[AsyncSubjectController] provide a method [asyncOperation] to handle or call async function associated with rxdart's [BehaviorSubject]
+///[AsyncSubjectManager] is a wrap around bloc pattern that use [rxdart]
+///[AsyncSubjectManager] provide a method [asyncOperation] to handle or call async function associated with rxdart's [BehaviorSubject]
 ///
-class AsyncSubjectController<T> {
+class AsyncSubjectManager<T> {
   BehaviorSubject<T> _controller;
-  AsyncSubjectController([T initialData]) {
+  AsyncSubjectManager([T initialData]) {
     _controller = BehaviorSubject<T>();
     if (initialData != null) {
       this.addData(initialData);

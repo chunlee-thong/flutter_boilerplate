@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 ///This class is inspired from SWR in React
-///[AsyncFutureController] is a wrap around [Future] and [ChangeNotifier]
+///[FutureManager] is a wrap around [Future] and [ChangeNotifier]
 ///
-///[AsyncFutureController] use [AsyncFutureControllerBuilder] instead of FutureBuilder to handle data
+///[FutureManager] use [AsyncFutureControllerBuilder] instead of FutureBuilder to handle data
 ///
-///[AsyncFutureController] provide a method [asyncOperation] to handle or call async function
+///[FutureManager] provide a method [asyncOperation] to handle or call async function
 ///
 
-class AsyncFutureController<T> extends ChangeNotifier {
+class FutureManager<T> extends ChangeNotifier {
   ///
   bool _isLoading = true;
   T _data;
