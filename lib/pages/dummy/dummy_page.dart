@@ -3,8 +3,8 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user_model.dart';
-import '../../services/async_future_controller.dart';
-import '../../widgets/state_widgets/async_future_controller_builder.dart';
+import '../../services/future_manager.dart';
+import '../../widgets/state_widgets/future_manager_builder.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);
@@ -13,7 +13,7 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  AsyncFutureController<UserResponse> userController = AsyncFutureController();
+  FutureManager<UserResponse> userController = FutureManager();
   int currentPage = 1;
   int totalPage = 10;
 
@@ -55,8 +55,8 @@ class _DummyPageState extends State<DummyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Fetch all users with pagination")),
-      body: AsyncFutureControllerBuilder<UserResponse>(
-        futureController: userController,
+      body: FutureManagerBuilder<UserResponse>(
+        futureManager: userController,
         ready: (context, UserResponse data) {
           return RefreshIndicator(
             onRefresh: () => fetchData(true),
