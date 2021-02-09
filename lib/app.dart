@@ -8,6 +8,7 @@ import 'constant/app_constant.dart';
 import 'constant/app_theme_color.dart';
 import 'pages/splash/splash_page.dart';
 import 'providers/theme_provider.dart';
+import 'providers/user_provider.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
         ],
         child: Builder(
           builder: (context) => Consumer<ThemeProvider>(

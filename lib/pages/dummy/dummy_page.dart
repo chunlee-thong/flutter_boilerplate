@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
-import '../../models/response/user_model.dart';
+import '../../models/response/user/user_model.dart';
 import '../../services/async_future_controller.dart';
 import '../../widgets/state_widgets/async_future_controller_builder.dart';
 

@@ -13,6 +13,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool obsecure;
   final bool readOnly;
   final int maxLines;
+  final String label;
 
   const PrimaryTextField({
     Key key,
@@ -28,6 +29,7 @@ class PrimaryTextField extends StatelessWidget {
     this.onTap,
     this.readOnly,
     this.maxLines = 1,
+    this.label,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class PrimaryTextField extends StatelessWidget {
           hintText: hint,
           border: OutlineInputBorder(),
           prefixIcon: prefixIcon,
+          labelText: label,
         ),
       ),
     );

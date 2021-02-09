@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../constant/app_constant.dart';
 import '../../pages/home/home_page.dart';
+import '../../pages/user_profile/user_profile_page.dart';
 import '../../providers/bottom_navigation_provider.dart';
+import '../../providers/user_provider.dart';
+import '../../services/local_storage_service.dart';
 import 'widgets/bottom_navigation.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
+
   RootPage({Key key, this.startPageIndex = 0}) : super(key: key);
 
   @override
@@ -18,11 +23,18 @@ class _RootPageState extends State<RootPage> {
         HomePage(),
         Container(),
         Container(),
-        Container(),
+        UserProfilePage(),
       ];
+
+  void setupUserData() async {
+    AppConstant.TOKEN = await LocalStorage.getToken();
+    AppConstant.USER_ID = await LocalStorage.read(key: LocalStorage.ID_KEY);
+    UserProvider.getProvider(context).getUserInfo();
+  }
 
   @override
   void initState() {
+    setupUserData();
     super.initState();
   }
 

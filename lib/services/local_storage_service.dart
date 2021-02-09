@@ -6,6 +6,7 @@ class LocalStorage {
   static const FlutterSecureStorage _fss = FlutterSecureStorage();
   static SharedPreferences sharedPreferences;
   static const String TOKEN_KEY = "key.token";
+  static const String ID_KEY = "key.id";
   static const String THEME_KEY = "key.theme";
 
   //Prevent initialization

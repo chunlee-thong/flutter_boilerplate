@@ -1,23 +1,19 @@
-import 'pagination.dart';
+import '../pagination.dart';
 
 class UserResponse {
-  List<User> users;
+  List<UserModel> users;
   Pagination pagination;
 
   UserResponse({this.pagination, this.users});
 
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
-        users: json["data"] == null
-            ? null
-            : List<User>.from(json["data"].map((x) => User.fromJson(x))),
-        pagination: json["pagination"] == null
-            ? null
-            : Pagination.fromJson(json["pagination"]),
+        users: json["data"] == null ? null : List<UserModel>.from(json["data"].map((x) => UserModel.fromJson(x))),
+        pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
       );
 }
 
-class User {
-  User({
+class UserModel {
+  UserModel({
     this.id,
     this.email,
     this.firstName,
@@ -31,7 +27,7 @@ class User {
   String lastName;
   String avatar;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"] == null ? null : json["id"],
         email: json["email"] == null ? null : json["email"],
         firstName: json["first_name"] == null ? null : json["first_name"],

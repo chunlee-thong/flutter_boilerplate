@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
+import '../../api_service/index.dart';
 import '../../api_service/mock_api_service.dart';
+import '../../models/others/login_response.dart';
 import '../../pages/root_page/root_page.dart';
-import '../../services/local_storage_service.dart';
+import '../../utils/auth_utils.dart';
 import '../../utils/service_locator.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/common/ui_helper.dart';
+import '../../widgets/form_input/primary_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,11 +24,11 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
   void onLogin() async {
     if (formKey.currentState.validate()) {
       try {
-        String token = await mockApiService.loginUser(
+        LoginResponse loginResponse = await userApiService.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
         );
-        LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: token);
+        await AuthUtils.onLoginSuccess(context, loginResponse);
         PageNavigator.pushReplacement(context, RootPage());
       } catch (e) {
         UIHelper.showGeneralMessageDialog(context, e.toString());
@@ -35,8 +38,8 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
 
   @override
   void initState() {
-    emailTC = TextEditingController();
-    passwordTC = TextEditingController();
+    emailTC = TextEditingController(text: "test1@gmail.com");
+    passwordTC = TextEditingController(text: "123456789");
     super.initState();
   }
 
@@ -55,25 +58,19 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 200, horizontal: 12),
           children: <Widget>[
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
+            PrimaryTextField(
+              textInputType: TextInputType.emailAddress,
               controller: emailTC,
               validator: (value) => JinFormValidator.validateEmail(value),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Email",
-              ),
+              label: "Email",
             ),
             SpaceY(16),
-            TextFormField(
-              keyboardType: TextInputType.visiblePassword,
+            PrimaryTextField(
+              textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
               validator: (value) => JinFormValidator.validateField(value, 'password'),
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Password",
-              ),
+              obsecure: true,
+              label: "Password",
             ),
             PrimaryButton(
               onPressed: onLogin,

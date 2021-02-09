@@ -20,6 +20,9 @@ class BaseApiService {
     }
   }
 
+  // ignore: non_constant_identifier_names
+  final String DATA_FIELD = "data";
+
   Future<T> onRequest<T>({
     @required String path,
     @required T Function(Response) onSuccess,
@@ -94,8 +97,7 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error provided by server
     int code = exception.response.statusCode;
-    String serverMessage =
-        exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+    String serverMessage = exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
   } else {
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);

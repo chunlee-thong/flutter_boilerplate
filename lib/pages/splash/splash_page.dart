@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/app_theme_color.dart';
+import '../../pages/root_page/root_page.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../services/local_storage_service.dart';
 import '../login_page/login_page.dart';
 
@@ -14,9 +16,11 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   void onSplashing() async {
     await LocalStorage.initialize();
+    bool isLoggedIn = (await LocalStorage.getToken()) != null;
+    UserProvider.getProvider(context).setLoginStatus(isLoggedIn);
     ThemeProvider.getProvider(context).initializeTheme();
     await Future.delayed(const Duration(seconds: 1));
-    PageNavigator.pushReplacement(context, LoginPage());
+    PageNavigator.pushReplacement(context, isLoggedIn ? RootPage() : LoginPage());
   }
 
   @override

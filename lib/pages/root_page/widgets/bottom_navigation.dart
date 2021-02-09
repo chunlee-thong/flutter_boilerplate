@@ -27,8 +27,8 @@ class RootBottomNavigation extends StatelessWidget {
           label: "Map",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: "Setting",
+          icon: Icon(Icons.person),
+          label: "Profile",
         )
       ],
     );
