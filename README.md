@@ -2,18 +2,16 @@
 
 A flutter boiler plate code initial project setup
 
-### [DEV'S NOTE ONLY] Branch management
-
-- Any new change will be made in [master] branch first
-- After change has been push, merge [master] into [bottom-navigation] then merge [bottom-navigation] into [user-authentication]
-- **Must not merge any branch to master**
-
 # Getting Started
 
 1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
-2. copy folder **assets**, **lib**, and **pubspec.yaml** from this project to your newly created project and replace all file
+2. copy folder **assets**, **lib**, **pubspec.yaml** and **test** from this project to your newly created project and replace all file
 3. run **flutter pub get**
 4. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
+5. Add
+    **android:allowBackup="false"**
+    **android:fullBackupContent="false"**
+   to AndroidManifest.xml application tag to disable backup when app uninstalled
 
 # App Icon
 
