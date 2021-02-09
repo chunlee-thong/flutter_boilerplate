@@ -8,7 +8,10 @@ A flutter boiler plate code initial project setup
 2. copy folder **assets**, **lib**, **pubspec.yaml** and **test** from this project to your newly created project and replace all file
 3. run **flutter pub get**
 4. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
-5. Add **android:allowBackup="false"** and **android:fullBackupContent="false"** to AndroidManifest.xml application tag
+5. Add
+    **android:allowBackup="false"**
+    **android:fullBackupContent="false"**
+   to AndroidManifest.xml application tag to disable backup when
 
 # App Icon
 
