@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 
 import '../api_service/index.dart';
 import '../models/response/user/user_model.dart';
-import '../services/async_future_controller.dart';
+import '../services/future_manager.dart';
 
 class UserProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
 
   bool get isLoggedIn => _isLoggedIn;
 
-  AsyncFutureController<UserModel> userController = AsyncFutureController<UserModel>();
+  FutureManager<UserModel> userController = FutureManager<UserModel>();
 
   UserModel get userData => userController.data;
 

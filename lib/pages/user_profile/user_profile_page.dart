@@ -5,8 +5,8 @@ import '../../models/response/user/user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/auth_utils.dart';
 import '../../widgets/common/ui_helper.dart';
-import '../../widgets/state_widgets/async_future_controller_builder.dart';
 import '../../widgets/state_widgets/error_widget.dart';
+import '../../widgets/state_widgets/future_manager_builder.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -25,8 +25,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
           },
         )
       ]),
-      body: AsyncFutureControllerBuilder<UserModel>(
-        futureController: UserProvider.getProvider(context).userController,
+      body: FutureManagerBuilder<UserModel>(
+        futureManager: UserProvider.getProvider(context).userController,
         error: (error) => CustomErrorWidget(
           message: error,
           onRefresh: UserProvider.getProvider(context).getUserInfo,
