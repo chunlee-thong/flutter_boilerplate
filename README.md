@@ -11,7 +11,7 @@ A flutter boiler plate code initial project setup
 5. Add
     **android:allowBackup="false"**
     **android:fullBackupContent="false"**
-   to AndroidManifest.xml application tag to disable backup when
+   to AndroidManifest.xml application tag to disable backup when app uninstalled
 
 # App Icon
 
