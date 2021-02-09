@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SimpleTextField extends StatelessWidget {
+class PrimaryTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final Widget prefixIcon;
@@ -11,8 +11,10 @@ class SimpleTextField extends StatelessWidget {
   final VoidCallback onTap;
   final bool isRequired;
   final bool obsecure;
+  final bool readOnly;
+  final int maxLines;
 
-  const SimpleTextField({
+  const PrimaryTextField({
     Key key,
     this.controller,
     this.hint = "",
@@ -24,6 +26,8 @@ class SimpleTextField extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
     this.onTap,
+    this.readOnly,
+    this.maxLines = 1,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,10 @@ class SimpleTextField extends StatelessWidget {
         textCapitalization: textCapitalization,
         controller: controller,
         autocorrect: false,
+        maxLines: maxLines,
+        readOnly: readOnly ?? onTap != null ? true : false,
         obscureText: obsecure,
+        onTap: onTap,
         validator: isRequired ? validator : null,
         decoration: InputDecoration(
           hintText: hint,
