@@ -98,6 +98,9 @@ void _onDioError(DioError exception) {
     ///Error provided by server
     int code = exception.response.statusCode;
     String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
+    throw DioErrorException("$code: $serverMessage", code: code);
+  } else {
+    throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }
 }
 

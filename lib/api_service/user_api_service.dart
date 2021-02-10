@@ -17,7 +17,7 @@ class UserApiService extends BaseApiService {
         "password": password,
       },
       onSuccess: (response) {
-        return LoginResponse(response.data["data"]["_id"], response.data["token"]);
+        return LoginResponse(response.data[DATA_FIELD]["user_id"], response.data[DATA_FIELD]["token"]);
       },
     );
   }
