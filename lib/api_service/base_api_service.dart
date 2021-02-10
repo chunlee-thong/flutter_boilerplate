@@ -20,6 +20,9 @@ class BaseApiService {
     }
   }
 
+  final String DATA_FIELD = "data";
+  final String ERROR_MESSAGE_FIELD = "message";
+
   Future<T> onRequest<T>({
     @required String path,
     @required T Function(Response) onSuccess,
@@ -34,7 +37,7 @@ class BaseApiService {
     Response response;
     try {
       final httpOption = Options(method: method);
-      if (requiredToken) {
+      if (requiredToken && AppConstant.TOKEN != null) {
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
       httpOption.headers.addAll(headers);
@@ -94,8 +97,7 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error provided by server
     int code = exception.response.statusCode;
-    String serverMessage =
-        exception.response.data['error'] ?? ErrorMessage.UNEXPECTED_ERROR;
+    String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
   } else {
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
