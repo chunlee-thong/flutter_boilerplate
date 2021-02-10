@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../models/others/login_response.dart';
@@ -15,6 +16,7 @@ class AuthUtils {
 
   static void logOutUser(BuildContext context) async {
     await LocalStorage.deleteAll();
+    AppConstant.clean();
     UserProvider.getProvider(context).setLoginStatus(false);
     PageNavigator.pushAndRemove(context, LoginPage());
   }

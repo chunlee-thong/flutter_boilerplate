@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import '../models/others/language_model.dart';
 
 class AppConstant {
-  // ignore: non_constant_identifier_names
   static String TOKEN;
-  // ignore: non_constant_identifier_names
   static String USER_ID;
+
+  static void clean() {
+    TOKEN = null;
+    USER_ID = null;
+  }
 }
 
 const Locale EN_LOCALE = Locale('en', 'US');
