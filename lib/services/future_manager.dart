@@ -8,77 +8,104 @@ import 'package:flutter/material.dart';
 ///[FutureManager] provide a method [asyncOperation] to handle or call async function
 ///
 
+typedef FutureFunction<T> = Future<T> Function();
+typedef SuccessCallBack<T> = T Function(T);
+typedef ErrorCallBack = void Function(dynamic);
+
 class FutureManager<T> extends ChangeNotifier {
-  ///
-  bool _isLoading = true;
-  T _data;
-  dynamic _error;
+  ///A future function that return the type of T
+  final FutureFunction<T> futureFunction;
 
-  ///
-  bool get hasData => _data != null;
-  bool get isLoading => _isLoading;
-  bool get hasError => _error != null;
+  /// A function that call after [asyncOperation] is success
+  final SuccessCallBack<T> onSuccess;
 
-  dynamic get error => _error;
-  T get data => _data;
+  /// A function that call after everything is done
+  final VoidCallback onDone;
 
-  ///Future that this class is doing in [asyncOperation]
-  Future<T> future;
+  /// A function that call after there is an error
+  final ErrorCallBack onError;
 
-  Future<T> asyncOperation(
-    ///A future function that return the type of T
-    Future<T> Function() doingOperation, {
+  /// if [reloading] is true, reload the controller to initial state
+  final bool reloading;
 
-    /// if [reloading] is true, reload the controller to initial state
-    bool reloading = false,
-
-    /// A function that call after [asyncOperation] is success
-    T Function(T) onSuccess,
-
-    /// A function that call after everything is done
-    void Function() onDone,
-
-    /// A function that call after there is an error
-    void Function(dynamic) onError,
-  }) async {
-    bool shouldApplyError = true;
-    if (this.hasData) {
-      shouldApplyError = reloading;
-    }
-    try {
-      if (reloading) resetData();
-      future = doingOperation();
-      T result = await future;
-      if (onSuccess != null) {
-        result = onSuccess?.call(result);
-      }
-      _data = result;
-      return _data;
-    } catch (exception) {
-      if (shouldApplyError) _error = exception;
-      onError?.call(exception);
-      return null;
-    } finally {
-      toggleLoading();
-      onDone?.call();
+  FutureManager({this.futureFunction, this.reloading = false, this.onSuccess, this.onDone, this.onError}) {
+    if (futureFunction != null) {
+      asyncOperation(
+        futureFunction,
+        reloading: reloading,
+        onSuccess: onSuccess,
+        onDone: onDone,
+        onError: onError,
+      );
     }
   }
 
+  ///
+  bool isLoading = true;
+  T data;
+  dynamic error;
+
+  ///
+  bool get hasData => data != null;
+  bool get hasError => error != null;
+
+  ///Future that this class is doing in [asyncOperation]
+  Future<T> future;
+  Future<T> Function({bool reloading, SuccessCallBack<T> onSuccess, VoidCallback onDone, ErrorCallBack onError}) refresh;
+
+  Future<T> asyncOperation(
+    FutureFunction<T> futureFunction, {
+    bool reloading = false,
+    SuccessCallBack<T> onSuccess,
+    VoidCallback onDone,
+    ErrorCallBack onError,
+  }) async {
+    refresh = ({reloading, onSuccess, onDone, onError}) async {
+      bool shouldReload = reloading ?? this.reloading;
+      SuccessCallBack<T> successCallBack = onSuccess ?? this.onSuccess;
+      ErrorCallBack errorCallBack = onError ?? this.onError;
+      VoidCallback onOperationDone = onDone ?? this.onDone;
+      //
+      bool triggerError = true;
+      if (hasData) {
+        triggerError = shouldReload;
+      }
+      try {
+        if (shouldReload) resetData();
+        future = futureFunction();
+        T result = await future;
+        if (successCallBack != null) {
+          result = successCallBack?.call(result);
+        }
+        data = result;
+        return data;
+      } catch (exception) {
+        if (triggerError) error = exception;
+        errorCallBack?.call(exception);
+        return null;
+      } finally {
+        toggleLoading();
+        onOperationDone?.call();
+      }
+    };
+    return refresh(reloading: reloading, onSuccess: onSuccess, onDone: onDone, onError: onError);
+  }
+
   void toggleLoading() {
-    _isLoading = !_isLoading;
+    isLoading = !isLoading;
     notifyListeners();
   }
 
   void resetData() {
-    _error = null;
-    _isLoading = true;
-    _data = null;
+    error = null;
+    isLoading = true;
+    data = null;
     notifyListeners();
   }
 
   @override
   void dispose() {
-    _data = null;
+    data = null;
     super.dispose();
   }
 }

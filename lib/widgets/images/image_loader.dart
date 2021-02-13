@@ -11,6 +11,7 @@ class ImageLoader extends StatelessWidget {
   final double width;
   final double height;
   final BorderRadius radius;
+  final Color color;
   const ImageLoader({
     Key key,
     @required this.imageUrl,
@@ -20,6 +21,7 @@ class ImageLoader extends StatelessWidget {
     this.width,
     this.height,
     this.radius = BorderRadius.zero,
+    this.color,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class ImageLoader extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
+          color: color,
           errorWidget: (context, err, obj) {
             if (error != null) return error;
             return Icon(Icons.error_outline);
