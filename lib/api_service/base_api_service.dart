@@ -58,6 +58,7 @@ class BaseApiService {
       }
 
       if (ignoreResponse == false) {
+        ///This condition may be depend on Response
         if (response.data['status'] == 1 || response.data['status'] == true) {
           return onSuccess(response);
         } else {
@@ -82,6 +83,7 @@ class BaseApiService {
 }
 
 void _onTypeError(dynamic exception) {
+  //Logic or syntax error on some condition
   errorLog("Error Stack trace: ${exception.stackTrace.toString()}");
   throw exception;
 }
@@ -92,10 +94,10 @@ void _onDioError(DioError exception) {
     ///Socket exception mostly from internet connection or host
     throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
   } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
-    ///Connection timeout due to internet connection or server
+    ///Connection timeout due to internet connection or server not responding
     throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
   } else if (exception.type == DioErrorType.RESPONSE) {
-    ///Error provided by server
+    ///Error that range from 400-500
     int code = exception.response.statusCode;
     String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
