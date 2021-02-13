@@ -9,6 +9,7 @@ extension MapExtension on Map {
     if (this.keys.contains(key)) {
       return this[key];
     }
+    return null;
   }
 }
 

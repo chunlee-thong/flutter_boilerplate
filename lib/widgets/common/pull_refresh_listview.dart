@@ -15,6 +15,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
   final bool shrinkWrap;
   final Widget onEmpty;
   final bool hasRefreshButtonWhenEmpty;
+  final ScrollController controller;
   //
   const PullRefreshListViewBuilder({
     @required this.onRefresh,
@@ -27,6 +28,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.separator,
     this.shrinkWrap = false,
     this.onEmpty,
+    this.controller,
     this.hasRefreshButtonWhenEmpty = false,
   });
 
@@ -41,6 +43,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.separator,
     this.shrinkWrap = false,
     this.onEmpty,
+    this.controller,
     this.hasRefreshButtonWhenEmpty = false,
   });
 
@@ -55,6 +58,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
         condition: onGetMoreData != null,
         onTrue: PaginatedListView(
           padding: padding,
+          scrollController: controller,
           hasMoreData: hasMoreData,
           itemBuilder: itemBuilder,
           onGetMoreData: onGetMoreData,
@@ -64,6 +68,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           divider: separator ?? SizedBox(),
         ),
         onFalse: ListView.separated(
+          controller: controller,
           separatorBuilder: (c, i) => separator ?? SizedBox(),
           padding: padding,
           itemBuilder: itemBuilder,
