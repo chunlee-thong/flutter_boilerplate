@@ -16,8 +16,7 @@ class BaseHttpClient {
       receiveTimeout: 25000,
     );
 
-    dio = Dio()
-      ..options = options
+    dio = Dio(options)
       ..interceptors.add(defaultInterceptor)
       ..interceptors.add(
         DioCacheManager(CacheConfig(baseUrl: AppConfig.BASE_URL)).interceptor,
