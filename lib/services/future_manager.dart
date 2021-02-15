@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/logger.dart';
+
 ///This class is inspired from SWR in React
 ///[FutureManager] is a wrap around [Future] and [ChangeNotifier]
 ///
@@ -28,7 +30,12 @@ class FutureManager<T> extends ChangeNotifier {
   /// if [reloading] is true, reload the controller to initial state
   final bool reloading;
 
-  FutureManager({this.futureFunction, this.reloading = false, this.onSuccess, this.onDone, this.onError}) {
+  FutureManager(
+      {this.futureFunction,
+      this.reloading = false,
+      this.onSuccess,
+      this.onDone,
+      this.onError}) {
     if (futureFunction != null) {
       asyncOperation(
         futureFunction,
@@ -51,7 +58,15 @@ class FutureManager<T> extends ChangeNotifier {
 
   ///Future that this class is doing in [asyncOperation]
   Future<T> future;
-  Future<T> Function({bool reloading, SuccessCallBack<T> onSuccess, VoidCallback onDone, ErrorCallBack onError}) refresh;
+  Future<T> Function(
+          {bool reloading,
+          SuccessCallBack<T> onSuccess,
+          VoidCallback onDone,
+          ErrorCallBack onError}) refresh =
+      ({reloading, onSuccess, onDone, onError}) async {
+    errorLog("Refresh has not been initialized yet");
+    return null;
+  };
 
   Future<T> asyncOperation(
     FutureFunction<T> futureFunction, {
@@ -88,7 +103,11 @@ class FutureManager<T> extends ChangeNotifier {
         onOperationDone?.call();
       }
     };
-    return refresh(reloading: reloading, onSuccess: onSuccess, onDone: onDone, onError: onError);
+    return refresh(
+        reloading: reloading,
+        onSuccess: onSuccess,
+        onDone: onDone,
+        onError: onError);
   }
 
   void toggleLoading() {

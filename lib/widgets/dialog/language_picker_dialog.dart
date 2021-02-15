@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/app_constant.dart';
-import '../../constant/style.dart';
+import '../../constant/style_decoration.dart';
 
 class LanguagePickerDialog extends StatelessWidget {
   @override
