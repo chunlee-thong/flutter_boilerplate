@@ -8,10 +8,11 @@ class ThemeProvider extends ChangeNotifier {
 
   bool get isDarkTheme => _isDarkTheme;
 
-  static ThemeProvider getProvider(BuildContext context) => Provider.of<ThemeProvider>(context, listen: false);
+  static ThemeProvider getProvider(BuildContext context) =>
+      Provider.of<ThemeProvider>(context, listen: false);
 
   void initializeTheme() {
-    bool isDark = LocalStorage.sharedPreferences.getBool(LocalStorage.THEME_KEY) ?? false;
+    bool isDark = LocalStorage.sp.getBool(LocalStorage.THEME_KEY) ?? false;
     _isDarkTheme = isDark;
     notifyListeners();
   }
@@ -19,6 +20,6 @@ class ThemeProvider extends ChangeNotifier {
   void switchTheme() async {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
-    LocalStorage.sharedPreferences.setBool(LocalStorage.THEME_KEY, _isDarkTheme);
+    LocalStorage.sp.setBool(LocalStorage.THEME_KEY, _isDarkTheme);
   }
 }

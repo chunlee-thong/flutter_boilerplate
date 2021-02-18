@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../constant/app_theme_color.dart';
-import '../../constant/style.dart';
+import '../../constant/style_decoration.dart';
 
 class NoDataWidget extends StatelessWidget {
   final double verticalMargin;
