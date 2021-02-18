@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../utils/logger.dart';
 import 'future_manager.dart';
 
 ///Previously call [BaseStream] or [BaseExtendBloc]
@@ -27,7 +28,12 @@ class AsyncSubjectManager<T> {
   /// if [reloading] is true, reload the controller to initial state
   final bool reloading;
 
-  AsyncSubjectManager({this.futureFunction, this.reloading = false, this.onSuccess, this.onDone, this.onError}) {
+  AsyncSubjectManager(
+      {this.futureFunction,
+      this.reloading = false,
+      this.onSuccess,
+      this.onDone,
+      this.onError}) {
     _controller = BehaviorSubject<T>();
     if (futureFunction != null) {
       asyncOperation(
@@ -46,7 +52,15 @@ class AsyncSubjectManager<T> {
 
   T get value => _controller.value;
 
-  Future<T> Function({bool reloading, SuccessCallBack<T> onSuccess, VoidCallback onDone, ErrorCallBack onError}) refresh;
+  Future<T> Function(
+          {bool reloading,
+          SuccessCallBack<T> onSuccess,
+          VoidCallback onDone,
+          ErrorCallBack onError}) refresh =
+      ({reloading, onSuccess, onDone, onError}) async {
+    errorLog("Refresh has not been initialized yet");
+    return null;
+  };
 
   void addData(T data) {
     if (!_controller.isClosed) _controller.add(data);
@@ -85,7 +99,11 @@ class AsyncSubjectManager<T> {
         onOperationDone?.call();
       }
     };
-    return refresh(reloading: reloading, onSuccess: onSuccess, onDone: onDone, onError: onError);
+    return refresh(
+        reloading: reloading,
+        onSuccess: onSuccess,
+        onDone: onDone,
+        onError: onError);
   }
 
   void addError(dynamic error) {
