@@ -3,18 +3,28 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:toast/toast.dart';
 
 class UIHelper {
-  static Future<T> showGeneralMessageDialog<T>(BuildContext context, String message) async {
+  static Future<T> showMessageDialog<T>(
+      BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
-      builder: (context) => JinSimpleDialog(content: message),
+      builder: (context) => JinSimpleDialog(content: message.toString()),
     );
   }
 
-  static void showToast(BuildContext context, String message) {
-    Toast.show(message, context);
+  static Future<T> showErrorDialog<T>(
+      BuildContext context, dynamic message) async {
+    return await showDialog(
+      context: context,
+      builder: (context) => JinSimpleDialog(content: message.toString()),
+    );
   }
 
-  static void showSnackBar(GlobalKey<ScaffoldState> scaffoldKey, dynamic message) {
+  static void showToast(BuildContext context, dynamic message) {
+    Toast.show(message.toString(), context);
+  }
+
+  static void showSnackBar(
+      GlobalKey<ScaffoldState> scaffoldKey, dynamic message) {
     scaffoldKey.currentState.hideCurrentSnackBar();
     scaffoldKey.currentState.showSnackBar(
       SnackBar(
