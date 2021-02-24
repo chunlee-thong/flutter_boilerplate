@@ -10,12 +10,14 @@ class PrimaryButton extends StatelessWidget {
   final Widget child;
   final bool fullWidth;
   final Color color;
+  final ShapeBorder shape;
   const PrimaryButton({
     Key key,
     this.onPressed,
     this.child,
     this.fullWidth = true,
     this.color = AppColor.primary,
+    this.shape = const StadiumBorder(),
   }) : super(key: key);
 
   const PrimaryButton.accent({
@@ -24,6 +26,7 @@ class PrimaryButton extends StatelessWidget {
     this.child,
     this.fullWidth = true,
     this.color = AppColor.accent,
+    this.shape = const StadiumBorder(),
   }) : super(key: key);
 
   @override
@@ -33,6 +36,7 @@ class PrimaryButton extends StatelessWidget {
       child: child,
       fullWidth: fullWidth,
       color: color,
+      shape: shape,
     );
   }
 }
