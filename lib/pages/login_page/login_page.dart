@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
         await AuthUtils.onLoginSuccess(context, loginResponse);
         PageNavigator.pushReplacement(context, RootPage());
       } catch (e) {
-        UIHelper.showGeneralMessageDialog(context, e.toString());
+        UIHelper.showMessageDialog(context, e.toString());
       }
     }
   }
@@ -68,7 +68,8 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
             PrimaryTextField(
               textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) => JinFormValidator.validateField(value, 'password'),
+              validator: (value) =>
+                  JinFormValidator.validateField(value, 'password'),
               obsecure: true,
               label: "Password",
             ),
