@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
-import '../../api_service/mock_api_service.dart';
-import '../../models/others/login_response.dart';
+import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../utils/auth_utils.dart';
-import '../../utils/service_locator.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/form_input/primary_text_field.dart';
@@ -17,14 +15,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with FormPageMixin {
-  MockApiService mockApiService = getIt<MockApiService>();
   TextEditingController emailTC;
   TextEditingController passwordTC;
 
   void onLogin() async {
     if (formKey.currentState.validate()) {
       try {
-        LoginResponse loginResponse = await userApiService.loginUser(
+        AuthResponse loginResponse = await userApiService.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
         );
@@ -68,8 +65,7 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
             PrimaryTextField(
               textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) =>
-                  JinFormValidator.validateField(value, 'password'),
+              validator: (value) => JinFormValidator.validateField(value, 'password'),
               obsecure: true,
               label: "Password",
             ),

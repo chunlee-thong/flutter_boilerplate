@@ -22,7 +22,7 @@ class _DummyPageState extends State<DummyPage> {
       currentPage = 1;
     }
     userController.asyncOperation(
-      () => mockApiService.fetchUserList(
+      () => userApiService.fetchUserList(
         count: 10,
         page: currentPage,
       ),

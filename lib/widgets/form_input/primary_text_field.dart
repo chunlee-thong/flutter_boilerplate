@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jin_widget_helper/jin_widget_helper.dart';
+
+import '../../constant/style_decoration.dart';
+import '../../utils/form_validator.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -23,7 +27,7 @@ class PrimaryTextField extends StatelessWidget {
     this.validator,
     this.obsecure = false,
     this.isRequired = true,
-    this.marginBottom = 12,
+    this.marginBottom = 16,
     this.textInputType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
     this.onTap,
@@ -34,23 +38,36 @@ class PrimaryTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: TextFormField(
-        keyboardType: textInputType,
-        textCapitalization: textCapitalization,
-        controller: controller,
-        autocorrect: false,
-        maxLines: maxLines,
-        readOnly: readOnly ?? onTap != null ? true : false,
-        obscureText: obsecure,
-        onTap: onTap,
-        validator: isRequired ? validator : null,
-        decoration: InputDecoration(
-          hintText: hint,
-          border: OutlineInputBorder(),
-          prefixIcon: prefixIcon,
-          labelText: label,
-        ),
+      margin: EdgeInsets.only(bottom: marginBottom),
+      child: Column(
+        children: [
+          if (label != null) ...[
+            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
+            SpaceY(),
+          ],
+          TextFormField(
+            keyboardType: textInputType,
+            textCapitalization: textCapitalization,
+            controller: controller,
+            autocorrect: false,
+            maxLines: maxLines,
+            readOnly: readOnly ?? onTap != null ? true : false,
+            obscureText: obsecure,
+            onTap: onTap,
+            validator: isRequired
+                ? (value) {
+                    if (validator != null) return validator(value);
+                    return FormValidator.validateField(value, field: label ?? hint);
+                  }
+                : null,
+            decoration: InputDecoration(
+              hintText: hint,
+              border: OutlineInputBorder(),
+              prefixIcon: prefixIcon,
+              labelText: label,
+            ),
+          ),
+        ],
       ),
     );
   }

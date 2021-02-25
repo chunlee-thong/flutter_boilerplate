@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_boiler_plate/constant/app_constant.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
-import '../models/others/login_response.dart';
+import '../constant/app_constant.dart';
+import '../models/response/user/auth_response.dart';
 import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
 
 class AuthUtils {
-  static Future<void> onLoginSuccess(BuildContext context, LoginResponse loginResponse) async {
-    UserProvider.getProvider(context).setLoginStatus(true);
+  static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: loginResponse.token);
-    await LocalStorage.save(key: LocalStorage.ID_KEY, value: loginResponse.id);
+    await LocalStorage.save(key: LocalStorage.ID_KEY, value: loginResponse.userId);
+    UserProvider.getProvider(context).setLoginStatus(true);
+    await UserProvider.getProvider(context).getUserInfo();
   }
 
   static void logOutUser(BuildContext context) async {

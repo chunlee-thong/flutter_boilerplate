@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 
-import '../constant/app_config.dart';
-import '../utils/logger.dart';
+import '../../constant/app_config.dart';
+import '../../utils/logger.dart';
 
 class BaseHttpClient {
   static Dio dio;

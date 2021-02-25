@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constant/app_constant.dart';
-import '../utils/logger.dart';
-import 'http_client.dart';
-import 'http_exception.dart';
+import '../../constant/app_constant.dart';
+import '../../utils/logger.dart';
+import '../client/http_client.dart';
+import '../client/http_exception.dart';
 
 class BaseApiService {
   Dio dio;
@@ -98,8 +98,7 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error that range from 400-500
     int code = exception.response.statusCode;
-    String serverMessage =
-        exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
+    String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
     throw DioErrorException("$code: $serverMessage", code: code);
   } else {
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
