@@ -19,12 +19,12 @@ class RootBottomNavigation extends StatelessWidget {
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.assessment),
-          label: "Report",
+          icon: Icon(Icons.search),
+          label: "Search",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: "Map",
+          icon: Icon(Icons.settings),
+          label: "Setting",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

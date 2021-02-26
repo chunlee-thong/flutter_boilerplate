@@ -15,10 +15,27 @@ class AuthService {
     await UserProvider.getProvider(context).getUserInfo();
   }
 
-  static void logOutUser(BuildContext context) async {
-    await LocalStorage.deleteAll();
-    AppConstant.clean();
-    UserProvider.getProvider(context).setLoginStatus(false);
-    PageNavigator.pushAndRemove(context, LoginPage());
+  static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
+    void onLogout() async {
+      await LocalStorage.deleteAll();
+      AppConstant.clean();
+      UserProvider.getProvider(context).setLoginStatus(false);
+      PageNavigator.pushAndRemove(context, LoginPage());
+    }
+
+    if (!showConfirmation) {
+      onLogout();
+      return;
+    }
+
+    JinNavigator.dialog(
+      JinConfirmationDialog(
+        content: Text("Do you want to logout?"),
+        title: "Warning",
+        onConfirm: onLogout,
+        confirmText: "Logout",
+        cancelText: "Cancel",
+      ),
+    );
   }
 }

@@ -40,6 +40,7 @@ class PrimaryTextField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: marginBottom),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
             Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
@@ -64,7 +65,7 @@ class PrimaryTextField extends StatelessWidget {
               hintText: hint,
               border: OutlineInputBorder(),
               prefixIcon: prefixIcon,
-              labelText: label,
+              //labelText: label,
             ),
           ),
         ],

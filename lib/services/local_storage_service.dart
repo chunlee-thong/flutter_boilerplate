@@ -6,6 +6,7 @@ class LocalStorage {
   static const FlutterSecureStorage _fss = FlutterSecureStorage();
   static SharedPreferences sp;
   static const String TOKEN_KEY = "key.token";
+  static const String LOGIN_KEY = "key.login";
   static const String ID_KEY = "key.id";
   static const String THEME_KEY = "key.theme";
 
@@ -18,6 +19,14 @@ class LocalStorage {
 
   static Future<String> getToken() async {
     return await _fss.read(key: TOKEN_KEY);
+  }
+
+  static Future<bool> saveLoginStatus(bool status) async {
+    return await sp.setBool(LOGIN_KEY, status);
+  }
+
+  static Future<bool> getLoginStatus(bool status) async {
+    return await sp.getBool(LOGIN_KEY);
   }
 
   static Future<void> save({

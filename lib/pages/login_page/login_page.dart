@@ -36,8 +36,8 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
 
   @override
   void initState() {
-    emailTC = TextEditingController(text: "test1@gmail.com");
-    passwordTC = TextEditingController(text: "123456789");
+    emailTC = TextEditingController(text: "admin@gmail.com");
+    passwordTC = TextEditingController(text: "123456");
     super.initState();
   }
 

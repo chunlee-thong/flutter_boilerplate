@@ -1,6 +1,11 @@
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../models/response/user/social_auth_data.dart';
 
 class SocialAuthService {
+  //static final FacebookAuth facebookAuth = FacebookAuth.instance;
+  static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
   static Future<SocialAuthData> loginWithFacebook() async {
     try {
       //Login with facebook
@@ -15,10 +20,13 @@ class SocialAuthService {
 
   static Future<SocialAuthData> loginWithGoogle() async {
     try {
-      //Login with Google
+      await _googleSignIn.signOut();
+      GoogleSignInAccount account = await _googleSignIn.signIn();
+      if (account == null) return null;
+      GoogleSignInAuthentication authentication = await account.authentication;
       return SocialAuthData(
-        accessToken: "",
-        authId: "",
+        accessToken: authentication.accessToken,
+        authId: authentication.idToken,
       );
     } catch (exception) {
       throw exception;
@@ -35,5 +43,10 @@ class SocialAuthService {
     } catch (exception) {
       throw exception;
     }
+  }
+
+  static Future<void> signOutAll() async {
+    //await _facebookAuth.logOut();
+    if (_googleSignIn != null) await _googleSignIn.signOut();
   }
 }
