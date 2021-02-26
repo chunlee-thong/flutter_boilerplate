@@ -7,25 +7,26 @@ import '../../widgets/common/ui_helper.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
-  final VoidCallback onAuthDone;
+  final void Function(bool) onAuthStateChange;
   const SocialAuthButtons({
     Key key,
     @required this.onLoginCompleted,
-    this.onAuthDone,
+    this.onAuthStateChange,
   }) : super(key: key);
 
   Future<void> onLoginWithFacebook(BuildContext context) async {
     try {
       SocialAuthData data = await SocialAuthService.loginWithFacebook();
       if (data == null) return;
-      onAuthDone?.call();
+      onAuthStateChange?.call(true);
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
-      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
+    } finally {
+      onAuthStateChange?.call(false);
     }
   }
 
@@ -33,14 +34,15 @@ class SocialAuthButtons extends StatelessWidget {
     try {
       SocialAuthData data = await SocialAuthService.loginWithGoogle();
       if (data == null) return;
-      onAuthDone?.call();
+      onAuthStateChange?.call(true);
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
-      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
+    } finally {
+      onAuthStateChange?.call(false);
     }
   }
 
@@ -48,14 +50,15 @@ class SocialAuthButtons extends StatelessWidget {
     try {
       SocialAuthData data = await SocialAuthService.loginWithApple();
       if (data == null) return;
-      onAuthDone?.call();
+      onAuthStateChange?.call(true);
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
-      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
+    } finally {
+      onAuthStateChange?.call(false);
     }
   }
 
