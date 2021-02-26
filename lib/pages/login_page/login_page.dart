@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/widgets/buttons/social_auth_buttons.dart';
 import 'package:jin_widget_helper/jin_widget_helper.dart';
 
 import '../../api_service/index.dart';
@@ -73,6 +74,8 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
               onPressed: onLogin,
               child: Text("LOGIN"),
             ),
+            SpaceY(100),
+            SocialAuthButtons(onLoginCompleted: (data) {}),
           ],
         ),
       ),
