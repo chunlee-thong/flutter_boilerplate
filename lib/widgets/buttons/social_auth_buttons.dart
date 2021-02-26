@@ -7,23 +7,24 @@ import '../../widgets/common/ui_helper.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
-  final VoidCallback onPlatformAuthSuccess;
+  final VoidCallback onAuthDone;
   const SocialAuthButtons({
     Key key,
     @required this.onLoginCompleted,
-    this.onPlatformAuthSuccess,
+    this.onAuthDone,
   }) : super(key: key);
 
   Future<void> onLoginWithFacebook(BuildContext context) async {
     try {
       SocialAuthData data = await SocialAuthService.loginWithFacebook();
       if (data == null) return;
-      onPlatformAuthSuccess?.call();
+      onAuthDone?.call();
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
+      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
     }
   }
@@ -32,12 +33,13 @@ class SocialAuthButtons extends StatelessWidget {
     try {
       SocialAuthData data = await SocialAuthService.loginWithGoogle();
       if (data == null) return;
-      onPlatformAuthSuccess?.call();
+      onAuthDone?.call();
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
+      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
     }
   }
@@ -46,12 +48,13 @@ class SocialAuthButtons extends StatelessWidget {
     try {
       SocialAuthData data = await SocialAuthService.loginWithApple();
       if (data == null) return;
-      onPlatformAuthSuccess?.call();
+      onAuthDone?.call();
       //Login to server
       //data.authResponse = await userApiService.......;
       //
       onLoginCompleted?.call(data);
     } catch (exception) {
+      onAuthDone?.call();
       UIHelper.showErrorDialog(context, exception);
     }
   }
