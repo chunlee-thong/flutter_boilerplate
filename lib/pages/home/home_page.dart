@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ThemeProvider.getProvider(context).switchTheme();
-          UIHelper.showSnackBar(scaffoldKey, "Theme changed");
+          UIHelper.showSnackBar(context, "Theme changed", scaffoldKey);
         },
         child: Icon(Icons.add),
       ),

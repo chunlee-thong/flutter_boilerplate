@@ -7,7 +7,7 @@ import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
 
-class AuthUtils {
+class AuthService {
   static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: loginResponse.token);
     await LocalStorage.save(key: LocalStorage.ID_KEY, value: loginResponse.userId);

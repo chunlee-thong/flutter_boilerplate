@@ -4,7 +4,7 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 import '../../api_service/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
-import '../../utils/auth_utils.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/form_input/primary_text_field.dart';
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
         );
-        await AuthUtils.onLoginSuccess(context, loginResponse);
+        await AuthService.onLoginSuccess(context, loginResponse);
         PageNavigator.pushReplacement(context, RootPage());
       } catch (e) {
         UIHelper.showMessageDialog(context, e.toString());

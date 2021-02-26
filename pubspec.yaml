@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   ##firebase and auth
+
   firebase_core: ^0.7.0
   firebase_auth: ^0.20.1
   flutter_facebook_auth: ^2.0.2

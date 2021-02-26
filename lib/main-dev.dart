@@ -19,5 +19,5 @@ void main() async {
 
 void setupEnvConfig() {
   AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
-  F.flavor = Flavor.production;
+  F.flavor = Flavor.dev;
 }

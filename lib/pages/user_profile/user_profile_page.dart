@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../models/response/user/user_model.dart';
 import '../../providers/user_provider.dart';
-import '../../utils/auth_utils.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/future_manager_builder.dart';
@@ -17,11 +17,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "User Profile", action: [
+      appBar: UIHelper.CustomAppBar(title: "User Profile", actions: [
         IconButton(
           icon: Icon(FlutterIcons.log_out_ent),
           onPressed: () {
-            AuthUtils.logOutUser(context);
+            AuthService.logOutUser(context);
           },
         )
       ]),

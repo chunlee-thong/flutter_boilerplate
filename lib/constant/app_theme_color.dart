@@ -4,8 +4,15 @@ import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'app_config.dart';
 
 class AppColor {
+  //main
   static const Color primary = const Color(0xFF60c5ba);
   static const Color accent = const Color(0xFFef5285);
+  //other
+  static const Color fbColor = const Color(0xFF3b5998);
+  static const Color googleRed = const Color(0xFFDB4437);
+  static const Color appleColor = const Color(0xFF555555);
+  static const Color twitterColor = const Color(0xFF1DA1F2);
+  //material
   static final MaterialColor materialPrimary = JinColorUtils.hexColorToMaterialColor(primary.value);
   static final MaterialColor materialAccent = JinColorUtils.hexColorToMaterialColor(accent.value);
 }

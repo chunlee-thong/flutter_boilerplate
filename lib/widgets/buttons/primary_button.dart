@@ -11,22 +11,25 @@ class PrimaryButton extends StatelessWidget {
   final bool fullWidth;
   final Color color;
   final ShapeBorder shape;
+  final EdgeInsets margin;
   const PrimaryButton({
     Key key,
-    this.onPressed,
-    this.child,
+    @required this.onPressed,
+    @required this.child,
     this.fullWidth = true,
     this.color = AppColor.primary,
     this.shape = const StadiumBorder(),
+    this.margin,
   }) : super(key: key);
 
   const PrimaryButton.accent({
     Key key,
-    this.onPressed,
-    this.child,
+    @required this.onPressed,
+    @required this.child,
     this.fullWidth = true,
     this.color = AppColor.accent,
     this.shape = const StadiumBorder(),
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -36,6 +39,7 @@ class PrimaryButton extends StatelessWidget {
       child: child,
       fullWidth: fullWidth,
       color: color,
+      margin: margin,
       shape: shape,
     );
   }

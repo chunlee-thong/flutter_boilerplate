@@ -28,7 +28,6 @@ class UserApiService extends BaseApiService {
         "page": page,
         "count": count,
       },
-      method: HttpMethod.GET,
       onSuccess: (response) {
         return UserResponse.fromJson(response.data);
       },
@@ -39,7 +38,6 @@ class UserApiService extends BaseApiService {
     String userId = AppConstant.USER_ID;
     return onRequest<UserModel>(
       path: "$_getUserInfo/$userId",
-      method: HttpMethod.GET,
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);
       },
