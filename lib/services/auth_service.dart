@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_constant.dart';
 import '../models/response/user/auth_response.dart';
@@ -28,8 +28,8 @@ class AuthService {
       return;
     }
 
-    JinNavigator.dialog(
-      JinConfirmationDialog(
+    SuraNavigator.dialog(
+      SuraConfirmationDialog(
         content: Text("Do you want to logout?"),
         title: "Warning",
         onConfirm: onLogout,

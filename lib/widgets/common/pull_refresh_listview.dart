@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../state_widgets/no_data_widget.dart';
 
@@ -56,18 +56,18 @@ class PullRefreshListViewBuilder extends StatelessWidget {
       onRefresh: onRefresh ?? () async {},
       child: ConditionalWidget(
         condition: onGetMoreData != null,
-        onTrue: PaginatedListView(
+        onTrue: () => SuraPaginatedList(
           padding: padding,
           scrollController: controller,
           hasMoreData: hasMoreData,
           itemBuilder: itemBuilder,
-          onGetMoreData: onGetMoreData,
+          dataLoader: onGetMoreData,
           shrinkWrap: shrinkWrap,
           scrollDirection: scrollDirection ?? Axis.vertical,
           itemCount: itemCount,
-          divider: separator ?? SizedBox(),
+          separator: separator ?? SizedBox(),
         ),
-        onFalse: ListView.separated(
+        onFalse: () => ListView.separated(
           controller: controller,
           separatorBuilder: (c, i) => separator ?? SizedBox(),
           padding: padding,

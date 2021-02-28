@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
@@ -34,7 +34,7 @@ class CustomErrorWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             if (onRefresh != null)
-              SmallIconButton(
+              SuraIconButton(
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(

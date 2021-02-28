@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 import 'package:toast/toast.dart';
 
 class UIHelper {
   static Future<T> showMessageDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
-      builder: (context) => JinSimpleDialog(content: message.toString()),
+      builder: (context) => SuraSimpleDialog(content: message.toString()),
     );
   }
 
   static Future<T> showErrorDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
-      builder: (context) => JinSimpleDialog(
+      builder: (context) => SuraSimpleDialog(
         content: message.toString(),
         title: "Error",
       ),

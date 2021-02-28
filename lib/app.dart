@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
 import 'package:provider/provider.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import 'constant/app_config.dart';
 import 'constant/app_constant.dart';
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context, themeProvider, child) {
               return MaterialApp(
                 title: AppConfig.APP_NAME,
-                navigatorKey: JinNavigator.navigatorKey,
+                navigatorKey: SuraNavigator.navigatorKey,
                 theme: themeProvider.isDarkTheme ? kDarkTheme : kLightTheme,
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: context.localizationDelegates,

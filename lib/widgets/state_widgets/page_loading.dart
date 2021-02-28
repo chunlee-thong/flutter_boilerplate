@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import 'loading_widget.dart';
 
@@ -16,16 +16,14 @@ class PageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).brightness == Brightness.dark
-        ? Colors.grey.withOpacity(0.2)
-        : Colors.black26;
+    final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
 
     return Stack(
       children: [
         child,
-        ValueObserver<bool>(
+        SuraNotifier<bool>(
           valueNotifier: loadingNotifier,
-          child: (isLoading) {
+          builder: (isLoading) {
             if (isLoading)
               return Container(
                 child: LoadingWidget(),

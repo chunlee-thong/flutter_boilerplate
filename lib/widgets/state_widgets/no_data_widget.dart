@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
 import '../../constant/style_decoration.dart';
@@ -31,7 +31,7 @@ class NoDataWidget extends StatelessWidget {
             SpaceY(16),
             Text(message, style: kSubtitleStyle.normal),
             if (onRefresh != null)
-              SmallIconButton(
+              SuraIconButton(
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(

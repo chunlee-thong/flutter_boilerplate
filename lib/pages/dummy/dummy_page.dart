@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user/user_model.dart';
@@ -60,10 +60,10 @@ class _DummyPageState extends State<DummyPage> {
         ready: (context, UserResponse data) {
           return RefreshIndicator(
             onRefresh: () => fetchData(true),
-            child: PaginatedListView(
+            child: SuraPaginatedList(
               itemCount: data.users.length,
               padding: EdgeInsets.zero,
-              onGetMoreData: fetchData,
+              dataLoader: fetchData,
               hasMoreData: currentPage <= totalPage,
               itemBuilder: (context, index) {
                 final user = data.users[index];

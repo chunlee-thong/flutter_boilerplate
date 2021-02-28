@@ -162,34 +162,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0-nullsafety.3"
-  connectivity:
-    dependency: transitive
-    description:
-      name: connectivity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
-  connectivity_for_web:
-    dependency: transitive
-    description:
-      name: connectivity_for_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1"
-  connectivity_macos:
-    dependency: transitive
-    description:
-      name: connectivity_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0+2"
-  connectivity_platform_interface:
-    dependency: transitive
-    description:
-      name: connectivity_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   convert:
     dependency: transitive
     description:
@@ -483,13 +455,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
-  jin_widget_helper:
-    dependency: "direct main"
-    description:
-      name: jin_widget_helper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.2"
   js:
     dependency: transitive
     description:
@@ -810,6 +775,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.1"
+  sura_flutter:
+    dependency: "direct main"
+    description:
+      name: sura_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   synchronized:
     dependency: transitive
     description:

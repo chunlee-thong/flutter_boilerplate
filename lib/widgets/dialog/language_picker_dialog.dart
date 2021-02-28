@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
 import '../../constant/style_decoration.dart';
@@ -9,7 +9,7 @@ class LanguagePickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: JinWidget.roundRect(),
+      shape: SuraStyle.roundRect(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

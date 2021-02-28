@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import 'app_config.dart';
 
@@ -13,8 +13,8 @@ class AppColor {
   static const Color appleColor = const Color(0xFF555555);
   static const Color twitterColor = const Color(0xFF1DA1F2);
   //material
-  static final MaterialColor materialPrimary = JinColorUtils.hexColorToMaterialColor(primary.value);
-  static final MaterialColor materialAccent = JinColorUtils.hexColorToMaterialColor(accent.value);
+  static final MaterialColor materialPrimary = SuraColor.toMaterial(primary.value);
+  static final MaterialColor materialAccent = SuraColor.toMaterial(accent.value);
 }
 
 final ThemeData kLightTheme = _buildLightTheme();

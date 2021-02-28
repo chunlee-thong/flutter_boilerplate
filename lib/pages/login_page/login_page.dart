@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/buttons/social_auth_buttons.dart';
-import 'package:jin_widget_helper/jin_widget_helper.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
+import '../../utils/form_validator.dart';
 import '../../widgets/buttons/primary_button.dart';
+import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/form_input/primary_text_field.dart';
 
@@ -15,7 +16,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with FormPageMixin {
+class _LoginPageState extends State<LoginPage> with SuraFormMixin {
   TextEditingController emailTC;
   TextEditingController passwordTC;
 
@@ -59,14 +60,14 @@ class _LoginPageState extends State<LoginPage> with FormPageMixin {
             PrimaryTextField(
               textInputType: TextInputType.emailAddress,
               controller: emailTC,
-              validator: (value) => JinFormValidator.validateEmail(value),
+              validator: (value) => FormValidator.validateField(value, field: 'email'),
               label: "Email",
             ),
             SpaceY(16),
             PrimaryTextField(
               textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) => JinFormValidator.validateField(value, 'password'),
+              validator: (value) => FormValidator.validateField(value, field: 'password'),
               obsecure: true,
               label: "Password",
             ),
