@@ -1,21 +1,40 @@
 # flutter_boiler_plate
 
-A flutter boiler plate code initial project setup
+A flutter boiler plate code for initial project setup
 
 # Getting Started
 
-1. create your own project with android studio or **flutter create** command ( to prevent package name redundancy )
-2. copy folder **assets**, **lib**, **pubspec.yaml** and **test** from this project to your newly created project and replace all file
+1. create your own project with android studio or **flutter create** command
+2. copy these files or folder into your new project
+
+- assets
+- lib
+- test
+- pubspec.yaml
+- analysis_options.yaml (optional)
+
+3. This files is optional if you're using flavor
+
+- flutter_launcher_icons-dev.yaml
+- flutter_launcher_icons-prod.yaml
+- flutter_launcher_icons-staging.yaml
+
 3. run **flutter pub get**
 4. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
-5. Add
-    **android:allowBackup="false"**
-    **android:fullBackupContent="false"**
-   to AndroidManifest.xml application tag to disable backup when app uninstalled
+5. You can copy any platform configuration setup (example: build.gradle, androidManifest) from this project into your new project
 
 # App Icon
 
-1. if you want to generate app icon,replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
+1. **if you're not using flavor:**
+
+- replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
+
+2. **if you're using flavor:**
+
+- replace your icon file in **assets/image/app-icon.png**, **assets/image/app-icon-dev.png**, **assets/image/app-icon-staging.png**
+- run **flutter pub run flutter_launcher_icons:main** -f ${flavor-name} for each flavor
+
+# Hive database
 
 2. run **flutter packages pub run build_runner build** to generate Hive TypeAdapter model
 

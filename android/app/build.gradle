@@ -1,3 +1,14 @@
+// one_signal_setup
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
+    }
+}
+// one_signal_setup
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -24,6 +35,10 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+//other setup
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 android {
     compileSdkVersion 29
@@ -47,11 +62,31 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        prod {
+            dimension "default"
+            applicationIdSuffix ""
+            manifestPlaceholders = [appName: "Flutter BLP"]
+        }
+        dev {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            manifestPlaceholders = [appName: "Flutter BLP Dev"]
+        }
+        staging {
+            dimension "default"
+            applicationIdSuffix ".staging"
+            manifestPlaceholders = [appName: "Flutter BLP stating"]
+        }
+    }
+
     buildTypes {
         release {
             useProguard true
             shrinkResources true
             minifyEnabled true
+
             signingConfig signingConfigs.debug
         }
     }
@@ -66,6 +101,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.google.firebase:firebase-core:17.2.3'
     implementation 'com.android.support:multidex:1.0.3'
 }
