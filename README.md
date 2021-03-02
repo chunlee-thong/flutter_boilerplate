@@ -5,6 +5,7 @@ A flutter boiler plate code for initial project setup
 # Getting Started
 
 1. create your own project with android studio or **flutter create** command
+
 2. copy these files or folder into your new project
 
 - assets
@@ -13,15 +14,17 @@ A flutter boiler plate code for initial project setup
 - pubspec.yaml
 - analysis_options.yaml (optional)
 
-3. This files is optional if you're using flavor
+4. This files is optional if you're using flavor
 
 - flutter_launcher_icons-dev.yaml
 - flutter_launcher_icons-prod.yaml
 - flutter_launcher_icons-staging.yaml
 
-3. run **flutter pub get**
-4. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
-5. You can copy any platform configuration setup (example: build.gradle, androidManifest) from this project into your new project
+3. delete all firebase dependency in pubspec.yaml if you're not planing using firebase
+
+4. run **flutter pub get**
+5. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
+6. You can copy any platform configuration setup (example: build.gradle, androidManifest) from this project into your new project
 
 # App Icon
 
