@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/widgets/form_input/primary_type_ahead_text_field.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
@@ -19,6 +20,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
   TextEditingController firstNameTC;
   TextEditingController lastNameTC;
   TextEditingController dobTC;
+  TextEditingController countryTC;
 
   String gender;
   List<String> genders = ["Male", "Female"];
@@ -29,6 +31,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
       try {
         String firstname = firstNameTC.text.trim();
         String lastname = lastNameTC.text.trim();
+        String country = countryTC.text.trim();
 
         bool result = await Future.value(true);
       } catch (e) {
@@ -56,6 +59,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
     firstNameTC = TextEditingController();
     lastNameTC = TextEditingController();
     dobTC = TextEditingController();
+    countryTC = TextEditingController();
     super.initState();
   }
 
@@ -69,6 +73,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
     firstNameTC.dispose();
     lastNameTC.dispose();
     dobTC.dispose();
+    countryTC.dispose();
     super.dispose();
   }
 
@@ -107,6 +112,14 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
             controller: dobTC,
             hint: "Date of birth",
             onTap: onPickDob,
+          ),
+          PrimaryTypeAHeadTextField(
+            controller: countryTC,
+            hint: "Country",
+            suggestions: [
+              "Cambodia",
+              "Thailand",
+            ],
           ),
           PrimaryDropDownButton(
             options: genders,
