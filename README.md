@@ -57,6 +57,10 @@ A flutter boiler plate code for initial project setup
 - db: model for hive or any database's model
 - others: other model such as custom data
 
+### page_template
+
+- a template for commonly use screen or page functioanlity in an app, example: change password page, setting page....
+
 ### pages
 
 - Each page has their own folder

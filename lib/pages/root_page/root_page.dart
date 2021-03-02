@@ -7,6 +7,8 @@ import '../../pages/user_profile/user_profile_page.dart';
 import '../../providers/bottom_navigation_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/local_storage_service.dart';
+import '../dummy/dummy_page.dart';
+import '../templates/template_pages.dart';
 import 'widgets/bottom_navigation.dart';
 
 class RootPage extends StatefulWidget {
@@ -21,8 +23,8 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   List<Widget> get pages => [
         HomePage(),
-        Container(),
-        Container(),
+        DummyPage(),
+        TemplatePages(),
         UserProfilePage(),
       ];
 

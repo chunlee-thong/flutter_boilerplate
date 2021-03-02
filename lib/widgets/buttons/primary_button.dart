@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
     @required this.child,
     this.fullWidth = true,
     this.color = AppColor.primary,
-    this.shape = const StadiumBorder(),
+    this.shape,
     this.margin,
   }) : super(key: key);
 
@@ -28,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
     @required this.child,
     this.fullWidth = true,
     this.color = AppColor.accent,
-    this.shape = const StadiumBorder(),
+    this.shape,
     this.margin,
   }) : super(key: key);
 

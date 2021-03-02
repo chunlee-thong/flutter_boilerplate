@@ -23,8 +23,8 @@ class RootBottomNavigation extends StatelessWidget {
           label: "Search",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: "Setting",
+          icon: Icon(Icons.dashboard_customize),
+          label: "Templates",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

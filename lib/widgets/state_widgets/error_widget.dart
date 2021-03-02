@@ -9,11 +9,13 @@ class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
   final Future<void> Function() onRefresh;
+  final bool hasAppBar;
   const CustomErrorWidget({
     Key key,
     @required this.message,
     this.verticalMargin = 0.0,
     this.onRefresh,
+    this.hasAppBar,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

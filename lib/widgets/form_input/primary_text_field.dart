@@ -9,6 +9,7 @@ class PrimaryTextField extends StatelessWidget {
   final String hint;
   final Widget prefixIcon;
   final String Function(String) validator;
+  final void Function(String) onChanged;
   final double marginBottom;
   final TextInputType textInputType;
   final TextCapitalization textCapitalization;
@@ -18,10 +19,11 @@ class PrimaryTextField extends StatelessWidget {
   final bool readOnly;
   final int maxLines;
   final String label;
+  final int lengthValidator;
 
   const PrimaryTextField({
     Key key,
-    this.controller,
+    @required this.controller,
     this.hint = "",
     this.prefixIcon,
     this.validator,
@@ -34,6 +36,8 @@ class PrimaryTextField extends StatelessWidget {
     this.readOnly,
     this.maxLines = 1,
     this.label,
+    this.lengthValidator,
+    this.onChanged,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,8 @@ class PrimaryTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
+            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium)
+                .paddingValue(horizontal: 4),
             SpaceY(),
           ],
           TextFormField(
@@ -52,13 +57,18 @@ class PrimaryTextField extends StatelessWidget {
             controller: controller,
             autocorrect: false,
             maxLines: maxLines,
+            onChanged: onChanged,
             readOnly: readOnly ?? onTap != null ? true : false,
             obscureText: obsecure,
             onTap: onTap,
             validator: isRequired
                 ? (value) {
                     if (validator != null) return validator(value);
-                    return FormValidator.validateField(value, field: label ?? hint);
+                    return FormValidator.validateField(
+                      value,
+                      field: label ?? hint,
+                      length: lengthValidator,
+                    );
                   }
                 : null,
             decoration: InputDecoration(

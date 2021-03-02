@@ -5,7 +5,6 @@ import '../../api_service/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
-import '../../utils/form_validator.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/common/ui_helper.dart';
@@ -60,14 +59,12 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
             PrimaryTextField(
               textInputType: TextInputType.emailAddress,
               controller: emailTC,
-              validator: (value) => FormValidator.validateField(value, field: 'email'),
               label: "Email",
             ),
             SpaceY(16),
             PrimaryTextField(
               textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
-              validator: (value) => FormValidator.validateField(value, field: 'password'),
               obsecure: true,
               label: "Password",
             ),

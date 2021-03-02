@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:flutter_boiler_plate/providers/theme_provider.dart';
 
-import './../dummy/dummy_page.dart';
+import '../../constant/app_config.dart';
 import '../../constant/locale_keys.dart';
-import '../../providers/theme_provider.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 
@@ -21,15 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        title: Text("Flutter Boilerplate"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.help_center),
-            onPressed: () => PageNavigator.push(context, DummyPage()),
-          )
-        ],
-      ),
+      appBar: UIHelper.CustomAppBar(title: AppConfig.APP_NAME),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +28,9 @@ class _HomePageState extends State<HomePage> {
             Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             RaisedButton(
               onPressed: () {
-                showDialog(context: context, builder: (context) => LanguagePickerDialog());
+                showDialog(
+                    context: context,
+                    builder: (context) => LanguagePickerDialog());
               },
               child: Text("Change Locale"),
             ),
@@ -46,8 +39,8 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          count++;
           ThemeProvider.getProvider(context).switchTheme();
-          UIHelper.showSnackBar(context, "Theme changed", scaffoldKey);
         },
         child: Icon(Icons.add),
       ),
