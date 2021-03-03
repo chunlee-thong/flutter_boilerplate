@@ -4,7 +4,7 @@ A flutter boiler plate code for initial project setup
 
 # Getting Started
 
-1. create your own project with android studio or **flutter create** command
+1. create your own project with Android studio or **flutter create** command
 
 2. copy these files or folder into your new project
 
@@ -14,28 +14,20 @@ A flutter boiler plate code for initial project setup
 - pubspec.yaml
 - analysis_options.yaml (optional)
 
-4. This files is optional if you're using flavor
+3. This files is optional if you're using flavor
 
-- flutter_launcher_icons-dev.yaml
 - flutter_launcher_icons-prod.yaml
+- flutter_launcher_icons-dev.yaml
 - flutter_launcher_icons-staging.yaml
 
-3. delete all firebase dependency in pubspec.yaml if you're not planing using firebase
+4. delete all firebase dependency in pubspec.yaml if you're not planing using firebase
 
-4. run **flutter pub get**
-5. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
-6. You can copy any platform configuration setup (example: build.gradle, androidManifest) from this project into your new project
+5. run **flutter pub get**
+6. **In [project]/android/app/build.gradle set minSdkVersion to >= 18 to use flutter_secure_storage**
+7. You can copy any platform configuration setup (example: build.gradle, androidManifest) from this project into your new project
 
 # App Icon
-
-1. **if you're not using flavor:**
-
 - replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
-
-2. **if you're using flavor:**
-
-- replace your icon file in **assets/image/app-icon.png**, **assets/image/app-icon-dev.png**, **assets/image/app-icon-staging.png**
-- run **flutter pub run flutter_launcher_icons:main** -f ${flavor-name} for each flavor
 
 # Hive database
 

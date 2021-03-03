@@ -35,7 +35,7 @@ dependencies:
   toast: ^0.1.5
   cached_network_image: ^2.5.0
   flutter_icons: ^1.1.0
-  sura_flutter: ^0.0.4
+  sura_flutter: ^0.0.5
 
   ##network
   dio_http_cache: ^0.2.11
@@ -49,6 +49,11 @@ dev_dependencies:
 
   flutter_localizations:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app-icon.png"
 
 flutter:
   uses-material-design: true

@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             PrimaryButton(
               fullWidth: false,
+              margin: const EdgeInsets.all(16),
               onPressed: () {
                 showDialog(context: context, builder: (context) => LanguagePickerDialog());
               },
