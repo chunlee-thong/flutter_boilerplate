@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/providers/theme_provider.dart';
 
 import '../../constant/app_config.dart';
 import '../../constant/locale_keys.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/common/ui_helper.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 
@@ -26,11 +27,10 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
-            RaisedButton(
+            PrimaryButton(
+              fullWidth: false,
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => LanguagePickerDialog());
+                showDialog(context: context, builder: (context) => LanguagePickerDialog());
               },
               child: Text("Change Locale"),
             ),

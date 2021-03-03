@@ -5,7 +5,7 @@ import 'app_config.dart';
 
 class AppColor {
   //main
-  static const Color primary = const Color(0xFF60c5ba);
+  static const Color primary = const Color(0xFF573399);
   static const Color accent = const Color(0xFFef5285);
   //other
   static const Color fbColor = const Color(0xFF3b5998);
@@ -31,7 +31,7 @@ ThemeData _buildLightTheme() {
     ),
     buttonColor: AppColor.primary,
     buttonTheme: ButtonThemeData(
-      buttonColor: AppColor.materialPrimary,
+      buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,
@@ -47,7 +47,7 @@ ThemeData _buildDarkTheme() {
     accentColor: AppColor.materialAccent,
     toggleableActiveColor: AppColor.materialAccent,
     buttonTheme: ButtonThemeData(
-      buttonColor: AppColor.materialPrimary,
+      buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,

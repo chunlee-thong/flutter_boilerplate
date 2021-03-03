@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:toast/toast.dart';
 
+import '../../widgets/dialog/custom_error_dialog.dart';
+
 class UIHelper {
   static Future<T> showMessageDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
@@ -13,8 +15,8 @@ class UIHelper {
   static Future<T> showErrorDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
-      builder: (context) => SuraSimpleDialog(
-        content: message.toString(),
+      builder: (context) => CustomErrorDialog(
+        message: message.toString(),
         title: "Error",
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/widgets/form_input/primary_type_ahead_text_field.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
@@ -8,6 +7,7 @@ import '../widgets/buttons/primary_button.dart';
 import '../widgets/common/ui_helper.dart';
 import '../widgets/form_input/primary_dropdown_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
+import '../widgets/form_input/primary_type_ahead_text_field.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   UpdateUserInfoPage({Key key}) : super(key: key);
@@ -15,8 +15,7 @@ class UpdateUserInfoPage extends StatefulWidget {
   _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
 }
 
-class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
-    with SuraFormMixin, AfterBuildMixin {
+class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
   TextEditingController firstNameTC;
   TextEditingController lastNameTC;
   TextEditingController dobTC;
