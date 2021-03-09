@@ -35,7 +35,7 @@ dependencies:
   toast: ^0.1.5
   cached_network_image: ^2.5.0
   flutter_icons: ^1.1.0
-  sura_flutter: ^0.0.5
+  sura_flutter: ^0.0.8
 
   ##network
   dio_http_cache: ^0.2.11

@@ -77,7 +77,7 @@ android {
         staging {
             dimension "default"
             applicationIdSuffix ".staging"
-            manifestPlaceholders = [appName: "Flutter BLP stating"]
+            manifestPlaceholders = [appName: "Flutter BLP staging"]
         }
     }
 
