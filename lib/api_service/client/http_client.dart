@@ -5,6 +5,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 
 import '../../constant/app_config.dart';
 import '../../utils/logger.dart';
+import '../../utils/object_util.dart';
 
 class BaseHttpClient {
   static Dio dio;
@@ -31,7 +32,8 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
   onRequest: (RequestOptions options) async {
     httpLog("${options.method}: ${options.path},"
         "query: ${options.queryParameters},"
-        "data: ${options.data}");
+        "data: ${options.data},"
+        "token: ${ObjectUtils.getLastIndexString(options.headers["authorization"])}");
     return options;
   },
   onResponse: (Response response) async {
