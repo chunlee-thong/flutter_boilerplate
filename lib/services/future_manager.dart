@@ -30,7 +30,12 @@ class FutureManager<T> extends ChangeNotifier {
   /// if [reloading] is true, reload the controller to initial state
   final bool reloading;
 
-  FutureManager({this.futureFunction, this.reloading = false, this.onSuccess, this.onDone, this.onError}) {
+  FutureManager(
+      {this.futureFunction,
+      this.reloading = false,
+      this.onSuccess,
+      this.onDone,
+      this.onError}) {
     if (futureFunction != null) {
       asyncOperation(
         futureFunction,
@@ -43,17 +48,24 @@ class FutureManager<T> extends ChangeNotifier {
   }
 
   ///
-  bool isLoading = true;
-  T data;
-  dynamic error;
+  bool _isLoading = true;
+  T _data;
+  dynamic _error;
+
+  T get data => _data;
+  dynamic get error => _error;
 
   ///
-  bool get hasData => data != null;
-  bool get hasError => error != null;
+  bool get hasData => _data != null;
+  bool get hasError => _error != null;
 
   ///Future that this class is doing in [asyncOperation]
   Future<T> future;
-  Future<T> Function({bool reloading, SuccessCallBack<T> onSuccess, VoidCallback onDone, ErrorCallBack onError}) refresh =
+  Future<T> Function(
+          {bool reloading,
+          SuccessCallBack<T> onSuccess,
+          VoidCallback onDone,
+          ErrorCallBack onError}) refresh =
       ({reloading, onSuccess, onDone, onError}) async {
     errorLog("Refresh has not been initialized yet");
     return null;
@@ -83,10 +95,10 @@ class FutureManager<T> extends ChangeNotifier {
         if (successCallBack != null) {
           result = successCallBack?.call(result);
         }
-        data = result;
-        return data;
+        _data = result;
+        return _data;
       } catch (exception) {
-        if (triggerError) error = exception;
+        if (triggerError) _error = exception;
         errorCallBack?.call(exception);
         return null;
       } finally {
@@ -94,28 +106,35 @@ class FutureManager<T> extends ChangeNotifier {
         onOperationDone?.call();
       }
     };
-    return refresh(reloading: reloading, onSuccess: onSuccess, onDone: onDone, onError: onError);
+    return refresh(
+        reloading: reloading,
+        onSuccess: onSuccess,
+        onDone: onDone,
+        onError: onError);
   }
 
   void toggleLoading() {
-    isLoading = !isLoading;
+    _isLoading = !_isLoading;
     notifyListeners();
   }
 
-  void notify() {
+  void update([T data]) {
+    if (data != null) {
+      _data = data;
+    }
     notifyListeners();
   }
 
   void resetData() {
-    error = null;
-    isLoading = true;
-    data = null;
+    _isLoading = true;
+    _error = null;
+    _data = null;
     notifyListeners();
   }
 
   @override
   void dispose() {
-    data = null;
+    _data = null;
     super.dispose();
   }
 }
