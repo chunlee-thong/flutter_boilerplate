@@ -13,7 +13,7 @@ class CustomErrorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: SuraStyle.roundRect(),
+      shape: SuraDecoration.roundRect(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -28,7 +28,7 @@ class CustomErrorDialog extends StatelessWidget {
   Widget buildHeader() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: SuraStyle.radiusTop(),
+        borderRadius: SuraDecoration.radiusTop(),
         color: color,
       ),
       padding: EdgeInsets.all(padding),

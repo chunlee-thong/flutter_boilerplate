@@ -7,7 +7,6 @@ import '../widgets/buttons/primary_button.dart';
 import '../widgets/common/ui_helper.dart';
 import '../widgets/form_input/primary_dropdown_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
-import '../widgets/form_input/primary_type_ahead_text_field.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   UpdateUserInfoPage({Key key}) : super(key: key);
@@ -111,14 +110,6 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
             controller: dobTC,
             hint: "Date of birth",
             onTap: onPickDob,
-          ),
-          PrimaryTypeAHeadTextField(
-            controller: countryTC,
-            hint: "Country",
-            suggestions: [
-              "Cambodia",
-              "Thailand",
-            ],
           ),
           PrimaryDropDownButton(
             options: genders,

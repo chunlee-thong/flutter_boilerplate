@@ -9,6 +9,7 @@ import 'constant/app_theme_color.dart';
 import 'pages/splash/splash_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/user_provider.dart';
+import 'widgets/state_widgets/loading_widget.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -37,15 +38,18 @@ class _MyAppState extends State<MyApp> {
         child: Builder(
           builder: (context) => Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
-              return MaterialApp(
-                title: AppConfig.APP_NAME,
-                navigatorKey: SuraNavigator.navigatorKey,
-                theme: themeProvider.isDarkTheme ? kDarkTheme : kLightTheme,
-                debugShowCheckedModeBanner: false,
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
-                home: SplashScreenPage(),
+              return SuraTheme(
+                loadingWidget: LoadingWidget(),
+                child: MaterialApp(
+                  title: AppConfig.APP_NAME,
+                  navigatorKey: SuraNavigator.navigatorKey,
+                  theme: themeProvider.isDarkTheme ? kDarkTheme : kLightTheme,
+                  debugShowCheckedModeBanner: false,
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  home: SplashScreenPage(),
+                ),
               );
             },
           ),

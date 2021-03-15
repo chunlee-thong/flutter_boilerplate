@@ -10,7 +10,7 @@ class LanguagePickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: SuraStyle.roundRect(),
+      shape: SuraDecoration.roundRect(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -19,11 +19,10 @@ class LanguagePickerDialog extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: context.primaryColor,
-              borderRadius: SuraStyle.radiusTop(4),
+              borderRadius: SuraDecoration.radiusTop(4),
             ),
             alignment: Alignment.center,
-            child: Text("Language",
-                style: kSubHeaderStyle.applyColor(Colors.white)),
+            child: Text("Language", style: kSubHeaderStyle.applyColor(Colors.white)),
           ),
           Divider0(),
           ...APP_LOCALES.map((language) {

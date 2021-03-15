@@ -3,8 +3,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user/user_model.dart';
-import '../../services/future_manager.dart';
-import '../../widgets/state_widgets/future_manager_builder.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key key}) : super(key: key);

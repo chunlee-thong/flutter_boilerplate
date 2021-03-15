@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../api_service/index.dart';
 import '../models/response/user/user_model.dart';
-import '../services/future_manager.dart';
 
 class UserProvider extends ChangeNotifier {
   bool _isLoggedIn = false;

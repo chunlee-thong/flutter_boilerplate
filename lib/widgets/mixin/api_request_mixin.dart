@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../services/future_manager.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 mixin ApiRequestMixin<Page extends StatefulWidget, T> on State<Page> {
   FutureManager<T> futureController;
