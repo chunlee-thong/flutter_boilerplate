@@ -30,7 +30,7 @@ class _RootPageState extends State<RootPage> {
 
   void setupUserData() async {
     AppConstant.TOKEN = await LocalStorage.getToken();
-    AppConstant.USER_ID = await LocalStorage.read(key: LocalStorage.ID_KEY);
+    AppConstant.USER_ID = await LocalStorage.read(key: ID_KEY);
     UserProvider.getProvider(context).getUserInfo();
   }
 

@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const String TOKEN_KEY = "key.token";
+const String LOGIN_KEY = "key.login";
+const String ID_KEY = "key.id";
+const String THEME_KEY = "key.theme";
+
 class LocalStorage {
   static const FlutterSecureStorage _fss = FlutterSecureStorage();
   static SharedPreferences sp;
-  static const String TOKEN_KEY = "key.token";
-  static const String LOGIN_KEY = "key.login";
-  static const String ID_KEY = "key.id";
-  static const String THEME_KEY = "key.theme";
-
   //Prevent initialization
   LocalStorage._();
 

@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
   static ThemeProvider getProvider(BuildContext context) => Provider.of<ThemeProvider>(context, listen: false);
 
   void initializeTheme() {
-    bool isDark = LocalStorage.sp.getBool(LocalStorage.THEME_KEY) ?? false;
+    bool isDark = LocalStorage.sp.getBool(THEME_KEY) ?? false;
     _isDarkTheme = isDark;
     notifyListeners();
   }
@@ -23,6 +23,6 @@ class ThemeProvider extends ChangeNotifier {
   void switchTheme() async {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
-    LocalStorage.sp.setBool(LocalStorage.THEME_KEY, _isDarkTheme);
+    LocalStorage.sp.setBool(THEME_KEY, _isDarkTheme);
   }
 }

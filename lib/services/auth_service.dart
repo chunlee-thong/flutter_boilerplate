@@ -9,8 +9,8 @@ import '../services/local_storage_service.dart';
 
 class AuthService {
   static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
-    await LocalStorage.save(key: LocalStorage.TOKEN_KEY, value: loginResponse.token);
-    await LocalStorage.save(key: LocalStorage.ID_KEY, value: loginResponse.userId);
+    await LocalStorage.save(key: TOKEN_KEY, value: loginResponse.token);
+    await LocalStorage.save(key: ID_KEY, value: loginResponse.userId);
     UserProvider.getProvider(context).setLoginStatus(true);
     await UserProvider.getProvider(context).getUserInfo();
   }

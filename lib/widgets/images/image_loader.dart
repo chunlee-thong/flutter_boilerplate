@@ -36,6 +36,7 @@ class ImageLoader extends StatelessWidget {
           height: height,
           fit: fit,
           color: color,
+          colorBlendMode: BlendMode.darken,
           errorWidget: (context, err, obj) {
             if (error != null) return error;
             return Icon(Icons.error_outline);
