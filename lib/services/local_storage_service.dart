@@ -17,16 +17,12 @@ class LocalStorage {
     sp = await SharedPreferences.getInstance();
   }
 
-  static Future<String> getToken() async {
-    return await _fss.read(key: TOKEN_KEY);
-  }
-
   static Future<bool> saveLoginStatus(bool status) async {
     return await sp.setBool(LOGIN_KEY, status);
   }
 
-  static Future<bool> getLoginStatus(bool status) async {
-    return await sp.getBool(LOGIN_KEY);
+  static Future<bool> getLoginStatus() async {
+    return await sp.getBool(LOGIN_KEY) ?? false;
   }
 
   static Future<void> save({
@@ -36,11 +32,12 @@ class LocalStorage {
     await _fss.write(key: key, value: value);
   }
 
-  static Future<String> read({@required String key}) async {
+  static Future<String> get({@required String key}) async {
     return await _fss.read(key: key);
   }
 
-  static Future<void> deleteAll() async {
+  static Future<void> clear() async {
+    await sp.clear();
     await _fss.deleteAll();
   }
 }

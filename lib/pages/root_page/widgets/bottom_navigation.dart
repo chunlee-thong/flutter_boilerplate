@@ -19,8 +19,8 @@ class RootBottomNavigation extends StatelessWidget {
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: "Search",
+          icon: Icon(Icons.group),
+          label: "Dummy",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.dashboard_customize),

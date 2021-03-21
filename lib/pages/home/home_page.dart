@@ -38,12 +38,12 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: ElevatedButton(
         onPressed: () {
           count++;
           ThemeProvider.getProvider(context).switchTheme();
         },
-        child: Icon(Icons.add),
+        child: Text("Switch Theme"),
       ),
     );
   }
