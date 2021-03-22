@@ -1,21 +1,21 @@
+name: Github Release apk
 on:
   push:
     tags: "v*"
-name: Create release apk
 jobs:
   build:
-    name: Build release apk
+    name: Build Github release apk
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: "8.x"
+          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          channel: "stable" # or: 'dev' or 'beta'
+          flutter-version: "1.22.5"
       - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi
+      - run: flutter build apk --release --split-per-abi --flavor prod
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:

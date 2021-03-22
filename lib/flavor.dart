@@ -1,3 +1,5 @@
+import 'constant/app_config.dart';
+
 enum Flavor {
   dev,
   staging,
@@ -21,4 +23,19 @@ class F {
     }
     return "";
   }
+}
+
+void setupDevEnvConfig() {
+  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
+  F.flavor = Flavor.dev;
+}
+
+void setupStagingEnvConfig() {
+  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
+  F.flavor = Flavor.staging;
+}
+
+void setupProdEnvConfig() {
+  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
+  F.flavor = Flavor.production;
 }
