@@ -15,9 +15,11 @@ jobs:
         with:
           flutter-version: "1.22.5"
       - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi --flavor prod
+      - run: flutter build apk --release --flavor dev
+      - run: flutter build apk --release --flavor staging
+      - run: flutter build apk --release --flavor prod
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*.apk"
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
