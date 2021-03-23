@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String TOKEN_KEY = "key.token";
+const String REFRESH_TOKEN_KEY = "key.refresh.token";
 const String LOGIN_KEY = "key.login";
 const String ID_KEY = "key.id";
 const String THEME_KEY = "key.theme";

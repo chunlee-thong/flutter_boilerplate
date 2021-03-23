@@ -23,6 +23,24 @@ class AuthService {
     AppConstant.USER_ID = await LocalStorage.get(key: ID_KEY);
   }
 
+  static Future<void> refreshUserToken() async {
+    String refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
+    try {
+      //Response response = await BaseHttpClient.dio.post("/", data:{"refresh_token":refresh_token});
+      // if (response.data['status'] == 1 || response.data['status'] == true) {
+      //   String newToken = response.....
+      //   String newRefreshToken = response....
+      //   await LocalStorage.save(key: TOKEN_KEY, value: newToken);
+      //   await LocalStorage.save(key: REFRESH_TOKEN_KEY, value: newRefreshToken);
+      //   AppConstant.TOKEN = newToken;
+      // } else {
+      //   throw response.data['message'];
+      // }
+    } catch (exception) {
+      throw exception;
+    }
+  }
+
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     void onLogout() async {
       await LocalStorage.clear();

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/services/auth_service.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
 import '../../utils/logger.dart';
@@ -29,15 +31,22 @@ class BaseApiService {
     Map<String, dynamic> query = const {},
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
+    String customToken,
     bool requiredToken = true,
-    bool ignoreResponse = false,
     Dio customDioClient,
   }) async {
     Response response;
     try {
       final httpOption = Options(method: method);
       if (requiredToken && AppConstant.TOKEN != null) {
+        bool isExpired = SuraJwtDecoder.decode(AppConstant.TOKEN).isExpired;
+        if (isExpired) {
+          await AuthService.refreshUserToken();
+        }
         httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
+      }
+      if (customToken != null) {
+        httpOption.headers['Authorization'] = "bearer $customToken";
       }
       httpOption.headers.addAll(headers);
       if (customDioClient != null) {
@@ -56,15 +65,12 @@ class BaseApiService {
         );
       }
 
-      if (ignoreResponse == false) {
-        ///This condition may be depend on Response
-        if (response.data['status'] == 1 || response.data['status'] == true) {
-          return onSuccess(response);
-        } else {
-          throw response.data['message'];
-        }
+      ///This condition may be depend on Response and your API
+      if (response.data['status'] == 1 || response.data['status'] == true) {
+        return onSuccess(response);
+      } else {
+        throw response.data['message'];
       }
-      return null;
     } on TypeError catch (exception) {
       _onTypeError(exception);
       return null;
