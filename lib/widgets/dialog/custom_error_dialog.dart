@@ -8,57 +8,64 @@ class CustomErrorDialog extends StatelessWidget {
   final String message;
   final String title;
   final Color color = Color(0xFFE57373);
-  final double padding = 12.0;
+  final double padding = 16.0;
+  final RoundedRectangleBorder shape = SuraDecoration.roundRect();
   CustomErrorDialog({Key key, this.message, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: SuraDecoration.roundRect(),
+      shape: shape,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildHeader(),
-          SpaceY(padding),
-          ...buildInfo(context),
+          buildContent(),
+          buildAction(context),
         ],
       ),
     );
   }
 
-  Widget buildHeader() {
+  Widget buildContent() {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: SuraDecoration.radiusTop(),
-        color: color,
-      ),
       padding: EdgeInsets.all(padding),
       alignment: Alignment.center,
       child: Column(
         children: [
-          Icon(FlutterIcons.emoji_sad_ent, color: Colors.white, size: 54),
-          SpaceY(12),
-          Text(title, style: kTitleStyle.white),
+          Icon(
+            FlutterIcons.warning_ant,
+            color: color,
+            size: 54,
+          ),
+          SpaceY(padding),
+          Text(title, style: kSubHeaderStyle),
+          SpaceY(padding),
+          Text(
+            message,
+            style: kSubtitleStyle.normal,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );
   }
 
-  List<Widget> buildInfo(context) {
-    return [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text(
-          message,
-          textAlign: TextAlign.center,
+  Widget buildAction(context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.fromLTRB(padding, 0, padding, padding),
+      child: Material(
+        elevation: 0.0,
+        color: color,
+        child: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Dismiss", style: kSubtitleStyle.medium.white),
+            ),
+          ),
         ),
       ),
-      SuraRaisedButton(
-        margin: EdgeInsets.symmetric(vertical: padding),
-        onPressed: () => Navigator.pop(context),
-        color: color,
-        elevation: 0.0,
-        child: Text("OKAY"),
-      ),
-    ];
+    );
   }
 }

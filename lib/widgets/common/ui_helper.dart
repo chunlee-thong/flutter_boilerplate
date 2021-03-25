@@ -17,7 +17,7 @@ class UIHelper {
       context: context,
       builder: (context) => CustomErrorDialog(
         message: message.toString(),
-        title: "Error",
+        title: "Oh Snap",
       ),
     );
   }

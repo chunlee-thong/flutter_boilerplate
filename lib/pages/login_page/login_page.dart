@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/utils/custom_exception.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
+import '../../utils/app_utils.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
-import '../../widgets/common/ui_helper.dart';
 import '../../widgets/form_input/primary_text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,16 +22,15 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
 
   void onLogin() async {
     if (formKey.currentState.validate()) {
-      try {
+      await exceptionWatcher(() async {
+        throw SessionLogoutException();
         AuthResponse loginResponse = await userApiService.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
         );
         await AuthService.onLoginSuccess(context, loginResponse);
         PageNavigator.pushReplacement(context, RootPage());
-      } catch (e) {
-        UIHelper.showMessageDialog(context, e.toString());
-      }
+      }, context: context);
     }
   }
 
