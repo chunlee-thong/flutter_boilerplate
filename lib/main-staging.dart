@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import './utils/hive_db_adapter.dart';
-import './utils/service_locator.dart';
+import './src/utils/hive_db_adapter.dart';
+import './src/utils/service_locator.dart';
 import 'app.dart';
 import 'flavor.dart';
 

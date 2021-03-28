@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import 'constant/app_config.dart';
-import 'constant/app_constant.dart';
-import 'constant/app_theme_color.dart';
-import 'pages/splash/splash_page.dart';
-import 'providers/theme_provider.dart';
-import 'providers/user_provider.dart';
-import 'widgets/state_widgets/loading_widget.dart';
+import './src/constant/app_config.dart';
+import './src/constant/app_constant.dart';
+import './src/constant/app_theme_color.dart';
+import './src/pages/splash/splash_page.dart';
+import './src/providers/theme_provider.dart';
+import './src/providers/user_provider.dart';
+import './src/widgets/state_widgets/loading_widget.dart';
 
 class MyApp extends StatefulWidget {
   @override

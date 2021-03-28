@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(tr(LocaleKeys.you_have_click, args: ["$count"])),
             PrimaryButton(
               fullWidth: false,
               margin: const EdgeInsets.all(16),

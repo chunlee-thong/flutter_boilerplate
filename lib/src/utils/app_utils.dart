@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_boiler_plate/services/auth_service.dart';
+import '../services/auth_service.dart';
 
 import '../utils/custom_exception.dart';
 import '../widgets/common/ui_helper.dart';

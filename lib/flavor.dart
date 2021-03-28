@@ -1,4 +1,4 @@
-import 'constant/app_config.dart';
+import './src/constant/app_config.dart';
 
 enum Flavor {
   dev,

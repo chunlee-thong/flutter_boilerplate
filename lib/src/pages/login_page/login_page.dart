@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/utils/custom_exception.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
@@ -7,6 +6,7 @@ import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
 import '../../utils/app_utils.dart';
+import '../../utils/custom_exception.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/form_input/primary_text_field.dart';

@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/services/auth_service.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
+import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
 import '../client/http_client.dart';
 import '../client/http_exception.dart';
