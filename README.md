@@ -52,7 +52,9 @@ _this project hasn't migrate to null-safety yet._
 
 ## App Icon
 
-- replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
+- replace your icon file in **assets/image/app-icon.png** then run the following command:
+**flutter pub run flutter_launcher_icons:main**
+- note: this command will run all flutter_launcher_icon with flavor if you have any
 
 ## Hive database
 
