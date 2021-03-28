@@ -7,6 +7,7 @@ import '../../providers/theme_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
 import '../../services/local_storage_service.dart';
+import '../../widgets/state_widgets/loading_widget.dart';
 import '../login_page/login_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     await LocalStorage.initialize();
     bool isLoggedIn = await LocalStorage.getLoginStatus();
     if (isLoggedIn) {
-      AuthService.initializeUserCredential();
+      await AuthService.initializeUserCredential();
       UserProvider.getProvider(context).getUserInfo();
     }
     UserProvider.getProvider(context).setLoginStatus(isLoggedIn);
@@ -49,12 +50,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       backgroundColor: AppColor.materialPrimary,
       body: FutureManagerBuilder<bool>(
         futureManager: splashManager,
-        ready: (context, ready) => Center(
-          child: Text(
-            "Loading...",
-            style: TextStyle(fontSize: 32, color: Colors.white),
-          ),
-        ),
+        loading: const LoadingWidget(Colors.white),
+        ready: (context, ready) => const LoadingWidget(Colors.white),
       ),
     );
   }

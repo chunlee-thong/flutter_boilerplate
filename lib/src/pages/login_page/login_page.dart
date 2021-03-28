@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
@@ -6,7 +8,6 @@ import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
 import '../../utils/app_utils.dart';
-import '../../utils/custom_exception.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/form_input/primary_text_field.dart';
@@ -23,7 +24,6 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
   void onLogin() async {
     if (formKey.currentState.validate()) {
       await exceptionWatcher(() async {
-        throw SessionLogoutException();
         AuthResponse loginResponse = await userApiService.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
@@ -59,18 +59,18 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
             PrimaryTextField(
               textInputType: TextInputType.emailAddress,
               controller: emailTC,
-              label: "Email",
+              label: tr(LocaleKeys.email),
             ),
             SpaceY(16),
             PrimaryTextField(
               textInputType: TextInputType.visiblePassword,
               controller: passwordTC,
               obsecure: true,
-              label: "Password",
+              label: tr(LocaleKeys.password),
             ),
             PrimaryButton(
               onPressed: onLogin,
-              child: Text("LOGIN"),
+              child: Text(tr(LocaleKeys.login)),
             ),
             SpaceY(100),
             SocialAuthButtons(onLoginCompleted: (data) {}),

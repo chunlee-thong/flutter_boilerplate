@@ -28,8 +28,8 @@ class _MyAppState extends State<MyApp> {
     return EasyLocalization(
       path: AppConfig.LANGUAGE_PATH,
       supportedLocales: languages,
-      fallbackLocale: languages.first,
-      startLocale: languages.first,
+      //fallbackLocale: languages.first,
+      //startLocale: languages.first,
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context) => Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               return SuraTheme(
-                loadingWidget: LoadingWidget(),
+                loadingWidget: const LoadingWidget(),
                 child: MaterialApp(
                   title: AppConfig.APP_NAME,
                   navigatorKey: SuraNavigator.navigatorKey,

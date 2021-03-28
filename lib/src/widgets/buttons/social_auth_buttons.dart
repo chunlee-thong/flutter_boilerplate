@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 
 import '../../models/response/user/social_auth_data.dart';
 import '../../services/social_auth_service.dart';
 import '../../widgets/buttons/primary_button.dart';
-import '../../widgets/common/ui_helper.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
@@ -15,51 +15,57 @@ class SocialAuthButtons extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> onLoginWithFacebook(BuildContext context) async {
-    try {
-      SocialAuthData data = await SocialAuthService.loginWithFacebook();
-      if (data == null) return;
-      onAuthStateChange?.call(true);
-      //Login to server
-      //data.authResponse = await userApiService.......;
-      //
-      onLoginCompleted?.call(data);
-    } catch (exception) {
-      UIHelper.showErrorDialog(context, exception);
-    } finally {
-      onAuthStateChange?.call(false);
-    }
+    await exceptionWatcher(
+      () async {
+        SocialAuthData data = await SocialAuthService.loginWithFacebook();
+        if (data == null) return;
+        onAuthStateChange?.call(true);
+        //Login to server
+        //data.authResponse = await userApiService.......;
+        //
+        onLoginCompleted?.call(data);
+      },
+      context: context,
+      onDone: () {
+        onAuthStateChange?.call(false);
+      },
+    );
   }
 
   Future<void> onLoginWithGoogle(BuildContext context) async {
-    try {
-      SocialAuthData data = await SocialAuthService.loginWithGoogle();
-      if (data == null) return;
-      onAuthStateChange?.call(true);
-      //Login to server
-      //data.authResponse = await userApiService.......;
-      //
-      onLoginCompleted?.call(data);
-    } catch (exception) {
-      UIHelper.showErrorDialog(context, exception);
-    } finally {
-      onAuthStateChange?.call(false);
-    }
+    await exceptionWatcher(
+      () async {
+        SocialAuthData data = await SocialAuthService.loginWithGoogle();
+        if (data == null) return;
+        onAuthStateChange?.call(true);
+        //Login to server
+        //data.authResponse = await userApiService.......;
+        //
+        onLoginCompleted?.call(data);
+      },
+      context: context,
+      onDone: () {
+        onAuthStateChange?.call(false);
+      },
+    );
   }
 
   Future<void> onLoginWithApple(BuildContext context) async {
-    try {
-      SocialAuthData data = await SocialAuthService.loginWithApple();
-      if (data == null) return;
-      onAuthStateChange?.call(true);
-      //Login to server
-      //data.authResponse = await userApiService.......;
-      //
-      onLoginCompleted?.call(data);
-    } catch (exception) {
-      UIHelper.showErrorDialog(context, exception);
-    } finally {
-      onAuthStateChange?.call(false);
-    }
+    await exceptionWatcher(
+      () async {
+        SocialAuthData data = await SocialAuthService.loginWithApple();
+        if (data == null) return;
+        onAuthStateChange?.call(true);
+        //Login to server
+        //data.authResponse = await userApiService.......;
+        //
+        onLoginCompleted?.call(data);
+      },
+      context: context,
+      onDone: () {
+        onAuthStateChange?.call(false);
+      },
+    );
   }
 
   @override
