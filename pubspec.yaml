@@ -1,7 +1,7 @@
 name: flutter_boiler_plate
 description: A flutter boiler plate for initial project setup
 
-version: 1.0.1
+version: 1.0.0
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
