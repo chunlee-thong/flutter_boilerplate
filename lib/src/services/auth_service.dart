@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_constant.dart';
@@ -50,12 +51,13 @@ class AuthService {
     }
 
     if (!showConfirmation) {
-      onLogout();
+      await onLogout();
       return;
     }
 
-    SuraNavigator.dialog(
-      SuraConfirmationDialog(
+    await showDialog(
+      context: context,
+      builder: (dialogContext) => SuraConfirmationDialog(
         content: Text("Do you want to logout?"),
         title: "Warning",
         onConfirm: onLogout,

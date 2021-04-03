@@ -69,20 +69,16 @@ class BaseApiService {
       if (response.data['status'] == 1 || response.data['status'] == true) {
         return onSuccess(response);
       } else {
-        throw response.data['message'];
+        throw ServerResponseException(response.data['message']);
       }
-    } on TypeError catch (exception) {
-      _onTypeError(exception);
-      return null;
-    } on NoSuchMethodError catch (exception) {
-      _onTypeError(exception);
-      return null;
     } on DioError catch (exception) {
       _onDioError(exception);
       return null;
-    } catch (exception) {
-      _onServerErrorMessage(exception, response);
+    } on ServerResponseException catch (exception) {
+      _onServerErrorResponseMessage(exception, response);
       return null;
+    } catch (exception) {
+      _onTypeError(exception);
     }
   }
 }
@@ -111,7 +107,7 @@ void _onDioError(DioError exception) {
   }
 }
 
-void _onServerErrorMessage(dynamic exception, Response response) {
+void _onServerErrorResponseMessage(dynamic exception, Response response) {
   errorLog("Server error:=> ${response.request.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }

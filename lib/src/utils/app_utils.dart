@@ -30,12 +30,15 @@ class Debouncer {
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception
 Future<T> exceptionWatcher<T>(
-  FutureOr<T> Function() function, {
+  ///context can be null
   BuildContext context,
+  FutureOr<T> Function() function, {
   VoidCallback onDone,
 }) async {
   try {
     return await function();
+  } on UserCancelException catch (_) {
+    return null;
   } catch (exception) {
     if (exception is SessionLogoutException) {
       if (context != null) {
