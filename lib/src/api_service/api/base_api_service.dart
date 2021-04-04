@@ -79,6 +79,7 @@ class BaseApiService {
       return null;
     } catch (exception) {
       _onTypeError(exception);
+      return null;
     }
   }
 }
