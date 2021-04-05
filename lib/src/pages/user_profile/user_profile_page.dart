@@ -27,7 +27,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       ]),
       body: FutureManagerBuilder<UserModel>(
         futureManager: UserProvider.getProvider(context).userController,
-        error: (error) => CustomErrorWidget(
+        error: (error) => OnErrorWidget(
           message: error,
           onRefresh: UserProvider.getProvider(context).getUserInfo,
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 
 import '../../models/response/user/social_auth_data.dart';
 import '../../services/social_auth_service.dart';
+import '../../utils/custom_exception.dart';
 import '../../widgets/buttons/primary_button.dart';
 
 class SocialAuthButtons extends StatelessWidget {

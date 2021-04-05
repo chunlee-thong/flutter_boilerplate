@@ -5,12 +5,12 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
 
-class CustomErrorWidget extends StatelessWidget {
+class OnErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
   final Future<void> Function() onRefresh;
   final bool hasAppBar;
-  const CustomErrorWidget({
+  const OnErrorWidget({
     Key key,
     @required this.message,
     this.verticalMargin = 0.0,
@@ -19,6 +19,16 @@ class CustomErrorWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    if (hasAppBar) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: buildErrorWidget(context),
+      );
+    }
+    return buildErrorWidget(context);
+  }
+
+  Widget buildErrorWidget(BuildContext context) {
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: verticalMargin),

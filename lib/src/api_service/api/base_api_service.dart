@@ -24,6 +24,8 @@ class BaseApiService {
   final String DATA_FIELD = "data";
   final String ERROR_MESSAGE_FIELD = "message";
 
+  ///Create an Http request method that required path and a callback functions [onSuccess]
+  ///default Http method is [GET]
   Future<T> onRequest<T>({
     @required String path,
     @required T Function(Response) onSuccess,
@@ -75,7 +77,7 @@ class BaseApiService {
       _onDioError(exception);
       return null;
     } on ServerResponseException catch (exception) {
-      _onServerErrorResponseMessage(exception, response);
+      _onServerResponseException(exception, response);
       return null;
     } catch (exception) {
       _onTypeError(exception);
@@ -108,7 +110,7 @@ void _onDioError(DioError exception) {
   }
 }
 
-void _onServerErrorResponseMessage(dynamic exception, Response response) {
+void _onServerResponseException(dynamic exception, Response response) {
   errorLog("Server error:=> ${response.request.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }

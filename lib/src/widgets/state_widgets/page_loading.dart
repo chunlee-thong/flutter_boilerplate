@@ -17,7 +17,6 @@ class PageLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
-
     return Stack(
       children: [
         child,

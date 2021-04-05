@@ -7,6 +7,7 @@ import '../../providers/theme_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
 import '../../services/local_storage_service.dart';
+import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
 import '../login_page/login_page.dart';
 
@@ -51,6 +52,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       body: FutureManagerBuilder<bool>(
         futureManager: splashManager,
         loading: const LoadingWidget(Colors.white),
+        error: (error) {
+          return OnErrorWidget(
+            message: error,
+            hasAppBar: true,
+            onRefresh: () => onSplashing(),
+          );
+        },
         ready: (context, ready) => const LoadingWidget(Colors.white),
       ),
     );
