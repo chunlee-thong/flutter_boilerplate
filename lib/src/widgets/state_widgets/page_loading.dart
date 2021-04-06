@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/loading_provider.dart';
 import 'loading_widget.dart';
 
 class PageLoading extends StatelessWidget {
-  final ValueNotifier<bool> loadingNotifier;
   final Widget child;
-  final Color loadingBarrierColor;
   const PageLoading({
     Key key,
     @required this.child,
-    @required this.loadingNotifier,
-    this.loadingBarrierColor,
   }) : assert(child != null);
 
   @override
@@ -20,13 +17,12 @@ class PageLoading extends StatelessWidget {
     return Stack(
       children: [
         child,
-        SuraNotifier<bool>(
-          valueNotifier: loadingNotifier,
-          builder: (isLoading) {
-            if (isLoading)
+        Consumer<LoadingProvider>(
+          builder: (context, provider, child) {
+            if (provider.isLoading)
               return Container(
                 child: LoadingWidget(),
-                color: loadingBarrierColor ?? color,
+                color: color,
               );
             return SizedBox();
           },

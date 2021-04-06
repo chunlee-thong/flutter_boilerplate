@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../..//constant/app_config.dart';
 import '../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
 
@@ -21,7 +22,7 @@ class OnErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (hasAppBar) {
       return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text(AppConfig.APP_NAME)),
         body: buildErrorWidget(context),
       );
     }
