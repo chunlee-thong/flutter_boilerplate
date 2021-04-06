@@ -69,3 +69,18 @@ class OnErrorWidget extends StatelessWidget {
     );
   }
 }
+
+class FlutterCustomErrorRendering extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Center(
+        child: Text(
+          'Rendering Error! Check stacktrace for more detail',
+          style: TextStyle(color: Colors.red),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
