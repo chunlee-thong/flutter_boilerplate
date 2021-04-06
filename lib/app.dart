@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
                   supportedLocales: context.supportedLocales,
                   locale: context.locale,
                   builder: (context, child) {
+                    LoadingProvider.init(context);
                     return PageLoading(child: child);
                   },
                   home: SplashScreenPage(),
