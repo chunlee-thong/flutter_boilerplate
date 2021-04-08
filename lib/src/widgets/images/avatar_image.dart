@@ -63,7 +63,7 @@ class AvatarImage extends StatelessWidget {
   Widget buildCircleAvatarImage(ImageProvider image) {
     return Card(
       color: Colors.white,
-      shape: const StadiumBorder(),
+      shape: const CircleBorder(),
       elevation: elevation,
       margin: EdgeInsets.zero,
       child: CircleAvatar(
