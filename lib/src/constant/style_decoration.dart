@@ -39,6 +39,14 @@ extension styleExtension on TextStyle {
   TextStyle get underline => this.apply(decoration: TextDecoration.underline);
 }
 
+///
+final BoxShadow greyShadow = BoxShadow(
+  color: Colors.grey.withOpacity(0.2),
+  blurRadius: 2,
+  spreadRadius: 1.0,
+  offset: Offset(0.0, 4.0),
+);
+
 ///material textStyle
 class MTS {
   static const TextStyle h1 = TextStyle(

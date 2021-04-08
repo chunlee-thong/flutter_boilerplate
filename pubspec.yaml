@@ -22,7 +22,6 @@ dependencies:
   provider: ^4.3.3
   flutter_bloc: ^6.1.2
   get_it: ^5.0.6
-  #can't update [easy_localization] yet, null safety is use in new version
   easy_localization: ^2.3.3
   flutter_secure_storage: ^3.3.5
   shared_preferences: ^0.5.12+4
@@ -34,7 +33,8 @@ dependencies:
   toast: ^0.1.5
   cached_network_image: ^2.5.0
   flutter_icons: ^1.1.0
-  sura_flutter: ^0.1.1
+  sura_flutter: ^0.1.3
+  image_picker: ^0.6.7+22
 
   ##network
   dio_http_cache: ^0.2.11

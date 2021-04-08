@@ -12,6 +12,7 @@ Future<T> exceptionWatcher<T>(
   BuildContext context,
   FutureOr<T> Function() function, {
   VoidCallback onDone,
+  void Function(dynamic) onError,
 }) async {
   try {
     return await function();
@@ -26,6 +27,7 @@ Future<T> exceptionWatcher<T>(
     } else if (context != null) {
       UIHelper.showErrorDialog(context, exception);
     }
+    onError?.call(exception);
     return null;
   } finally {
     onDone?.call();
