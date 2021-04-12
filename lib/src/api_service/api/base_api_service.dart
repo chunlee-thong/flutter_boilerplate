@@ -88,8 +88,8 @@ class BaseApiService {
 
 void _onTypeError(dynamic exception) {
   //Logic or syntax error on some condition
-  errorLog("Type error:=> ${exception.stackTrace.toString()}");
-  throw exception;
+  errorLog("Type Error :=> ${exception.toString()}\nStackTrace:  ${exception.stackTrace.toString()}");
+  throw ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
 void _onDioError(DioError exception) {
@@ -104,13 +104,14 @@ void _onDioError(DioError exception) {
     ///Error that range from 400-500
     int code = exception.response.statusCode;
     String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
-    throw DioErrorException("$code: $serverMessage", code: code);
+    throw DioErrorException(serverMessage, code: code);
   } else {
+    //Rare condition
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }
 }
 
 void _onServerResponseException(dynamic exception, Response response) {
-  errorLog("Server error:=> ${response.request.path}:=> $exception");
+  errorLog("Server error :=> ${response.request.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }
