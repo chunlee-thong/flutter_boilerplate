@@ -8,7 +8,7 @@ _this project hasn't migrate to null-safety yet._
 
 ### What we provided and use in this project
 
-- A folder structure and resuable some widgets
+- A folder structure and reusable some widgets
 - Theme switch (dark and light mode)
 - Pages
   - Login page
@@ -17,12 +17,12 @@ _this project hasn't migrate to null-safety yet._
 
 ---
 
-- Localization (using: [easy_localization](https://pub.dev/packages/easy_localization))
-- State management with [Provider](https://pub.dev/packages/provider)
+- [easy_localization](https://pub.dev/packages/easy_localization) for localization
+- [Provider](https://pub.dev/packages/provider) for State management
 - [Dio](https://pub.dev/packages/dio) for http client
 - [Hive](https://pub.dev/packages/hive) database for structural local storage and [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) and [shared_preferences](https://pub.dev/packages/shared_preferences) for key value local storage
 - [get_it](https://pub.dev/packages/get_it) for service locator
-- Some others popular package
+- Some others useful packages
 
 ## Getting Started
 
