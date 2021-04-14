@@ -36,11 +36,15 @@ _this project hasn't migrate to null-safety yet._
 - pubspec.yaml
 - analysis_options.yaml (optional)
 
-3. copy these files if you're using flavor and want a different launcher icon for your flavor
+3. if you are using flavor
 
-- flutter_launcher_icons-prod.yaml
-- flutter_launcher_icons-dev.yaml
-- flutter_launcher_icons-staging.yaml
+- change bundle id and app name in **pubspec.yaml**
+- run **flutter pub run flutter_flavorizr -p assets:download,assets:extract,ios:xcconfig,ios:buildTargets,ios:schema,assets:clean,ide:config,android:buildGradle,android:androidManifest** to generate flavor config for ios and android if you're using flavor.
+- copy these files into project folder if you're using flavor and want a different launcher icon for your flavor
+
+  - flutter_launcher_icons-prod.yaml
+  - flutter_launcher_icons-dev.yaml
+  - flutter_launcher_icons-staging.yaml
 
 4. copy .github folder if you're using github action
 
@@ -52,8 +56,7 @@ _this project hasn't migrate to null-safety yet._
 
 ## App Icon
 
-- replace your icon file in **assets/image/app-icon.png** then run the following command:
-**flutter pub run flutter_launcher_icons:main**
+- replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
 - note: this command will run all flutter_launcher_icon with flavor if you have any
 
 ## Hive database

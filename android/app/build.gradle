@@ -41,6 +41,27 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 android {
+
+    flavorDimensions "flavor-type"
+
+    productFlavors {
+        dev {
+            dimension "flavor-type"
+            applicationId "com.chunlee.flutter_boiler_plate.dev"
+            resValue "string", "app_name", "Flutter Boilerplate Dev"
+        }
+        staging {
+            dimension "flavor-type"
+            applicationId "com.chunlee.flutter_boiler_plate.staging"
+            resValue "string", "app_name", "Flutter Boilerplate Staging"
+        }
+        prod {
+            dimension "flavor-type"
+            applicationId "com.chunlee.flutter_boiler_plate"
+            resValue "string", "app_name", "Flutter Boilerplate"
+        }
+    }
+
     compileSdkVersion 29
 
     sourceSets {
@@ -84,3 +105,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.android.support:multidex:1.0.3'
 }
+

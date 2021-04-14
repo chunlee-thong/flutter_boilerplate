@@ -1,0 +1,6 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/main-staging.dart
+
+ASSET_PREFIX=staging
+BUNDLE_NAME=Flutter Boilerplate Staging
