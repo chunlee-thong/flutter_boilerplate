@@ -62,25 +62,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions "default"
-    productFlavors {
-        prod {
-            dimension "default"
-            applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Flutter BLP"]
-        }
-        dev {
-            dimension "default"
-            applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "Flutter BLP Dev"]
-        }
-        staging {
-            dimension "default"
-            applicationIdSuffix ".staging"
-            manifestPlaceholders = [appName: "Flutter BLP staging"]
-        }
-    }
-
     buildTypes {
         release {
             useProguard true

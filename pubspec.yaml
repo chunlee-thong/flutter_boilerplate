@@ -42,6 +42,7 @@ dependencies:
 
 dev_dependencies:
   hive_generator: ^0.8.1
+  flutter_flavorizr: ^1.0.9
   build_runner: ^1.10.3
   flutter_test:
     sdk: flutter
@@ -73,3 +74,36 @@ flutter:
     - family: PreahVihear
       fonts:
         - asset: assets/fonts/Preahvihear-Regular.ttf
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: "Flutter Boilerplate Dev"
+      android:
+        applicationId: "com.chunlee.flutter_boiler_plate.dev"
+
+      ios:
+        bundleId: "com.chunlee.flutter_boiler_plate.dev"
+
+    staging:
+      app:
+        name: "Flutter Boilerplate Staging"
+
+      android:
+        applicationId: "com.chunlee.flutter_boiler_plate.staging"
+      ios:
+        bundleId: "com.chunlee.flutter_boiler_plate.staging"
+    prod:
+      app:
+        name: "Flutter Boilerplate"
+
+      android:
+        applicationId: "com.chunlee.flutter_boiler_plate"
+      ios:
+        bundleId: "com.chunlee.flutter_boiler_plate"

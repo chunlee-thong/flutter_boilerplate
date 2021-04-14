@@ -314,6 +314,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  flutter_flavorizr:
+    dependency: "direct dev"
+    description:
+      name: flutter_flavorizr
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
   flutter_icons:
     dependency: "direct main"
     description:
