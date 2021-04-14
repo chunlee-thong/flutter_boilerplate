@@ -39,7 +39,7 @@ _this project hasn't migrate to null-safety yet._
 3. if you are using flavor
 
 - change bundle id and app name in **pubspec.yaml**
-- run **flutter pub run flutter_flavorizr -p assets:download,assets:extract,ios:xcconfig,ios:buildTargets,ios:schema,assets:clean,ide:config,android:buildGradle,android:androidManifest** to generate flavor config for ios and android if you're using flavor.
+- run **flutter pub run flutter_flavorizr -p assets:download,assets:extract,ios:xcconfig,ios:buildTargets,ios:schema,ios:plist,assets:clean,ide:config,android:buildGradle,android:androidManifest** to generate flavor config for ios and android if you're using flavor.
 - copy these files into project folder if you're using flavor and want a different launcher icon for your flavor
 
   - flutter_launcher_icons-prod.yaml

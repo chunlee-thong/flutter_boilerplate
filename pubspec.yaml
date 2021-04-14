@@ -78,7 +78,7 @@ flutter:
 flavorizr:
   app:
     android:
-      flavorDimensions: "flavor-type"
+      flavorDimensions: "flavor"
     ios:
 
   flavors:
@@ -86,24 +86,24 @@ flavorizr:
       app:
         name: "Flutter Boilerplate Dev"
       android:
-        applicationId: "com.chunlee.flutter_boiler_plate.dev"
+        applicationId: "com.chunleethong.flutter_boiler_plate.dev"
 
       ios:
-        bundleId: "com.chunlee.flutter_boiler_plate.dev"
+        bundleId: "com.chunleethong.flutterBoilerPlate.dev"
 
     staging:
       app:
         name: "Flutter Boilerplate Staging"
 
       android:
-        applicationId: "com.chunlee.flutter_boiler_plate.staging"
+        applicationId: "com.chunleethong.flutter_boiler_plate.staging"
       ios:
-        bundleId: "com.chunlee.flutter_boiler_plate.staging"
+        bundleId: "com.chunleethong.flutterBoilerPlate.staging"
     prod:
       app:
         name: "Flutter Boilerplate"
 
       android:
-        applicationId: "com.chunlee.flutter_boiler_plate"
+        applicationId: "com.chunleethong.flutter_boiler_plate"
       ios:
-        bundleId: "com.chunlee.flutter_boiler_plate"
+        bundleId: "com.chunleethong.flutterBoilerPlate"

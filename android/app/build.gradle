@@ -42,28 +42,27 @@ apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 android {
 
-    flavorDimensions "flavor-type"
+    flavorDimensions "flavor"
 
     productFlavors {
         dev {
-            dimension "flavor-type"
-            applicationId "com.chunlee.flutter_boiler_plate.dev"
+            dimension "flavor"
+            applicationId "com.chunleethong.flutter_boiler_plate.dev"
             resValue "string", "app_name", "Flutter Boilerplate Dev"
         }
         staging {
-            dimension "flavor-type"
-            applicationId "com.chunlee.flutter_boiler_plate.staging"
+            dimension "flavor"
+            applicationId "com.chunleethong.flutter_boiler_plate.staging"
             resValue "string", "app_name", "Flutter Boilerplate Staging"
         }
         prod {
-            dimension "flavor-type"
-            applicationId "com.chunlee.flutter_boiler_plate"
+            dimension "flavor"
+            applicationId "com.chunleethong.flutter_boiler_plate"
             resValue "string", "app_name", "Flutter Boilerplate"
         }
     }
 
     compileSdkVersion 29
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -73,7 +72,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.chunleethong.flutter_boiler_plate"
         minSdkVersion 22
         targetSdkVersion 29
@@ -88,7 +86,6 @@ android {
             useProguard true
             shrinkResources true
             minifyEnabled true
-
             signingConfig signingConfigs.debug
         }
     }
@@ -105,4 +102,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.android.support:multidex:1.0.3'
 }
+
+
+
+
 
