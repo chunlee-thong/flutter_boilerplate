@@ -78,7 +78,7 @@ flutter:
 flavorizr:
   app:
     android:
-      flavorDimensions: "flavor"
+      flavorDimensions: "default"
     ios:
 
   flavors:
