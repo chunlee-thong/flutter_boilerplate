@@ -68,7 +68,7 @@ class BaseApiService {
       }
 
       ///This condition may be depend on Response and your API
-      if (response.data['status'] == 1 || response.data['status'] == true) {
+      if (response.data['status'] == true) {
         return onSuccess(response);
       } else {
         throw ServerResponseException(response.data['message']);
@@ -88,7 +88,8 @@ class BaseApiService {
 
 void _onTypeError(dynamic exception) {
   //Logic or syntax error on some condition
-  errorLog("Type Error :=> ${exception.toString()}\nStackTrace:  ${exception.stackTrace.toString()}");
+  errorLog("Type Error :=> ${exception.toString()}"
+      "StackTrace: ${exception.stackTrace.toString()}");
   throw ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
@@ -103,8 +104,11 @@ void _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error that range from 400-500
     int code = exception.response.statusCode;
+    if (code == 502) {
+      throw DioErrorException(ErrorMessage.UNEXPECTED_ERROR, code: code);
+    }
     String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
-    throw DioErrorException(serverMessage, code: code);
+    throw DioErrorException(serverMessage);
   } else {
     //Rare condition
     throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);

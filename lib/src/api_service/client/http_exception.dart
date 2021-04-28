@@ -4,10 +4,10 @@ class DioErrorException extends BaseHttpException {
   final int code;
   final String message;
 
-  DioErrorException(this.message, {this.code = 200});
+  DioErrorException(this.message, {this.code});
   @override
   String toString() {
-    return this.message;
+    return code != null ? "$code: $message" : this.message;
   }
 }
 
