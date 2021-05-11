@@ -12,6 +12,7 @@ import '../client/http_exception.dart';
 
 class BaseApiService {
   Dio dio;
+
   BaseApiService({Dio dio}) {
     if (dio == null) {
       if (BaseHttpClient.dio == null) BaseHttpClient.init();

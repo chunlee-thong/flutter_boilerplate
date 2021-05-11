@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/api_service/client/http_client.dart';
+import 'package:flutter_boiler_plate/src/utils/custom_exception.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_constant.dart';
@@ -27,16 +30,22 @@ class AuthService {
   static Future<void> refreshUserToken() async {
     String refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
     try {
-      //Response response = await BaseHttpClient.dio.post("/", data:{"refresh_token":refresh_token});
-      // if (response.data['status'] == 1 || response.data['status'] == true) {
-      //   String newToken = response.....
-      //   String newRefreshToken = response....
-      //   await LocalStorage.save(key: TOKEN_KEY, value: newToken);
-      //   await LocalStorage.save(key: REFRESH_TOKEN_KEY, value: newRefreshToken);
-      //   AppConstant.TOKEN = newToken;
-      // } else {
-      //   throw response.data['message'];
-      // }
+      Response response = await BaseHttpClient.dio.post("/", data: {"refresh_token": refreshToken});
+      //String newToken = response.....
+      //await LocalStorage.save(key: TOKEN_KEY, value: newToken);
+      //AppConstant.TOKEN = newToken;
+    } on DioError catch (exception) {
+      if (exception.type == DioErrorType.RESPONSE) {
+        int code = exception.response.statusCode;
+
+        ///Or other specific code
+        if (code == 401) {
+          throw SessionExpiredException();
+        } else
+          throw exception;
+      } else {
+        throw exception;
+      }
     } catch (exception) {
       throw exception;
     }
