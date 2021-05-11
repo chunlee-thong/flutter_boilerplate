@@ -40,10 +40,17 @@ extension styleExtension on TextStyle {
 }
 
 ///
-final BoxShadow greyShadow = BoxShadow(
+final BoxShadow greyShadow2 = BoxShadow(
   color: Colors.grey.withOpacity(0.2),
   blurRadius: 2,
   spreadRadius: 1.0,
+  offset: Offset(0.0, 4.0),
+);
+
+final BoxShadow greyShadow4 = BoxShadow(
+  color: Colors.grey.withOpacity(0.2),
+  blurRadius: 4,
+  spreadRadius: 4,
   offset: Offset(0.0, 4.0),
 );
 

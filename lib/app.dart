@@ -54,12 +54,18 @@ class _MyAppState extends State<MyApp> {
                   supportedLocales: context.supportedLocales,
                   locale: context.locale,
                   builder: (context, child) {
-                    LoadingProvider.init(context);
                     ErrorWidget.builder = (detail) {
                       if (kReleaseMode) return FlutterCustomErrorRendering();
                       return ErrorWidget(detail.exception);
                     };
-                    return PageLoading(child: child);
+                    return Theme(
+                      child: PageLoading(child: child),
+                      data: Theme.of(context).copyWith(
+                        textTheme: Theme.of(context).textTheme.apply(
+                              fontFamily: context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME,
+                            ),
+                      ),
+                    );
                   },
                   home: SplashScreenPage(),
                 ),

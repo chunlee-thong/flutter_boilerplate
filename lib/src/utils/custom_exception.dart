@@ -7,6 +7,7 @@ import '../widgets/common/ui_helper.dart';
 
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception
+///Return null if there is an exception
 Future<T> exceptionWatcher<T>(
   ///context can be null
   BuildContext context,
@@ -19,7 +20,7 @@ Future<T> exceptionWatcher<T>(
   } on UserCancelException catch (_) {
     return null;
   } catch (exception) {
-    if (exception is SessionLogoutException) {
+    if (exception is SessionExpiredException) {
       if (context != null) {
         UIHelper.showToast(context, exception.toString());
         AuthService.logOutUser(context, showConfirmation: false);
@@ -36,7 +37,7 @@ Future<T> exceptionWatcher<T>(
 
 ///Use with FutureManagerBuilder onError field to handle error
 void handleManagerError(dynamic exception, BuildContext context) {
-  if (exception is SessionLogoutException) {
+  if (exception is SessionExpiredException) {
     UIHelper.showToast(context, exception.toString());
     AuthService.logOutUser(context, showConfirmation: false);
   }
@@ -50,7 +51,7 @@ class UserCancelException {
   }
 }
 
-class SessionLogoutException {
+class SessionExpiredException {
   @override
   String toString() {
     return "Session expired, Please login again";

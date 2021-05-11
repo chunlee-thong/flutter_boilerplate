@@ -109,7 +109,7 @@ class _UserAvatarState extends State<UserAvatar> with NotifierMixin {
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
-          boxShadow: [greyShadow],
+          boxShadow: [greyShadow2],
         ),
         child: Stack(
           children: [

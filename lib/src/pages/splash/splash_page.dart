@@ -22,12 +22,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   Future<bool> onSplashing() async {
     await LocalStorage.initialize();
     bool isLoggedIn = await LocalStorage.getLoginStatus();
+    ThemeProvider.getProvider(context).initializeTheme();
     if (isLoggedIn) {
       await AuthService.initializeUserCredential();
       UserProvider.getProvider(context).getUserInfo();
     }
     UserProvider.getProvider(context).setLoginStatus(isLoggedIn);
-    ThemeProvider.getProvider(context).initializeTheme();
     await Future.delayed(const Duration(seconds: 1));
     PageNavigator.pushReplacement(context, isLoggedIn ? RootPage() : LoginPage());
     return true;
