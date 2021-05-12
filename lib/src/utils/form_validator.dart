@@ -1,10 +1,21 @@
+import 'package:flutter_boiler_plate/src/utils/app_extension.dart';
+
 class FormValidator {
   static String validateField(String value, {String field, int length}) {
     if (value.isEmpty) {
       return "Please input your $field";
     }
-    if (length != null && value.length < length)
-      return "$field must be $length characters long";
+    if (length != null && value.length < length) return "$field must be $length characters long";
+    return null;
+  }
+
+  static String validateEmail(String value) {
+    if (value.isEmpty) {
+      return "Please input your email";
+    }
+    if (!value.isEmail()) {
+      return "Please input a valid email";
+    }
     return null;
   }
 
@@ -22,8 +33,7 @@ class FormValidator {
       return "Please confirm your password";
     }
 
-    if (value.trim() != newPassword.trim())
-      return "Confirm password must be the same as password";
+    if (value.trim() != newPassword.trim()) return "Confirm password must be the same as password";
     return null;
   }
 }

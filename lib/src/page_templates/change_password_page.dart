@@ -10,12 +10,12 @@ import '../widgets/form_input/primary_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   ChangePasswordPage({Key key}) : super(key: key);
+
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage>
-    with SuraFormMixin {
+class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMixin {
   TextEditingController oldPasswordTC;
   TextEditingController newPasswordTC;
   TextEditingController confirmNewPasswordTC;
@@ -87,8 +87,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
             controller: confirmNewPasswordTC,
             hint: "Confirm new password",
             obsecure: true,
-            validator: (value) => FormValidator.validateConfirmPassword(
-                value, newPasswordTC.text),
+            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
           ),
           PrimaryButton(
             onPressed: onSubmit,

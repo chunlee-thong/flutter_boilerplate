@@ -4,12 +4,13 @@ import '../../models/response/user/user_model.dart';
 import 'base_api_service.dart';
 
 class UserApiService extends BaseApiService {
-  static const String _loginUser = "/api/user/login";
-  static const String _getUserInfo = "/api/user/info";
+  static const String _LOGIN_USER = "/api/user/login";
+  //If your path "/" at the end, it means that there's further route
+  static const String _GET_USER_INFO = "/api/user/info/";
 
   Future<AuthResponse> loginUser({String email, String password}) async {
     return onRequest(
-      path: _loginUser,
+      path: _LOGIN_USER,
       method: HttpMethod.POST,
       data: {
         "email": email,
@@ -37,7 +38,7 @@ class UserApiService extends BaseApiService {
   Future<UserModel> fetchUserInfo({String email, String password}) async {
     String userId = AppConstant.USER_ID;
     return onRequest<UserModel>(
-      path: "$_getUserInfo/$userId",
+      path: _GET_USER_INFO + userId,
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/widgets/common/pull_refresh_listview.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
@@ -56,6 +57,23 @@ class _DummyPageState extends State<DummyPage> {
       body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
         ready: (context, UserResponse data) {
+          return PullRefreshListViewBuilder.paginated(
+            onRefresh: () => fetchData(true),
+            itemCount: data.users.length,
+            hasMoreData: currentPage <= totalPage,
+            itemBuilder: (context, index) {
+              final user = data.users[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.person),
+                ),
+                onTap: () {},
+                title: Text("${user.firstName} ${user.lastName}"),
+                subtitle: Text(user.email),
+              );
+            },
+            onGetMoreData: fetchData,
+          );
           return RefreshIndicator(
             onRefresh: () => fetchData(true),
             child: SuraPaginatedList(

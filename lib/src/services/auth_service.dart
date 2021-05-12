@@ -37,8 +37,6 @@ class AuthService {
     } on DioError catch (exception) {
       if (exception.type == DioErrorType.RESPONSE) {
         int code = exception.response.statusCode;
-
-        ///Or other specific code
         if (code == 401) {
           throw SessionExpiredException();
         } else
