@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../services/auth_service.dart';
 import '../widgets/common/ui_helper.dart';
@@ -20,13 +22,27 @@ Future<T> exceptionWatcher<T>(
   } on UserCancelException catch (_) {
     return null;
   } catch (exception) {
+    String message = "";
     if (exception is SessionExpiredException) {
       if (context != null) {
         UIHelper.showToast(context, exception.toString());
         AuthService.logOutUser(context, showConfirmation: false);
       }
-    } else if (context != null) {
-      UIHelper.showErrorDialog(context, exception);
+    } else if (exception is PlatformException) {
+      message = exception.message;
+    } else if (exception is FirebaseAuthException) {
+      message = exception.message;
+      if (exception.code == 'invalid-verification-code') {
+        message = "Invalid Code";
+      }
+    } else if (exception is TypeError) {
+      message = exception.toString();
+    } else {
+      message = exception.toString();
+    }
+
+    if (context != null) {
+      UIHelper.showErrorDialog(context, message);
     }
     onError?.call(exception);
     return null;
@@ -35,7 +51,6 @@ Future<T> exceptionWatcher<T>(
   }
 }
 
-///Use with FutureManagerBuilder onError field to handle error
 void handleManagerError(dynamic exception, BuildContext context) {
   if (exception is SessionExpiredException) {
     UIHelper.showToast(context, exception.toString());
@@ -43,7 +58,6 @@ void handleManagerError(dynamic exception, BuildContext context) {
   }
 }
 
-///Other custom exception
 class UserCancelException {
   @override
   String toString() {

@@ -13,14 +13,14 @@ import '../../utils/custom_exception.dart';
 import 'avatar_image.dart';
 
 class UserAvatar extends StatefulWidget {
-  final String image;
+  final String imageUrl;
   final double radius;
   final Future<void> Function(File) onImageChanged;
   final bool currentUser;
 
   const UserAvatar({
     Key key,
-    @required this.image,
+    @required this.imageUrl,
     @required this.onImageChanged,
     this.radius = 50.0,
     this.currentUser = false,
@@ -28,8 +28,8 @@ class UserAvatar extends StatefulWidget {
 
   const UserAvatar.currentUser({
     Key key,
-    @required this.image,
-    @required this.onImageChanged,
+    this.imageUrl,
+    this.onImageChanged,
     this.radius = 20.0,
     this.currentUser = true,
   }) : super(key: key);
@@ -38,25 +38,9 @@ class UserAvatar extends StatefulWidget {
   _UserAvatarState createState() => _UserAvatarState();
 }
 
-class _UserAvatarState extends State<UserAvatar> with NotifierMixin {
+class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
   File selectedImage;
   final picker = ImagePicker();
-
-  // try {
-  //   final pickedFile = await picker.getImage(source: imageSource, maxWidth: 1000);
-  //   toggleLoading();
-  //   if (pickedFile != null) {
-  //     selectedImage = File(pickedFile.path);
-  //     print(selectedImage.path);
-  //     await widget.onImageChanged?.call(selectedImage);
-  //   }
-  // } catch (exception) {
-  //   selectedImage = null;
-  //   UIHelper.showErrorMessageDialog(context, exception);
-  // } finally {
-  //   toggleLoading();
-  //   setState(() {});
-  // }
 
   void onChooseProfileImageSource() async {
     showCupertinoModalPopup(
@@ -80,15 +64,14 @@ class _UserAvatarState extends State<UserAvatar> with NotifierMixin {
   Future onPickImage(ImageSource imageSource) async {
     await exceptionWatcher(context, () async {
       final pickedFile = await picker.getImage(source: imageSource, maxWidth: 1000);
-      toggleLoading();
       if (pickedFile != null) {
-        selectedImage = File(pickedFile.path);
+        toggleValue(true);
         await widget.onImageChanged?.call(selectedImage);
+        selectedImage = File(pickedFile.path);
       }
-    }, onDone: () {
-      toggleLoading();
-      setState(() {});
-    });
+    }, onDone: () {});
+    toggleValue(false);
+    setState(() {});
   }
 
   @override
@@ -120,14 +103,14 @@ class _UserAvatarState extends State<UserAvatar> with NotifierMixin {
                   )
                 : AvatarImage(
                     radius: widget.radius,
-                    imageUrl: widget.image,
+                    imageUrl: widget.imageUrl,
                   ),
             Positioned(
               bottom: 0,
               right: 0,
               child: SuraIconButton(
                 icon: Icon(
-                  widget.image == null ? Icons.add : Icons.edit,
+                  widget.imageUrl == null ? Icons.add : Icons.edit,
                   color: AppColor.primary,
                   size: 20,
                 ),
@@ -146,7 +129,7 @@ class _UserAvatarState extends State<UserAvatar> with NotifierMixin {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SuraNotifier<bool>(
-                  valueNotifier: loadingNotifier,
+                  valueNotifier: boolNotifier,
                   builder: (isLoading) {
                     return ConditionalWidget(
                       condition: isLoading,
