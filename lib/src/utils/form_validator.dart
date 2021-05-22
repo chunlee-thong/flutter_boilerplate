@@ -1,7 +1,7 @@
 import 'package:flutter_boiler_plate/src/utils/app_extension.dart';
 
 class FormValidator {
-  static String validateField(String value, {String field, int length}) {
+  static String? validateField(String value, {String? field, int? length}) {
     if (value.isEmpty) {
       return "Please input your $field";
     }
@@ -9,7 +9,7 @@ class FormValidator {
     return null;
   }
 
-  static String validateEmail(String value) {
+  static String? validateEmail(String value) {
     if (value.isEmpty) {
       return "Please input your email";
     }
@@ -19,17 +19,17 @@ class FormValidator {
     return null;
   }
 
-  static String isNumber(String value, {String field}) {
-    if (value.isEmpty) {
+  static String? isNumber(String? value, {String? field}) {
+    if (value == null || value.isEmpty) {
       return "Please input your $field";
     }
-    num asNumber = num.tryParse(value);
+    num? asNumber = num.tryParse(value);
     if (asNumber is num) return null;
     return "$field must be a number";
   }
 
-  static String validateConfirmPassword(String value, String newPassword) {
-    if (value.isEmpty) {
+  static String? validateConfirmPassword(String? value, String newPassword) {
+    if (value == null || value.isEmpty) {
       return "Please confirm your password";
     }
 

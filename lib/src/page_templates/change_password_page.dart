@@ -9,22 +9,22 @@ import '../widgets/common/ui_helper.dart';
 import '../widgets/form_input/primary_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
-  ChangePasswordPage({Key key}) : super(key: key);
+  ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMixin {
-  TextEditingController oldPasswordTC;
-  TextEditingController newPasswordTC;
-  TextEditingController confirmNewPasswordTC;
+  TextEditingController? oldPasswordTC;
+  TextEditingController? newPasswordTC;
+  TextEditingController? confirmNewPasswordTC;
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        String oldPassword = oldPasswordTC.text.trim();
-        String newPassword = newPasswordTC.text.trim();
+        String oldPassword = oldPasswordTC!.text.trim();
+        String newPassword = newPasswordTC!.text.trim();
 
         bool result = await Future.value(true);
       } catch (e) {
@@ -43,16 +43,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
 
   @override
   void dispose() {
-    oldPasswordTC.dispose();
-    newPasswordTC.dispose();
-    confirmNewPasswordTC.dispose();
+    oldPasswordTC!.dispose();
+    newPasswordTC!.dispose();
+    confirmNewPasswordTC!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(
@@ -87,7 +87,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
             controller: confirmNewPasswordTC,
             hint: "Confirm new password",
             obsecure: true,
-            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
+            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC!.text),
           ),
           PrimaryButton(
             onPressed: onSubmit,

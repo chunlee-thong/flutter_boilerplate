@@ -11,19 +11,19 @@ import '../widgets/common/ui_helper.dart';
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception
 ///Return null if there is an exception
-Future<T> ExceptionWatcher<T>(
+Future<T?> ExceptionWatcher<T>(
   ///context can be null
   BuildContext context,
   FutureOr<T> Function() function, {
-  VoidCallback onDone,
-  void Function(dynamic) onError,
+  VoidCallback? onDone,
+  void Function(dynamic)? onError,
 }) async {
   try {
     return await function();
   } on UserCancelException catch (_) {
     return null;
   } catch (exception, stackTrace) {
-    String message = "";
+    String? message = "";
     if (exception is SessionExpiredException) {
       if (context != null) {
         UIHelper.showToast(context, exception.toString());

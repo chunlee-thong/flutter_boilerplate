@@ -10,7 +10,7 @@ const String THEME_KEY = "key.theme";
 
 class LocalStorage {
   static const FlutterSecureStorage _fss = FlutterSecureStorage();
-  static SharedPreferences sp;
+  static late SharedPreferences sp;
   //Prevent initialization
   LocalStorage._();
 
@@ -27,13 +27,13 @@ class LocalStorage {
   }
 
   static Future<void> save({
-    @required String key,
-    @required String value,
+    required String key,
+    required String? value,
   }) async {
     await _fss.write(key: key, value: value);
   }
 
-  static Future<String> get({@required String key}) async {
+  static Future<String?> get({required String key}) async {
     return await _fss.read(key: key);
   }
 

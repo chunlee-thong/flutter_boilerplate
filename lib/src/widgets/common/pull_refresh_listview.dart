@@ -8,20 +8,20 @@ class PullRefreshListViewBuilder extends StatelessWidget {
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
   final EdgeInsets padding;
-  final Function onGetMoreData;
+  final Future<void> Function()? onGetMoreData;
   final bool hasMoreData;
-  final Axis scrollDirection;
-  final Widget separator;
+  final Axis? scrollDirection;
+  final Widget? separator;
   final bool shrinkWrap;
-  final Widget onEmpty;
+  final Widget? onEmpty;
   final bool hasRefreshButtonWhenEmpty;
-  final ScrollController controller;
+  final ScrollController? controller;
   //
   const PullRefreshListViewBuilder({
-    @required this.onRefresh,
-    @required this.itemCount,
-    @required this.itemBuilder,
-    this.padding,
+    required this.onRefresh,
+    required this.itemCount,
+    required this.itemBuilder,
+    this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.onGetMoreData,
     this.hasMoreData = false,
     this.scrollDirection,
@@ -33,11 +33,11 @@ class PullRefreshListViewBuilder extends StatelessWidget {
   });
 
   const PullRefreshListViewBuilder.paginated({
-    @required this.onRefresh,
-    @required this.itemCount,
-    @required this.itemBuilder,
-    @required this.onGetMoreData,
-    this.padding,
+    required this.onRefresh,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.onGetMoreData,
+    this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.hasMoreData = false,
     this.scrollDirection,
     this.separator,
@@ -53,7 +53,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
       return onEmpty ?? NoDataWidget(onRefresh: hasRefreshButtonWhenEmpty ? onRefresh : null);
     }
     return RefreshIndicator(
-      onRefresh: onRefresh ?? () async {},
+      onRefresh: onRefresh,
       child: ConditionalWidget(
         condition: onGetMoreData != null,
         onTrue: () => SuraPaginatedList(
@@ -61,7 +61,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           scrollController: controller,
           hasMoreData: hasMoreData,
           itemBuilder: itemBuilder,
-          dataLoader: onGetMoreData,
+          dataLoader: onGetMoreData!,
           shrinkWrap: shrinkWrap,
           scrollDirection: scrollDirection ?? Axis.vertical,
           itemCount: itemCount,

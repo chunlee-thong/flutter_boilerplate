@@ -9,11 +9,11 @@ import '../common/ellipsis_text.dart';
 class OnErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
-  final Future<void> Function() onRefresh;
+  final Future<void> Function()? onRefresh;
   final bool hasAppBar;
   const OnErrorWidget({
-    Key key,
-    @required this.message,
+    Key? key,
+    required this.message,
     this.onRefresh,
     this.verticalMargin = 0.0,
     this.hasAppBar = false,

@@ -33,7 +33,7 @@ class LanguagePickerDialog extends StatelessWidget {
               title: Text(language.name),
               separator: Divider0(),
               onTap: () {
-                context.locale = language.locale;
+                context.setLocale(language.locale);
                 Navigator.of(context).pop(language.locale);
               },
             );

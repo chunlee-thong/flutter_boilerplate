@@ -12,7 +12,7 @@ import 'widgets/bottom_navigation.dart';
 class RootPage extends StatefulWidget {
   final int startPageIndex;
 
-  RootPage({Key key, this.startPageIndex = 0}) : super(key: key);
+  RootPage({Key? key, this.startPageIndex = 0}) : super(key: key);
 
   @override
   _RootPageState createState() => _RootPageState();

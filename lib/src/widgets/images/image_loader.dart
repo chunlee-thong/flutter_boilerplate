@@ -5,15 +5,15 @@ import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 class ImageLoader extends StatelessWidget {
   final String imageUrl;
   final BoxFit fit;
-  final Widget loading;
-  final Widget error;
-  final double width;
-  final double height;
+  final Widget? loading;
+  final Widget? error;
+  final double? width;
+  final double? height;
   final BorderRadius radius;
-  final Color color;
+  final Color? color;
   const ImageLoader({
-    Key key,
-    @required this.imageUrl,
+    Key? key,
+    required this.imageUrl,
     this.fit = BoxFit.cover,
     this.loading,
     this.error,
@@ -30,18 +30,18 @@ class ImageLoader extends StatelessWidget {
       child: ClipRRect(
         borderRadius: radius,
         child: CachedNetworkImage(
-          imageUrl: AppUtils.getFileUrl(imageUrl),
+          imageUrl: AppUtils.getFileUrl(imageUrl)!,
           width: width,
           height: height,
           fit: fit,
           color: color,
           colorBlendMode: BlendMode.darken,
           errorWidget: (context, err, obj) {
-            if (error != null) return error;
+            if (error != null) return error!;
             return Icon(Icons.error_outline);
           },
           placeholder: (context, data) {
-            if (loading != null) return loading;
+            if (loading != null) return loading!;
             return const Icon(Icons.image_rounded, size: 32);
           },
         ),

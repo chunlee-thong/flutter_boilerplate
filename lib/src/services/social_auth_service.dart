@@ -18,10 +18,10 @@ class SocialAuthService {
     }
   }
 
-  static Future<SocialAuthData> loginWithGoogle() async {
+  static Future<SocialAuthData?> loginWithGoogle() async {
     try {
       await _googleSignIn.signOut();
-      GoogleSignInAccount account = await _googleSignIn.signIn();
+      GoogleSignInAccount? account = await _googleSignIn.signIn();
       if (account == null) return null;
       GoogleSignInAuthentication authentication = await account.authentication;
       return SocialAuthData(

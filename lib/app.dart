@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                       return ErrorWidget(detail.exception);
                     };
                     return Theme(
-                      child: PageLoading(child: child),
+                      child: PageLoading(child: child!),
                       data: Theme.of(context).copyWith(
                         textTheme: Theme.of(context).textTheme.apply(
                               fontFamily: context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME,

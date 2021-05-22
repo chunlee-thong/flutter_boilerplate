@@ -8,7 +8,7 @@ import '../constant/app_config.dart';
 class AppUtils {
   static void util() {}
 
-  static String getFileUrl(String file) {
+  static String? getFileUrl(String? file) {
     if (file == null) return null;
     if (file.startsWith("http")) {
       return file;
@@ -20,14 +20,14 @@ class AppUtils {
 
 class Debouncer {
   final int milliseconds;
-  VoidCallback action;
-  Timer _timer;
+  VoidCallback? action;
+  Timer? _timer;
 
   Debouncer({this.milliseconds = 800});
 
   run(VoidCallback action) {
     if (_timer != null) {
-      _timer.cancel();
+      _timer!.cancel();
     }
 
     _timer = Timer(Duration(milliseconds: milliseconds), action);

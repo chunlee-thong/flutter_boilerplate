@@ -6,8 +6,8 @@ class LanguageModel {
   final String image;
 
   const LanguageModel({
-    this.locale,
-    this.name,
-    this.image,
+    required this.locale,
+    required this.name,
+    required this.image,
   });
 }

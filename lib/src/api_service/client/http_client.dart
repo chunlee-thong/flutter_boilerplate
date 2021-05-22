@@ -7,7 +7,7 @@ import '../../utils/logger.dart';
 import '../../utils/object_util.dart';
 
 class BaseHttpClient {
-  static Dio dio;
+  static Dio? dio;
 
   static void init() {
     final BaseOptions options = BaseOptions(
@@ -24,20 +24,18 @@ final JsonDecoder decoder = JsonDecoder();
 final JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
 final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
-  onRequest: (RequestOptions options) async {
+  onRequest: (RequestOptions options, RequestInterceptorHandler requestInterceptorHandler) async {
     httpLog("${options.method}: ${options.path},"
         "query: ${options.queryParameters},"
         "data: ${options.data},"
         "token: ${ObjectUtils.getLastIndexString(options.headers["authorization"])}");
-    return options;
+    requestInterceptorHandler.next(options);
   },
-  onResponse: (Response response) async {
+  onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
     //prettyPrintJson(response.data);
-    return response; // continue
+    responseInterceptorHandler.next(response);
   },
-  onError: (DioError error) async {
-    return error; //continue
-  },
+  onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {},
 );
 
 void prettyPrintJson(dynamic input) {

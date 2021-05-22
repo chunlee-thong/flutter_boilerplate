@@ -13,21 +13,21 @@ import '../../utils/custom_exception.dart';
 import 'avatar_image.dart';
 
 class UserAvatar extends StatefulWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final double radius;
-  final Future<void> Function(File) onImageChanged;
+  final Future<void> Function(File?)? onImageChanged;
   final bool currentUser;
 
   const UserAvatar({
-    Key key,
-    @required this.imageUrl,
-    @required this.onImageChanged,
+    Key? key,
+    required this.imageUrl,
+    required this.onImageChanged,
     this.radius = 50.0,
     this.currentUser = false,
   }) : super(key: key);
 
   const UserAvatar.currentUser({
-    Key key,
+    Key? key,
     this.imageUrl,
     this.onImageChanged,
     this.radius = 20.0,
@@ -39,7 +39,7 @@ class UserAvatar extends StatefulWidget {
 }
 
 class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
-  File selectedImage;
+  File? selectedImage;
   final picker = ImagePicker();
 
   void onChooseProfileImageSource() async {
@@ -48,8 +48,8 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
       builder: (context) => SuraActionSheet(
         title: tr("Please choose your image source"),
         cancelText: tr("Cancel"),
-        builder: (option, index) => Text(option),
-        onSelected: (name, index) {
+        builder: (dynamic option, index) => Text(option),
+        onSelected: (dynamic name, index) {
           if (index == 0) {
             onPickImage(ImageSource.camera);
           } else if (index == 1) {
@@ -79,7 +79,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
     if (widget.currentUser) {
       UserProvider userProvider = UserProvider.getProvider(context);
       return AvatarImage(
-        imageUrl: userProvider.userData.avatar,
+        imageUrl: userProvider.userData!.avatar,
         radius: widget.radius,
         elevation: 1.0,
       );
@@ -99,7 +99,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
             selectedImage != null
                 ? AvatarImage.file(
                     radius: widget.radius,
-                    fileImage: FileImage(selectedImage),
+                    fileImage: FileImage(selectedImage!),
                   )
                 : AvatarImage(
                     radius: widget.radius,

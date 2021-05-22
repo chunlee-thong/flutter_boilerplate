@@ -6,13 +6,13 @@ import '../../constant/style_decoration.dart';
 class PrimaryDropDownButton<T> extends StatelessWidget {
   final List<T> options;
   final T value;
-  final void Function(T) onChanged;
-  final String label;
+  final void Function(T?) onChanged;
+  final String? label;
   const PrimaryDropDownButton({
-    Key key,
-    @required this.options,
-    @required this.value,
-    @required this.onChanged,
+    Key? key,
+    required this.options,
+    required this.value,
+    required this.onChanged,
     this.label,
   }) : super(key: key);
   @override
@@ -23,7 +23,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text(label, style: kTitleStyle.medium).paddingValue(horizontal: 4),
+            Text(label!, style: kTitleStyle.medium).paddingValue(horizontal: 4),
             SpaceY(),
           ],
           DropdownButtonFormField<T>(

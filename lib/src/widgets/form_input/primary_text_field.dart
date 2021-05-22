@@ -6,31 +6,31 @@ import '../../constant/style_decoration.dart';
 import '../../utils/form_validator.dart';
 
 class PrimaryTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hint;
-  final Widget prefixIcon;
-  final Widget suffixIcon;
-  final String Function(String) validator;
-  final void Function(String) onChanged;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   final double marginBottom;
   final TextInputType textInputType;
   final TextCapitalization textCapitalization;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool isRequired;
   final bool obsecure;
-  final List<TextInputFormatter> inputFormatters;
-  final bool readOnly;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool? readOnly;
   final int maxLines;
-  final String label;
-  final int lengthValidator;
+  final String? label;
+  final int? lengthValidator;
   final bool autoFocus;
-  final int maxLength;
+  final int? maxLength;
   final bool autoCorrect;
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
   const PrimaryTextField({
-    Key key,
-    @required this.controller,
+    Key? key,
+    required this.controller,
     this.hint = "",
     this.label,
     this.obsecure = false,
@@ -79,9 +79,9 @@ class PrimaryTextField extends StatelessWidget {
             onTap: onTap,
             validator: isRequired
                 ? (value) {
-                    if (validator != null) return validator(value);
+                    if (validator != null) return validator!(value);
                     return FormValidator.validateField(
-                      value,
+                      value!,
                       field: label ?? hint,
                       length: lengthValidator,
                     );

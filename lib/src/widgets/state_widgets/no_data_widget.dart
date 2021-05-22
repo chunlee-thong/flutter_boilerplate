@@ -8,10 +8,10 @@ import '../../constant/style_decoration.dart';
 class NoDataWidget extends StatelessWidget {
   final double verticalMargin;
   final String message;
-  final Future<void> Function() onRefresh;
+  final Future<void> Function()? onRefresh;
 
   const NoDataWidget({
-    Key key,
+    Key? key,
     this.verticalMargin = 0.0,
     this.message = "There is nothing here!",
     this.onRefresh,

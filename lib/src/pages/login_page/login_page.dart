@@ -7,6 +7,7 @@ import '../../constant/locale_keys.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
+import '../../utils/custom_exception.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/form_input/primary_text_field.dart';
@@ -17,17 +18,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with SuraFormMixin {
-  TextEditingController emailTC;
-  TextEditingController passwordTC;
+  TextEditingController? emailTC;
+  TextEditingController? passwordTC;
 
   void onLogin() async {
-    if (formKey.currentState.validate()) {
-      AuthResponse loginResponse = await userApiService.loginUser(
-        email: emailTC.text.trim(),
-        password: passwordTC.text.trim(),
-      );
-      await AuthService.onLoginSuccess(context, loginResponse);
-      PageNavigator.pushReplacement(context, RootPage());
+    if (formKey.currentState!.validate()) {
+      ExceptionWatcher(context, () async {
+        AuthResponse? loginResponse = await userApiService!.loginUser(
+          email: emailTC!.text.trim(),
+          password: passwordTC!.text.trim(),
+        );
+        await AuthService.onLoginSuccess(context, loginResponse!);
+        PageNavigator.pushReplacement(context, RootPage());
+      });
     }
   }
 
@@ -40,8 +43,8 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
 
   @override
   void dispose() {
-    emailTC.dispose();
-    passwordTC.dispose();
+    emailTC!.dispose();
+    passwordTC!.dispose();
     super.dispose();
   }
 

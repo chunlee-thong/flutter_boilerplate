@@ -6,7 +6,7 @@ class Dot extends StatelessWidget {
   final double space;
 
   const Dot({
-    Key key,
+    Key? key,
     this.size = 8,
     this.color = Colors.grey,
     this.space = 8,

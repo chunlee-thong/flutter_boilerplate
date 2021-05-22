@@ -8,14 +8,14 @@ import '../../utils/app_utils.dart';
 
 class AvatarImage extends StatelessWidget {
   final double radius;
-  final String imageUrl;
-  final ImageProvider fileImage;
+  final String? imageUrl;
+  final ImageProvider? fileImage;
   final double elevation;
-  final IconData placeHolderIcon;
+  final IconData? placeHolderIcon;
   //
   const AvatarImage({
-    Key key,
-    @required this.imageUrl,
+    Key? key,
+    required this.imageUrl,
     this.radius = 20,
     this.fileImage,
     this.elevation = 3.0,
@@ -24,7 +24,7 @@ class AvatarImage extends StatelessWidget {
 
   const AvatarImage.file({
     this.radius = 20,
-    @required this.fileImage,
+    required this.fileImage,
     this.imageUrl,
     this.elevation = 3.0,
     this.placeHolderIcon,
@@ -32,7 +32,7 @@ class AvatarImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String realImageUrl = AppUtils.getFileUrl(imageUrl);
+    final String? realImageUrl = AppUtils.getFileUrl(imageUrl);
     final placeholder = Card(
       shape: const CircleBorder(),
       elevation: elevation,
@@ -60,7 +60,7 @@ class AvatarImage extends StatelessWidget {
     );
   }
 
-  Widget buildCircleAvatarImage(ImageProvider image) {
+  Widget buildCircleAvatarImage(ImageProvider? image) {
     return Card(
       color: Colors.white,
       shape: const CircleBorder(),

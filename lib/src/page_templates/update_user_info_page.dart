@@ -9,26 +9,26 @@ import '../widgets/form_input/primary_dropdown_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
-  UpdateUserInfoPage({Key key}) : super(key: key);
+  UpdateUserInfoPage({Key? key}) : super(key: key);
   @override
   _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
 }
 
 class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
-  TextEditingController firstNameTC;
-  TextEditingController lastNameTC;
-  TextEditingController dobTC;
-  TextEditingController countryTC;
+  TextEditingController? firstNameTC;
+  TextEditingController? lastNameTC;
+  TextEditingController? dobTC;
+  late TextEditingController countryTC;
 
-  String gender;
+  String? gender;
   List<String> genders = ["Male", "Female"];
-  DateTime selectedDOB;
+  late DateTime selectedDOB;
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        String firstname = firstNameTC.text.trim();
-        String lastname = lastNameTC.text.trim();
+        String firstname = firstNameTC!.text.trim();
+        String lastname = lastNameTC!.text.trim();
         String country = countryTC.text.trim();
 
         bool result = await Future.value(true);
@@ -39,7 +39,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   }
 
   void onPickDob() async {
-    DateTime pickedDate = await showDatePicker(
+    DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
@@ -47,7 +47,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
     );
     if (pickedDate != null) {
       selectedDOB = pickedDate;
-      dobTC.text = selectedDOB.formatDate();
+      dobTC!.text = selectedDOB.formatDate();
     }
   }
 
@@ -68,9 +68,9 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
 
   @override
   void dispose() {
-    firstNameTC.dispose();
-    lastNameTC.dispose();
-    dobTC.dispose();
+    firstNameTC!.dispose();
+    lastNameTC!.dispose();
+    dobTC!.dispose();
     countryTC.dispose();
     super.dispose();
   }
@@ -78,7 +78,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(
@@ -114,7 +114,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
           PrimaryDropDownButton(
             options: genders,
             value: gender,
-            onChanged: (value) {
+            onChanged: (dynamic value) {
               setState(() {
                 gender = value;
               });

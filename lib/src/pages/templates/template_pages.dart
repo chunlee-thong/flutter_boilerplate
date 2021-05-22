@@ -7,7 +7,7 @@ import '../../page_templates/update_user_info_page.dart';
 import '../../widgets/common/ui_helper.dart';
 
 class TemplatePages extends StatefulWidget {
-  TemplatePages({Key key}) : super(key: key);
+  TemplatePages({Key? key}) : super(key: key);
   @override
   _TemplatePagesState createState() => _TemplatePagesState();
 }
@@ -16,7 +16,7 @@ class _TemplatePagesState extends State<TemplatePages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "Templates"),
+      appBar: UIHelper.CustomAppBar(title: "Templates") as PreferredSizeWidget?,
       body: Column(
         children: [
           ListTile(

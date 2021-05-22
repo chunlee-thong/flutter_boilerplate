@@ -11,9 +11,9 @@ import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
 class BaseApiService {
-  Dio dio;
+  Dio? dio;
 
-  BaseApiService({Dio dio}) {
+  BaseApiService({Dio? dio}) {
     if (dio == null) {
       if (BaseHttpClient.dio == null) BaseHttpClient.init();
       this.dio = BaseHttpClient.dio;
@@ -27,31 +27,31 @@ class BaseApiService {
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
-  Future<T> onRequest<T>({
-    @required String path,
-    @required T Function(Response) onSuccess,
+  Future<T?> onRequest<T>({
+    required String path,
+    required T Function(Response?) onSuccess,
     String method = HttpMethod.GET,
     Map<String, dynamic> query = const {},
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
-    String customToken,
+    String? customToken,
     bool requiredToken = true,
-    Dio customDioClient,
+    Dio? customDioClient,
   }) async {
-    Response response;
+    Response? response;
     try {
-      final httpOption = Options(method: method);
+      final httpOption = Options(method: method, headers: {});
       if (requiredToken && AppConstant.TOKEN != null) {
-        bool isExpired = SuraJwtDecoder.decode(AppConstant.TOKEN).isExpired;
+        bool isExpired = SuraJwtDecoder.decode(AppConstant.TOKEN!).isExpired;
         if (isExpired) {
           await AuthService.refreshUserToken();
         }
-        httpOption.headers['Authorization'] = "bearer ${AppConstant.TOKEN}";
+        httpOption.headers!['Authorization'] = "bearer ${AppConstant.TOKEN}";
       }
       if (customToken != null) {
-        httpOption.headers['Authorization'] = "bearer $customToken";
+        httpOption.headers!['Authorization'] = "bearer $customToken";
       }
-      httpOption.headers.addAll(headers);
+      httpOption.headers!.addAll(headers);
       if (customDioClient != null) {
         response = await customDioClient.request(
           path,
@@ -60,7 +60,7 @@ class BaseApiService {
           data: data,
         );
       } else {
-        response = await dio.request(
+        response = await dio!.request(
           path,
           options: httpOption,
           queryParameters: query,
@@ -78,7 +78,7 @@ class BaseApiService {
       _onDioError(exception);
       return null;
     } on ServerResponseException catch (exception) {
-      _onServerResponseException(exception, response);
+      _onServerResponseException(exception, response!);
       return null;
     } catch (exception) {
       _onTypeError(exception);
@@ -98,25 +98,25 @@ void _onDioError(DioError exception) {
   if (exception.error is SocketException) {
     ///Socket exception mostly from internet connection or host
     throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
-  } else if (exception.type == DioErrorType.CONNECT_TIMEOUT) {
+  } else if (exception.type == DioErrorType.connectTimeout) {
     ///Connection timeout due to internet connection or server not responding
     throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
-  } else if (exception.type == DioErrorType.RESPONSE) {
+  } else if (exception.type == DioErrorType.response) {
     ///Error that range from 400-500
     String serverMessage;
-    if (exception.response.data is Map) {
+    if (exception.response!.data is Map) {
       serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
     } else {
       serverMessage = ErrorMessage.UNEXPECTED_ERROR;
     }
-    throw DioErrorException(serverMessage, code: exception.response.statusCode);
+    throw DioErrorException(serverMessage, code: exception.response!.statusCode);
   }
 }
 
 void _logDioError(DioError exception) {
-  String errorMessage = "Dio error :=> ${exception.request.path}";
+  String errorMessage = "Dio error :=> ${exception.requestOptions.path}";
   if (exception.response != null) {
-    errorMessage += ", Response: => ${exception.response.data.toString()}";
+    errorMessage += ", Response: => ${exception.response!.data.toString()}";
   } else {
     errorMessage += ", ${exception.toString()}";
   }
@@ -124,6 +124,6 @@ void _logDioError(DioError exception) {
 }
 
 void _onServerResponseException(dynamic exception, Response response) {
-  httpLog("Server error :=> ${response.request.path}:=> $exception");
+  httpLog("Server error :=> ${response.requestOptions.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }

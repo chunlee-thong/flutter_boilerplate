@@ -6,10 +6,10 @@ class AuthResponse {
     this.tokenExpireDate,
   });
 
-  String userId;
-  String token;
-  String refreshToken;
-  int tokenExpireDate;
+  String? userId;
+  String? token;
+  String? refreshToken;
+  int? tokenExpireDate;
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         userId: json["user_id"] == null ? null : json["user_id"],

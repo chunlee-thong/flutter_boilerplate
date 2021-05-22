@@ -5,14 +5,14 @@ import 'package:toast/toast.dart';
 import '../../widgets/dialog/custom_error_dialog.dart';
 
 class UIHelper {
-  static Future<T> showMessageDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showMessageDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
       builder: (context) => SuraSimpleDialog(content: message.toString()),
     );
   }
 
-  static Future<T> showErrorDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showErrorDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
       builder: (context) => CustomErrorDialog(
@@ -26,10 +26,10 @@ class UIHelper {
     Toast.show(message.toString(), context, duration: 3);
   }
 
-  static void showSnackBar(BuildContext context, dynamic message, [GlobalKey<ScaffoldState> scaffoldKey]) {
+  static void showSnackBar(BuildContext context, dynamic message, [GlobalKey<ScaffoldState>? scaffoldKey]) {
     if (scaffoldKey != null) {
-      scaffoldKey.currentState.hideCurrentSnackBar();
-      scaffoldKey.currentState.showSnackBar(
+      scaffoldKey.currentState!.hideCurrentSnackBar();
+      scaffoldKey.currentState!.showSnackBar(
         SnackBar(
           content: Text(message.toString()),
           margin: const EdgeInsets.all(8),
@@ -49,11 +49,11 @@ class UIHelper {
   }
 
   static Widget CustomAppBar({
-    @required String title,
+    required String title,
     double elevation = 2.0,
-    List<Widget> actions,
+    List<Widget>? actions,
     bool centerTitle = false,
-    Color backgroundColor,
+    Color? backgroundColor,
   }) {
     return AppBar(
       title: Text(title),

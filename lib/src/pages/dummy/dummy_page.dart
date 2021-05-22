@@ -6,33 +6,33 @@ import '../../api_service/index.dart';
 import '../../models/response/user/user_model.dart';
 
 class DummyPage extends StatefulWidget {
-  DummyPage({Key key}) : super(key: key);
+  DummyPage({Key? key}) : super(key: key);
   @override
   _DummyPageState createState() => _DummyPageState();
 }
 
 class _DummyPageState extends State<DummyPage> {
-  FutureManager<UserResponse> userController = FutureManager();
+  FutureManager<UserResponse?> userController = FutureManager();
   int currentPage = 1;
-  int totalPage = 10;
+  int? totalPage = 10;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
       currentPage = 1;
     }
     userController.asyncOperation(
-      () => userApiService.fetchUserList(
+      () => userApiService!.fetchUserList(
         count: 10,
         page: currentPage,
       ),
       onSuccess: (response) {
         if (userController.hasData) {
-          response.users = [...userController.data.users, ...response.users];
+          response!.users = [...userController.data!.users!, ...response.users!];
         }
-        if (response.users.isNotEmpty) {
+        if (response!.users!.isNotEmpty) {
           currentPage += 1;
         }
-        totalPage = response.pagination.totalPage;
+        totalPage = response.pagination!.totalPage;
         return response;
       },
       reloading: reload,
@@ -54,22 +54,22 @@ class _DummyPageState extends State<DummyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Fetch all users with pagination")),
-      body: FutureManagerBuilder<UserResponse>(
+      body: FutureManagerBuilder<UserResponse?>(
         futureManager: userController,
-        ready: (context, UserResponse data) {
+        ready: (context, UserResponse? data) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),
-            itemCount: data.users.length,
-            hasMoreData: currentPage <= totalPage,
+            itemCount: data!.users!.length,
+            hasMoreData: currentPage <= totalPage!,
             itemBuilder: (context, index) {
-              final user = data.users[index];
+              final user = data.users![index];
               return ListTile(
                 leading: CircleAvatar(
                   child: Icon(Icons.person),
                 ),
                 onTap: () {},
                 title: Text("${user.firstName} ${user.lastName}"),
-                subtitle: Text(user.email),
+                subtitle: Text(user.email!),
               );
             },
             onGetMoreData: fetchData,
@@ -77,19 +77,19 @@ class _DummyPageState extends State<DummyPage> {
           return RefreshIndicator(
             onRefresh: () => fetchData(true),
             child: SuraPaginatedList(
-              itemCount: data.users.length,
+              itemCount: data.users!.length,
               padding: EdgeInsets.zero,
               dataLoader: fetchData,
-              hasMoreData: currentPage <= totalPage,
+              hasMoreData: currentPage <= totalPage!,
               itemBuilder: (context, index) {
-                final user = data.users[index];
+                final user = data.users![index];
                 return ListTile(
                   leading: CircleAvatar(
                     child: Icon(Icons.person),
                   ),
                   onTap: () {},
                   title: Text("${user.firstName} ${user.lastName}"),
-                  subtitle: Text(user.email),
+                  subtitle: Text(user.email!),
                 );
               },
             ),

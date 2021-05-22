@@ -28,15 +28,15 @@ class AuthService {
   }
 
   static Future<void> refreshUserToken() async {
-    String refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
+    String? refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
     try {
-      Response response = await BaseHttpClient.dio.post("/", data: {"refresh_token": refreshToken});
+      Response response = await BaseHttpClient.dio!.post("/", data: {"refresh_token": refreshToken});
       //String newToken = response.....
       //await LocalStorage.save(key: TOKEN_KEY, value: newToken);
       //AppConstant.TOKEN = newToken;
     } on DioError catch (exception) {
-      if (exception.type == DioErrorType.RESPONSE) {
-        int code = exception.response.statusCode;
+      if (exception.type == DioErrorType.response) {
+        int? code = exception.response!.statusCode;
         if (code == 401) {
           throw SessionExpiredException();
         } else
@@ -50,7 +50,7 @@ class AuthService {
   }
 
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
-    void onLogout() async {
+    Future onLogout() async {
       await LocalStorage.clear();
       AppConstant.clean();
       UserProvider.getProvider(context).setLoginStatus(false);
@@ -58,7 +58,7 @@ class AuthService {
     }
 
     if (!showConfirmation) {
-      await onLogout();
+      await onLogout.call();
       return;
     }
 

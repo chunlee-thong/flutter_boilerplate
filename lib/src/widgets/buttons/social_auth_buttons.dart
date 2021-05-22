@@ -7,10 +7,10 @@ import '../../widgets/buttons/primary_button.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
-  final void Function(bool) onAuthStateChange;
+  final void Function(bool)? onAuthStateChange;
   const SocialAuthButtons({
-    Key key,
-    @required this.onLoginCompleted,
+    Key? key,
+    required this.onLoginCompleted,
     this.onAuthStateChange,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class SocialAuthButtons extends StatelessWidget {
         //Login to server
         //data.authResponse = await userApiService.......;
         //
-        onLoginCompleted?.call(data);
+        onLoginCompleted.call(data);
       },
       onDone: () {
         onAuthStateChange?.call(false);
@@ -36,13 +36,13 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData data = await SocialAuthService.loginWithGoogle();
+        SocialAuthData? data = await SocialAuthService.loginWithGoogle();
         if (data == null) return;
         onAuthStateChange?.call(true);
         //Login to server
         //data.authResponse = await userApiService.......;
         //
-        onLoginCompleted?.call(data);
+        onLoginCompleted.call(data);
       },
       onDone: () {
         onAuthStateChange?.call(false);
@@ -60,7 +60,7 @@ class SocialAuthButtons extends StatelessWidget {
         //Login to server
         //data.authResponse = await userApiService.......;
         //
-        onLoginCompleted?.call(data);
+        onLoginCompleted.call(data);
       },
       onDone: () {
         onAuthStateChange?.call(false);

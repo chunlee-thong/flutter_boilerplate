@@ -5,12 +5,12 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/style_decoration.dart';
 
 class CustomErrorDialog extends StatelessWidget {
-  final String message;
-  final String title;
+  final String? message;
+  final String? title;
   final Color color = Color(0xFFE57373);
   final double padding = 16.0;
   final RoundedRectangleBorder shape = SuraDecoration.roundRect();
-  CustomErrorDialog({Key key, this.message, this.title}) : super(key: key);
+  CustomErrorDialog({Key? key, this.message, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -37,10 +37,10 @@ class CustomErrorDialog extends StatelessWidget {
             size: 54,
           ),
           SpaceY(padding),
-          Text(title, style: kSubHeaderStyle),
+          Text(title!, style: kSubHeaderStyle),
           SpaceY(padding),
           Text(
-            message,
+            message!,
             style: kSubtitleStyle.normal,
             textAlign: TextAlign.center,
           ),

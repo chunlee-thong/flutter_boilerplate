@@ -11,7 +11,7 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "About"),
+      appBar: UIHelper.CustomAppBar(title: "About") as PreferredSizeWidget?,
     );
   }
 }

@@ -15,22 +15,22 @@ enum VerificationStep {
 }
 
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage({Key key}) : super(key: key);
+  ResetPasswordPage({Key? key}) : super(key: key);
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin {
-  TextEditingController emailTC, codeTC;
+  TextEditingController? emailTC, codeTC;
   VerificationStep step = VerificationStep.sendCode;
-  Timer codeTimer;
+  Timer? codeTimer;
   ValueNotifier timerNotifier = ValueNotifier<int>(60);
 
   Future<void> onSendVerificationCode() async {
     if (isFormValidated) {
       try {
         if (codeTimer?.isActive ?? false) throw "Can't resend code now";
-        String email = emailTC.text.trim();
+        String email = emailTC!.text.trim();
         await Future.delayed(Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
@@ -64,15 +64,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
 
   @override
   void dispose() {
-    codeTC.dispose();
-    emailTC.dispose();
+    codeTC!.dispose();
+    emailTC!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Form(
@@ -94,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
                 ),
               ] else ...[
                 Text("We have send a verification code to"),
-                Text(emailTC.text.trim(), style: kTitleStyle.red),
+                Text(emailTC!.text.trim(), style: kTitleStyle.red),
                 SpaceY(16),
                 PrimaryTextField(
                   hint: "Code",
@@ -104,7 +104,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
                 buildCountdownTimer(),
                 SpaceY(16),
                 PrimaryButton(
-                  onPressed: () => onVerifyCode(codeTC.text.trim()),
+                  onPressed: () => onVerifyCode(codeTC!.text.trim()),
                   child: Text("Verify"),
                 ),
                 buildFooter(),
@@ -118,7 +118,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
 
   Widget buildCountdownTimer() {
     return Center(
-      child: SuraNotifier(valueNotifier: timerNotifier, builder: (timer) => Text("$timer")),
+      child: SuraNotifier(valueNotifier: timerNotifier, builder: (dynamic timer) => Text("$timer")),
     );
   }
 
@@ -134,7 +134,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
             onPressed: onSendVerificationCode,
             child: Text(
               "Resend Code",
-              style: Theme.of(context).textTheme.button.primary,
+              style: Theme.of(context).textTheme.button!.primary,
             ),
           ),
         ],

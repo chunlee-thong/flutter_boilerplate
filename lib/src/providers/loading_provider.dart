@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 class LoadingProvider extends ChangeNotifier {
   bool isLoading = false;
-  static BuildContext _context;
+  static BuildContext? _context;
 
   ///Loading provider need a stable context, so it's best to initialize with
   ///the context that always active. eg. Builder context of MaterialApp
@@ -13,14 +13,14 @@ class LoadingProvider extends ChangeNotifier {
     _context = childContext;
   }
 
-  static void toggleLoading([bool value]) {
+  static void toggleLoading([bool? value]) {
     if (_context == null) {
       throw FlutterError("Please initialize a LoadingProvider with init() function");
     }
-    Provider.of<LoadingProvider>(_context, listen: false)._toggleLoading(value);
+    Provider.of<LoadingProvider>(_context!, listen: false)._toggleLoading(value);
   }
 
-  void _toggleLoading([bool value]) {
+  void _toggleLoading([bool? value]) {
     isLoading = value ?? !isLoading;
     notifyListeners();
   }

@@ -1,7 +1,7 @@
 abstract class BaseHttpException {}
 
 class DioErrorException extends BaseHttpException {
-  final int code;
+  final int? code;
   final String message;
 
   DioErrorException(this.message, {this.code});
@@ -23,12 +23,12 @@ class ServerErrorException extends BaseHttpException {
 }
 
 class ServerResponseException extends BaseHttpException {
-  final String message;
+  final String? message;
 
   ServerResponseException(this.message);
 
   @override
   String toString() {
-    return this.message;
+    return this.message!;
   }
 }

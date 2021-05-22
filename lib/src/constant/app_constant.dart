@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/others/language_model.dart';
 
 class AppConstant {
-  static String TOKEN;
-  static String USER_ID;
+  static String? TOKEN;
+  static String? USER_ID;
 
   static void clean() {
     TOKEN = null;

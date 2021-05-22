@@ -10,26 +10,26 @@ class PrimaryButton extends StatelessWidget {
   final Widget child;
   final bool fullWidth;
   final Color color;
-  final ShapeBorder shape;
+  final OutlinedBorder? shape;
   final EdgeInsets margin;
   const PrimaryButton({
-    Key key,
-    @required this.onPressed,
-    @required this.child,
+    Key? key,
+    required this.onPressed,
+    required this.child,
     this.fullWidth = true,
     this.color = AppColor.primary,
     this.shape,
-    this.margin,
+    this.margin = const EdgeInsets.symmetric(vertical: 16),
   }) : super(key: key);
 
   const PrimaryButton.accent({
-    Key key,
-    @required this.onPressed,
-    @required this.child,
+    Key? key,
+    required this.onPressed,
+    required this.child,
     this.fullWidth = true,
     this.color = AppColor.accent,
     this.shape,
-    this.margin,
+    this.margin = const EdgeInsets.symmetric(vertical: 16),
   }) : super(key: key);
 
   @override

@@ -7,8 +7,8 @@ import 'loading_widget.dart';
 class PageLoading extends StatefulWidget {
   final Widget child;
   const PageLoading({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : assert(child != null);
 
   @override

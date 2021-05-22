@@ -10,9 +10,9 @@ class UserProvider extends ChangeNotifier {
 
   bool get isLoggedIn => _isLoggedIn;
 
-  FutureManager<UserModel> userController = FutureManager<UserModel>();
+  FutureManager<UserModel?> userController = FutureManager<UserModel?>();
 
-  UserModel get userData => userController.data;
+  UserModel? get userData => userController.data;
 
   static UserProvider getProvider(BuildContext context, [bool listen = false]) => Provider.of<UserProvider>(
         context,
@@ -26,7 +26,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> getUserInfo() async {
     await userController.asyncOperation(
-      () => userApiService.fetchUserInfo(),
+      () => userApiService!.fetchUserInfo(),
       reloading: true,
     );
   }

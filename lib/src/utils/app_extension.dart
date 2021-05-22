@@ -18,13 +18,13 @@ extension FileExtensionMethod on FileSystemEntity {
 }
 
 extension StringUtil on String {
-  String obsecure([bool condition]) => condition == true ? this.replaceAll(RegExp(r'.'), "*") : this;
+  String obsecure([bool? condition]) => condition == true ? this.replaceAll(RegExp(r'.'), "*") : this;
   String obsecureLast([int length = 4]) => this.replaceAll(RegExp(".{$length}\$"), '*' * length);
 
   bool isEmail() {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = new RegExp(pattern as String);
     return regex.hasMatch(this);
   }
 }

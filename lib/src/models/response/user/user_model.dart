@@ -1,8 +1,8 @@
 import '../pagination.dart';
 
 class UserResponse {
-  List<UserModel> users;
-  Pagination pagination;
+  List<UserModel>? users;
+  Pagination? pagination;
 
   UserResponse({this.pagination, this.users});
 
@@ -21,11 +21,11 @@ class UserModel {
     this.avatar,
   });
 
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  String avatar;
+  int? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? avatar;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"] == null ? null : json["id"],
