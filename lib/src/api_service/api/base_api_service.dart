@@ -89,13 +89,12 @@ class BaseApiService {
 
 void _onTypeError(dynamic exception) {
   //Logic or syntax error on some condition
-  errorLog("Type Error :=> ${exception.toString()}"
-      "StackTrace: ${exception.stackTrace.toString()}");
+  errorLog("Type Error :=> ${exception.toString()}\nStackTrace:  ${exception.stackTrace.toString()}");
   throw ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
 void _onDioError(DioError exception) {
-  errorLog("Dio error :=> ${exception.request.path}, ${exception.toString()}");
+  _logDioError(exception);
   if (exception.error is SocketException) {
     ///Socket exception mostly from internet connection or host
     throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
@@ -104,19 +103,27 @@ void _onDioError(DioError exception) {
     throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
   } else if (exception.type == DioErrorType.RESPONSE) {
     ///Error that range from 400-500
-    int code = exception.response.statusCode;
-    if (code == 502) {
-      throw DioErrorException(ErrorMessage.UNEXPECTED_ERROR, code: code);
+    String serverMessage;
+    if (exception.response.data is Map) {
+      serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
+    } else {
+      serverMessage = ErrorMessage.UNEXPECTED_ERROR;
     }
-    String serverMessage = exception.response.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
-    throw DioErrorException(serverMessage);
-  } else {
-    //Rare condition
-    throw ServerErrorException(ErrorMessage.UNEXPECTED_ERROR);
+    throw DioErrorException(serverMessage, code: exception.response.statusCode);
   }
 }
 
+void _logDioError(DioError exception) {
+  String errorMessage = "Dio error :=> ${exception.request.path}";
+  if (exception.response != null) {
+    errorMessage += ", Response: => ${exception.response.data.toString()}";
+  } else {
+    errorMessage += ", ${exception.toString()}";
+  }
+  httpLog(errorMessage);
+}
+
 void _onServerResponseException(dynamic exception, Response response) {
-  errorLog("Server error :=> ${response.request.path}:=> $exception");
+  httpLog("Server error :=> ${response.request.path}:=> $exception");
   throw ServerResponseException(exception.toString());
 }

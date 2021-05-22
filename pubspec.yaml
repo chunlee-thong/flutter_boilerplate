@@ -35,6 +35,7 @@ dependencies:
   flutter_icons: ^1.1.0
   sura_flutter: ^0.1.5
   image_picker: ^0.6.7+22
+  sentry: ^4.0.6
 
   ##network
   dio_http_cache: ^0.2.11

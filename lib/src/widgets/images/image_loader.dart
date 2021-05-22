@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 
-import '../state_widgets/loading_widget.dart';
-
 class ImageLoader extends StatelessWidget {
   final String imageUrl;
   final BoxFit fit;
@@ -44,7 +42,7 @@ class ImageLoader extends StatelessWidget {
           },
           placeholder: (context, data) {
             if (loading != null) return loading;
-            return LoadingWidget();
+            return const Icon(Icons.image_rounded, size: 32);
           },
         ),
       ),

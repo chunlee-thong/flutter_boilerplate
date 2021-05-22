@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
 
 import '../../constant/app_config.dart';
 import '../../utils/logger.dart';
@@ -13,15 +12,11 @@ class BaseHttpClient {
   static void init() {
     final BaseOptions options = BaseOptions(
       baseUrl: AppConfig.BASE_URL,
-      connectTimeout: 25000,
-      receiveTimeout: 25000,
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
     );
 
-    dio = Dio(options)
-      ..interceptors.add(defaultInterceptor)
-      ..interceptors.add(
-        DioCacheManager(CacheConfig(baseUrl: AppConfig.BASE_URL)).interceptor,
-      );
+    dio = Dio(options)..interceptors.add(defaultInterceptor);
   }
 }
 

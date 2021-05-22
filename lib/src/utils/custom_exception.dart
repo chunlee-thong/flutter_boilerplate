@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sentry/sentry.dart';
 
 import '../services/auth_service.dart';
 import '../widgets/common/ui_helper.dart';
@@ -10,7 +11,7 @@ import '../widgets/common/ui_helper.dart';
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception
 ///Return null if there is an exception
-Future<T> exceptionWatcher<T>(
+Future<T> ExceptionWatcher<T>(
   ///context can be null
   BuildContext context,
   FutureOr<T> Function() function, {
@@ -21,7 +22,7 @@ Future<T> exceptionWatcher<T>(
     return await function();
   } on UserCancelException catch (_) {
     return null;
-  } catch (exception) {
+  } catch (exception, stackTrace) {
     String message = "";
     if (exception is SessionExpiredException) {
       if (context != null) {
@@ -40,7 +41,7 @@ Future<T> exceptionWatcher<T>(
     } else {
       message = exception.toString();
     }
-
+    Sentry.captureException(message, stackTrace: stackTrace);
     if (context != null) {
       UIHelper.showErrorDialog(context, message);
     }

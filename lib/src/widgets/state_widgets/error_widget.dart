@@ -14,9 +14,9 @@ class OnErrorWidget extends StatelessWidget {
   const OnErrorWidget({
     Key key,
     @required this.message,
-    this.verticalMargin = 0.0,
     this.onRefresh,
-    this.hasAppBar,
+    this.verticalMargin = 0.0,
+    this.hasAppBar = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

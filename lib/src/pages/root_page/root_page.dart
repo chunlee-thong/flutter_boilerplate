@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.locale;
     return ChangeNotifierProvider(
       create: (_) => BottomNavigationProvider(widget.startPageIndex),
       child: Consumer<BottomNavigationProvider>(
