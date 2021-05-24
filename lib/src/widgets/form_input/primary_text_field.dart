@@ -79,9 +79,9 @@ class PrimaryTextField extends StatelessWidget {
             onTap: onTap,
             validator: isRequired
                 ? (value) {
-                    if (validator != null) return validator!(value);
+                    if (validator != null) return validator?.call(value);
                     return FormValidator.validateField(
-                      value!,
+                      value,
                       field: label ?? hint,
                       length: lengthValidator,
                     );

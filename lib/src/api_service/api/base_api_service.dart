@@ -10,7 +10,7 @@ import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
 class BaseApiService {
-  Dio? dio;
+  late Dio dio;
 
   BaseApiService({Dio? dio}) {
     if (dio == null) {
@@ -59,7 +59,7 @@ class BaseApiService {
           data: data,
         );
       } else {
-        response = await dio!.request(
+        response = await dio.request(
           path,
           options: httpOption,
           queryParameters: query,
@@ -68,12 +68,12 @@ class BaseApiService {
       }
 
       ///This condition may be depend on Response and your API
-      return onSuccess(response);
-      // if (response.data['status'] == true) {
-      //  return onSuccess(response);
-      // } else {
-      //   throw ServerResponseException(response.data['message']);
-      // }
+      //return onSuccess(response);
+      if (response.data['status'] == true) {
+        return onSuccess(response);
+      } else {
+        throw ServerResponseException(response.data['message']);
+      }
     } on DioError catch (exception) {
       throw _onDioError(exception);
     } on ServerResponseException catch (exception) {
@@ -116,7 +116,7 @@ void _logDioError(DioError exception) {
   if (exception.response != null) {
     errorMessage += ", Response: => ${exception.response!.data.toString()}";
   } else {
-    errorMessage += ", ${exception.toString()}";
+    errorMessage += ", ${exception.message}";
   }
   httpLog(errorMessage);
 }

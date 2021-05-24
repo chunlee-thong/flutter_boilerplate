@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/api_service/client/http_client.dart';
-import 'package:flutter_boiler_plate/src/utils/custom_exception.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../api_service/client/http_client.dart';
 import '../constant/app_constant.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
+import '../utils/custom_exception.dart';
 
 class AuthService {
   //
@@ -30,7 +30,7 @@ class AuthService {
   static Future<void> refreshUserToken() async {
     String? refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
     try {
-      Response response = await BaseHttpClient.dio!.post("/", data: {"refresh_token": refreshToken});
+      Response response = await BaseHttpClient.dio.post("/", data: {"refresh_token": refreshToken});
       //String newToken = response.....
       //await LocalStorage.save(key: TOKEN_KEY, value: newToken);
       //AppConstant.TOKEN = newToken;

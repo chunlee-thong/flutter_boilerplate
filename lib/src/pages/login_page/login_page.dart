@@ -22,8 +22,8 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
   TextEditingController? passwordTC;
 
   void onLogin() async {
-    if (formKey.currentState!.validate()) {
-      ExceptionWatcher(context, () async {
+    if (isFormValidated) {
+      await ExceptionWatcher(context, () async {
         AuthResponse loginResponse = await userApiService.loginUser(
           email: emailTC!.text.trim(),
           password: passwordTC!.text.trim(),

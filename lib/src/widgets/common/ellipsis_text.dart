@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EllipsisText extends StatelessWidget {
-  final String text;
+  final String? text;
   final TextStyle style;
   final int maxLines;
   final TextAlign? textAlign;
@@ -17,7 +17,7 @@ class EllipsisText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text ?? "",
       style: style.copyWith(height: 1.2),
       maxLines: maxLines,
       textAlign: textAlign ?? TextAlign.start,

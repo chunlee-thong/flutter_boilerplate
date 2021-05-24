@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/widgets/common/pull_refresh_listview.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api_service/index.dart';
 import '../../models/response/user/user_model.dart';
+import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {
   DummyPage({Key? key}) : super(key: key);

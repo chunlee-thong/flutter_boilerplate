@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'src/api_service/client/http_client.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -24,6 +25,7 @@ class _MyAppState extends State<MyApp> {
   List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
   @override
   void initState() {
+    BaseHttpClient.init();
     super.initState();
   }
 

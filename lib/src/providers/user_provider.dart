@@ -10,7 +10,7 @@ class UserProvider extends ChangeNotifier {
 
   bool get isLoggedIn => _isLoggedIn;
 
-  FutureManager<UserModel?> userController = FutureManager<UserModel?>();
+  FutureManager<UserModel> userController = FutureManager<UserModel>();
 
   UserModel? get userData => userController.data;
 

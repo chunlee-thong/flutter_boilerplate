@@ -1,16 +1,16 @@
-import 'package:flutter_boiler_plate/src/utils/app_extension.dart';
+import 'app_extension.dart';
 
 class FormValidator {
-  static String? validateField(String value, {String? field, int? length}) {
-    if (value.isEmpty) {
+  static String? validateField(String? value, {String? field, int? length}) {
+    if (value == null || value.isEmpty) {
       return "Please input your $field";
     }
     if (length != null && value.length < length) return "$field must be $length characters long";
     return null;
   }
 
-  static String? validateEmail(String value) {
-    if (value.isEmpty) {
+  static String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
       return "Please input your email";
     }
     if (!value.isEmail()) {

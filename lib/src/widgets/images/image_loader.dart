@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
+
+import '../../utils/app_utils.dart';
 
 class ImageLoader extends StatelessWidget {
   final String imageUrl;
@@ -30,7 +31,7 @@ class ImageLoader extends StatelessWidget {
       child: ClipRRect(
         borderRadius: radius,
         child: CachedNetworkImage(
-          imageUrl: AppUtils.getFileUrl(imageUrl)!,
+          imageUrl: AppUtils.getFileUrl(imageUrl),
           width: width,
           height: height,
           fit: fit,

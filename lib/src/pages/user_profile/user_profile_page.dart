@@ -24,8 +24,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
             AuthService.logOutUser(context);
           },
         )
-      ]) as PreferredSizeWidget?,
-      body: FutureManagerBuilder<UserModel?>(
+      ]),
+      body: FutureManagerBuilder<UserModel>(
         futureManager: UserProvider.getProvider(context).userController,
         error: (error) => OnErrorWidget(
           message: error,
@@ -34,7 +34,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ready: (context, user) {
           return Column(
             children: [
-              ListTile(title: Text(user!.firstName!), subtitle: Text("First name")),
+              ListTile(title: Text(user.firstName!), subtitle: Text("First name")),
               ListTile(title: Text(user.lastName!), subtitle: Text("Last name")),
               ListTile(title: Text(user.email!), subtitle: Text("Email")),
             ],

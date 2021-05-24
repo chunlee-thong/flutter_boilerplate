@@ -7,15 +7,14 @@ import '../../utils/logger.dart';
 import '../../utils/object_util.dart';
 
 class BaseHttpClient {
-  static Dio? dio;
+  static late Dio dio;
 
   static void init() {
     final BaseOptions options = BaseOptions(
       baseUrl: AppConfig.BASE_URL,
-      connectTimeout: 5000,
-      receiveTimeout: 5000,
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
     );
-
     dio = Dio(options)..interceptors.add(defaultInterceptor);
   }
 }
@@ -35,7 +34,9 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     //prettyPrintJson(response.data);
     responseInterceptorHandler.next(response);
   },
-  onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {},
+  onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
+    errorInterceptorHandler.reject(error);
+  },
 );
 
 void prettyPrintJson(dynamic input) {

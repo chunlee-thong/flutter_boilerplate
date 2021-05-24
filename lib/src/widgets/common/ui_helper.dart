@@ -37,7 +37,7 @@ class UIHelper {
     );
   }
 
-  static Widget CustomAppBar({
+  static AppBar CustomAppBar({
     required String title,
     double elevation = 2.0,
     List<Widget>? actions,
