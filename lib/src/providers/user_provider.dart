@@ -26,7 +26,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> getUserInfo() async {
     await userController.asyncOperation(
-      () => userApiService!.fetchUserInfo(),
+      () => userApiService.fetchUserInfo(),
       reloading: true,
     );
   }

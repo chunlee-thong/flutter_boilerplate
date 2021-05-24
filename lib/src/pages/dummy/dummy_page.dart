@@ -12,7 +12,7 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  FutureManager<UserResponse?> userController = FutureManager();
+  FutureManager<UserResponse> userController = FutureManager();
   int currentPage = 1;
   int? totalPage = 10;
 
@@ -21,15 +21,15 @@ class _DummyPageState extends State<DummyPage> {
       currentPage = 1;
     }
     userController.asyncOperation(
-      () => userApiService!.fetchUserList(
+      () => userApiService.fetchUserList(
         count: 10,
         page: currentPage,
       ),
       onSuccess: (response) {
         if (userController.hasData) {
-          response!.users = [...userController.data!.users!, ...response.users!];
+          response.users = [...userController.data!.users!, ...response.users!];
         }
-        if (response!.users!.isNotEmpty) {
+        if (response.users!.isNotEmpty) {
           currentPage += 1;
         }
         totalPage = response.pagination!.totalPage;
@@ -54,12 +54,12 @@ class _DummyPageState extends State<DummyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Fetch all users with pagination")),
-      body: FutureManagerBuilder<UserResponse?>(
+      body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
-        ready: (context, UserResponse? data) {
+        ready: (context, UserResponse data) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),
-            itemCount: data!.users!.length,
+            itemCount: data.users!.length,
             hasMoreData: currentPage <= totalPage!,
             itemBuilder: (context, index) {
               final user = data.users![index];
@@ -73,26 +73,6 @@ class _DummyPageState extends State<DummyPage> {
               );
             },
             onGetMoreData: fetchData,
-          );
-          return RefreshIndicator(
-            onRefresh: () => fetchData(true),
-            child: SuraPaginatedList(
-              itemCount: data.users!.length,
-              padding: EdgeInsets.zero,
-              dataLoader: fetchData,
-              hasMoreData: currentPage <= totalPage!,
-              itemBuilder: (context, index) {
-                final user = data.users![index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    child: Icon(Icons.person),
-                  ),
-                  onTap: () {},
-                  title: Text("${user.firstName} ${user.lastName}"),
-                  subtitle: Text(user.email!),
-                );
-              },
-            ),
           );
         },
       ),

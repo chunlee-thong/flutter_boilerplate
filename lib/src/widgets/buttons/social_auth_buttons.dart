@@ -18,7 +18,7 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData data = await SocialAuthService.loginWithFacebook();
+        SocialAuthData? data = await SocialAuthService.loginWithFacebook();
         if (data == null) return;
         onAuthStateChange?.call(true);
         //Login to server
@@ -54,7 +54,7 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData data = await SocialAuthService.loginWithApple();
+        SocialAuthData? data = await SocialAuthService.loginWithApple();
         if (data == null) return;
         onAuthStateChange?.call(true);
         //Login to server

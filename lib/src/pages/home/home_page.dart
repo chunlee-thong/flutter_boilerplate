@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/widgets/images/image_loader.dart';
 
 import '../../constant/app_config.dart';
 import '../../providers/theme_provider.dart';

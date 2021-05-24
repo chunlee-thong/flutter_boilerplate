@@ -6,7 +6,7 @@ class SocialAuthService {
   //static final FacebookAuth facebookAuth = FacebookAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  static Future<SocialAuthData> loginWithFacebook() async {
+  static Future<SocialAuthData?> loginWithFacebook() async {
     try {
       //Login with facebook
       return SocialAuthData(
@@ -33,7 +33,7 @@ class SocialAuthService {
     }
   }
 
-  static Future<SocialAuthData> loginWithApple() async {
+  static Future<SocialAuthData?> loginWithApple() async {
     try {
       //Login with Apple
       return SocialAuthData(
@@ -47,6 +47,6 @@ class SocialAuthService {
 
   static Future<void> signOutAll() async {
     //await _facebookAuth.logOut();
-    if (_googleSignIn != null) await _googleSignIn.signOut();
+    await _googleSignIn.signOut();
   }
 }

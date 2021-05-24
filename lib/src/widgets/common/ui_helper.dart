@@ -26,26 +26,15 @@ class UIHelper {
     Toast.show(message.toString(), context, duration: 3);
   }
 
-  static void showSnackBar(BuildContext context, dynamic message, [GlobalKey<ScaffoldState>? scaffoldKey]) {
-    if (scaffoldKey != null) {
-      scaffoldKey.currentState!.hideCurrentSnackBar();
-      scaffoldKey.currentState!.showSnackBar(
-        SnackBar(
-          content: Text(message.toString()),
-          margin: const EdgeInsets.all(8),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    } else {
-      Scaffold.of(context).hideCurrentSnackBar();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message.toString()),
-          margin: const EdgeInsets.all(8),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
+  static void showSnackBar(BuildContext context, dynamic message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message.toString()),
+        margin: const EdgeInsets.all(8),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   static Widget CustomAppBar({

@@ -13,7 +13,7 @@ import '../widgets/common/ui_helper.dart';
 ///Return null if there is an exception
 Future<T?> ExceptionWatcher<T>(
   ///context can be null
-  BuildContext context,
+  BuildContext? context,
   FutureOr<T> Function() function, {
   VoidCallback? onDone,
   void Function(dynamic)? onError,

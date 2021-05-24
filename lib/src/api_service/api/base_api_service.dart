@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
@@ -27,15 +26,15 @@ class BaseApiService {
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
-  Future<T?> onRequest<T>({
+  Future<T> onRequest<T>({
     required String path,
-    required T Function(Response?) onSuccess,
+    required T Function(Response) onSuccess,
     String method = HttpMethod.GET,
     Map<String, dynamic> query = const {},
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
-    String? customToken,
     bool requiredToken = true,
+    String? customToken,
     Dio? customDioClient,
   }) async {
     Response? response;
@@ -69,38 +68,36 @@ class BaseApiService {
       }
 
       ///This condition may be depend on Response and your API
-      if (response.data['status'] == true) {
-        return onSuccess(response);
-      } else {
-        throw ServerResponseException(response.data['message']);
-      }
+      return onSuccess(response);
+      // if (response.data['status'] == true) {
+      //  return onSuccess(response);
+      // } else {
+      //   throw ServerResponseException(response.data['message']);
+      // }
     } on DioError catch (exception) {
-      _onDioError(exception);
-      return null;
+      throw _onDioError(exception);
     } on ServerResponseException catch (exception) {
-      _onServerResponseException(exception, response!);
-      return null;
+      throw _onServerResponseException(exception, response!);
     } catch (exception) {
-      _onTypeError(exception);
-      return null;
+      throw _onTypeError(exception);
     }
   }
 }
 
-void _onTypeError(dynamic exception) {
+String _onTypeError(dynamic exception) {
   //Logic or syntax error on some condition
   errorLog("Type Error :=> ${exception.toString()}\nStackTrace:  ${exception.stackTrace.toString()}");
-  throw ErrorMessage.UNEXPECTED_TYPE_ERROR;
+  return ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
-void _onDioError(DioError exception) {
+DioErrorException _onDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
     ///Socket exception mostly from internet connection or host
-    throw DioErrorException(ErrorMessage.CONNECTION_ERROR);
+    return DioErrorException(ErrorMessage.CONNECTION_ERROR);
   } else if (exception.type == DioErrorType.connectTimeout) {
     ///Connection timeout due to internet connection or server not responding
-    throw DioErrorException(ErrorMessage.TIMEOUT_ERROR);
+    return DioErrorException(ErrorMessage.TIMEOUT_ERROR);
   } else if (exception.type == DioErrorType.response) {
     ///Error that range from 400-500
     String serverMessage;
@@ -109,8 +106,9 @@ void _onDioError(DioError exception) {
     } else {
       serverMessage = ErrorMessage.UNEXPECTED_ERROR;
     }
-    throw DioErrorException(serverMessage, code: exception.response!.statusCode);
+    return DioErrorException(serverMessage, code: exception.response!.statusCode);
   }
+  throw DioErrorException(ErrorMessage.UNEXPECTED_ERROR);
 }
 
 void _logDioError(DioError exception) {
@@ -123,7 +121,7 @@ void _logDioError(DioError exception) {
   httpLog(errorMessage);
 }
 
-void _onServerResponseException(dynamic exception, Response response) {
+ServerResponseException _onServerResponseException(dynamic exception, Response response) {
   httpLog("Server error :=> ${response.requestOptions.path}:=> $exception");
-  throw ServerResponseException(exception.toString());
+  return ServerResponseException(exception.toString());
 }

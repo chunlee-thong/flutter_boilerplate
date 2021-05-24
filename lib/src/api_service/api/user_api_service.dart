@@ -8,7 +8,7 @@ class UserApiService extends BaseApiService {
   //If your path "/" at the end, it means that there's further route
   static const String _GET_USER_INFO = "/api/user/info/";
 
-  Future<AuthResponse?> loginUser({String? email, String? password}) async {
+  Future<AuthResponse> loginUser({String? email, String? password}) async {
     return onRequest(
       path: _LOGIN_USER,
       method: HttpMethod.POST,
@@ -17,12 +17,12 @@ class UserApiService extends BaseApiService {
         "password": password,
       },
       onSuccess: (response) {
-        return AuthResponse.fromJson(response!.data[DATA_FIELD]);
+        return AuthResponse.fromJson(response.data[DATA_FIELD]);
       },
     );
   }
 
-  Future<UserResponse?> fetchUserList({int page = 1, int count = 99999}) async {
+  Future<UserResponse> fetchUserList({int page = 1, int count = 99999}) async {
     return onRequest(
       path: "/api/user/all",
       query: {
@@ -30,17 +30,17 @@ class UserApiService extends BaseApiService {
         "count": count,
       },
       onSuccess: (response) {
-        return UserResponse.fromJson(response!.data);
+        return UserResponse.fromJson(response.data);
       },
     );
   }
 
-  Future<UserModel?> fetchUserInfo({String? email, String? password}) async {
+  Future<UserModel> fetchUserInfo({String? email, String? password}) async {
     String userId = AppConstant.USER_ID!;
     return onRequest<UserModel>(
       path: _GET_USER_INFO + userId,
       onSuccess: (response) {
-        return UserModel.fromJson(response!.data[DATA_FIELD]);
+        return UserModel.fromJson(response.data[DATA_FIELD]);
       },
     );
   }

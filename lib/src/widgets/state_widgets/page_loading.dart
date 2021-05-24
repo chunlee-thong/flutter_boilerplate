@@ -9,7 +9,7 @@ class PageLoading extends StatefulWidget {
   const PageLoading({
     Key? key,
     required this.child,
-  }) : assert(child != null);
+  });
 
   @override
   _PageLoadingState createState() => _PageLoadingState();
