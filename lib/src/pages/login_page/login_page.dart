@@ -24,11 +24,11 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
   void onLogin() async {
     if (formKey.currentState!.validate()) {
       ExceptionWatcher(context, () async {
-        AuthResponse? loginResponse = await userApiService!.loginUser(
+        AuthResponse loginResponse = await userApiService.loginUser(
           email: emailTC!.text.trim(),
           password: passwordTC!.text.trim(),
         );
-        await AuthService.onLoginSuccess(context, loginResponse!);
+        await AuthService.onLoginSuccess(context, loginResponse);
         PageNavigator.pushReplacement(context, RootPage());
       });
     }
