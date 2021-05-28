@@ -65,11 +65,11 @@ _this project hasn't migrate to null-safety yet._
 
 ## Project folder structure
 
-### lib
+### lib/src
 
-#### api_service
+#### api
 
-- create your api service class which extends BaseApiService here
+- create your repository class which extends BaseApiRepositry here
 
 #### constant
 
@@ -84,12 +84,18 @@ _this project hasn't migrate to null-safety yet._
 
 #### page_template
 
-- a template for commonly use screen or page functioanlity in an app, example: change password page, setting page....
+- a template for commonly used screen or page functioanlity in an app, example: change password page, setting page....
 
-#### pages
+#### ui
+
+##### pages
 
 - Each page has their own folder
 - Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
+
+##### widgets
+
+- global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
 
 #### providers
 
@@ -102,10 +108,6 @@ _this project hasn't migrate to null-safety yet._
 #### utils
 
 - utility function and class
-
-#### widgets
-
-- global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
 
 ### assets
 
