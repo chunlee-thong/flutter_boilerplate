@@ -31,7 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.3
   flutter_launcher_icons: ^0.9.0
   cached_network_image: ^3.0.0
-  sura_flutter: ^0.2.2
+  sura_flutter: ^0.2.4
   image_picker: ^0.7.5+2
   sentry: ^5.0.0
 

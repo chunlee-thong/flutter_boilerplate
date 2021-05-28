@@ -14,8 +14,7 @@ class BaseApiService {
 
   BaseApiService({Dio? dio}) {
     if (dio == null) {
-      if (BaseHttpClient.dio == null) BaseHttpClient.init();
-      this.dio = BaseHttpClient.dio;
+      this.dio = dio ?? BaseHttpClient.dio;
     } else {
       this.dio = dio;
     }
@@ -30,7 +29,7 @@ class BaseApiService {
     required String path,
     required T Function(Response) onSuccess,
     String method = HttpMethod.GET,
-    Map<String, dynamic> query = const {},
+    Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
     bool requiredToken = true,

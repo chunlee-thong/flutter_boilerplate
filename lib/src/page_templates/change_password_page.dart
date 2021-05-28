@@ -16,15 +16,15 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMixin {
-  TextEditingController? oldPasswordTC;
-  TextEditingController? newPasswordTC;
-  TextEditingController? confirmNewPasswordTC;
+  late TextEditingController oldPasswordTC;
+  late TextEditingController newPasswordTC;
+  late TextEditingController confirmNewPasswordTC;
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        String oldPassword = oldPasswordTC!.text.trim();
-        String newPassword = newPasswordTC!.text.trim();
+        String oldPassword = oldPasswordTC.text.trim();
+        String newPassword = newPasswordTC.text.trim();
 
         bool result = await Future.value(true);
       } catch (e) {
@@ -43,16 +43,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
 
   @override
   void dispose() {
-    oldPasswordTC!.dispose();
-    newPasswordTC!.dispose();
-    confirmNewPasswordTC!.dispose();
+    oldPasswordTC.dispose();
+    newPasswordTC.dispose();
+    confirmNewPasswordTC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
+      appBar: UIHelper.CustomAppBar(title: ""),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(
@@ -87,7 +87,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
             controller: confirmNewPasswordTC,
             hint: "Confirm new password",
             obsecure: true,
-            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC!.text),
+            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
           ),
           PrimaryButton(
             onPressed: onSubmit,

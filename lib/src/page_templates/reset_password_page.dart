@@ -21,7 +21,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin {
-  TextEditingController? emailTC, codeTC;
+  late TextEditingController emailTC, codeTC;
   VerificationStep step = VerificationStep.sendCode;
   Timer? codeTimer;
   ValueNotifier timerNotifier = ValueNotifier<int>(60);
@@ -30,7 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
     if (isFormValidated) {
       try {
         if (codeTimer?.isActive ?? false) throw "Can't resend code now";
-        String email = emailTC!.text.trim();
+        String email = emailTC.text.trim();
         await Future.delayed(Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
@@ -64,15 +64,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
 
   @override
   void dispose() {
-    codeTC!.dispose();
-    emailTC!.dispose();
+    codeTC.dispose();
+    emailTC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
+      appBar: UIHelper.CustomAppBar(title: ""),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Form(
@@ -94,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
                 ),
               ] else ...[
                 Text("We have send a verification code to"),
-                Text(emailTC!.text.trim(), style: kTitleStyle.red),
+                Text(emailTC.text.trim(), style: kTitleStyle.red),
                 SpaceY(16),
                 PrimaryTextField(
                   hint: "Code",
@@ -104,7 +104,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
                 buildCountdownTimer(),
                 SpaceY(16),
                 PrimaryButton(
-                  onPressed: () => onVerifyCode(codeTC!.text.trim()),
+                  onPressed: () => onVerifyCode(codeTC.text.trim()),
                   child: Text("Verify"),
                 ),
                 buildFooter(),

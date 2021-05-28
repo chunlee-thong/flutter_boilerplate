@@ -15,9 +15,9 @@ class UpdateUserInfoPage extends StatefulWidget {
 }
 
 class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
-  TextEditingController? firstNameTC;
-  TextEditingController? lastNameTC;
-  TextEditingController? dobTC;
+  late TextEditingController firstNameTC;
+  late TextEditingController lastNameTC;
+  late TextEditingController dobTC;
   late TextEditingController countryTC;
 
   String? gender;
@@ -27,8 +27,8 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        String firstname = firstNameTC!.text.trim();
-        String lastname = lastNameTC!.text.trim();
+        String firstname = firstNameTC.text.trim();
+        String lastname = lastNameTC.text.trim();
         String country = countryTC.text.trim();
 
         bool result = await Future.value(true);
@@ -47,7 +47,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
     );
     if (pickedDate != null) {
       selectedDOB = pickedDate;
-      dobTC!.text = selectedDOB.formatDate();
+      dobTC.text = selectedDOB.formatDate();
     }
   }
 
@@ -68,9 +68,9 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
 
   @override
   void dispose() {
-    firstNameTC!.dispose();
-    lastNameTC!.dispose();
-    dobTC!.dispose();
+    firstNameTC.dispose();
+    lastNameTC.dispose();
+    dobTC.dispose();
     countryTC.dispose();
     super.dispose();
   }
@@ -78,7 +78,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "") as PreferredSizeWidget?,
+      appBar: UIHelper.CustomAppBar(title: ""),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(
