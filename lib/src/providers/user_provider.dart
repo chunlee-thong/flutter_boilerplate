@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/api/index.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../api_service/index.dart';
 import '../models/response/user/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
@@ -26,7 +26,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> getUserInfo() async {
     await userController.asyncOperation(
-      () => userApiService.fetchUserInfo(),
+      () => userRepository.fetchUserInfo(),
       reloading: true,
     );
   }

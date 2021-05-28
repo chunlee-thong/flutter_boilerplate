@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../api_service/client/http_client.dart';
+import '../api/client/http_client.dart';
 import '../constant/app_constant.dart';
 import '../models/response/user/auth_response.dart';
-import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
+import '../ui/pages/login_page/login_page.dart';
 import '../utils/custom_exception.dart';
 
 class AuthService {

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:sentry/sentry.dart';
 
 import '../services/auth_service.dart';
-import '../widgets/common/ui_helper.dart';
+import '../ui/widgets/common/ui_helper.dart';
 
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception

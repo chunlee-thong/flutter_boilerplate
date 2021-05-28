@@ -3,10 +3,10 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
 import '../constant/style_decoration.dart';
+import '../ui/widgets/buttons/primary_button.dart';
+import '../ui/widgets/common/ui_helper.dart';
+import '../ui/widgets/form_input/primary_text_field.dart';
 import '../utils/form_validator.dart';
-import '../widgets/buttons/primary_button.dart';
-import '../widgets/common/ui_helper.dart';
-import '../widgets/form_input/primary_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   ChangePasswordPage({Key? key}) : super(key: key);
