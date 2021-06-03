@@ -5,7 +5,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../../constant/app_theme_color.dart';
 import '../../../models/response/user/social_auth_data.dart';
 import '../../../services/social_auth_service.dart';
-import '../../../utils/custom_exception.dart';
+import '../../../utils/exception_handler.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
@@ -20,8 +20,7 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData? data = await SocialAuthService.loginWithFacebook();
-        if (data == null) return;
+        SocialAuthData data = await SocialAuthService.loginWithFacebook();
         onAuthStateChange?.call(true);
         //Login to server
         //data.authResponse = await userApiService.......;
@@ -38,8 +37,8 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData? data = await SocialAuthService.loginWithGoogle();
-        if (data == null) return;
+        SocialAuthData data = await SocialAuthService.loginWithGoogle();
+
         onAuthStateChange?.call(true);
         //Login to server
         //data.authResponse = await userApiService.......;
@@ -56,8 +55,8 @@ class SocialAuthButtons extends StatelessWidget {
     await ExceptionWatcher(
       context,
       () async {
-        SocialAuthData? data = await SocialAuthService.loginWithApple();
-        if (data == null) return;
+        SocialAuthData data = await SocialAuthService.loginWithApple();
+
         onAuthStateChange?.call(true);
         //Login to server
         //data.authResponse = await userApiService.......;

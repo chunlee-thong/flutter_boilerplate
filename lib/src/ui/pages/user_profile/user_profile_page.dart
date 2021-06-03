@@ -5,8 +5,8 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../../models/response/user/user_model.dart';
 import '../../../providers/user_provider.dart';
 import '../../../services/auth_service.dart';
-import '../../widgets/common/ui_helper.dart';
 import '../../widgets/state_widgets/error_widget.dart';
+import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:toast/toast.dart';
 
-import '../../widgets/dialog/custom_error_dialog.dart';
+import 'dialog/custom_error_dialog.dart';
 
 class UIHelper {
   static Future<T?> showMessageDialog<T>(BuildContext context, dynamic message) async {

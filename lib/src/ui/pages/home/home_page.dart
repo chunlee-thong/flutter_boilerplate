@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../constant/app_config.dart';
 import '../../../providers/theme_provider.dart';
 import '../../widgets/buttons/primary_button.dart';
-import '../../widgets/common/ui_helper.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
+import '../../widgets/ui_helper.dart';
 
 class HomePage extends StatefulWidget {
   @override

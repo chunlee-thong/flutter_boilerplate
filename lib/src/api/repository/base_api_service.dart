@@ -10,7 +10,7 @@ import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
 class BaseApiService {
-  late Dio dio;
+  late final Dio dio;
 
   BaseApiService({Dio? dio}) {
     if (dio == null) {

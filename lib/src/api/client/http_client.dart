@@ -7,8 +7,9 @@ import '../../utils/logger.dart';
 import '../../utils/object_util.dart';
 
 class BaseHttpClient {
-  static late Dio dio;
+  static late final Dio dio;
 
+  ///
   static void init() {
     final BaseOptions options = BaseOptions(
       baseUrl: AppConfig.BASE_URL,

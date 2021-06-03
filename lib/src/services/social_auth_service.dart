@@ -1,12 +1,13 @@
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/response/user/social_auth_data.dart';
+import '../utils/custom_exception.dart';
 
 class SocialAuthService {
   //static final FacebookAuth facebookAuth = FacebookAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  static Future<SocialAuthData?> loginWithFacebook() async {
+  static Future<SocialAuthData> loginWithFacebook() async {
     try {
       //Login with facebook
       return SocialAuthData(
@@ -18,11 +19,11 @@ class SocialAuthService {
     }
   }
 
-  static Future<SocialAuthData?> loginWithGoogle() async {
+  static Future<SocialAuthData> loginWithGoogle() async {
     try {
       await _googleSignIn.signOut();
       GoogleSignInAccount? account = await _googleSignIn.signIn();
-      if (account == null) return null;
+      if (account == null) throw UserCancelException();
       GoogleSignInAuthentication authentication = await account.authentication;
       return SocialAuthData(
         accessToken: authentication.accessToken,
@@ -33,7 +34,7 @@ class SocialAuthService {
     }
   }
 
-  static Future<SocialAuthData?> loginWithApple() async {
+  static Future<SocialAuthData> loginWithApple() async {
     try {
       //Login with Apple
       return SocialAuthData(

@@ -6,7 +6,7 @@ import '../../../api/index.dart';
 import '../../../constant/locale_keys.dart';
 import '../../../models/response/user/auth_response.dart';
 import '../../../services/auth_service.dart';
-import '../../../utils/custom_exception.dart';
+import '../../../utils/exception_handler.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';

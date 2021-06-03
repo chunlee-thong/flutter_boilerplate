@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/common/ui_helper.dart';
+import '../../widgets/ui_helper.dart';
 
 class AboutPage extends StatefulWidget {
   @override
