@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_config.dart';
 import '../../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
+import '../ui_helper.dart';
 
 class OnErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
   final Future<void> Function()? onRefresh;
-  final bool hasAppBar;
+  final bool? hasAppBar;
   const OnErrorWidget({
     Key? key,
     required this.message,
-    this.onRefresh,
-    this.verticalMargin = 0.0,
     this.hasAppBar = false,
+    this.verticalMargin = 0.0,
+    this.onRefresh,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (hasAppBar) {
+    if (hasAppBar!) {
       return Scaffold(
-        appBar: AppBar(title: Text(AppConfig.APP_NAME)),
+        appBar: UIHelper.CustomAppBar(title: ""),
         body: buildErrorWidget(context),
       );
     }

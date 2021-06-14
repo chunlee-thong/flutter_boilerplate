@@ -32,7 +32,7 @@ class _PageLoadingState extends State<PageLoading> {
           builder: (context, provider, child) {
             if (provider.isLoading)
               return Container(
-                child: LoadingWidget(),
+                child: const LoadingWidget(),
                 color: color,
               );
             return SizedBox();

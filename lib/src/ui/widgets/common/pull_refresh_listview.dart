@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../../constant/app_dimension.dart';
 import '../state_widgets/no_data_widget.dart';
 
 class PullRefreshListViewBuilder extends StatelessWidget {
   final Future<void> Function() onRefresh;
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
-  final EdgeInsets padding;
-  final Future<void> Function()? onGetMoreData;
   final bool hasMoreData;
+  final bool hasRefreshButtonWhenEmpty;
+  final Future<void> Function()? onGetMoreData;
+  final EdgeInsets? padding;
   final Axis? scrollDirection;
   final Widget? separator;
   final bool shrinkWrap;
   final Widget? onEmpty;
-  final bool hasRefreshButtonWhenEmpty;
   final ScrollController? controller;
   //
   const PullRefreshListViewBuilder({
     required this.onRefresh,
     required this.itemCount,
     required this.itemBuilder,
-    this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+    this.padding,
     this.onGetMoreData,
     this.hasMoreData = false,
     this.scrollDirection,
@@ -37,7 +38,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     required this.itemCount,
     required this.itemBuilder,
     required this.onGetMoreData,
-    this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+    this.padding,
     this.hasMoreData = false,
     this.scrollDirection,
     this.separator,
@@ -57,7 +58,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
       child: ConditionalWidget(
         condition: onGetMoreData != null,
         onTrue: () => SuraPaginatedList(
-          padding: padding,
+          padding: padding ?? AppDimension.pageSpacing,
           scrollController: controller,
           hasMoreData: hasMoreData,
           itemBuilder: itemBuilder,
@@ -70,7 +71,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
         onFalse: () => ListView.separated(
           controller: controller,
           separatorBuilder: (c, i) => separator ?? SizedBox(),
-          padding: padding,
+          padding: padding ?? AppDimension.pageSpacing,
           itemBuilder: itemBuilder,
           itemCount: itemCount,
           shrinkWrap: shrinkWrap,
