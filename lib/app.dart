@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
         child: Builder(
           builder: (context) => Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
-              return SuraTheme(
+              return SuraProvider(
                 loadingWidget: const LoadingWidget(),
                 child: MaterialApp(
                   title: AppConfig.APP_NAME,
