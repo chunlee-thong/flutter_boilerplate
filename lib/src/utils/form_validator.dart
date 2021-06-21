@@ -9,6 +9,13 @@ class FormValidator {
     return null;
   }
 
+  static String? validateValue(Object? value, {required String field}) {
+    if (value == null) {
+      return "Please input your $field";
+    }
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return "Please input your email";
