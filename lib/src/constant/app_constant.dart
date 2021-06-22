@@ -2,15 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/others/language_model.dart';
 
-class AppConstant {
-  static String? TOKEN;
-  static String? USER_ID;
-
-  static void clean() {
-    TOKEN = null;
-    USER_ID = null;
-  }
-}
+class AppConstant {}
 
 const Locale EN_LOCALE = Locale('en', 'US');
 const Locale KH_LOCALE = Locale('km', 'KH');

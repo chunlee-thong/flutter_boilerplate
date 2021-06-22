@@ -10,12 +10,12 @@ class PrimaryTextField extends StatelessWidget {
   final String hint;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final double marginBottom;
   final TextInputType textInputType;
   final TextCapitalization textCapitalization;
   final VoidCallback? onTap;
+  final String? Function(String?)? validator;
   final bool isRequired;
   final bool obsecure;
   final List<TextInputFormatter>? inputFormatters;

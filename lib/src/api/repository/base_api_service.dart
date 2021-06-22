@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
+import '../../models/others/local_user_credential.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
+import '../../utils/service_locator.dart';
 import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
@@ -39,12 +41,13 @@ class BaseApiService {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && AppConstant.TOKEN != null) {
-        bool isExpired = SuraJwtDecoder.decode(AppConstant.TOKEN!).isExpired;
+      if (requiredToken && getIt<LocalUserCredential>().hasValidToken()) {
+        String token = getIt<LocalUserCredential>().jwtToken!;
+        bool isExpired = SuraJwtDecoder.decode(token).isExpired;
         if (isExpired) {
-          await AuthService.refreshUserToken();
+          token = await AuthService.refreshUserToken();
         }
-        httpOption.headers!['Authorization'] = "bearer ${AppConstant.TOKEN}";
+        httpOption.headers!['Authorization'] = "bearer $token";
       }
       if (customToken != null) {
         httpOption.headers!['Authorization'] = "bearer $customToken";

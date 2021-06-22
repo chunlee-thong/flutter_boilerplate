@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/models/others/local_user_credential.dart';
+import 'package:flutter_boiler_plate/src/utils/service_locator.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../api/client/http_client.dart';
-import '../constant/app_constant.dart';
 import '../models/response/user/auth_response.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
@@ -23,17 +24,23 @@ class AuthService {
   }
 
   static Future<void> initializeUserCredential() async {
-    AppConstant.TOKEN = await LocalStorage.get(key: TOKEN_KEY);
-    AppConstant.USER_ID = await LocalStorage.get(key: ID_KEY);
+    String? token = await LocalStorage.get(key: TOKEN_KEY);
+    String? userId = await LocalStorage.get(key: ID_KEY);
+
+    getIt<LocalUserCredential>().initLocalCrendential(
+      token: token,
+      userId: userId,
+    );
   }
 
-  static Future<void> refreshUserToken() async {
+  static Future<String> refreshUserToken() async {
     String? refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
     try {
       Response response = await BaseHttpClient.dio.post("/", data: {"refresh_token": refreshToken});
       //String newToken = response.....
       //await LocalStorage.save(key: TOKEN_KEY, value: newToken);
       //AppConstant.TOKEN = newToken;
+      return "newToken";
     } on DioError catch (exception) {
       if (exception.type == DioErrorType.response) {
         int? code = exception.response!.statusCode;
@@ -52,7 +59,7 @@ class AuthService {
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
-      AppConstant.clean();
+      getIt<LocalUserCredential>().clearLocalCredential();
       UserProvider.getProvider(context).setLoginStatus(false);
       PageNavigator.pushAndRemove(context, LoginPage());
     }
