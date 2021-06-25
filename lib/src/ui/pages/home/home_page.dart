@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: UIHelper.CustomAppBar(title: AppConfig.APP_NAME) as PreferredSizeWidget?,
+      appBar: UIHelper.CustomAppBar(title: AppConfig.APP_NAME),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

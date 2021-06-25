@@ -1,4 +1,4 @@
-# flutter_boiler_plate V1.1.0
+# flutter_boiler_plate
 
 A flutter boiler plate code for initial project setup
 
