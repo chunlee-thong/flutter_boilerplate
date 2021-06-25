@@ -12,13 +12,11 @@ import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
 class BaseApiService {
-  late final Dio dio;
+  late final Dio? dio;
 
-  BaseApiService({Dio? dio}) {
+  BaseApiService({this.dio}) {
     if (dio == null) {
-      this.dio = dio ?? BaseHttpClient.dio;
-    } else {
-      this.dio = dio;
+      this.dio = BaseHttpClient.dio;
     }
   }
 
@@ -61,7 +59,7 @@ class BaseApiService {
           data: data,
         );
       } else {
-        response = await dio.request(
+        response = await dio!.request(
           path,
           options: httpOption,
           queryParameters: query,
