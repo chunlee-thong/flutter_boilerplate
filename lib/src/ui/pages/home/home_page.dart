@@ -12,13 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int count = 0;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: UIHelper.CustomAppBar(title: AppConfig.APP_NAME),
       body: Center(
         child: Column(
@@ -37,7 +33,6 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          count++;
           ThemeProvider.getProvider(context).switchTheme();
         },
         child: Text("Switch Theme"),
