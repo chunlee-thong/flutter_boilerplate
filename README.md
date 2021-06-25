@@ -2,13 +2,9 @@
 
 A flutter boiler plate code for initial project setup
 
-## _Note_
-
-_this project hasn't migrate to null-safety yet._
-
 ### What we provided and use in this project
 
-- A folder structure and reusable some widgets
+- A folder structure and some widgets
 - Theme switch (dark and light mode)
 - Pages
   - Login page
@@ -18,17 +14,17 @@ _this project hasn't migrate to null-safety yet._
 ---
 
 - [easy_localization](https://pub.dev/packages/easy_localization) for localization
-- [Provider](https://pub.dev/packages/provider) for State management
+- [Provider](https://pub.dev/packages/provider) for State management and context based DI
 - [Dio](https://pub.dev/packages/dio) for http client
 - [Hive](https://pub.dev/packages/hive) database for structural local storage and [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) and [shared_preferences](https://pub.dev/packages/shared_preferences) for key value local storage
-- [get_it](https://pub.dev/packages/get_it) for service locator
+- [get_it](https://pub.dev/packages/get_it) for service locator and DI
 - Some others useful packages
 
 ## Getting Started
 
 1. create your own project with Android studio or **flutter create** command
 
-2. copy these files or folder into your new project
+2. copy these files and folder into your new project
 
 - assets
 - lib
@@ -69,24 +65,37 @@ _this project hasn't migrate to null-safety yet._
 
 #### api
 
-- create your repository class which extends BaseApiRepositry here
+- store your repository class which extends BaseApiService
+- store your http client and http configuration
 
 #### constant
 
-- contain your constant file here such as TextStyle, Color, Theme, Asset path, LocaleKeys, Enum, Height, Dimension,.....
+- store your constant file here such as Configuration, TextStyle, Color, Theme, Asset path, LocaleKeys, Enum, Height, Dimension.....
 
 #### model
 
-- response: your mapping response model from api here
+- response: your mapping response model from api
 - request: your own model class to request api
 - db: model for hive or any database's model
-- others: other model such as custom data
+- others: custom object model
 
 #### page_template
 
 - a template for commonly used screen or page functioanlity in an app, example: change password page, setting page....
 
-#### ui
+#### providers
+
+- store your provider or riverpod class
+
+#### services
+
+- mostly static class for some specific feature
+  - example:
+    - notifications service
+    - database or storage service
+    - auth service .....
+
+### ui
 
 ##### pages
 
@@ -96,14 +105,6 @@ _this project hasn't migrate to null-safety yet._
 ##### widgets
 
 - global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
-
-#### providers
-
-- contain your provider classes
-
-#### services
-
-- service provider class such as: ImagePickerService, DialogService, NavigationService.....
 
 #### utils
 
