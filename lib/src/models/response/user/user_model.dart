@@ -21,14 +21,14 @@ class UserModel {
     this.avatar,
   });
 
-  int? id;
+  String? id;
   String? email;
   String? firstName;
   String? lastName;
   String? avatar;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["id"] == null ? null : json["id"],
+        id: json["_id"] == null ? null : json["_id"],
         email: json["email"] == null ? null : json["email"],
         firstName: json["first_name"] == null ? null : json["first_name"],
         lastName: json["last_name"] == null ? null : json["last_name"],

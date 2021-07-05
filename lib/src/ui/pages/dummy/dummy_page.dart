@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/utils/logger.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../../api/index.dart';
@@ -56,6 +57,9 @@ class _DummyPageState extends State<DummyPage> {
       appBar: AppBar(title: Text("Fetch all users with pagination")),
       body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
+        onError: (error) {
+          errorLog("Error", error.stackTrace);
+        },
         ready: (context, UserResponse data) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),

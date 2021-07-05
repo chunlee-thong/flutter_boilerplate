@@ -6,6 +6,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_constant.dart';
 import '../../models/others/local_user_credential.dart';
 import '../../services/auth_service.dart';
+import '../../utils/custom_exception.dart';
 import '../../utils/logger.dart';
 import '../../utils/service_locator.dart';
 import '../client/http_client.dart';
@@ -69,26 +70,33 @@ class BaseApiService {
         );
       }
 
-      ///This condition may be depend on Response and your API
-      //return onSuccess(response);
+      ///This condition may be depend on Response of your API
+      ///return onSuccess(response);
       if (response.data['status'] == true) {
         return onSuccess(response);
       } else {
-        throw ServerResponseException(response.data['message']);
+        throw ServerResponseException(response.data[ERROR_MESSAGE_FIELD]);
       }
     } on DioError catch (exception) {
       throw _onDioError(exception);
     } on ServerResponseException catch (exception) {
       throw _onServerResponseException(exception, response!);
-    } catch (exception) {
-      throw _onTypeError(exception);
+    } catch (e) {
+      throw _onOtherException(e);
     }
   }
 }
 
-String _onTypeError(dynamic exception) {
+dynamic _onOtherException(dynamic exception) {
   //Logic or syntax error on some condition
-  errorLog("Type Error :=> ${exception.toString()}\nStackTrace:  ${exception.stackTrace.toString()}");
+  String? stackTrace = exception?.stackTrace?.toString() ?? "";
+  errorLog("Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
+  if (exception is Error) {
+    return CustomErrorWrapper(
+      "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
+      exception.stackTrace,
+    );
+  }
   return ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
@@ -108,7 +116,10 @@ DioErrorException _onDioError(DioError exception) {
       } else {
         serverMessage = ErrorMessage.UNEXPECTED_ERROR;
       }
-      return DioErrorException(serverMessage, code: exception.response!.statusCode);
+      return DioErrorException(
+        serverMessage,
+        code: exception.response!.statusCode,
+      );
     default:
       return DioErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }
@@ -125,6 +136,6 @@ void _logDioError(DioError exception) {
 }
 
 ServerResponseException _onServerResponseException(dynamic exception, Response response) {
-  httpLog("Server error :=> ${response.requestOptions.path}:=> $exception");
+  httpLog("Server response error :=> ${response.requestOptions.path}:=> $exception");
   return ServerResponseException(exception.toString());
 }

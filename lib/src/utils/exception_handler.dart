@@ -9,6 +9,13 @@ import '../services/auth_service.dart';
 import '../ui/widgets/ui_helper.dart';
 import 'custom_exception.dart';
 
+class ExceptionHandler {
+  ///Record error to Analytic or Crashlytic
+  static void recordError({required String message, dynamic stackTrace}) {
+    Sentry.captureException(message, stackTrace: stackTrace);
+  }
+}
+
 ///a function that use globally for try catch the exception, so you can easily send a report or
 ///do run some function on some exception
 ///Return null if there is an exception
@@ -42,10 +49,15 @@ Future<T?> ExceptionWatcher<T>(
     } else {
       message = exception.toString();
     }
-    Sentry.captureException(message, stackTrace: stackTrace);
+
     if (context != null) {
       UIHelper.showErrorDialog(context, message);
     }
+
+    ExceptionHandler.recordError(
+      message: exception.toString(),
+      stackTrace: stackTrace,
+    );
     onError?.call(exception);
     return null;
   } finally {
@@ -53,9 +65,15 @@ Future<T?> ExceptionWatcher<T>(
   }
 }
 
+///Use this function on your AsyncSubjectManager or FutureManager
+///To run some logic when there is an error
 void handleManagerError(dynamic exception, BuildContext context) {
   if (exception is SessionExpiredException) {
     UIHelper.showToast(context, exception.toString());
     AuthService.logOutUser(context, showConfirmation: false);
   }
+  ExceptionHandler.recordError(
+    message: exception.toString(),
+    stackTrace: exception.stackTrace,
+  );
 }

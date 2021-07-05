@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
     return EasyLocalization(
       path: AppConfig.LANGUAGE_PATH,
       supportedLocales: languages,
-      //fallbackLocale: languages.first,
-      //startLocale: languages.first,
+      fallbackLocale: KH_LOCALE,
+      startLocale: KH_LOCALE,
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),

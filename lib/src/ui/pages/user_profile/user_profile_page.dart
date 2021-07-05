@@ -17,16 +17,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "User Profile", actions: [
-        IconButton(
-          icon: Icon(FlutterIcons.log_out_ent),
-          onPressed: () {
-            AuthService.logOutUser(context);
-          },
-        )
-      ]),
+      appBar: UIHelper.CustomAppBar(
+        title: "User Profile",
+        actions: [
+          IconButton(
+            icon: Icon(FlutterIcons.log_out_ent),
+            onPressed: () {
+              AuthService.logOutUser(context);
+            },
+          )
+        ],
+      ),
       body: FutureManagerBuilder<UserModel>(
-        futureManager: UserProvider.getProvider(context).userController,
+        futureManager: UserProvider.getProvider(context).userManager,
         error: (error) => OnErrorWidget(
           message: error,
           onRefresh: UserProvider.getProvider(context).getUserInfo,
