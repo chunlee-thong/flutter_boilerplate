@@ -7,6 +7,7 @@ import '../ui/widgets/buttons/primary_button.dart';
 import '../ui/widgets/form_input/primary_dropdown_button.dart';
 import '../ui/widgets/form_input/primary_text_field.dart';
 import '../ui/widgets/ui_helper.dart';
+import '../utils/exception_handler.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   UpdateUserInfoPage({Key? key}) : super(key: key);
@@ -26,15 +27,11 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
-      try {
+      await ExceptionWatcher(context, () async {
         String firstname = firstNameTC.text.trim();
         String lastname = lastNameTC.text.trim();
         String country = countryTC.text.trim();
-
-        bool result = await Future.value(true);
-      } catch (e) {
-        UIHelper.showErrorDialog(context, e);
-      }
+      });
     }
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/utils/form_validator.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../../constant/style_decoration.dart';
+import '../../../utils/form_validator.dart';
 
 class PrimaryDropDownButton<T> extends StatelessWidget {
   final List<T> options;
@@ -13,6 +13,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final bool isRequired;
   final double marginBottom;
+
   const PrimaryDropDownButton({
     Key? key,
     required this.options,

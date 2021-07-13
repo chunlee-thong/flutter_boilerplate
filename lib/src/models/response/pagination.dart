@@ -1,17 +1,17 @@
 class Pagination {
   Pagination({
-    this.page,
-    this.totalItems,
-    this.totalPage,
+    required this.page,
+    required this.totalItems,
+    required this.totalPage,
   });
 
-  int? page;
-  int? totalItems;
-  int? totalPage;
+  num page;
+  num totalItems;
+  num totalPage;
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        page: json["page"] == null ? null : json["page"],
-        totalItems: json["total_items"] == null ? null : json["total_items"],
-        totalPage: json["total_page"] == null ? null : json["total_page"],
+        page: json["page"] == null ? 0 : json["page"],
+        totalItems: json["total_items"] == null ? 0 : json["total_items"],
+        totalPage: json["total_page"] == null ? 0 : json["total_page"],
       );
 }

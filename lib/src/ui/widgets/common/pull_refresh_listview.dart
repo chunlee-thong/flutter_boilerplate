@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_dimension.dart';
 import '../state_widgets/no_data_widget.dart';
 
 class PullRefreshListViewBuilder extends StatelessWidget {
@@ -58,7 +57,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
       child: ConditionalWidget(
         condition: onGetMoreData != null,
         onTrue: () => SuraPaginatedList(
-          padding: padding ?? AppDimension.pageSpacing,
+          padding: padding ?? EdgeInsets.zero,
           scrollController: controller,
           hasMoreData: hasMoreData,
           itemBuilder: itemBuilder,
@@ -70,8 +69,8 @@ class PullRefreshListViewBuilder extends StatelessWidget {
         ),
         onFalse: () => ListView.separated(
           controller: controller,
-          separatorBuilder: (c, i) => separator ?? SizedBox(),
-          padding: padding ?? AppDimension.pageSpacing,
+          separatorBuilder: (c, i) => separator ?? const SizedBox(),
+          padding: padding ?? EdgeInsets.zero,
           itemBuilder: itemBuilder,
           itemCount: itemCount,
           shrinkWrap: shrinkWrap,

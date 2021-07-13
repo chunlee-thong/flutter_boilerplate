@@ -8,6 +8,7 @@ class UserCancelException {
 }
 
 class SessionExpiredException extends BaseHttpException {
+  static final int code = 420;
   @override
   String toString() {
     return "Session expired, Please login again";

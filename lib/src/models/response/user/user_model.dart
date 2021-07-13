@@ -1,13 +1,15 @@
 import '../pagination.dart';
 
 class UserResponse {
-  List<UserModel>? users;
-  Pagination? pagination;
+  List<UserModel> users;
+  final Pagination? pagination;
 
-  UserResponse({this.pagination, this.users});
+  UserResponse({this.pagination, required this.users});
+
+  bool get hasMoreData => pagination != null ? users.length < pagination!.totalItems : false;
 
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
-        users: json["data"] == null ? null : List<UserModel>.from(json["data"].map((x) => UserModel.fromJson(x))),
+        users: json["data"] == null ? [] : List<UserModel>.from(json["data"].map((x) => UserModel.fromJson(x))),
         pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
       );
 }

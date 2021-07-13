@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/utils/logger.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../../api/index.dart';
@@ -15,7 +14,6 @@ class DummyPage extends StatefulWidget {
 class _DummyPageState extends State<DummyPage> {
   FutureManager<UserResponse> userController = FutureManager();
   int currentPage = 1;
-  int? totalPage = 10;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
@@ -28,12 +26,9 @@ class _DummyPageState extends State<DummyPage> {
       ),
       onSuccess: (response) {
         if (userController.hasData) {
-          response.users = [...userController.data!.users!, ...response.users!];
+          response.users = [...userController.data!.users, ...response.users];
         }
-        if (response.users!.isNotEmpty) {
-          currentPage += 1;
-        }
-        totalPage = response.pagination!.totalPage;
+        currentPage += 1;
         return response;
       },
       reloading: reload,
@@ -57,16 +52,13 @@ class _DummyPageState extends State<DummyPage> {
       appBar: AppBar(title: Text("Fetch all users with pagination")),
       body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
-        onError: (error) {
-          errorLog("Error", error.stackTrace);
-        },
-        ready: (context, UserResponse data) {
+        ready: (context, UserResponse response) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),
-            itemCount: data.users!.length,
-            hasMoreData: currentPage <= totalPage!,
+            itemCount: response.users.length,
+            hasMoreData: response.hasMoreData,
             itemBuilder: (context, index) {
-              final user = data.users![index];
+              final user = response.users[index];
               return ListTile(
                 leading: CircleAvatar(
                   child: Icon(Icons.person),

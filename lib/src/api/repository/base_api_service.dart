@@ -69,18 +69,11 @@ class BaseApiService {
           data: data,
         );
       }
-
-      ///This condition may be depend on Response of your API
-      ///return onSuccess(response);
-      if (response.data['status'] == true) {
-        return onSuccess(response);
-      } else {
-        throw ServerResponseException(response.data[ERROR_MESSAGE_FIELD]);
-      }
+      return onSuccess(response);
     } on DioError catch (exception) {
       throw _onDioError(exception);
-    } on ServerResponseException catch (exception) {
-      throw _onServerResponseException(exception, response!);
+    } on SessionExpiredException catch (e) {
+      throw e;
     } catch (e) {
       throw _onOtherException(e);
     }
@@ -100,7 +93,7 @@ dynamic _onOtherException(dynamic exception) {
   return ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
-DioErrorException _onDioError(DioError exception) {
+dynamic _onDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
     return DioErrorException(ErrorMessage.CONNECTION_ERROR);
@@ -116,6 +109,9 @@ DioErrorException _onDioError(DioError exception) {
       } else {
         serverMessage = ErrorMessage.UNEXPECTED_ERROR;
       }
+      if (exception.response!.statusCode == SessionExpiredException.code) {
+        return SessionExpiredException();
+      }
       return DioErrorException(
         serverMessage,
         code: exception.response!.statusCode,
@@ -128,14 +124,9 @@ DioErrorException _onDioError(DioError exception) {
 void _logDioError(DioError exception) {
   String errorMessage = "Dio error :=> ${exception.requestOptions.path}";
   if (exception.response != null) {
-    errorMessage += ", Response: => ${exception.response!.data.toString()}";
+    errorMessage += ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";
   } else {
     errorMessage += ", ${exception.message}";
   }
   httpLog(errorMessage);
-}
-
-ServerResponseException _onServerResponseException(dynamic exception, Response response) {
-  httpLog("Server response error :=> ${response.requestOptions.path}:=> $exception");
-  return ServerResponseException(exception.toString());
 }

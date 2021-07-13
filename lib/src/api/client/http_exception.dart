@@ -10,14 +10,3 @@ class DioErrorException extends BaseHttpException {
     return code != null ? "$code: $message" : this.message;
   }
 }
-
-class ServerResponseException extends BaseHttpException {
-  final String? message;
-
-  ServerResponseException(this.message);
-
-  @override
-  String toString() {
-    return this.message!;
-  }
-}
