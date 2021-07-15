@@ -6,7 +6,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_constant.dart';
 import '../../models/others/local_user_credential.dart';
 import '../../services/auth_service.dart';
-import '../../utils/custom_exception.dart';
 import '../../utils/logger.dart';
 import '../../utils/service_locator.dart';
 import '../client/http_client.dart';
@@ -17,7 +16,7 @@ class BaseApiService {
 
   BaseApiService({Dio? dio}) {
     if (dio == null) {
-      this.dio = BaseHttpClient.dio;
+      this.dio = DefaultHttpClient.dio;
     } else {
       this.dio = dio;
     }
@@ -70,9 +69,10 @@ class BaseApiService {
         );
       }
       return onSuccess(response);
-    } on DioError catch (exception) {
-      throw _onDioError(exception);
+    } on DioError catch (e) {
+      throw _onDioError(e);
     } on SessionExpiredException catch (e) {
+      //This exception throw from AuthService.refreshToken()
       throw e;
     } catch (e) {
       throw _onOtherException(e);

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/bottom_navigation_provider.dart';
+import '../../providers/bottom_navigation_provider.dart';
 import '../../pages/home/home_page.dart';
 import '../../pages/user_profile/user_profile_page.dart';
 import '../dummy/dummy_page.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/style_decoration.dart';
+import '../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
 import '../ui_helper.dart';
 

@@ -6,15 +6,18 @@ import '../../constant/app_config.dart';
 import '../../utils/logger.dart';
 import '../../utils/object_util.dart';
 
-class BaseHttpClient {
+class DefaultHttpClient {
   static late final Dio dio;
 
-  ///
+  //20seconds timeout
+  static final int _timeOut = 20000;
+
+  ///Must be call when running app
   static void init() {
     final BaseOptions options = BaseOptions(
       baseUrl: AppConfig.BASE_URL,
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
+      connectTimeout: _timeOut,
+      receiveTimeout: _timeOut,
     );
     dio = Dio(options)..interceptors.add(defaultInterceptor);
   }

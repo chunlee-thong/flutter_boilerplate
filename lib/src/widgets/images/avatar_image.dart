@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_theme_color.dart';
-import '../../../utils/app_utils.dart';
+import '../../constant/app_theme_color.dart';
+import '../../utils/app_utils.dart';
 
 class AvatarImage extends StatelessWidget {
   final double radius;

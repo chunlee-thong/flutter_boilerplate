@@ -1,7 +1,6 @@
 import 'dart:io';
 
-File resourceClass = File("../lib/constant/app_assets.dart");
-String classData = "class AppAssets {";
+File resourceClass = File("../lib/src/constant/app_assets.dart");
 
 void main() {
   generateFile();
@@ -9,17 +8,21 @@ void main() {
 
 void generateFile() async {
   Directory dir = Directory('./images');
+  var buffer = StringBuffer();
+  buffer.writeln("//this class is generated from assets/generator.dart");
+  buffer.write("class AppAssets {");
   List<FileSystemEntity> filesSystem = dir.listSync(recursive: true);
 
   for (final fileSystem in filesSystem) {
     if (fileSystem is Directory) {
       continue;
     } else {
-      classData += generateImageAssetsClass(fileSystem.uri.path);
+      buffer.write(generateImageAssetsClass(fileSystem.uri.path));
     }
-    await resourceClass.writeAsString(classData);
+    await resourceClass.writeAsString(buffer.toString());
   }
   resourceClass.writeAsStringSync("\n}", mode: FileMode.append);
+  print("Success");
 }
 
 String generateImageAssetsClass(String path) {

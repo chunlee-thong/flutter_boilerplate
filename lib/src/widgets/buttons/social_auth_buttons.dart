@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_theme_color.dart';
-import '../../../models/response/user/social_auth_data.dart';
-import '../../../services/social_auth_service.dart';
-import '../../../utils/exception_handler.dart';
+import '../../constant/app_theme_color.dart';
+import '../../models/response/user/social_auth_data.dart';
+import '../../services/social_auth_service.dart';
+import '../../utils/exception_handler.dart';
 
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;

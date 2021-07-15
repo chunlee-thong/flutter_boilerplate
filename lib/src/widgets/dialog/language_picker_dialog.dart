@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_constant.dart';
-import '../../../constant/style_decoration.dart';
+import '../../constant/app_constant.dart';
+import '../../constant/style_decoration.dart';
 import '../common/divider0.dart';
 
 class LanguagePickerDialog extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/loading_provider.dart';
+import '../../providers/loading_provider.dart';
 import 'loading_widget.dart';
 
 class PageLoading extends StatefulWidget {
@@ -35,7 +35,7 @@ class _PageLoadingState extends State<PageLoading> {
                 child: const LoadingWidget(),
                 color: color,
               );
-            return SizedBox();
+            return const SizedBox();
           },
         ),
       ],

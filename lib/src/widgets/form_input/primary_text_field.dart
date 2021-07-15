@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/style_decoration.dart';
-import '../../../utils/form_validator.dart';
+import '../../constant/style_decoration.dart';
+import '../../utils/form_validator.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final TextEditingController? controller;

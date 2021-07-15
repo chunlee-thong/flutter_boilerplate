@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../api/client/http_client.dart';
+import '../api/client/http_exception.dart';
 import '../constant/app_constant.dart';
 import '../models/others/local_user_credential.dart';
 import '../models/response/user/auth_response.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
 import '../ui/pages/login_page/login_page.dart';
-import '../utils/custom_exception.dart';
 import '../utils/service_locator.dart';
 
 class AuthService {
@@ -37,7 +37,7 @@ class AuthService {
   static Future<String> refreshUserToken() async {
     String? refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
     try {
-      Response response = await BaseHttpClient.dio.request(
+      Response response = await DefaultHttpClient.dio.request(
         "/api/user/refresh-token",
         options: Options(
           headers: {"Authorization": "bearer $refreshToken"},

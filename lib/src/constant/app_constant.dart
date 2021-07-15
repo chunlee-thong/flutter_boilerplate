@@ -4,15 +4,15 @@ import '../models/others/language_model.dart';
 
 class AppConstant {}
 
-const Locale EN_LOCALE = Locale('en', 'US');
-const Locale KH_LOCALE = Locale('km', 'KH');
-
 class ErrorMessage {
   static const UNEXPECTED_ERROR = "An unexpected error occur!";
   static const UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
   static const CONNECTION_ERROR = "Error connecting to server. Please check your internet connection or Try again later!";
   static const TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
 }
+
+const Locale EN_LOCALE = Locale('en', 'US');
+const Locale KH_LOCALE = Locale('km', 'KH');
 
 const List<LanguageModel> APP_LOCALES = [
   const LanguageModel(

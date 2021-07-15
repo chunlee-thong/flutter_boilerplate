@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../constant/app_theme_color.dart';
+import '../../constant/app_theme_color.dart';
 
 class PrimaryButton extends StatelessWidget {
   final FutureOr<void> Function() onPressed;

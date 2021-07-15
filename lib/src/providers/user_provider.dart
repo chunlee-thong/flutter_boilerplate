@@ -30,4 +30,10 @@ class UserProvider extends ChangeNotifier {
       reloading: true,
     );
   }
+
+  @override
+  void dispose() {
+    userManager.dispose();
+    super.dispose();
+  }
 }

@@ -4,7 +4,6 @@ import '../models/response/user/social_auth_data.dart';
 import '../utils/custom_exception.dart';
 
 class SocialAuthService {
-  //static final FacebookAuth facebookAuth = FacebookAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   static Future<SocialAuthData> loginWithFacebook() async {
@@ -47,7 +46,6 @@ class SocialAuthService {
   }
 
   static Future<void> signOutAll() async {
-    //await _facebookAuth.logOut();
     await _googleSignIn.signOut();
   }
 }

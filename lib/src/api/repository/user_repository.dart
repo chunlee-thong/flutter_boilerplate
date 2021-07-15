@@ -6,9 +6,9 @@ import '../../utils/service_locator.dart';
 import 'base_api_service.dart';
 
 class UserRepository extends BaseApiService {
+  //
   static const String _LOGIN_USER = "/api/user/login";
   static const String _GET_ALL_USER = "/api/user/all";
-  //If your path "/" at the end, it means that there's further route
   static const String _GET_USER_INFO = "/api/user/info/";
 
   Future<AuthResponse> loginUser({required String email, required String password}) async {

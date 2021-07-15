@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../api/index.dart';
-import '../../../constant/locale_keys.dart';
-import '../../../models/response/user/auth_response.dart';
-import '../../../services/auth_service.dart';
-import '../../../utils/exception_handler.dart';
+import '../../api/index.dart';
+import '../../constant/locale_keys.dart';
+import '../../models/response/user/auth_response.dart';
+import '../../services/auth_service.dart';
+import '../../utils/exception_handler.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';

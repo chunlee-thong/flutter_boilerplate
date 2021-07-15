@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../models/response/user/user_model.dart';
-import '../../../providers/user_provider.dart';
-import '../../../services/auth_service.dart';
+import '../../models/response/user/user_model.dart';
+import '../../providers/user_provider.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/ui_helper.dart';
 
