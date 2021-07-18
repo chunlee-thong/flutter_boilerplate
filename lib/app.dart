@@ -8,13 +8,13 @@ import 'src/api/client/http_client.dart';
 import 'src/constant/app_config.dart';
 import 'src/constant/app_constant.dart';
 import 'src/constant/app_theme_color.dart';
+import 'src/pages/splash/splash_page.dart';
 import 'src/providers/loading_provider.dart';
 import 'src/providers/theme_provider.dart';
 import 'src/providers/user_provider.dart';
-import 'src/ui/pages/splash/splash_page.dart';
-import 'src/ui/widgets/state_widgets/error_widget.dart';
-import 'src/ui/widgets/state_widgets/loading_widget.dart';
-import 'src/ui/widgets/state_widgets/page_loading.dart';
+import 'src/widgets/state_widgets/error_widget.dart';
+import 'src/widgets/state_widgets/loading_widget.dart';
+import 'src/widgets/state_widgets/page_loading.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -23,9 +23,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
+
+  ThemeData customizeTheme(BuildContext context) {
+    String fontName = context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME;
+    return Theme.of(context).copyWith(
+      textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
+    );
+  }
+
   @override
   void initState() {
-    BaseHttpClient.init();
+    DefaultHttpClient.init();
     super.initState();
   }
 
@@ -62,11 +70,7 @@ class _MyAppState extends State<MyApp> {
                     };
                     return Theme(
                       child: PageLoading(child: child!),
-                      data: Theme.of(context).copyWith(
-                        textTheme: Theme.of(context).textTheme.apply(
-                              fontFamily: context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME,
-                            ),
-                      ),
+                      data: customizeTheme(context),
                     );
                   },
                   home: SplashScreenPage(),

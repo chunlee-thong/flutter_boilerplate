@@ -8,16 +8,16 @@ import '../api/client/http_exception.dart';
 import '../constant/app_constant.dart';
 import '../models/others/local_user_credential.dart';
 import '../models/response/user/auth_response.dart';
+import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
 import '../services/local_storage_service.dart';
-import '../ui/pages/login_page/login_page.dart';
 import '../utils/service_locator.dart';
 
 class AuthService {
   //
   static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
-    await LocalStorage.save(key: TOKEN_KEY, value: loginResponse.token);
-    await LocalStorage.save(key: ID_KEY, value: loginResponse.userId);
+    await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
+    await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
     await initializeUserCredential();
     await LocalStorage.saveLoginStatus(true);
     UserProvider.getProvider(context).setLoginStatus(true);
@@ -25,8 +25,8 @@ class AuthService {
   }
 
   static Future<void> initializeUserCredential() async {
-    String? token = await LocalStorage.get(key: TOKEN_KEY);
-    String? userId = await LocalStorage.get(key: ID_KEY);
+    String? token = await LocalStorage.read(key: TOKEN_KEY);
+    String? userId = await LocalStorage.read(key: ID_KEY);
 
     getIt<LocalUserCredential>().initLocalCrendential(
       token: token,
@@ -35,7 +35,7 @@ class AuthService {
   }
 
   static Future<String> refreshUserToken() async {
-    String? refreshToken = await LocalStorage.get(key: REFRESH_TOKEN_KEY);
+    String? refreshToken = await LocalStorage.read(key: REFRESH_TOKEN_KEY);
     try {
       Response response = await DefaultHttpClient.dio.request(
         "/api/user/refresh-token",
@@ -45,7 +45,7 @@ class AuthService {
         ),
       );
       AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
-      await LocalStorage.save(key: TOKEN_KEY, value: authResponse.token);
+      await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
       getIt<LocalUserCredential>().initLocalCrendential(
         token: authResponse.token,
         userId: authResponse.userId,

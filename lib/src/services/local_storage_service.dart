@@ -25,14 +25,14 @@ class LocalStorage {
     return await sp.getBool(LOGIN_KEY) ?? false;
   }
 
-  static Future<void> save({
+  static Future<void> write({
     required String key,
     required String? value,
   }) async {
     await _fss.write(key: key, value: value);
   }
 
-  static Future<String?> get({required String key}) async {
+  static Future<String?> read({required String key}) async {
     return await _fss.read(key: key);
   }
 

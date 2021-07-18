@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../../api/index.dart';
-import '../../../models/response/user/user_model.dart';
+import '../../api/index.dart';
+import '../../models/response/user/user_model.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {

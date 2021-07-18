@@ -7,7 +7,7 @@ import 'package:sentry/sentry.dart';
 
 import '../api/client/http_exception.dart';
 import '../services/auth_service.dart';
-import '../ui/widgets/ui_helper.dart';
+import '../widgets/ui_helper.dart';
 import 'custom_exception.dart';
 
 class ExceptionHandler {

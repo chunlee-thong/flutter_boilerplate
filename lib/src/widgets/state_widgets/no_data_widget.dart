@@ -12,8 +12,8 @@ class NoDataWidget extends StatelessWidget {
 
   const NoDataWidget({
     Key? key,
-    this.verticalMargin = 0.0,
     this.message = "There is nothing here!",
+    this.verticalMargin = 0.0,
     this.onRefresh,
   }) : super(key: key);
 

@@ -8,7 +8,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
 import '../../constant/style_decoration.dart';
-import '../../providers/user_provider.dart';
 import '../../utils/exception_handler.dart';
 import 'avatar_image.dart';
 
@@ -16,22 +15,12 @@ class UserAvatar extends StatefulWidget {
   final String? imageUrl;
   final double radius;
   final Future<void> Function(File?)? onImageChanged;
-  final bool currentUser;
 
   const UserAvatar({
     Key? key,
     required this.imageUrl,
     required this.onImageChanged,
-    this.radius = 50.0,
-    this.currentUser = false,
-  }) : super(key: key);
-
-  const UserAvatar.currentUser({
-    Key? key,
-    this.imageUrl,
-    this.onImageChanged,
-    this.radius = 20.0,
-    this.currentUser = true,
+    required this.radius,
   }) : super(key: key);
 
   @override
@@ -76,15 +65,6 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.currentUser) {
-      UserProvider userProvider = UserProvider.getProvider(context);
-      return AvatarImage(
-        imageUrl: userProvider.userData!.avatar,
-        radius: widget.radius,
-        elevation: 1.0,
-      );
-    }
-
     return GestureDetector(
       onTap: onChooseProfileImageSource,
       child: Container(
