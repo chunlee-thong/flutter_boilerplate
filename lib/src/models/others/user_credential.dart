@@ -1,4 +1,5 @@
-class LocalUserCredential {
+///Memory user credential
+class MemUserCredential {
   String? jwtToken;
   String? userId;
 
@@ -6,12 +7,12 @@ class LocalUserCredential {
     return this.jwtToken != null && this.jwtToken!.isNotEmpty;
   }
 
-  void clearLocalCredential() {
+  void clearMemoryCredential() {
     this.jwtToken = null;
     this.userId = null;
   }
 
-  void initLocalCrendential({required String? token, required String? userId}) {
+  void initMemoryCredential({required String? token, required String? userId}) {
     this.jwtToken = token;
     this.userId = userId;
   }

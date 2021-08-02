@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
-import '../../models/others/local_user_credential.dart';
+import '../../models/others/user_credential.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
 import '../../utils/service_locator.dart';
@@ -41,9 +41,9 @@ class BaseApiService {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && getIt<LocalUserCredential>().hasValidToken()) {
-        String token = getIt<LocalUserCredential>().jwtToken!;
-        bool isExpired = SuraJwtDecoder.decode(token).isExpired;
+      if (requiredToken && getIt<MemUserCredential>().hasValidToken()) {
+        String? token = getIt<MemUserCredential>().jwtToken;
+        bool isExpired = SuraJwtDecoder.decode("$token").isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken();
         }
@@ -71,9 +71,6 @@ class BaseApiService {
       return onSuccess(response);
     } on DioError catch (e) {
       throw _onDioError(e);
-    } on SessionExpiredException catch (e) {
-      //This exception throw from AuthService.refreshToken()
-      throw e;
     } catch (e) {
       throw _onOtherException(e);
     }

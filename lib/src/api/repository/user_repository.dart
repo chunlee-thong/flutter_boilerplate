@@ -1,5 +1,5 @@
 import '../../constant/app_constant.dart';
-import '../../models/others/local_user_credential.dart';
+import '../../models/others/user_credential.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
 import '../../utils/service_locator.dart';
@@ -39,7 +39,7 @@ class UserRepository extends BaseApiService {
   }
 
   Future<UserModel> fetchUserInfo() async {
-    String? userId = getIt<LocalUserCredential>().userId;
+    String? userId = getIt<MemUserCredential>().userId;
     return onRequest(
       path: _GET_USER_INFO + "$userId",
       onSuccess: (response) {

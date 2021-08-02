@@ -6,7 +6,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../api/client/http_client.dart';
 import '../api/client/http_exception.dart';
 import '../constant/app_constant.dart';
-import '../models/others/local_user_credential.dart';
+import '../models/others/user_credential.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
@@ -28,43 +28,34 @@ class AuthService {
     String? token = await LocalStorage.read(key: TOKEN_KEY);
     String? userId = await LocalStorage.read(key: ID_KEY);
 
-    getIt<LocalUserCredential>().initLocalCrendential(
+    getIt<MemUserCredential>().initMemoryCredential(
       token: token,
       userId: userId,
     );
   }
 
-  static Future<String> refreshUserToken() async {
+  static Future<String?> refreshUserToken() async {
     String? refreshToken = await LocalStorage.read(key: REFRESH_TOKEN_KEY);
-    try {
-      Response response = await DefaultHttpClient.dio.request(
-        "/api/user/refresh-token",
-        options: Options(
-          headers: {"Authorization": "bearer $refreshToken"},
-          method: HttpMethod.POST,
-        ),
-      );
-      AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
-      await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
-      getIt<LocalUserCredential>().initLocalCrendential(
-        token: authResponse.token,
-        userId: authResponse.userId,
-      );
-      return authResponse.token!;
-    } on DioError catch (error) {
-      if (error.response != null && error.response!.statusCode == SessionExpiredException.code) {
-        throw SessionExpiredException();
-      }
-      throw error;
-    } catch (exception) {
-      throw exception;
-    }
+    Response response = await DefaultHttpClient.dio.request(
+      "/api/user/refresh-token",
+      options: Options(
+        headers: {"Authorization": "bearer $refreshToken"},
+        method: HttpMethod.POST,
+      ),
+    );
+    AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
+    await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
+    getIt<MemUserCredential>().initMemoryCredential(
+      token: authResponse.token,
+      userId: authResponse.userId,
+    );
+    return authResponse.token;
   }
 
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
-      getIt<LocalUserCredential>().clearLocalCredential();
+      getIt<MemUserCredential>().clearMemoryCredential();
       UserProvider.getProvider(context).setLoginStatus(false);
       PageNavigator.pushAndRemove(context, LoginPage());
     }
