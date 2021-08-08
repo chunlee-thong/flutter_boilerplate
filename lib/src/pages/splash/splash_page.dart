@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
-import '../../providers/theme_provider.dart';
+import '../../pages/root_page/root_page.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
-import '../../services/local_storage_service.dart';
-import '../../pages/root_page/root_page.dart';
+import '../../services/local_storage_service/local_storage_service.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
 import '../login_page/login_page.dart';
@@ -20,9 +19,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
 
   Future<bool> onSplashing() async {
-    await LocalStorage.initialize();
-    bool isLoggedIn = await LocalStorage.getLoginStatus();
-    ThemeProvider.getProvider(context).initializeTheme();
+    bool? isLoggedIn = await LocalStorage.read<bool>(key: LOGIN_KEY) ?? false;
     if (isLoggedIn) {
       await AuthService.initializeUserCredential();
       UserProvider.getProvider(context).getUserInfo();

@@ -1,7 +1,10 @@
 ///Memory user credential
-class MemUserCredential {
+class MemoryUserCredential {
   String? jwtToken;
   String? userId;
+
+  MemoryUserCredential._();
+  static final MemoryUserCredential instance = MemoryUserCredential._();
 
   bool hasValidToken() {
     return this.jwtToken != null && this.jwtToken!.isNotEmpty;

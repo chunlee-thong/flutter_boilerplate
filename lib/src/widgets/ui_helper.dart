@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:toast/toast.dart';
 
 import 'dialog/custom_error_dialog.dart';
 
@@ -22,8 +22,17 @@ class UIHelper {
     );
   }
 
-  static void showToast(BuildContext context, dynamic message) {
-    Toast.show(message.toString(), context, duration: 3);
+  ///BuildContext isn't use, but required in case something change
+  static Future showToast(BuildContext context, dynamic message) async {
+    await Fluttertoast.showToast(
+      msg: "${message.toString()}",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
 
   static void showSnackBar(BuildContext context, dynamic message) {

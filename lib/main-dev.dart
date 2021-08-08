@@ -6,19 +6,18 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sentry/sentry.dart';
 
-import './src/utils/hive_db_adapter.dart';
-import './src/utils/service_locator.dart';
 import 'app.dart';
 import 'flavors.dart';
+import 'src/providers/theme_provider.dart';
+import 'src/services/local_storage_service/local_storage_service.dart';
+import 'src/services/local_storage_service/spf_storage_service.dart';
+import 'src/utils/hive_db_adapter.dart';
 import 'src/utils/logger.dart';
+import 'src/utils/service_locator.dart';
 
 void main() async {
   runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Hive.initFlutter();
-    await EasyLocalization.ensureInitialized();
-    registerHiveAdapter();
-    registerLocator();
+    await registerAppConfiguration();
     setupDevEnvConfig();
     await Sentry.init(
       (options) {
@@ -30,4 +29,14 @@ void main() async {
     errorLog("RunZonedGuard error: ", exception);
     await Sentry.captureException(exception, stackTrace: stackTrace);
   });
+}
+
+Future registerAppConfiguration() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await EasyLocalization.ensureInitialized();
+  await LocalStorage.initialize(SharedPreferencesStorageService());
+  await ThemeProvider.initializeTheme();
+  registerHiveAdapter();
+  registerLocator();
 }

@@ -7,7 +7,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 import 'src/api/client/http_client.dart';
 import 'src/constant/app_config.dart';
 import 'src/constant/app_constant.dart';
-import 'src/constant/app_theme_color.dart';
 import 'src/pages/splash/splash_page.dart';
 import 'src/providers/loading_provider.dart';
 import 'src/providers/theme_provider.dart';
@@ -58,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                 child: MaterialApp(
                   title: AppConfig.APP_NAME,
                   navigatorKey: SuraNavigator.navigatorKey,
-                  theme: themeProvider.isDarkTheme ? kDarkTheme : kLightTheme,
+                  theme: themeProvider.getThemeData(),
                   debugShowCheckedModeBanner: false,
                   localizationsDelegates: context.localizationDelegates,
                   supportedLocales: context.supportedLocales,

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sentry/sentry.dart';
@@ -40,11 +39,12 @@ Future<T?> ExceptionWatcher<T>(
       }
     } else if (exception is PlatformException) {
       message = exception.message;
-    } else if (exception is FirebaseAuthException) {
-      message = exception.message;
-      if (exception.code == 'invalid-verification-code') {
-        message = "Invalid Code";
-      }
+      // } else if (exception is FirebaseAuthException) {
+      //   message = exception.message;
+      //   if (exception.code == 'invalid-verification-code') {
+      //     message = "Invalid Code";
+      //   }
+      // }
     } else if (exception is TypeError) {
       message = exception.toString();
     } else {

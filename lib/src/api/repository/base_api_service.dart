@@ -7,7 +7,6 @@ import '../../constant/app_constant.dart';
 import '../../models/others/user_credential.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
-import '../../utils/service_locator.dart';
 import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
@@ -41,8 +40,8 @@ class BaseApiService {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && getIt<MemUserCredential>().hasValidToken()) {
-        String? token = getIt<MemUserCredential>().jwtToken;
+      if (requiredToken && MemoryUserCredential.instance.hasValidToken()) {
+        String? token = MemoryUserCredential.instance.jwtToken;
         bool isExpired = SuraJwtDecoder.decode("$token").isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken();

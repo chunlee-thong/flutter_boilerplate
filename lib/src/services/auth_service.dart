@@ -4,22 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../api/client/http_client.dart';
-import '../api/client/http_exception.dart';
 import '../constant/app_constant.dart';
 import '../models/others/user_credential.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
-import '../services/local_storage_service.dart';
-import '../utils/service_locator.dart';
+import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
   //
   static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
     await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
+    await LocalStorage.write<bool>(key: LOGIN_KEY, value: true);
     await initializeUserCredential();
-    await LocalStorage.saveLoginStatus(true);
     UserProvider.getProvider(context).setLoginStatus(true);
     await UserProvider.getProvider(context).getUserInfo();
   }
@@ -28,7 +26,7 @@ class AuthService {
     String? token = await LocalStorage.read(key: TOKEN_KEY);
     String? userId = await LocalStorage.read(key: ID_KEY);
 
-    getIt<MemUserCredential>().initMemoryCredential(
+    MemoryUserCredential.instance.initMemoryCredential(
       token: token,
       userId: userId,
     );
@@ -45,7 +43,7 @@ class AuthService {
     );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
-    getIt<MemUserCredential>().initMemoryCredential(
+    MemoryUserCredential.instance.initMemoryCredential(
       token: authResponse.token,
       userId: authResponse.userId,
     );
@@ -55,7 +53,7 @@ class AuthService {
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
-      getIt<MemUserCredential>().clearMemoryCredential();
+      MemoryUserCredential.instance.clearMemoryCredential();
       UserProvider.getProvider(context).setLoginStatus(false);
       PageNavigator.pushAndRemove(context, LoginPage());
     }
