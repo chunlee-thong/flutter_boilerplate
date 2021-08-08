@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:sura_manager/sura_manager.dart';
 
 import '../../api/index.dart';
 import '../../models/response/user/user_model.dart';
@@ -21,7 +21,7 @@ class _DummyPageState extends State<DummyPage> {
     }
     userController.asyncOperation(
       () => userRepository.fetchUserList(
-        count: 10,
+        count: 20,
         page: currentPage,
       ),
       onSuccess: (response) {

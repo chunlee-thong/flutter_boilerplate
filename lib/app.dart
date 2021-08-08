@@ -54,6 +54,12 @@ class _MyAppState extends State<MyApp> {
             builder: (context, themeProvider, child) {
               return SuraProvider(
                 loadingWidget: const LoadingWidget(),
+                errorWidget: (error, onRefresh) {
+                  return OnErrorWidget(
+                    message: error,
+                    onRefresh: onRefresh,
+                  );
+                },
                 child: MaterialApp(
                   title: AppConfig.APP_NAME,
                   navigatorKey: SuraNavigator.navigatorKey,

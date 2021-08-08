@@ -9,6 +9,7 @@ import '../models/others/user_credential.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/login_page/login_page.dart';
 import '../providers/user_provider.dart';
+import '../utils/logger.dart';
 import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
@@ -16,6 +17,7 @@ class AuthService {
   static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
     await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
+    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: loginResponse.refreshToken);
     await LocalStorage.write<bool>(key: LOGIN_KEY, value: true);
     await initializeUserCredential();
     UserProvider.getProvider(context).setLoginStatus(true);
@@ -23,8 +25,11 @@ class AuthService {
   }
 
   static Future<void> initializeUserCredential() async {
-    String? token = await LocalStorage.read(key: TOKEN_KEY);
-    String? userId = await LocalStorage.read(key: ID_KEY);
+    String? token = await LocalStorage.read<String>(key: TOKEN_KEY);
+    String? userId = await LocalStorage.read<String>(key: ID_KEY);
+
+    infoLog("token", token);
+    infoLog("userId", userId);
 
     MemoryUserCredential.instance.initMemoryCredential(
       token: token,

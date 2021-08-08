@@ -32,6 +32,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.1
   cached_network_image: ^3.1.0
   sura_flutter: ^0.3.1
+  sura_manager: ^0.0.5
   image_picker: ^0.8.3+1
   sentry: ^5.1.0
 

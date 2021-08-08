@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../constant/app_config.dart';
-import '../../providers/theme_provider.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';
@@ -32,8 +31,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          ThemeProvider.getProvider(context).switchTheme();
+        onPressed: () async {
+          //ThemeProvider.getProvider(context).switchTheme();
+          await UIHelper.showMessageDialog(context, "You have click change Theme");
+          await UIHelper.showErrorDialog(context, "There is an error");
         },
         child: Text("Switch Theme"),
       ),

@@ -15,8 +15,8 @@ class FssStorageService extends LocalStorage {
   }
 
   @override
-  Future<String?> readStringImpl({required String key}) {
-    return _fss.read(key: key);
+  Future<String?> readStringImpl({required String key}) async {
+    return await _fss.read(key: key);
   }
 
   @override

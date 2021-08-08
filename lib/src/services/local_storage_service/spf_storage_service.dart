@@ -18,13 +18,14 @@ class SharedPreferencesStorageService extends LocalStorage {
   @override
   Future<String?> readStringImpl({required String key}) async {
     final spf = await SharedPreferences.getInstance();
-    return spf.getString(key);
+    String? data = spf.getString(key);
+    return data;
   }
 
   @override
   Future<bool?> readBoolImpl({required String key}) async {
     final spf = await SharedPreferences.getInstance();
-    return spf.getBool(key);
+    return await spf.getBool(key);
   }
 
   @override

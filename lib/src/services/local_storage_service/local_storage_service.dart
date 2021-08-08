@@ -27,19 +27,21 @@ abstract class LocalStorage {
     required String key,
     required T value,
   }) async {
-    if (T is bool) {
-      await _localStorage.writeBoolImpl(key: key, value: value as bool);
+    if (value is bool) {
+      await _localStorage.writeBoolImpl(key: key, value: value);
     } else {
       await _localStorage.writeStringImpl(key: key, value: value.toString());
     }
   }
 
   static Future<T?> read<T>({required String key}) async {
-    if (T is bool) {
-      await _localStorage.readBoolImpl(key: key) as bool;
+    dynamic value;
+    if (T == bool) {
+      value = await _localStorage.readBoolImpl(key: key);
     } else {
-      await _localStorage.readStringImpl(key: key);
+      value = await _localStorage.readStringImpl(key: key);
     }
+    return value;
   }
 
   static Future<void> clear() async {
