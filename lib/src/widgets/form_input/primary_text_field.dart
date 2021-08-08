@@ -7,7 +7,8 @@ import '../../utils/form_validator.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final TextEditingController? controller;
-  final String hint;
+  final String? hint;
+  final String? label;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final void Function(String)? onChanged;
@@ -21,7 +22,6 @@ class PrimaryTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? readOnly;
   final int maxLines;
-  final String? label;
   final int? lengthValidator;
   final bool autoFocus;
   final int? maxLength;
@@ -31,7 +31,7 @@ class PrimaryTextField extends StatelessWidget {
   const PrimaryTextField({
     Key? key,
     required this.controller,
-    this.hint = "",
+    this.hint,
     this.label,
     this.obsecure = false,
     this.isRequired = true,
@@ -51,7 +51,8 @@ class PrimaryTextField extends StatelessWidget {
     this.maxLength,
     this.suffixIcon,
     this.focusNode,
-  }) : super(key: key);
+  })  : assert(hint != null || label != null),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -82,7 +83,7 @@ class PrimaryTextField extends StatelessWidget {
                     if (validator != null) return validator?.call(value);
                     return FormValidator.validateField(
                       value,
-                      field: label ?? hint,
+                      field: label ?? hint ?? "",
                       length: lengthValidator,
                     );
                   }

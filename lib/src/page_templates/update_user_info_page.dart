@@ -1,13 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
 import '../constant/style_decoration.dart';
+import '../utils/exception_handler.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_dropdown_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
 import '../widgets/ui_helper.dart';
-import '../utils/exception_handler.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   UpdateUserInfoPage({Key? key}) : super(key: key);
@@ -50,7 +52,6 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
 
   @override
   void initState() {
-    gender = genders[0];
     firstNameTC = TextEditingController();
     lastNameTC = TextEditingController();
     dobTC = TextEditingController();
@@ -81,7 +82,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Update your info", style: kHeaderStyle),
+            Text(LocaleKeys.update.tr(args: ["${LocaleKeys.profile.tr()}"]), style: kHeaderStyle),
             SpaceY(24),
             buildForm(),
           ],
@@ -97,15 +98,15 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
         children: [
           PrimaryTextField(
             controller: firstNameTC,
-            hint: "First name",
+            hint: tr(LocaleKeys.first_name),
           ),
           PrimaryTextField(
             controller: lastNameTC,
-            hint: "Last name",
+            hint: tr(LocaleKeys.last_name),
           ),
           PrimaryTextField(
             controller: dobTC,
-            hint: "Date of birth",
+            hint: tr(LocaleKeys.date_of_birth),
             onTap: onPickDob,
           ),
           PrimaryDropDownButton(
@@ -116,10 +117,11 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
                 gender = value;
               });
             },
+            hint: tr(LocaleKeys.gender.tr()),
           ),
           PrimaryButton(
             onPressed: onSubmit,
-            child: Text("Change Password"),
+            child: Text(tr(LocaleKeys.update, args: [""])),
           ),
         ],
       ),

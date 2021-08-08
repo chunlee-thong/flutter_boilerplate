@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/app_theme_color.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
@@ -20,45 +23,37 @@ class ResetPasswordPage extends StatefulWidget {
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin {
+class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin, CountdownMixin {
   late TextEditingController emailTC, codeTC;
   VerificationStep step = VerificationStep.sendCode;
-  Timer? codeTimer;
-  ValueNotifier timerNotifier = ValueNotifier<int>(60);
 
   Future<void> onSendVerificationCode() async {
     if (isFormValidated) {
       try {
-        if (codeTimer?.isActive ?? false) throw "Can't resend code now";
         String email = emailTC.text.trim();
         await Future.delayed(Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
           step = VerificationStep.Verify;
         });
+        startCountDownTimer();
       } catch (e) {
         UIHelper.showErrorDialog(context, e);
       }
     }
   }
 
-  Future<void> onVerifyCode(String code) async {}
-
-  void startCountDownTimer() {
-    codeTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (timerNotifier.value > 0) {
-        timerNotifier.value -= 1;
-      } else {
-        timer.cancel();
-        timerNotifier.value = 60;
-      }
-    });
+  @override
+  Future<void> resendCode() async {
+    startCountDownTimer();
   }
+
+  Future<void> onVerifyCode(String code) async {}
 
   @override
   void initState() {
     codeTC = TextEditingController();
-    emailTC = TextEditingController(text: "chunlee@gmail.com");
+    emailTC = TextEditingController(text: "email");
     super.initState();
   }
 
@@ -80,34 +75,32 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Reset your Password", style: kHeaderStyle),
+              Text(tr(LocaleKeys.reset_password), style: kHeaderStyle),
               SpaceY(24),
               PrimaryTextField(
                 controller: emailTC,
-                hint: "Email",
+                hint: tr(LocaleKeys.email),
                 readOnly: step == VerificationStep.Verify,
               ),
               if (step == VerificationStep.sendCode) ...[
                 PrimaryButton(
                   onPressed: onSendVerificationCode,
-                  child: Text("Send Code"),
+                  child: Text(LocaleKeys.send_verification_code.tr()),
                 ),
               ] else ...[
-                Text("We have send a verification code to"),
+                Text(LocaleKeys.we_have_send_code.tr()),
                 Text(emailTC.text.trim(), style: kTitleStyle.red),
                 SpaceY(16),
                 PrimaryTextField(
-                  hint: "Code",
+                  hint: LocaleKeys.code.tr(),
                   controller: codeTC,
                   isRequired: false,
                 ),
                 buildCountdownTimer(),
-                SpaceY(16),
                 PrimaryButton(
                   onPressed: () => onVerifyCode(codeTC.text.trim()),
-                  child: Text("Verify"),
+                  child: Text(LocaleKeys.verify.tr()),
                 ),
-                buildFooter(),
               ]
             ],
           ),
@@ -115,30 +108,80 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
       ),
     );
   }
+}
+
+mixin CountdownMixin<T extends StatefulWidget> on State<T> {
+  Timer? codeTimer;
+  int expiredInSecond = 10;
+  int resendDuration = 0;
+  late ValueNotifier<int> timerNotifier;
+
+  Future<void> resendCode();
+
+  void startCountDownTimer() {
+    timerNotifier.value = expiredInSecond;
+    codeTimer?.cancel();
+    codeTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (timerNotifier.value > 0) {
+        timerNotifier.value -= 1;
+      } else {
+        timer.cancel();
+        timerNotifier.value = expiredInSecond;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    timerNotifier = ValueNotifier<int>(expiredInSecond);
+    resendDuration = expiredInSecond;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timerNotifier.dispose();
+    codeTimer?.cancel();
+    codeTimer = null;
+    super.dispose();
+  }
 
   Widget buildCountdownTimer() {
-    return Center(
-      child: SuraNotifier(valueNotifier: timerNotifier, builder: (dynamic timer) => Text("$timer")),
+    return ValueListenableBuilder<int>(
+      valueListenable: timerNotifier,
+      child: _buildResendInfo(),
+      builder: (context, time, child) {
+        if (codeTimer == null) {
+          return SizedBox();
+        }
+        return Column(
+          children: [
+            if (time <= resendDuration) child!,
+            if (codeTimer?.isActive == true)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("($time)"),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 
-  Widget buildFooter() {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Didn't receive code?"),
-          SuraFlatButton(
-            onPressed: onSendVerificationCode,
-            child: Text(
-              "Resend Code",
-              style: Theme.of(context).textTheme.button!.primary,
-            ),
-          ),
-        ],
-      ),
+  Widget _buildResendInfo() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.applyColor(Colors.grey)),
+        SuraFlatButton(
+          onPressed: resendCode,
+          child: Text(LocaleKeys.resend_code.tr()),
+          textColor: AppColor.primary,
+        ),
+      ],
     );
   }
 }

@@ -52,7 +52,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
 
   Future onPickImage(ImageSource imageSource) async {
     await ExceptionWatcher(context, () async {
-      final pickedFile = await picker.getImage(source: imageSource, maxWidth: 1000);
+      final pickedFile = await picker.pickImage(source: imageSource, maxWidth: 1000);
       if (pickedFile != null) {
         toggleValue(true);
         await widget.onImageChanged?.call(selectedImage);

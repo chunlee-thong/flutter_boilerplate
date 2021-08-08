@@ -29,7 +29,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.shrinkWrap = false,
     this.onEmpty,
     this.controller,
-    this.hasRefreshButtonWhenEmpty = false,
+    this.hasRefreshButtonWhenEmpty = true,
   });
 
   const PullRefreshListViewBuilder.paginated({
@@ -44,7 +44,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.shrinkWrap = false,
     this.onEmpty,
     this.controller,
-    this.hasRefreshButtonWhenEmpty = false,
+    this.hasRefreshButtonWhenEmpty = true,
   });
 
   @override

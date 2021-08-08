@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 
 import '../../constant/app_config.dart';
 import '../../widgets/buttons/primary_button.dart';
@@ -25,7 +27,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 showDialog(context: context, builder: (context) => LanguagePickerDialog());
               },
-              child: Text("Change Locale"),
+              child: Text(tr(LocaleKeys.change_language)),
             ),
           ],
         ),
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           await UIHelper.showMessageDialog(context, "You have click change Theme");
           await UIHelper.showErrorDialog(context, "There is an error");
         },
-        child: Text("Switch Theme"),
+        child: Text(LocaleKeys.switch_theme.tr()),
       ),
     );
   }

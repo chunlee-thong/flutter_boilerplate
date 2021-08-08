@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/bottom_navigation_provider.dart';
@@ -16,7 +18,7 @@ class RootBottomNavigation extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: "Home",
+          label: LocaleKeys.home.tr(),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.group),
@@ -28,7 +30,7 @@ class RootBottomNavigation extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: "Profile",
+          label: tr(LocaleKeys.profile),
         )
       ],
     );

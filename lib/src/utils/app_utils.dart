@@ -16,6 +16,10 @@ class AppUtils {
     String image = "${AppConfig.BASE_URL}/uploads/$file";
     return image;
   }
+
+  static Future waiting([int second = 2]) async {
+    await Future.delayed(Duration(seconds: second));
+  }
 }
 
 class Debouncer {

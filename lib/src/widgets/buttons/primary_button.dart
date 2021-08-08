@@ -41,6 +41,8 @@ class PrimaryButton extends StatelessWidget {
       color: color,
       margin: margin,
       shape: shape,
+      //set fix height to look good on every font when loading widget display
+      height: 46,
     );
   }
 }

@@ -1,12 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
+import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
 import '../constant/style_decoration.dart';
+import '../utils/form_validator.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
 import '../widgets/ui_helper.dart';
-import '../utils/form_validator.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   ChangePasswordPage({Key? key}) : super(key: key);
@@ -23,9 +26,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
+        await AppUtils.waiting();
         String oldPassword = oldPasswordTC.text.trim();
         String newPassword = newPasswordTC.text.trim();
-
         bool result = await Future.value(true);
       } catch (e) {
         UIHelper.showErrorDialog(context, e);
@@ -58,7 +61,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Change your Password", style: kHeaderStyle),
+            Text(tr(LocaleKeys.change_password), style: kHeaderStyle),
             SpaceY(24),
             buildForm(),
           ],
@@ -74,24 +77,24 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
         children: [
           PrimaryTextField(
             controller: oldPasswordTC,
-            hint: "Old password",
+            hint: LocaleKeys.old_password.tr(),
             obsecure: true,
           ),
           PrimaryTextField(
             controller: newPasswordTC,
-            hint: "New password",
+            hint: LocaleKeys.new_password.tr(),
             lengthValidator: 6,
             obsecure: true,
           ),
           PrimaryTextField(
             controller: confirmNewPasswordTC,
-            hint: "Confirm new password",
+            hint: LocaleKeys.confirm_new_password.tr(),
             obsecure: true,
             validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
           ),
           PrimaryButton(
             onPressed: onSubmit,
-            child: Text("Change Password"),
+            child: Text(LocaleKeys.save.tr()),
           ),
         ],
       ),

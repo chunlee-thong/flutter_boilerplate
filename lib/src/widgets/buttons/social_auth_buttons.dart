@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -72,26 +74,27 @@ class SocialAuthButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const margin = const EdgeInsets.only(bottom: 16);
+    //final buttonHeight = 40.0;
     return Container(
       child: Column(
         children: [
           SuraAsyncButton(
             onPressed: () => onLoginWithFacebook(context),
-            child: Text("Sign In with Facebook"),
+            child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
             margin: margin,
             startIcon: Icon(FlutterIcons.facebook_ent),
             color: AppColor.fbColor,
           ),
           SuraAsyncButton(
             onPressed: () => onLoginWithGoogle(context),
-            child: Text("Sign In with Google"),
+            child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
             margin: margin,
             startIcon: Icon(FlutterIcons.google_ant),
             color: AppColor.googleRed,
           ),
           SuraAsyncButton(
             onPressed: () => onLoginWithApple(context),
-            child: Text("Sign In with Apple"),
+            child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
             margin: margin,
             startIcon: Icon(FlutterIcons.apple1_ant),
             color: AppColor.appleColor,

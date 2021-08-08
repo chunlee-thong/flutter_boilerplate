@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_manager/sura_manager.dart';
 
@@ -18,7 +20,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: UIHelper.CustomAppBar(
-        title: "User Profile",
+        title: LocaleKeys.profile.tr(),
         actions: [
           IconButton(
             icon: Icon(FlutterIcons.log_out_ent),
@@ -37,9 +39,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ready: (context, user) {
           return Column(
             children: [
-              ListTile(title: Text(user.firstName!), subtitle: Text("First name")),
-              ListTile(title: Text(user.lastName!), subtitle: Text("Last name")),
-              ListTile(title: Text(user.email!), subtitle: Text("Email")),
+              ListTile(title: Text(user.firstName!), subtitle: Text(tr(LocaleKeys.first_name))),
+              ListTile(title: Text(user.lastName!), subtitle: Text(LocaleKeys.last_name.tr())),
+              ListTile(title: Text(user.email!), subtitle: Text(LocaleKeys.email.tr())),
             ],
           );
         },
