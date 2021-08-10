@@ -24,6 +24,13 @@ class UIHelper {
     );
   }
 
+  static Future<T?> showCustomDialog<T>(BuildContext context, Widget dialog) async {
+    return await showDialog(
+      context: context,
+      builder: (context) => dialog,
+    );
+  }
+
   ///BuildContext isn't use, but required in case something change
   static Future showToast(BuildContext context, dynamic message) async {
     await Fluttertoast.showToast(
