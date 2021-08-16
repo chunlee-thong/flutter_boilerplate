@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
 import '../constant/app_theme_color.dart';
 import '../services/local_storage_service/local_storage_service.dart';
@@ -19,7 +20,9 @@ class ThemeProvider extends ChangeNotifier {
   static ThemeProvider getProvider(BuildContext context) => Provider.of<ThemeProvider>(context, listen: false);
 
   static Future initializeTheme() async {
-    _theme = _themeStringToEnum(await LocalStorage.read(key: THEME_KEY));
+    var systemBrightness = describeEnum(SchedulerBinding.instance!.window.platformBrightness);
+    String savedTheme = await LocalStorage.read(key: THEME_KEY) ?? systemBrightness;
+    _theme = _themeStringToEnum(savedTheme);
   }
 
   T themeValue<T>(T lightValue, T darkValue) {
@@ -39,9 +42,9 @@ class ThemeProvider extends ChangeNotifier {
     return kLightTheme;
   }
 
-  static MyThemeValue _themeStringToEnum(String? value) {
+  static MyThemeValue _themeStringToEnum(String value) {
     if (value == "dark") return MyThemeValue.dark;
-    if (value == "light") return MyThemeValue.dark;
+    if (value == "light") return MyThemeValue.light;
     return MyThemeValue.light;
   }
 }

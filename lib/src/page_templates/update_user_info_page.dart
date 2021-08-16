@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../constant/locale_keys.dart';
 import '../constant/app_dimension.dart';
 import '../constant/style_decoration.dart';
 import '../utils/exception_handler.dart';

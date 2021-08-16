@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 
 import '../../constant/app_config.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';
+import '../../providers/theme_provider.dart';
+import '../../constant/locale_keys.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,9 +35,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: ElevatedButton(
         onPressed: () async {
-          //ThemeProvider.getProvider(context).switchTheme();
-          await UIHelper.showMessageDialog(context, "You have click change Theme");
-          await UIHelper.showErrorDialog(context, "There is an error");
+          ThemeProvider.getProvider(context).switchTheme();
         },
         child: Text(LocaleKeys.switch_theme.tr()),
       ),

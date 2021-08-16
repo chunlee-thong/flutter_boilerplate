@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
-import 'package:flutter_boiler_plate/src/utils/app_utils.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
+import '../constant/locale_keys.dart';
+import '../utils/app_utils.dart';
 import '../constant/style_decoration.dart';
 import '../utils/form_validator.dart';
 import '../widgets/buttons/primary_button.dart';

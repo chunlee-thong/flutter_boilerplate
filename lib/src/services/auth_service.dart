@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../api/client/http_client.dart';
+import '../constant/locale_keys.dart';
 import '../constant/app_constant.dart';
 import '../models/others/user_credential.dart';
 import '../models/response/user/auth_response.dart';

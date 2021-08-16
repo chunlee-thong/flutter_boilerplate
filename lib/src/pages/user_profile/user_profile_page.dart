@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_manager/sura_manager.dart';
 
+import '../../constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';

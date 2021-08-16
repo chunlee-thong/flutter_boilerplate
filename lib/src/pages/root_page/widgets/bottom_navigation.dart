@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
+import '../../../constant/locale_keys.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/bottom_navigation_provider.dart';

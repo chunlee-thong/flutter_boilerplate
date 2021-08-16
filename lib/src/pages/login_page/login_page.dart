@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/widgets/common/ellipsis_text.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../api/index.dart';
@@ -12,6 +11,7 @@ import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/form_input/primary_text_field.dart';
+import '../../widgets/common/ellipsis_text.dart';
 
 class LoginPage extends StatefulWidget {
   @override

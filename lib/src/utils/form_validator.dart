@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_boiler_plate/src/constant/locale_keys.dart';
+import '../constant/locale_keys.dart';
 
 class FormValidator {
   static String? validateField(String? value, {required String field, int? length}) {
