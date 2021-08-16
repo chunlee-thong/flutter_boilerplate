@@ -31,12 +31,13 @@ A flutter boiler plate code for initial project setup
 - test
 - pubspec.yaml
 - analysis_options.yaml (optional)
+- README.md (optional)
 
 3. if you are using flavor
 
 - change bundle id and app name in **pubspec.yaml**
 - run **flutter pub run flutter_flavorizr -p assets:download,assets:extract,ios:xcconfig,ios:buildTargets,ios:schema,ios:plist,assets:clean,ide:config,android:buildGradle,android:androidManifest** to generate flavor config for ios and android if you're using flavor.
-- copy these files into project folder if you're using flavor and want a different launcher icon for your flavor
+- copy these files for a different launcher icon base on flavor
 
   - flutter_launcher_icons-prod.yaml
   - flutter_launcher_icons-dev.yaml
@@ -52,8 +53,10 @@ A flutter boiler plate code for initial project setup
 
 ## App Icon
 
-- replace your icon file in **assets/image/app-icon.png** then run the following command: **flutter pub run flutter_launcher_icons:main**
+- replace your icon file in **assets/image/app-icon.png** 
+- run: **flutter pub run flutter_launcher_icons:main**
 - note: this command will run all flutter_launcher_icon with flavor if you have any
+- App Icon isn't dynamic by flavor in ios. you need to replace a String "ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;" to "ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-$(ASSET_PREFIX);" in ios/project.pbxproj
 
 ## Hive database
 

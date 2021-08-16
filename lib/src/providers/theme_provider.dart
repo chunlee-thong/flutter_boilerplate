@@ -10,6 +10,8 @@ enum MyThemeValue {
   light,
 }
 
+
+///Control Theme in our app, default theme is Light
 class ThemeProvider extends ChangeNotifier {
   static MyThemeValue _theme = MyThemeValue.light;
   MyThemeValue get theme => _theme;

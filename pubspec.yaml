@@ -87,7 +87,7 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Flutter Boilerplate Dev"
+        name: "flutter_boiler_plate Dev"
       android:
         applicationId: "com.chunleethong.flutter_boiler_plate.dev"
 
@@ -96,7 +96,7 @@ flavorizr:
 
     staging:
       app:
-        name: "Flutter Boilerplate Staging"
+        name: "flutter_boiler_plate Staging"
 
       android:
         applicationId: "com.chunleethong.flutter_boiler_plate.staging"
@@ -104,7 +104,7 @@ flavorizr:
         bundleId: "com.chunleethong.flutterBoilerPlate.staging"
     prod:
       app:
-        name: "Flutter Boilerplate"
+        name: "flutter_boiler_plate"
 
       android:
         applicationId: "com.chunleethong.flutter_boiler_plate"
