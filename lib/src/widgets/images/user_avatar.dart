@@ -37,8 +37,8 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
       builder: (context) => SuraActionSheet(
         title: tr("Please choose your image source"),
         cancelText: tr("Cancel"),
-        builder: (dynamic option, index) => Text(option),
-        onSelected: (dynamic name, index) {
+        builder: (String option, index) => Text(option),
+        onSelected: (String name, index) {
           if (index == 0) {
             onPickImage(ImageSource.camera);
           } else if (index == 1) {

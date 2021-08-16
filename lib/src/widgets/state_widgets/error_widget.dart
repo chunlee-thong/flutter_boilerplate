@@ -75,8 +75,9 @@ class FlutterCustomErrorRendering extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
-      child: Center(
+    return Scaffold(
+      appBar: AppBar(),
+      body: const Center(
         child: Text(
           'Rendering Error! Check stacktrace for more detail',
           style: TextStyle(color: Colors.red),

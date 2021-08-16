@@ -5,7 +5,6 @@ import 'package:sentry/sentry.dart';
 
 import 'app.dart';
 import 'flavors.dart';
-import 'main_dev.dart';
 import 'src/utils/logger.dart';
 
 void main() async {

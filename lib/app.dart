@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'src/api/client/http_client.dart';
 import 'src/constant/app_config.dart';
@@ -11,9 +13,23 @@ import 'src/pages/splash/splash_page.dart';
 import 'src/providers/loading_provider.dart';
 import 'src/providers/theme_provider.dart';
 import 'src/providers/user_provider.dart';
+import 'src/services/local_storage_service/fss_storage_service.dart';
+import 'src/services/local_storage_service/local_storage_service.dart';
+import 'src/utils/hive_db_adapter.dart';
+import 'src/utils/service_locator.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 import 'src/widgets/state_widgets/page_loading.dart';
+
+Future<void> registerAppConfiguration() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await EasyLocalization.ensureInitialized();
+  await LocalStorage.initialize(FssStorageService());
+  await ThemeProvider.initializeTheme();
+  registerHiveAdapter();
+  registerLocator();
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
