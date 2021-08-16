@@ -18,7 +18,6 @@ dependencies:
   ##google_sign_in: ^5.0.4
 
   ##utils
-  rxdart: ^0.27.1
   provider: ^5.0.0
   get_it: ^7.1.3
   easy_localization: ^3.0.0

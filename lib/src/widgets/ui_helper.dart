@@ -31,7 +31,7 @@ class UIHelper {
     );
   }
 
-  ///BuildContext isn't use, but required in case something change
+  ///BuildContext isn't use, but required just in case something change
   static Future showToast(BuildContext context, dynamic message) async {
     await Fluttertoast.showToast(
       msg: "${message.toString()}",
@@ -48,7 +48,7 @@ class UIHelper {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message.toString()),
+        content: Text("${message.toString()}"),
         margin: const EdgeInsets.all(8),
         behavior: SnackBarBehavior.floating,
       ),

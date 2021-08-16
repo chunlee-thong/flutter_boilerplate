@@ -95,14 +95,12 @@ A flutter boiler plate code for initial project setup
     - database or storage service
     - auth service .....
 
-### ui
-
-##### pages
+#### pages
 
 - Each page has their own folder
 - Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
 
-##### widgets
+#### widgets
 
 - global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
 

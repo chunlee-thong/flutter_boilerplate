@@ -10,7 +10,7 @@ class OnErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
   final Future<void> Function()? onRefresh;
-  final bool? hasAppBar;
+  final bool hasAppBar;
   const OnErrorWidget({
     Key? key,
     required this.message,
@@ -20,7 +20,7 @@ class OnErrorWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (hasAppBar!) {
+    if (hasAppBar) {
       return Scaffold(
         appBar: UIHelper.CustomAppBar(title: ""),
         body: buildErrorWidget(context),

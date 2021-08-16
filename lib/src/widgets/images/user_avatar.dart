@@ -113,7 +113,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
                   builder: (isLoading) {
                     return ConditionalWidget(
                       condition: isLoading,
-                      onTrue: () => CircularProgressIndicator(),
+                      onTrue: () => const CircularProgressIndicator(),
                       onFalse: () => SizedBox(),
                     );
                   },
