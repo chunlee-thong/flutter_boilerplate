@@ -8,9 +8,9 @@ import 'package:sentry/sentry.dart';
 
 import 'app.dart';
 import 'flavors.dart';
+import 'src/services/local_storage_service/fss_storage_service.dart';
 import 'src/providers/theme_provider.dart';
 import 'src/services/local_storage_service/local_storage_service.dart';
-import 'src/services/local_storage_service/spf_storage_service.dart';
 import 'src/utils/hive_db_adapter.dart';
 import 'src/utils/logger.dart';
 import 'src/utils/service_locator.dart';
@@ -23,7 +23,7 @@ void main() async {
       (options) {
         options.dsn = 'sentry-dns';
       },
-      appRunner: () => runApp(MyApp()),
+      appRunner: () => runApp(const MyApp()),
     );
   }, (exception, stackTrace) async {
     errorLog("RunZonedGuard error: ", exception);
@@ -35,7 +35,7 @@ Future registerAppConfiguration() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await EasyLocalization.ensureInitialized();
-  await LocalStorage.initialize(SharedPreferencesStorageService());
+  await LocalStorage.initialize(FssStorageService());
   await ThemeProvider.initializeTheme();
   registerHiveAdapter();
   registerLocator();

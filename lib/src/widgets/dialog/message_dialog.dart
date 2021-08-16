@@ -26,7 +26,7 @@ class CustomMessageDialog extends StatelessWidget {
     this.title,
     required this.message,
   })  : _isError = true,
-        _color = Color(0xFFE57373),
+        _color = const Color(0xFFE57373),
         super(key: key);
 
   @override
@@ -44,7 +44,8 @@ class CustomMessageDialog extends StatelessWidget {
   }
 
   Widget buildContent() {
-    final iconData = _isError ? FlutterIcons.warning_ant : FlutterIcons.infocirlce_ant;
+    final iconData =
+        _isError ? FlutterIcons.warning_ant : FlutterIcons.infocirlce_ant;
     return Container(
       padding: EdgeInsets.all(padding),
       alignment: Alignment.center,
@@ -58,7 +59,7 @@ class CustomMessageDialog extends StatelessWidget {
                 color: _color,
                 size: 32,
               ),
-              SpaceX(16),
+              const SpaceX(16),
               Text(title ?? "Information", style: kSubHeaderStyle.medium),
             ],
           ),

@@ -52,7 +52,8 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
 
   Future onPickImage(ImageSource imageSource) async {
     await ExceptionWatcher(context, () async {
-      final pickedFile = await picker.pickImage(source: imageSource, maxWidth: 1000);
+      final pickedFile =
+          await picker.pickImage(source: imageSource, maxWidth: 1000);
       if (pickedFile != null) {
         toggleValue(true);
         await widget.onImageChanged?.call(selectedImage);
@@ -72,7 +73,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
-          boxShadow: [greyShadow2],
+          boxShadow: [kGreyShadow2],
         ),
         child: Stack(
           children: [
@@ -114,7 +115,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
                     return ConditionalWidget(
                       condition: isLoading,
                       onTrue: () => const CircularProgressIndicator(),
-                      onFalse: () => SizedBox(),
+                      onFalse: () => const SizedBox(),
                     );
                   },
                 ),

@@ -12,12 +12,13 @@ import '../widgets/form_input/primary_text_field.dart';
 import '../widgets/ui_helper.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
-  UpdateUserInfoPage({Key? key}) : super(key: key);
+  const UpdateUserInfoPage({Key? key}) : super(key: key);
   @override
   _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
 }
 
-class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
+class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
+    with SuraFormMixin, AfterBuildMixin {
   late TextEditingController firstNameTC;
   late TextEditingController lastNameTC;
   late TextEditingController dobTC;
@@ -60,9 +61,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   }
 
   @override
-  void afterBuild(BuildContext context) {
-    // TODO: implement afterBuild
-  }
+  void afterBuild(BuildContext context) {}
 
   @override
   void dispose() {
@@ -82,8 +81,9 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(LocaleKeys.update.tr(args: ["${LocaleKeys.profile.tr()}"]), style: kHeaderStyle),
-            SpaceY(24),
+            Text(LocaleKeys.update.tr(args: [(LocaleKeys.profile.tr())]),
+                style: kHeaderStyle),
+            const SpaceY(24),
             buildForm(),
           ],
         ),

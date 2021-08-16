@@ -7,23 +7,27 @@ class AppConstant {}
 class ErrorMessage {
   static const UNEXPECTED_ERROR = "An unexpected error occur!";
   static const UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
-  static const CONNECTION_ERROR = "Error connecting to server. Please check your internet connection or Try again later!";
-  static const TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
+  static const CONNECTION_ERROR =
+      "Error connecting to server. Please check your internet connection or Try again later!";
+  static const TIMEOUT_ERROR =
+      "Connection timeout. Please check your internet connection or Try again later!";
 }
 
 const Locale EN_LOCALE = Locale('en', 'US');
 const Locale KH_LOCALE = Locale('km', 'KH');
 
 const List<LanguageModel> APP_LOCALES = [
-  const LanguageModel(
+  LanguageModel(
     locale: EN_LOCALE,
     name: "English",
-    image: "https://ecolebranchee.com/wp-content/uploads/2015/04/etats-unis-drapeau.gif",
+    image:
+        "https://ecolebranchee.com/wp-content/uploads/2015/04/etats-unis-drapeau.gif",
   ),
-  const LanguageModel(
+  LanguageModel(
     locale: KH_LOCALE,
     name: "ខ្មែរ",
-    image: "https://wonderfulengineering.com/wp-content/uploads/2015/08/Cambodia-flag-3.gif",
+    image:
+        "https://wonderfulengineering.com/wp-content/uploads/2015/08/Cambodia-flag-3.gif",
   ),
 ];
 

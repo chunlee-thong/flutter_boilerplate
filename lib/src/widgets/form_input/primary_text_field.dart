@@ -61,8 +61,9 @@ class PrimaryTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
-            SpaceY(),
+            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium)
+                .paddingValue(horizontal: 4),
+            const SpaceY(),
           ],
           TextFormField(
             focusNode: focusNode,
@@ -90,7 +91,7 @@ class PrimaryTextField extends StatelessWidget {
                 : null,
             decoration: InputDecoration(
               hintText: hint,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
               //labelText: label,

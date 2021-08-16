@@ -7,6 +7,7 @@ import '../../constant/style_decoration.dart';
 import '../common/divider0.dart';
 
 class LanguagePickerDialog extends StatelessWidget {
+  const LanguagePickerDialog({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -22,16 +23,17 @@ class LanguagePickerDialog extends StatelessWidget {
               borderRadius: SuraDecoration.radiusTop(4),
             ),
             alignment: Alignment.center,
-            child: Text("Language", style: kSubHeaderStyle.applyColor(Colors.white)),
+            child: Text("Language",
+                style: kSubHeaderStyle.applyColor(Colors.white)),
           ),
-          Divider0(),
+          const Divider0(),
           ...APP_LOCALES.map((language) {
             return SuraListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(language.image),
               ),
               title: Text(language.name),
-              separator: Divider0(),
+              separator: const Divider0(),
               onTap: () {
                 context.setLocale(language.locale);
                 Navigator.of(context).pop(language.locale);

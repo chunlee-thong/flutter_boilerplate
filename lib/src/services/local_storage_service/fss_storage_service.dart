@@ -3,14 +3,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'local_storage_service.dart';
 
 class FssStorageService extends LocalStorage {
-  final _fss = FlutterSecureStorage();
+  final _fss = const FlutterSecureStorage();
   @override
   Future clearImpl() async {
     await _fss.deleteAll();
   }
 
   @override
-  Future<void> writeStringImpl({required String key, required dynamic value}) async {
+  Future<void> writeStringImpl(
+      {required String key, required dynamic value}) async {
     await _fss.write(key: key, value: value.toString());
   }
 

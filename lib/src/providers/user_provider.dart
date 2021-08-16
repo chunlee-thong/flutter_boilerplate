@@ -14,7 +14,9 @@ class UserProvider extends ChangeNotifier {
 
   UserModel? get userData => userManager.data;
 
-  static UserProvider getProvider(BuildContext context, [bool listen = false]) => Provider.of<UserProvider>(
+  static UserProvider getProvider(BuildContext context,
+          [bool listen = false]) =>
+      Provider.of<UserProvider>(
         context,
         listen: listen,
       );

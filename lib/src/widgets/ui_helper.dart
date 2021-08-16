@@ -4,7 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dialog/message_dialog.dart';
 
 class UIHelper {
-  static Future<T?> showMessageDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showMessageDialog<T>(
+      BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog(
@@ -14,7 +15,8 @@ class UIHelper {
     );
   }
 
-  static Future<T?> showErrorDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showErrorDialog<T>(
+      BuildContext context, dynamic message) async {
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog.error(
@@ -24,7 +26,8 @@ class UIHelper {
     );
   }
 
-  static Future<T?> showCustomDialog<T>(BuildContext context, Widget dialog) async {
+  static Future<T?> showCustomDialog<T>(
+      BuildContext context, Widget dialog) async {
     return await showDialog(
       context: context,
       builder: (context) => dialog,
@@ -34,7 +37,7 @@ class UIHelper {
   ///BuildContext isn't use, but required just in case something change
   static Future showToast(BuildContext context, dynamic message) async {
     await Fluttertoast.showToast(
-      msg: "${message.toString()}",
+      msg: message.toString(),
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
@@ -48,7 +51,7 @@ class UIHelper {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("${message.toString()}"),
+        content: Text(message.toString()),
         margin: const EdgeInsets.all(8),
         behavior: SnackBarBehavior.floating,
       ),

@@ -6,6 +6,8 @@ version: 0.0.1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+publish_to: none  
+
 dependencies:
   flutter:
     sdk: flutter
@@ -25,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.6
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  flutter_lints: ^1.0.4
   ##UI
   fluttertoast: ^8.0.8
   cupertino_icons: ^1.0.3

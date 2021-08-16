@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../providers/bottom_navigation_provider.dart';
 
 class RootBottomNavigation extends StatelessWidget {
+  const RootBottomNavigation({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<BottomNavigationProvider>(context);
@@ -17,19 +18,19 @@ class RootBottomNavigation extends StatelessWidget {
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: const Icon(Icons.home),
           label: LocaleKeys.home.tr(),
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.group),
           label: "Dummy",
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.dashboard_customize),
           label: "Templates",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
           label: tr(LocaleKeys.profile),
         )
       ],

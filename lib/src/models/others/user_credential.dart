@@ -7,16 +7,16 @@ class MemoryUserCredential {
   static final MemoryUserCredential instance = MemoryUserCredential._();
 
   bool hasValidToken() {
-    return this.jwtToken != null && this.jwtToken!.isNotEmpty;
+    return jwtToken != null && jwtToken!.isNotEmpty;
   }
 
   void clearMemoryCredential() {
-    this.jwtToken = null;
-    this.userId = null;
+    jwtToken = null;
+    userId = null;
   }
 
   void initMemoryCredential({required String? token, required String? userId}) {
-    this.jwtToken = token;
+    jwtToken = token;
     this.userId = userId;
   }
 }

@@ -39,7 +39,7 @@ class OnErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             buildImage(),
-            SpaceY(16),
+            const SpaceY(16),
             EllipsisText(
               message.toString(),
               style: kSubtitleStyle.normal,
@@ -62,7 +62,7 @@ class OnErrorWidget extends StatelessWidget {
   }
 
   Widget buildImage() {
-    return Icon(
+    return const Icon(
       FlutterIcons.warning_ant,
       size: 54,
       color: Colors.red,
@@ -71,9 +71,11 @@ class OnErrorWidget extends StatelessWidget {
 }
 
 class FlutterCustomErrorRendering extends StatelessWidget {
+  const FlutterCustomErrorRendering({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return const Material(
       child: Center(
         child: Text(
           'Rendering Error! Check stacktrace for more detail',

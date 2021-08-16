@@ -16,6 +16,8 @@ import 'src/widgets/state_widgets/loading_widget.dart';
 import 'src/widgets/state_widgets/page_loading.dart';
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -24,7 +26,9 @@ class _MyAppState extends State<MyApp> {
   List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
 
   ThemeData customizeTheme(BuildContext context) {
-    String fontName = context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME;
+    String fontName = context.locale == KH_LOCALE
+        ? AppConfig.KH_FONT_NAME
+        : AppConfig.EN_FONT_NAME;
     return Theme.of(context).copyWith(
       textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
     );
@@ -70,7 +74,9 @@ class _MyAppState extends State<MyApp> {
                   locale: context.locale,
                   builder: (context, child) {
                     ErrorWidget.builder = (detail) {
-                      if (kReleaseMode) return FlutterCustomErrorRendering();
+                      if (kReleaseMode) {
+                        return const FlutterCustomErrorRendering();
+                      }
                       return ErrorWidget(detail.exception);
                     };
                     return Theme(
@@ -78,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                       data: customizeTheme(context),
                     );
                   },
-                  home: SplashScreenPage(),
+                  home: const SplashScreenPage(),
                 ),
               );
             },

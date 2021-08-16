@@ -7,7 +7,7 @@ import '../../page_templates/update_user_info_page.dart';
 import '../../widgets/ui_helper.dart';
 
 class TemplatePages extends StatefulWidget {
-  TemplatePages({Key? key}) : super(key: key);
+  const TemplatePages({Key? key}) : super(key: key);
   @override
   _TemplatePagesState createState() => _TemplatePagesState();
 }
@@ -20,24 +20,24 @@ class _TemplatePagesState extends State<TemplatePages> {
       body: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.pages),
-            title: Text("Change password page"),
+            leading: const Icon(Icons.pages),
+            title: const Text("Change password page"),
             onTap: () {
-              PageNavigator.push(context, ChangePasswordPage());
+              PageNavigator.push(context, const ChangePasswordPage());
             },
           ),
           ListTile(
-            leading: Icon(Icons.pages),
-            title: Text("Update user info page"),
+            leading: const Icon(Icons.pages),
+            title: const Text("Update user info page"),
             onTap: () {
-              PageNavigator.push(context, UpdateUserInfoPage());
+              PageNavigator.push(context, const UpdateUserInfoPage());
             },
           ),
           ListTile(
-            leading: Icon(Icons.pages),
-            title: Text("Reset password page"),
+            leading: const Icon(Icons.pages),
+            title: const Text("Reset password page"),
             onTap: () {
-              PageNavigator.push(context, ResetPasswordPage());
+              PageNavigator.push(context, const ResetPasswordPage());
             },
           ),
         ],

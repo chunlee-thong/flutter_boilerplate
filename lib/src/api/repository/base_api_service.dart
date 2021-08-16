@@ -42,7 +42,7 @@ class BaseApiService {
       final httpOption = Options(method: method, headers: {});
       if (requiredToken && MemoryUserCredential.instance.hasValidToken()) {
         String? token = MemoryUserCredential.instance.jwtToken;
-        bool isExpired = SuraJwtDecoder.decode("$token").isExpired;
+        bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken();
         }
@@ -79,7 +79,8 @@ class BaseApiService {
 dynamic _onOtherException(dynamic exception) {
   //Logic or syntax error on some condition
   String? stackTrace = exception?.stackTrace?.toString() ?? "";
-  errorLog("Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
+  errorLog(
+      "Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
   if (exception is Error) {
     return CustomErrorWrapper(
       "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
@@ -101,7 +102,8 @@ dynamic _onDioError(DioError exception) {
     case DioErrorType.response:
       String serverMessage;
       if (exception.response!.data is Map) {
-        serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
+        serverMessage = exception.response?.data["message"] ??
+            ErrorMessage.UNEXPECTED_ERROR;
       } else {
         serverMessage = ErrorMessage.UNEXPECTED_ERROR;
       }
@@ -120,7 +122,8 @@ dynamic _onDioError(DioError exception) {
 void _logDioError(DioError exception) {
   String errorMessage = "Dio error :=> ${exception.requestOptions.path}";
   if (exception.response != null) {
-    errorMessage += ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";
+    errorMessage +=
+        ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";
   } else {
     errorMessage += ", ${exception.message}";
   }

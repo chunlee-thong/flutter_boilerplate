@@ -12,6 +12,8 @@ import '../../widgets/state_widgets/loading_widget.dart';
 import '../login_page/login_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
+  const SplashScreenPage({Key? key}) : super(key: key);
+
   @override
   _SplashScreenPageState createState() => _SplashScreenPageState();
 }
@@ -27,7 +29,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     }
     UserProvider.getProvider(context).setLoginStatus(isLoggedIn);
     await Future.delayed(const Duration(seconds: 1));
-    PageNavigator.pushReplacement(context, isLoggedIn ? RootPage() : LoginPage());
+    PageNavigator.pushReplacement(
+        context, isLoggedIn ? const RootPage() : const LoginPage());
     return true;
   }
 
@@ -49,7 +52,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       backgroundColor: AppColor.materialPrimary,
       body: FutureManagerBuilder<bool>(
         futureManager: splashManager,
-        loading: const LoadingWidget(Colors.white),
+        loading: const LoadingWidget(color: Colors.white),
         error: (error) {
           return OnErrorWidget(
             message: error,
@@ -57,7 +60,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             onRefresh: () => onSplashing(),
           );
         },
-        ready: (context, ready) => const LoadingWidget(Colors.white),
+        ready: (context, ready) => const LoadingWidget(color: Colors.white),
       ),
     );
   }

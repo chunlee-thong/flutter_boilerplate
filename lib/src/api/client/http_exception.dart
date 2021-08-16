@@ -7,12 +7,12 @@ class DioErrorException extends BaseHttpException {
   DioErrorException(this.message, {this.code});
   @override
   String toString() {
-    return code != null ? "$code: $message" : this.message;
+    return code != null ? "$code: $message" : message;
   }
 }
 
 class SessionExpiredException extends BaseHttpException {
-  static final int code = 420;
+  static const int code = 420;
   @override
   String toString() {
     return "Session expired, Please login again";

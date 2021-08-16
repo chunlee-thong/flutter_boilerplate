@@ -15,9 +15,11 @@ class LoadingProvider extends ChangeNotifier {
 
   static void toggleLoading([bool? value]) {
     if (_context == null) {
-      throw FlutterError("Please initialize a LoadingProvider with init() function");
+      throw FlutterError(
+          "Please initialize a LoadingProvider with init() function");
     }
-    Provider.of<LoadingProvider>(_context!, listen: false)._toggleLoading(value);
+    Provider.of<LoadingProvider>(_context!, listen: false)
+        ._toggleLoading(value);
   }
 
   void _toggleLoading([bool? value]) {

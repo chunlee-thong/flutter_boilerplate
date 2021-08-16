@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 File resourceClass = File("../lib/src/constant/app_assets.dart");
@@ -22,11 +23,15 @@ void generateFile() async {
     await resourceClass.writeAsString(buffer.toString());
   }
   resourceClass.writeAsStringSync("\n}", mode: FileMode.append);
-  print("Success");
+  log("Success");
 }
 
 String generateImageAssetsClass(String path) {
   final String imageName = path.split("/").last.replaceAll("%20", " ");
-  final String imageFieldName = imageName.replaceAll(RegExp(r'[-\s+\b|\b\s]'), "_").split(".").first.toUpperCase();
+  final String imageFieldName = imageName
+      .replaceAll(RegExp(r'[-\s+\b|\b\s]'), "_")
+      .split(".")
+      .first
+      .toUpperCase();
   return '\n  static const String $imageFieldName = "$path";';
 }

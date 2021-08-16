@@ -28,30 +28,30 @@ const TextStyle kCaptionStyle = TextStyle(
 
 //extension
 
-extension styleExtension on TextStyle {
-  TextStyle get black => this.apply(color: Colors.black);
-  TextStyle get white => this.apply(color: Colors.white);
-  TextStyle get red => this.apply(color: Colors.red);
-  TextStyle get grey => this.apply(color: Colors.grey);
-  TextStyle get green => this.apply(color: Colors.green);
-  TextStyle get primary => this.apply(color: AppColor.primary);
-  TextStyle get accent => this.apply(color: AppColor.accent);
-  TextStyle get underline => this.apply(decoration: TextDecoration.underline);
+extension StyleExtension on TextStyle {
+  TextStyle get black => apply(color: Colors.black);
+  TextStyle get white => apply(color: Colors.white);
+  TextStyle get red => apply(color: Colors.red);
+  TextStyle get grey => apply(color: Colors.grey);
+  TextStyle get green => apply(color: Colors.green);
+  TextStyle get primary => apply(color: AppColor.primary);
+  TextStyle get accent => apply(color: AppColor.accent);
+  TextStyle get underline => apply(decoration: TextDecoration.underline);
 }
 
 ///
-final BoxShadow greyShadow2 = BoxShadow(
+final BoxShadow kGreyShadow2 = BoxShadow(
   color: Colors.grey.withOpacity(0.2),
   blurRadius: 2,
   spreadRadius: 1.0,
-  offset: Offset(0.0, 4.0),
+  offset: const Offset(0.0, 4.0),
 );
 
-final BoxShadow greyShadow4 = BoxShadow(
+final BoxShadow kGreyShadow4 = BoxShadow(
   color: Colors.grey.withOpacity(0.2),
   blurRadius: 4,
   spreadRadius: 4,
-  offset: Offset(0.0, 4.0),
+  offset: const Offset(0.0, 4.0),
 );
 
 ///material textStyle

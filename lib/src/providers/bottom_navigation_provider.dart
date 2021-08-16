@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 class BottomNavigationProvider extends ChangeNotifier {
   int currentIndex = 0;
   late PageController pageController;
-  BottomNavigationProvider([int index = 0]) {
-    pageController = PageController(initialPage: index);
-    currentIndex = index;
+  BottomNavigationProvider([this.currentIndex = 0]) {
+    pageController = PageController(initialPage: currentIndex);
   }
 
   void changeIndex(int index) {
     if (pageController.hasClients) {
-      this.currentIndex = index;
+      currentIndex = index;
       pageController.jumpToPage(index);
       notifyListeners();
     }

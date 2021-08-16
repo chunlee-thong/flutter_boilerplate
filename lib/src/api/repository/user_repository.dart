@@ -10,7 +10,8 @@ class UserRepository extends BaseApiService {
   static const String _GET_ALL_USER = "/api/user/all";
   static const String _GET_USER_INFO = "/api/user/info/";
 
-  Future<AuthResponse> loginUser({required String email, required String password}) async {
+  Future<AuthResponse> loginUser(
+      {required String email, required String password}) async {
     return onRequest(
       path: _LOGIN_USER,
       method: HttpMethod.POST,

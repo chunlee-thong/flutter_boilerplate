@@ -12,7 +12,7 @@ import 'widgets/bottom_navigation.dart';
 class RootPage extends StatefulWidget {
   final int startPageIndex;
 
-  RootPage({Key? key, this.startPageIndex = 0}) : super(key: key);
+  const RootPage({Key? key, this.startPageIndex = 0}) : super(key: key);
 
   @override
   _RootPageState createState() => _RootPageState();
@@ -20,10 +20,10 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   List<Widget> get pages => [
-        HomePage(),
-        DummyPage(),
-        TemplatePages(),
-        UserProfilePage(),
+        const HomePage(),
+        const DummyPage(),
+        const TemplatePages(),
+        const UserProfilePage(),
       ];
 
   @override
@@ -53,10 +53,10 @@ class _RootPageState extends State<RootPage> {
           child: Scaffold(
             body: PageView(
               controller: state.pageController,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               children: pages,
             ),
-            bottomNavigationBar: RootBottomNavigation(),
+            bottomNavigationBar: const RootBottomNavigation(),
           ),
         ),
       ),

@@ -9,6 +9,7 @@ import '../../providers/theme_provider.dart';
 import '../../constant/locale_keys.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,7 +27,9 @@ class _HomePageState extends State<HomePage> {
               fullWidth: false,
               margin: const EdgeInsets.all(16),
               onPressed: () {
-                showDialog(context: context, builder: (context) => LanguagePickerDialog());
+                showDialog(
+                    context: context,
+                    builder: (context) => const LanguagePickerDialog());
               },
               child: Text(tr(LocaleKeys.change_language)),
             ),

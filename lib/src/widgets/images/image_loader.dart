@@ -39,7 +39,7 @@ class ImageLoader extends StatelessWidget {
           colorBlendMode: BlendMode.darken,
           errorWidget: (context, err, obj) {
             if (error != null) return error!;
-            return Icon(Icons.error_outline);
+            return const Icon(Icons.error_outline);
           },
           placeholder: (context, data) {
             if (loading != null) return loading!;

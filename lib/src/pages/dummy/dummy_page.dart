@@ -6,7 +6,7 @@ import '../../models/response/user/user_model.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {
-  DummyPage({Key? key}) : super(key: key);
+  const DummyPage({Key? key}) : super(key: key);
   @override
   _DummyPageState createState() => _DummyPageState();
 }
@@ -49,7 +49,7 @@ class _DummyPageState extends State<DummyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Fetch all users with pagination")),
+      appBar: AppBar(title: const Text("Fetch all users with pagination")),
       body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
         ready: (context, UserResponse response) {
@@ -60,7 +60,7 @@ class _DummyPageState extends State<DummyPage> {
             itemBuilder: (context, index) {
               final user = response.users[index];
               return ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
                 onTap: () {},

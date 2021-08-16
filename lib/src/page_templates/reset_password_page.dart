@@ -18,12 +18,13 @@ enum VerificationStep {
 }
 
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage({Key? key}) : super(key: key);
+  const ResetPasswordPage({Key? key}) : super(key: key);
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin, CountdownMixin {
+class _ResetPasswordPageState extends State<ResetPasswordPage>
+    with SuraFormMixin, CountdownMixin {
   late TextEditingController emailTC, codeTC;
   VerificationStep step = VerificationStep.sendCode;
 
@@ -31,7 +32,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
     if (isFormValidated) {
       try {
         String email = emailTC.text.trim();
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
           step = VerificationStep.Verify;
@@ -76,7 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(tr(LocaleKeys.reset_password), style: kHeaderStyle),
-              SpaceY(24),
+              const SpaceY(24),
               PrimaryTextField(
                 controller: emailTC,
                 hint: tr(LocaleKeys.email),
@@ -90,7 +91,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
               ] else ...[
                 Text(LocaleKeys.we_have_send_code.tr()),
                 Text(emailTC.text.trim(), style: kTitleStyle.red),
-                SpaceY(16),
+                const SpaceY(16),
                 PrimaryTextField(
                   hint: LocaleKeys.code.tr(),
                   controller: codeTC,
@@ -121,7 +122,7 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
   void startCountDownTimer() {
     timerNotifier.value = expiredInSecond;
     codeTimer?.cancel();
-    codeTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+    codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timerNotifier.value > 0) {
         timerNotifier.value -= 1;
       } else {
@@ -152,7 +153,7 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       child: _buildResendInfo(),
       builder: (context, time, child) {
         if (codeTimer == null) {
-          return SizedBox();
+          return const SizedBox();
         }
         return Column(
           children: [
@@ -175,7 +176,8 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.applyColor(Colors.grey)),
+        Text(tr(LocaleKeys.didnt_receive_code),
+            style: kSubtitleStyle.applyColor(Colors.grey)),
         SuraFlatButton(
           onPressed: resendCode,
           child: Text(LocaleKeys.resend_code.tr()),

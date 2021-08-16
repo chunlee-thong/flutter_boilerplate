@@ -73,34 +73,32 @@ class SocialAuthButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const margin = const EdgeInsets.only(bottom: 16);
+    const margin = EdgeInsets.only(bottom: 16);
     //final buttonHeight = 40.0;
-    return Container(
-      child: Column(
-        children: [
-          SuraAsyncButton(
-            onPressed: () => onLoginWithFacebook(context),
-            child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
-            margin: margin,
-            startIcon: Icon(FlutterIcons.facebook_ent),
-            color: AppColor.fbColor,
-          ),
-          SuraAsyncButton(
-            onPressed: () => onLoginWithGoogle(context),
-            child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
-            margin: margin,
-            startIcon: Icon(FlutterIcons.google_ant),
-            color: AppColor.googleRed,
-          ),
-          SuraAsyncButton(
-            onPressed: () => onLoginWithApple(context),
-            child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
-            margin: margin,
-            startIcon: Icon(FlutterIcons.apple1_ant),
-            color: AppColor.appleColor,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        SuraAsyncButton(
+          onPressed: () => onLoginWithFacebook(context),
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
+          margin: margin,
+          startIcon: const Icon(FlutterIcons.facebook_ent),
+          color: AppColor.fbColor,
+        ),
+        SuraAsyncButton(
+          onPressed: () => onLoginWithGoogle(context),
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
+          margin: margin,
+          startIcon: const Icon(FlutterIcons.google_ant),
+          color: AppColor.googleRed,
+        ),
+        SuraAsyncButton(
+          onPressed: () => onLoginWithApple(context),
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
+          margin: margin,
+          startIcon: const Icon(FlutterIcons.apple1_ant),
+          color: AppColor.appleColor,
+        ),
+      ],
     );
   }
 }

@@ -23,12 +23,13 @@ class AvatarImage extends StatelessWidget {
   }) : super(key: key);
 
   const AvatarImage.file({
+    Key? key,
     this.radius = 20,
     required this.fileImage,
     this.imageUrl,
     this.elevation = 3.0,
     this.placeHolderIcon,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,8 @@ class AvatarImage extends StatelessWidget {
       child: CircleAvatar(
         radius: radius,
         backgroundColor: Colors.white,
-        child: Icon(placeHolderIcon ?? Icons.person, color: AppColor.primary, size: radius),
+        child: Icon(placeHolderIcon ?? Icons.person,
+            color: AppColor.primary, size: radius),
       ),
     );
     return ConditionalWidget(

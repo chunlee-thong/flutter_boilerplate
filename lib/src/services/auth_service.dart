@@ -16,10 +16,12 @@ import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
   //
-  static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
+  static Future<void> onLoginSuccess(
+      BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
     await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
-    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: loginResponse.refreshToken);
+    await LocalStorage.write(
+        key: REFRESH_TOKEN_KEY, value: loginResponse.refreshToken);
     await LocalStorage.write<bool>(key: LOGIN_KEY, value: true);
     await initializeUserCredential();
     UserProvider.getProvider(context).setLoginStatus(true);
@@ -28,12 +30,12 @@ class AuthService {
 
   static Future<void> initializeUserCredential() async {
     String? token = await LocalStorage.read<String>(key: TOKEN_KEY);
-    String? refreshToken = await LocalStorage.read<String>(key: REFRESH_TOKEN_KEY);
+    String? refreshToken =
+        await LocalStorage.read<String>(key: REFRESH_TOKEN_KEY);
     String? userId = await LocalStorage.read<String>(key: ID_KEY);
 
     TokenPayload tokenPayload = SuraJwtDecoder.decode(token!);
     infoLog("Token Expired date", tokenPayload.expiredDate.toLocal());
-
     infoLog("token", token);
     infoLog("refresh token", refreshToken);
     infoLog("userId", userId);
@@ -55,7 +57,8 @@ class AuthService {
     );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
-    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
+    await LocalStorage.write(
+        key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
     MemoryUserCredential.instance.initMemoryCredential(
       token: authResponse.token,
       userId: authResponse.userId,
@@ -63,12 +66,13 @@ class AuthService {
     return authResponse.token;
   }
 
-  static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
+  static void logOutUser(BuildContext context,
+      {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
       MemoryUserCredential.instance.clearMemoryCredential();
       UserProvider.getProvider(context).setLoginStatus(false);
-      PageNavigator.pushAndRemove(context, LoginPage());
+      PageNavigator.pushAndRemove(context, const LoginPage());
     }
 
     if (!showConfirmation) {

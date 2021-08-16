@@ -11,7 +11,7 @@ class SocialAuthService {
         authId: "",
       );
     } catch (exception) {
-      throw exception;
+      rethrow;
     }
   }
 
@@ -30,7 +30,7 @@ class SocialAuthService {
         authId: "",
       );
     } catch (exception) {
-      throw exception;
+      rethrow;
     }
   }
 
@@ -42,7 +42,7 @@ class SocialAuthService {
         authId: "",
       );
     } catch (exception) {
-      throw exception;
+      rethrow;
     }
   }
 

@@ -11,6 +11,8 @@ import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {
+  const UserProfilePage({Key? key}) : super(key: key);
+
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
 }
@@ -23,7 +25,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         title: LocaleKeys.profile.tr(),
         actions: [
           IconButton(
-            icon: Icon(FlutterIcons.log_out_ent),
+            icon: const Icon(FlutterIcons.log_out_ent),
             onPressed: () {
               AuthService.logOutUser(context);
             },
@@ -39,9 +41,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ready: (context, user) {
           return Column(
             children: [
-              ListTile(title: Text(user.firstName!), subtitle: Text(tr(LocaleKeys.first_name))),
-              ListTile(title: Text(user.lastName!), subtitle: Text(LocaleKeys.last_name.tr())),
-              ListTile(title: Text(user.email!), subtitle: Text(LocaleKeys.email.tr())),
+              ListTile(
+                  title: Text(user.firstName!),
+                  subtitle: Text(tr(LocaleKeys.first_name))),
+              ListTile(
+                  title: Text(user.lastName!),
+                  subtitle: Text(LocaleKeys.last_name.tr())),
+              ListTile(
+                  title: Text(user.email!),
+                  subtitle: Text(LocaleKeys.email.tr())),
             ],
           );
         },

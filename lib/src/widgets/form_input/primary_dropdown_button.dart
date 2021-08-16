@@ -33,8 +33,9 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
-            SpaceY(),
+            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium)
+                .paddingValue(horizontal: 4),
+            const SpaceY(),
           ],
           DropdownButtonFormField<T>(
             elevation: 1,
@@ -49,7 +50,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
                     );
                   }
                 : null,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),
             items: options

@@ -14,6 +14,8 @@ import '../../widgets/form_input/primary_text_field.dart';
 import '../../widgets/common/ellipsis_text.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -29,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
           password: passwordTC.text.trim(),
         );
         await AuthService.onLoginSuccess(context, loginResponse);
-        PageNavigator.pushReplacement(context, RootPage());
+        PageNavigator.pushReplacement(context, const RootPage());
       });
     }
   }
@@ -55,14 +57,14 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
         child: Form(
           key: formKey,
           child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 12),
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
             children: <Widget>[
               PrimaryTextField(
                 textInputType: TextInputType.emailAddress,
                 controller: emailTC,
                 label: tr(LocaleKeys.email),
               ),
-              SpaceY(16),
+              const SpaceY(16),
               PrimaryTextField(
                 textInputType: TextInputType.visiblePassword,
                 controller: passwordTC,
@@ -75,7 +77,7 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
                   tr(LocaleKeys.login),
                 ),
               ),
-              SpaceY(100),
+              const SpaceY(100),
               SocialAuthButtons(onLoginCompleted: (data) {}),
             ],
           ),

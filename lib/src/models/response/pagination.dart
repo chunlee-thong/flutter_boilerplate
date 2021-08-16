@@ -10,8 +10,8 @@ class Pagination {
   num totalPage;
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        page: json["page"] == null ? 0 : json["page"],
-        totalItems: json["total_items"] == null ? 0 : json["total_items"],
-        totalPage: json["total_page"] == null ? 0 : json["total_page"],
+        page: json["page"] ?? 0,
+        totalItems: json["total_items"] ?? 0,
+        totalPage: json["total_page"] ?? 0,
       );
 }
