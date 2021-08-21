@@ -20,7 +20,7 @@ dependencies:
   ##google_sign_in: ^5.0.4
 
   ##utils
-  provider: ^5.0.0
+  provider: ^6.0.0
   get_it: ^7.1.3
   easy_localization: ^3.0.0
   flutter_secure_storage: ^4.2.1
@@ -29,13 +29,13 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_lints: ^1.0.4
   ##UI
-  fluttertoast: ^8.0.8
+  flutter_styled_toast: ^2.0.0
   cupertino_icons: ^1.0.3
   flutter_launcher_icons: ^0.9.1
   cached_network_image: ^3.1.0
-  sura_flutter: ^0.3.1
-  sura_manager: ^0.0.5
-  image_picker: ^0.8.3+1
+  sura_flutter: ^0.4.1
+  sura_manager: ^0.0.8
+  image_picker: ^0.8.3+2
   sentry: ^5.1.0
 
   ##network
@@ -49,7 +49,7 @@ dependencies:
 dev_dependencies:
   hive_generator: ^1.1.0
   flutter_flavorizr: ^2.0.0
-  build_runner: ^2.0.4
+  build_runner: ^2.1.1
   flutter_test:
     sdk: flutter
 
