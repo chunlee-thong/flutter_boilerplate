@@ -15,7 +15,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build apk --release --flavor prod
+      - run: flutter build apk --release --flavor prod -t lib/main_prod.dart
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
