@@ -13,10 +13,8 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.22.5"
+          channel: "stable"
       - run: flutter pub get
-      - run: flutter build apk --release --flavor dev
-      - run: flutter build apk --release --flavor staging
       - run: flutter build apk --release --flavor prod
       - name: Create a Release APK
         uses: ncipollo/release-action@v1

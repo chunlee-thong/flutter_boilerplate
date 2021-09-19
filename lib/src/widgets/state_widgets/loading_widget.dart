@@ -13,7 +13,8 @@ class LoadingWidget extends StatelessWidget {
           ? const CupertinoActivityIndicator()
           : CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
-                  color ?? Theme.of(context).accentColor),
+                color ?? Theme.of(context).colorScheme.secondary,
+              ),
             ),
     );
   }

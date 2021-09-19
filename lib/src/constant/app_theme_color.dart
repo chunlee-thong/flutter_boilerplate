@@ -13,10 +13,8 @@ class AppColor {
   static const Color appleColor = Color(0xFF555555);
   static const Color twitterColor = Color(0xFF1DA1F2);
   //material
-  static final MaterialColor materialPrimary =
-      SuraColor.toMaterial(primary.value);
-  static final MaterialColor materialAccent =
-      SuraColor.toMaterial(accent.value);
+  static final MaterialColor materialPrimary = SuraColor.toMaterial(primary.value);
+  static final MaterialColor materialAccent = SuraColor.toMaterial(accent.value);
 }
 
 final ThemeData kLightTheme = _buildLightTheme();
@@ -25,18 +23,18 @@ final ThemeData kDarkTheme = _buildDarkTheme();
 ThemeData _buildLightTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: AppColor.materialPrimary,
-    accentColor: AppColor.materialAccent,
     tabBarTheme: TabBarTheme(
       labelColor: AppColor.materialAccent,
       unselectedLabelColor: Colors.grey,
     ),
-    buttonColor: AppColor.primary,
     buttonTheme: const ButtonThemeData(
       buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: AppColor.materialPrimary).copyWith(
+      secondary: AppColor.materialAccent,
+    ),
   );
   return base;
 }
@@ -44,15 +42,16 @@ ThemeData _buildLightTheme() {
 ThemeData _buildDarkTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: AppColor.materialPrimary,
     primaryColorDark: AppColor.materialPrimary,
-    accentColor: AppColor.materialAccent,
     toggleableActiveColor: AppColor.materialAccent,
     buttonTheme: const ButtonThemeData(
       buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: AppColor.materialPrimary).copyWith(
+      secondary: AppColor.materialAccent,
+    ),
   );
   return base;
 }

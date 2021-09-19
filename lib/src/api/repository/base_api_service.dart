@@ -79,8 +79,7 @@ class BaseApiService {
 dynamic _onOtherException(dynamic exception) {
   //Logic or syntax error on some condition
   String? stackTrace = exception?.stackTrace?.toString() ?? "";
-  errorLog(
-      "Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
+  errorLog("Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
   if (exception is Error) {
     return CustomErrorWrapper(
       "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
@@ -101,15 +100,18 @@ dynamic _onDioError(DioError exception) {
       return DioErrorException(ErrorMessage.TIMEOUT_ERROR);
     case DioErrorType.response:
       String serverMessage;
-      if (exception.response!.data is Map) {
-        serverMessage = exception.response?.data["message"] ??
-            ErrorMessage.UNEXPECTED_ERROR;
+      int statusCode = exception.response?.statusCode ?? 500;
+
+      if (statusCode >= 500) {
+        serverMessage = ErrorMessage.INTERNAL_SERVER_ERROR;
+      } else if (statusCode == SessionExpiredException.code) {
+        return SessionExpiredException();
+      } else if (exception.response!.data is Map) {
+        serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
       } else {
         serverMessage = ErrorMessage.UNEXPECTED_ERROR;
       }
-      if (exception.response!.statusCode == SessionExpiredException.code) {
-        return SessionExpiredException();
-      }
+
       return DioErrorException(
         serverMessage,
         code: exception.response!.statusCode,
@@ -122,8 +124,7 @@ dynamic _onDioError(DioError exception) {
 void _logDioError(DioError exception) {
   String errorMessage = "Dio error :=> ${exception.requestOptions.path}";
   if (exception.response != null) {
-    errorMessage +=
-        ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";
+    errorMessage += ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";
   } else {
     errorMessage += ", ${exception.message}";
   }
