@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../providers/auth_provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
@@ -27,10 +28,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       await AuthService.initializeUserCredential();
       UserProvider.getProvider(context).getUserInfo();
     }
-    UserProvider.getProvider(context).setLoginStatus(isLoggedIn);
+    AuthProvider.getProvider(context).setLoginStatus(isLoggedIn);
     await Future.delayed(const Duration(seconds: 1));
     PageNavigator.pushReplacement(
-        context, isLoggedIn ? const RootPage() : const LoginPage());
+      context,
+      isLoggedIn ? const RootPage() : const LoginPage(),
+    );
     return true;
   }
 

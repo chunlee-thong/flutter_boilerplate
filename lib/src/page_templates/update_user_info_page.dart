@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/locale_keys.dart';
 import '../constant/app_dimension.dart';
+import '../constant/locale_keys.dart';
 import '../constant/style_decoration.dart';
 import '../utils/exception_handler.dart';
 import '../widgets/buttons/primary_button.dart';
@@ -17,8 +17,7 @@ class UpdateUserInfoPage extends StatefulWidget {
   _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
 }
 
-class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
-    with SuraFormMixin, AfterBuildMixin {
+class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
   late TextEditingController firstNameTC;
   late TextEditingController lastNameTC;
   late TextEditingController dobTC;
@@ -30,7 +29,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
-      await ExceptionWatcher(context, () async {
+      await ExceptionHandler.run(context, () async {
         String firstname = firstNameTC.text.trim();
         String lastname = lastNameTC.text.trim();
         String country = countryTC.text.trim();
@@ -81,8 +80,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(LocaleKeys.update.tr(args: [(LocaleKeys.profile.tr())]),
-                style: kHeaderStyle),
+            Text(LocaleKeys.update.tr(args: [(LocaleKeys.profile.tr())]), style: kHeaderStyle),
             const SpaceY(24),
             buildForm(),
           ],

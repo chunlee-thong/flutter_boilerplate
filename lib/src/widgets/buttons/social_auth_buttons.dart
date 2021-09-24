@@ -19,7 +19,7 @@ class SocialAuthButtons extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> onLoginWithFacebook(BuildContext context) async {
-    await ExceptionWatcher(
+    await ExceptionHandler.run(
       context,
       () async {
         SocialAuthData data = await SocialAuthService.loginWithFacebook();
@@ -36,7 +36,7 @@ class SocialAuthButtons extends StatelessWidget {
   }
 
   Future<void> onLoginWithGoogle(BuildContext context) async {
-    await ExceptionWatcher(
+    await ExceptionHandler.run(
       context,
       () async {
         SocialAuthData data = await SocialAuthService.loginWithGoogle();
@@ -54,7 +54,7 @@ class SocialAuthButtons extends StatelessWidget {
   }
 
   Future<void> onLoginWithApple(BuildContext context) async {
-    await ExceptionWatcher(
+    await ExceptionHandler.run(
       context,
       () async {
         SocialAuthData data = await SocialAuthService.loginWithApple();

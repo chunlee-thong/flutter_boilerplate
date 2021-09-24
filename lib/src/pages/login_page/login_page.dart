@@ -10,8 +10,8 @@ import '../../services/auth_service.dart';
 import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
-import '../../widgets/form_input/primary_text_field.dart';
 import '../../widgets/common/ellipsis_text.dart';
+import '../../widgets/form_input/primary_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
 
   void onLogin() async {
     if (isFormValidated) {
-      await ExceptionWatcher(context, () async {
+      await ExceptionHandler.run(context, () async {
         AuthResponse loginResponse = await userRepository.loginUser(
           email: emailTC.text.trim(),
           password: passwordTC.text.trim(),
