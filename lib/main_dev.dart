@@ -1,15 +1,16 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sentry/sentry.dart';
 
 import 'app.dart';
-import 'flavors.dart';
+import 'flavor.dart';
 import 'src/utils/logger.dart';
 
 void main() async {
   runZonedGuarded(() async {
+    setupFlavorConfiguration(Flavor.dev);
     await registerAppConfiguration();
-    setupDevEnvConfig();
     await Sentry.init(
       (options) {
         options.dsn = 'sentry-dns';

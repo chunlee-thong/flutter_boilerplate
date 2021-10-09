@@ -34,22 +34,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
       ),
       body: FutureManagerBuilder<UserModel>(
         futureManager: UserProvider.getProvider(context).userManager,
-        error: (error) => OnErrorWidget(
+        error: (error) => CustomErrorWidget(
           message: error,
           onRefresh: UserProvider.getProvider(context).getUserInfo,
         ),
         ready: (context, user) {
           return Column(
             children: [
-              ListTile(
-                  title: Text(user.firstName!),
-                  subtitle: Text(tr(LocaleKeys.first_name))),
-              ListTile(
-                  title: Text(user.lastName!),
-                  subtitle: Text(LocaleKeys.last_name.tr())),
-              ListTile(
-                  title: Text(user.email!),
-                  subtitle: Text(LocaleKeys.email.tr())),
+              ListTile(title: Text(user.firstName!), subtitle: Text(tr(LocaleKeys.first_name))),
+              ListTile(title: Text(user.lastName!), subtitle: Text(LocaleKeys.last_name.tr())),
+              ListTile(title: Text(user.email!), subtitle: Text(LocaleKeys.email.tr())),
             ],
           );
         },

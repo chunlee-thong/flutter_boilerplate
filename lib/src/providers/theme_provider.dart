@@ -1,55 +1,44 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart';
 
 import '../constant/app_theme_color.dart';
 import '../services/local_storage_service/local_storage_service.dart';
 
-enum MyThemeValue {
-  dark,
-  light,
-}
-
 ///Control Theme in our app, default theme is Light
 class ThemeProvider extends ChangeNotifier {
-  static MyThemeValue _theme = MyThemeValue.light;
-  MyThemeValue get theme => _theme;
+  static bool isDark = false;
 
-  static ThemeProvider getProvider(BuildContext context) =>
-      Provider.of<ThemeProvider>(context, listen: false);
+  static final List<String> themeValueString = ["dark", "light"];
+
+  static ThemeProvider getProvider(BuildContext context) => Provider.of<ThemeProvider>(context, listen: false);
 
   static Future initializeTheme() async {
-    var systemBrightness =
-        describeEnum(SchedulerBinding.instance!.window.platformBrightness);
-    String savedTheme =
-        await LocalStorage.read(key: THEME_KEY) ?? systemBrightness;
-    _theme = _themeStringToEnum(savedTheme);
+    var systemBrightness = describeEnum(SchedulerBinding.instance!.window.platformBrightness);
+    String savedTheme = await LocalStorage.read(key: THEME_KEY) ?? systemBrightness;
+    isDark = _themeStringChecker(savedTheme);
   }
 
   T themeValue<T>(T lightValue, T darkValue) {
-    return _theme == MyThemeValue.dark ? darkValue : lightValue;
+    return isDark ? darkValue : lightValue;
   }
 
-  void switchTheme([MyThemeValue? themeValue]) async {
+  void switchTheme([bool? isDarkTheme]) async {
     //Change by provided theme or else switch between light or dark
-    _theme = themeValue ??
-        (_theme == MyThemeValue.light ? MyThemeValue.dark : MyThemeValue.light);
+    isDark = isDarkTheme ?? !isDark;
     notifyListeners();
-    LocalStorage.write(
-        key: THEME_KEY, value: _theme.toString().split(".").last);
+    LocalStorage.write(key: THEME_KEY, value: isDark ? themeValueString[0] : themeValueString[1]);
   }
 
   ThemeData getThemeData() {
-    if (_theme == MyThemeValue.dark) return kDarkTheme;
-    if (_theme == MyThemeValue.light) return kLightTheme;
-    return kLightTheme;
+    return isDark ? kDarkTheme : kLightTheme;
   }
 
-  static MyThemeValue _themeStringToEnum(String value) {
-    if (value == "dark") return MyThemeValue.dark;
-    if (value == "light") return MyThemeValue.light;
-    return MyThemeValue.light;
+  static bool _themeStringChecker(String value) {
+    if (value == themeValueString[0]) return true;
+    if (value == themeValueString[1]) return false;
+    return false;
   }
 }

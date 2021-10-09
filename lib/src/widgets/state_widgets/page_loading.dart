@@ -6,10 +6,7 @@ import 'loading_widget.dart';
 
 class PageLoading extends StatefulWidget {
   final Widget child;
-  const PageLoading({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const PageLoading({Key? key, required this.child}) : super(key: key);
 
   @override
   _PageLoadingState createState() => _PageLoadingState();
@@ -24,9 +21,7 @@ class _PageLoadingState extends State<PageLoading> {
   @override
   Widget build(BuildContext context) {
     LoadingProvider.init(context);
-    final color = Theme.of(context).brightness == Brightness.dark
-        ? Colors.grey.withOpacity(0.2)
-        : Colors.black26;
+    final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
     return Stack(
       children: [
         widget.child,

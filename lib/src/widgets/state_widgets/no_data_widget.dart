@@ -27,7 +27,7 @@ class NoDataWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildImage(),
+            _buildNoDataIcon(),
             const SpaceY(16),
             Text(message, style: kSubtitleStyle.normal),
             if (onRefresh != null)
@@ -45,7 +45,7 @@ class NoDataWidget extends StatelessWidget {
     );
   }
 
-  Widget buildImage() {
+  Widget _buildNoDataIcon() {
     return const Icon(
       FlutterIcons.cloud_off_mdi,
       size: 54,

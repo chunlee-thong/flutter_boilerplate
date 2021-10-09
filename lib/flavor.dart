@@ -26,17 +26,7 @@ class F {
   }
 }
 
-void setupDevEnvConfig() {
+void setupFlavorConfiguration(Flavor flavor) {
   AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
-  F.flavor = Flavor.dev;
-}
-
-void setupStagingEnvConfig() {
-  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
-  F.flavor = Flavor.staging;
-}
-
-void setupProdEnvConfig() {
-  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
-  F.flavor = Flavor.production;
+  F.flavor = flavor;
 }

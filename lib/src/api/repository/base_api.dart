@@ -10,10 +10,10 @@ import '../../utils/logger.dart';
 import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
-class BaseApiService {
+class API {
   late final Dio dio;
 
-  BaseApiService({Dio? dio}) {
+  API({Dio? dio}) {
     if (dio == null) {
       this.dio = DefaultHttpClient.dio;
     } else {

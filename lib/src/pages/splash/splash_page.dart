@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../providers/auth_provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../../constant/app_theme_color.dart';
 import '../../pages/root_page/root_page.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
 import '../../services/local_storage_service/local_storage_service.dart';
@@ -57,7 +57,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         futureManager: splashManager,
         loading: const LoadingWidget(color: Colors.white),
         error: (error) {
-          return OnErrorWidget(
+          return CustomErrorWidget(
             message: error,
             hasAppBar: true,
             onRefresh: () => onSplashing(),

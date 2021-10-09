@@ -36,16 +36,15 @@ class CustomMessageDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildContent(),
-          buildAction(context),
+          _buildContent(),
+          _buildAction(context),
         ],
       ),
     );
   }
 
-  Widget buildContent() {
-    final iconData =
-        _isError ? FlutterIcons.warning_ant : FlutterIcons.infocirlce_ant;
+  Widget _buildContent() {
+    final iconData = _isError ? FlutterIcons.warning_ant : FlutterIcons.infocirlce_ant;
     return Container(
       padding: EdgeInsets.all(padding),
       alignment: Alignment.center,
@@ -74,7 +73,7 @@ class CustomMessageDialog extends StatelessWidget {
     );
   }
 
-  Widget buildAction(context) {
+  Widget _buildAction(context) {
     final buttonText = _isError ? "Dismiss" : "Ok";
     return Container(
       width: double.infinity,

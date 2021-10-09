@@ -25,6 +25,9 @@ const TextStyle kNormalStyle = TextStyle(
 const TextStyle kCaptionStyle = TextStyle(
   fontSize: 12,
 );
+const TextStyle kOverLineStyle = TextStyle(
+  fontSize: 10,
+);
 
 //extension
 

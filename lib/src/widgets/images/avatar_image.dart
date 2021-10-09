@@ -41,13 +41,12 @@ class AvatarImage extends StatelessWidget {
       child: CircleAvatar(
         radius: radius,
         backgroundColor: Colors.white,
-        child: Icon(placeHolderIcon ?? Icons.person,
-            color: AppColor.primary, size: radius),
+        child: Icon(placeHolderIcon ?? Icons.person, color: AppColor.primary, size: radius),
       ),
     );
     return ConditionalWidget(
       condition: fileImage != null,
-      onTrue: () => buildCircleAvatarImage(fileImage),
+      onTrue: () => _buildCircleAvatarImage(fileImage),
       onFalse: () => realImageUrl == null
           ? placeholder
           : CachedNetworkImage(
@@ -56,13 +55,13 @@ class AvatarImage extends StatelessWidget {
               errorWidget: (context, url, _) => placeholder,
               placeholder: (context, url) => placeholder,
               imageBuilder: (context, image) {
-                return buildCircleAvatarImage(image);
+                return _buildCircleAvatarImage(image);
               },
             ),
     );
   }
 
-  Widget buildCircleAvatarImage(ImageProvider? image) {
+  Widget _buildCircleAvatarImage(ImageProvider? image) {
     return Card(
       color: Colors.white,
       shape: const CircleBorder(),

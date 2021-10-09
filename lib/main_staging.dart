@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:sentry/sentry.dart';
 
 import 'app.dart';
-import 'flavors.dart';
+import 'flavor.dart';
 import 'src/utils/logger.dart';
 
 void main() async {
   runZonedGuarded(() async {
+    setupFlavorConfiguration(Flavor.staging);
     await registerAppConfiguration();
-    setupStagingEnvConfig();
     await Sentry.init(
       (options) {
         options.dsn = 'sentry-dns';

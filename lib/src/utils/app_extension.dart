@@ -18,10 +18,8 @@ extension FileExtensionMethod on FileSystemEntity {
 }
 
 extension StringUtil on String {
-  String obsecure([bool? condition]) =>
-      condition == true ? replaceAll(RegExp(r'.'), "*") : this;
-  String obsecureLast([int length = 4]) =>
-      replaceAll(RegExp(".{$length}\$"), '*' * length);
+  String obscure([bool? condition]) => condition == true ? replaceAll(RegExp(r'.'), "*") : this;
+  String obscureLast([int length = 4]) => replaceAll(RegExp(".{$length}\$"), '*' * length);
 
   bool isEmail() {
     Pattern pattern =

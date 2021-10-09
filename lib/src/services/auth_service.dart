@@ -17,10 +17,7 @@ import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
   //
-  static Future<void> onLoginSuccess(
-    BuildContext context,
-    AuthResponse loginResponse,
-  ) async {
+  static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
     await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
     await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
     await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: loginResponse.refreshToken);

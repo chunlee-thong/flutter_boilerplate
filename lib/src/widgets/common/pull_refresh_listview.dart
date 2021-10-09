@@ -16,6 +16,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
   final bool shrinkWrap;
   final Widget? onEmpty;
   final ScrollController? controller;
+  final bool? hasError;
   //
   const PullRefreshListViewBuilder({
     required this.onRefresh,
@@ -31,6 +32,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.onEmpty,
     this.controller,
     this.hasRefreshButtonWhenEmpty = true,
+    this.hasError,
   }) : super(key: key);
 
   const PullRefreshListViewBuilder.paginated({
@@ -47,6 +49,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.onEmpty,
     this.controller,
     this.hasRefreshButtonWhenEmpty = true,
+    this.hasError,
   }) : super(key: key);
 
   @override
@@ -68,6 +71,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           scrollDirection: scrollDirection ?? Axis.vertical,
           itemCount: itemCount,
           separator: separator ?? const SizedBox(),
+          hasError: hasError ?? false,
         ),
         onFalse: () => ListView.separated(
           controller: controller,

@@ -2,16 +2,15 @@ import '../../constant/app_constant.dart';
 import '../../models/others/user_credential.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
-import 'base_api_service.dart';
+import 'base_api.dart';
 
-class UserRepository extends BaseApiService {
+class UserRepository extends API {
   //
   static const String _LOGIN_USER = "/api/user/login";
   static const String _GET_ALL_USER = "/api/user/all";
   static const String _GET_USER_INFO = "/api/user/info/";
 
-  Future<AuthResponse> loginUser(
-      {required String email, required String password}) async {
+  Future<AuthResponse> loginUser({required String email, required String password}) async {
     return onRequest(
       path: _LOGIN_USER,
       method: HttpMethod.POST,

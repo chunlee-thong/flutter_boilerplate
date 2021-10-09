@@ -6,12 +6,12 @@ import '../../constant/style_decoration.dart';
 import '../common/ellipsis_text.dart';
 import '../ui_helper.dart';
 
-class OnErrorWidget extends StatelessWidget {
+class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
   final Future<void> Function()? onRefresh;
   final bool hasAppBar;
-  const OnErrorWidget({
+  const CustomErrorWidget({
     Key? key,
     required this.message,
     this.hasAppBar = false,
