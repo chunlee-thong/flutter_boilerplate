@@ -74,6 +74,7 @@ class SocialAuthButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const margin = EdgeInsets.only(bottom: 16);
+    const double buttonHeight = 46;
     //final buttonHeight = 40.0;
     return Column(
       children: [
@@ -83,6 +84,7 @@ class SocialAuthButtons extends StatelessWidget {
           margin: margin,
           startIcon: const Icon(FlutterIcons.facebook_ent),
           color: AppColor.fbColor,
+          height: buttonHeight,
         ),
         SuraAsyncButton(
           onPressed: () => onLoginWithGoogle(context),
@@ -90,6 +92,7 @@ class SocialAuthButtons extends StatelessWidget {
           margin: margin,
           startIcon: const Icon(FlutterIcons.google_ant),
           color: AppColor.googleRed,
+          height: buttonHeight,
         ),
         SuraAsyncButton(
           onPressed: () => onLoginWithApple(context),
@@ -97,6 +100,7 @@ class SocialAuthButtons extends StatelessWidget {
           margin: margin,
           startIcon: const Icon(FlutterIcons.apple1_ant),
           color: AppColor.appleColor,
+          height: buttonHeight,
         ),
       ],
     );

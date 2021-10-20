@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 import '../../constant/app_config.dart';
@@ -21,6 +23,11 @@ class DefaultHttpClient {
       receiveTimeout: _timeOut,
     );
     dio = Dio(options)..interceptors.add(defaultInterceptor);
+
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
   }
 }
 
@@ -28,21 +35,18 @@ const JsonDecoder decoder = JsonDecoder();
 const JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
 final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
-  onRequest: (RequestOptions options,
-      RequestInterceptorHandler requestInterceptorHandler) async {
+  onRequest: (RequestOptions options, RequestInterceptorHandler requestInterceptorHandler) async {
     httpLog("${options.method}: ${options.path},"
         "query: ${options.queryParameters},"
         "data: ${options.data},"
         "token: ${ObjectUtils.getLastIndexString(options.headers["authorization"])}");
     requestInterceptorHandler.next(options);
   },
-  onResponse: (Response response,
-      ResponseInterceptorHandler responseInterceptorHandler) async {
+  onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
     //prettyPrintJson(response.data);
     responseInterceptorHandler.next(response);
   },
-  onError:
-      (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
+  onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
     errorInterceptorHandler.reject(error);
   },
 );

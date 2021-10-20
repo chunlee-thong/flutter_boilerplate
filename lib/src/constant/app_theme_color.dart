@@ -32,8 +32,11 @@ ThemeData _buildLightTheme() {
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: AppColor.materialPrimary).copyWith(
-      secondary: AppColor.materialAccent,
+    colorScheme: const ColorScheme.light(),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        onPrimary: Colors.white,
+      ),
     ),
   );
   return base;
@@ -49,8 +52,11 @@ ThemeData _buildDarkTheme() {
       textTheme: ButtonTextTheme.primary,
     ),
     fontFamily: AppConfig.EN_FONT_NAME,
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: AppColor.materialPrimary).copyWith(
-      secondary: AppColor.materialAccent,
+    colorScheme: const ColorScheme.dark(),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        onPrimary: Colors.white,
+      ),
     ),
   );
   return base;

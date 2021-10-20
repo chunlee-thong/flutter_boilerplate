@@ -52,6 +52,7 @@ dev_dependencies:
   flutter_flavorizr: ^2.0.0
   build_runner: ^2.1.1
   flutter_lints: ^1.0.4
+  mocktail: ^0.1.4
   flutter_test:
     sdk: flutter
 

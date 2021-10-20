@@ -11,7 +11,7 @@ class UserRepository extends API {
   static const String _GET_USER_INFO = "/api/user/info/";
 
   Future<AuthResponse> loginUser({required String email, required String password}) async {
-    return onRequest(
+    return httpRequest(
       path: _LOGIN_USER,
       method: HttpMethod.POST,
       data: {
@@ -25,7 +25,7 @@ class UserRepository extends API {
   }
 
   Future<UserResponse> fetchUserList({int page = 1, int count = 99999}) async {
-    return onRequest(
+    return httpRequest(
       path: _GET_ALL_USER,
       query: {
         "page": page,
@@ -39,7 +39,7 @@ class UserRepository extends API {
 
   Future<UserModel> fetchUserInfo() async {
     String? userId = MemoryUserCredential.instance.userId;
-    return onRequest(
+    return httpRequest(
       path: _GET_USER_INFO + "$userId",
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);

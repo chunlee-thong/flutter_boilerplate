@@ -26,7 +26,7 @@ class API {
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
-  Future<T> onRequest<T>({
+  Future<T> httpRequest<T>({
     required String path,
     required T Function(Response) onSuccess,
     String method = HttpMethod.GET,
@@ -78,7 +78,12 @@ class API {
 
 dynamic _onOtherException(dynamic exception) {
   //Logic or syntax error on some condition
-  String? stackTrace = exception?.stackTrace?.toString() ?? "";
+  String? stackTrace = "";
+  if (exception is Exception) {
+    stackTrace = exception.toString();
+  } else {
+    stackTrace = exception?.stackTrace?.toString() ?? "";
+  }
   errorLog("Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
   if (exception is Error) {
     return CustomErrorWrapper(
