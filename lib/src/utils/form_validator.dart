@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+
 import '../constant/locale_keys.dart';
 
 class FormValidator {
-  static String? validateField(String? value,
-      {required String field, int? length}) {
+  static String? validateField(String? value, {required String field, int? length}) {
     if (value == null || value.isEmpty) {
       return tr(LocaleKeys.please_input_a, args: [field]);
     }
@@ -13,8 +13,7 @@ class FormValidator {
     return null;
   }
 
-  static String? validateYourField(String? value,
-      {required String field, int? length}) {
+  static String? validateYourField(String? value, {required String field, int? length}) {
     if (value == null || value.isEmpty) {
       return tr(LocaleKeys.please_input_your, args: [field]);
     }
@@ -44,8 +43,7 @@ class FormValidator {
 
   static String? validateConfirmPassword(String? value, String newPassword) {
     if (value == null || value.isEmpty) {
-      return tr(LocaleKeys.please_input_a,
-          args: [LocaleKeys.confirm_password.tr()]);
+      return tr(LocaleKeys.please_input_a, args: [LocaleKeys.confirm_password.tr()]);
     }
 
     if (value.trim() != newPassword.trim()) {

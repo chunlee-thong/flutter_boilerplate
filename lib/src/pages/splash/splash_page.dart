@@ -30,7 +30,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     }
     AuthProvider.getProvider(context).setLoginStatus(isLoggedIn);
     await Future.delayed(const Duration(seconds: 1));
-    PageNavigator.pushReplacement(
+    SuraPageNavigator.pushReplacement(
       context,
       isLoggedIn ? const RootPage() : const LoginPage(),
     );

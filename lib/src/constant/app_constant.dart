@@ -5,12 +5,12 @@ import '../models/others/language_model.dart';
 class AppConstant {}
 
 class ErrorMessage {
-  static const UNEXPECTED_ERROR = "An unexpected error occur!";
-  static const INTERNAL_SERVER_ERROR = "Internal server error, Please try again later.";
-  static const UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
-  static const CONNECTION_ERROR =
+  static const String UNEXPECTED_ERROR = "An unexpected error occur!";
+  static const String INTERNAL_SERVER_ERROR = "Internal server error, Please try again later.";
+  static const String UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
+  static const String CONNECTION_ERROR =
       "Error connecting to server. Please check your internet connection or Try again later!";
-  static const TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
+  static const String TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
 }
 
 const Locale EN_LOCALE = Locale('en', 'US');

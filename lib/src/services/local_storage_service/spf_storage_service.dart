@@ -10,8 +10,7 @@ class SharedPreferencesStorageService extends LocalStorage {
   }
 
   @override
-  Future<void> writeStringImpl(
-      {required String key, required String value}) async {
+  Future<void> writeStringImpl({required String key, required String value}) async {
     final spf = await SharedPreferences.getInstance();
     await spf.setString(key, value);
   }

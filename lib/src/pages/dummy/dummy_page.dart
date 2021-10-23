@@ -57,6 +57,7 @@ class _DummyPageState extends State<DummyPage> {
             onRefresh: () => fetchData(true),
             itemCount: response.users.length,
             hasMoreData: response.hasMoreData,
+            hasError: userController.hasError,
             itemBuilder: (context, index) {
               final user = response.users[index];
               return ListTile(

@@ -68,7 +68,7 @@ class AuthService {
       await LocalStorage.clear();
       MemoryUserCredential.instance.clearMemoryCredential();
       AuthProvider.getProvider(context).setLoginStatus(false);
-      PageNavigator.pushAndRemove(context, const LoginPage());
+      SuraPageNavigator.pushAndRemove(context, const LoginPage());
     }
 
     if (!showConfirmation) {

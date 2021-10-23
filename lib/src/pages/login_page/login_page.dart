@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with SuraFormMixin {
           password: passwordTC.text.trim(),
         );
         await AuthService.onLoginSuccess(context, loginResponse);
-        PageNavigator.pushReplacement(context, const RootPage());
+        SuraPageNavigator.pushReplacement(context, const RootPage());
       });
     }
   }

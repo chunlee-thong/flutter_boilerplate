@@ -23,21 +23,21 @@ class _TemplatePagesState extends State<TemplatePages> {
             leading: const Icon(Icons.pages),
             title: const Text("Change password page"),
             onTap: () {
-              PageNavigator.push(context, const ChangePasswordPage());
+              SuraPageNavigator.push(context, const ChangePasswordPage());
             },
           ),
           ListTile(
             leading: const Icon(Icons.pages),
             title: const Text("Update user info page"),
             onTap: () {
-              PageNavigator.push(context, const UpdateUserInfoPage());
+              SuraPageNavigator.push(context, const UpdateUserInfoPage());
             },
           ),
           ListTile(
             leading: const Icon(Icons.pages),
             title: const Text("Reset password page"),
             onTap: () {
-              PageNavigator.push(context, const ResetPasswordPage());
+              SuraPageNavigator.push(context, const ResetPasswordPage());
             },
           ),
         ],
