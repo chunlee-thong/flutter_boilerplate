@@ -7,8 +7,8 @@ import '../../constant/app_constant.dart';
 import '../../models/others/user_credential.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
-import '../client/http_client.dart';
-import '../client/http_exception.dart';
+import 'http_client.dart';
+import 'http_exception.dart';
 
 class API {
   late final Dio dio;
@@ -40,8 +40,8 @@ class API {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && MemoryUserCredential.instance.hasValidToken()) {
-        String? token = MemoryUserCredential.instance.jwtToken;
+      if (requiredToken && UserCredential.instance.hasValidToken()) {
+        String? token = UserCredential.instance.jwtToken;
         bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken();

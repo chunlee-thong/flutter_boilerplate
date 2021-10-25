@@ -1,21 +1,21 @@
 ///Memory user credential
-class MemoryUserCredential {
+class UserCredential {
   String? jwtToken;
   String? userId;
 
-  MemoryUserCredential._();
-  static final MemoryUserCredential instance = MemoryUserCredential._();
+  UserCredential._();
+  static final UserCredential instance = UserCredential._();
 
   bool hasValidToken() {
     return jwtToken != null && jwtToken!.isNotEmpty;
   }
 
-  void clearMemoryCredential() {
+  void clearCredential() {
     jwtToken = null;
     userId = null;
   }
 
-  void initMemoryCredential({required String? token, required String? userId}) {
+  void initLocalCredential({required String? token, required String? userId}) {
     jwtToken = token;
     this.userId = userId;
   }

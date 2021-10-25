@@ -38,7 +38,7 @@ class AuthService {
     infoLog("refresh token", refreshToken);
     infoLog("userId", userId);
 
-    MemoryUserCredential.instance.initMemoryCredential(
+    UserCredential.instance.initLocalCredential(
       token: token,
       userId: userId,
     );
@@ -56,7 +56,7 @@ class AuthService {
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
     await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
-    MemoryUserCredential.instance.initMemoryCredential(
+    UserCredential.instance.initLocalCredential(
       token: authResponse.token,
       userId: authResponse.userId,
     );
@@ -66,7 +66,7 @@ class AuthService {
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
-      MemoryUserCredential.instance.clearMemoryCredential();
+      UserCredential.instance.clearCredential();
       AuthProvider.getProvider(context).setLoginStatus(false);
       SuraPageNavigator.pushAndRemove(context, const LoginPage());
     }

@@ -2,7 +2,7 @@ import '../../constant/app_constant.dart';
 import '../../models/others/user_credential.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
-import 'base_api.dart';
+import '../client/base_api.dart';
 
 class UserRepository extends API {
   //
@@ -38,7 +38,7 @@ class UserRepository extends API {
   }
 
   Future<UserModel> fetchUserInfo() async {
-    String? userId = MemoryUserCredential.instance.userId;
+    String? userId = UserCredential.instance.userId;
     return httpRequest(
       path: _GET_USER_INFO + "$userId",
       onSuccess: (response) {
