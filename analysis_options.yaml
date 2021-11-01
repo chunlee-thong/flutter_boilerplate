@@ -1,9 +1,9 @@
 include: package:flutter_lints/flutter.yaml
 
-
 linter:
   rules:
     constant_identifier_names: false
     non_constant_identifier_names: false
     unnecessary_null_in_if_null_operators: false
     unnecessary_string_interpolations: false
+    prefer_if_null_operators: false
