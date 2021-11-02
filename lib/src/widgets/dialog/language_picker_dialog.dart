@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_constant.dart';
+import '../../constant/app_locale.dart';
 import '../../constant/style_decoration.dart';
 import '../common/divider0.dart';
 
@@ -23,8 +23,7 @@ class LanguagePickerDialog extends StatelessWidget {
               borderRadius: SuraDecoration.radiusTop(4),
             ),
             alignment: Alignment.center,
-            child: Text("Language",
-                style: kSubHeaderStyle.applyColor(Colors.white)),
+            child: Text("Language", style: kSubHeaderStyle.applyColor(Colors.white)),
           ),
           const Divider0(),
           ...APP_LOCALES.map((language) {

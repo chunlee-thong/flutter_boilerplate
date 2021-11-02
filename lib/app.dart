@@ -11,7 +11,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import 'src/api/client/http_client.dart';
 import 'src/constant/app_config.dart';
-import 'src/constant/app_constant.dart';
+import 'src/constant/app_locale.dart';
 import 'src/pages/splash/splash_page.dart';
 import 'src/providers/auth_provider.dart';
 import 'src/providers/loading_provider.dart';
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
 
   ///Change font family base on locale
-  ThemeData customizeTheme(BuildContext context) {
+  ThemeData _customizeTheme(BuildContext context) {
     String fontName = context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME;
     return Theme.of(context).copyWith(
       textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                       };
                       return Theme(
                         child: PageLoading(child: child!),
-                        data: customizeTheme(context),
+                        data: _customizeTheme(context),
                       );
                     },
                     home: const SplashScreenPage(),

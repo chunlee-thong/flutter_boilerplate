@@ -76,6 +76,7 @@ class API {
   }
 }
 
+///Handle another type of exception that relate to runtime
 dynamic _onOtherException(dynamic exception) {
   //Logic or syntax error on some condition
   String? stackTrace = "";

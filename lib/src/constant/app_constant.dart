@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-
-import '../models/others/language_model.dart';
-
 class AppConstant {}
 
 class ErrorMessage {
@@ -12,22 +8,6 @@ class ErrorMessage {
       "Error connecting to server. Please check your internet connection or Try again later!";
   static const String TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
 }
-
-const Locale EN_LOCALE = Locale('en', 'US');
-const Locale KH_LOCALE = Locale('km', 'KH');
-
-const List<LanguageModel> APP_LOCALES = [
-  LanguageModel(
-    locale: EN_LOCALE,
-    name: "English",
-    image: "https://ecolebranchee.com/wp-content/uploads/2015/04/etats-unis-drapeau.gif",
-  ),
-  LanguageModel(
-    locale: KH_LOCALE,
-    name: "ខ្មែរ",
-    image: "https://wonderfulengineering.com/wp-content/uploads/2015/08/Cambodia-flag-3.gif",
-  ),
-];
 
 class HttpMethod {
   HttpMethod._();
