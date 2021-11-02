@@ -53,10 +53,10 @@ A flutter boiler plate code for initial project setup
 
 ## App Icon
 
-- replace your icon file in **assets/image/app-icon.png** 
+- replace your icon file in **assets/image/app-icon.png**
 - run: **flutter pub run flutter_launcher_icons:main**
 - note: this command will run all flutter_launcher_icon with flavor if you have any
-- App Icon isn't dynamic by flavor in ios. you need to replace a String "ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;" to "ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-$(ASSET_PREFIX);" in ios/project.pbxproj
+- App Icon isn't dynamic by flavor in ios. you need to replace a String ""$(ASSET_PREFIX)AppIcon";" to ""$(ASSET_PREFIX)AppIcon"-$(ASSET_PREFIX);" in ios/project.pbxproj
 
 ## Hive database
 

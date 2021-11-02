@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../state_widgets/loading_widget.dart';
 import '../state_widgets/no_data_widget.dart';
 
 class PullRefreshListViewBuilder extends StatelessWidget {
@@ -72,6 +73,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           itemCount: itemCount,
           separator: separator ?? const SizedBox(),
           hasError: hasError ?? false,
+          loadingWidget: const LoadingWidget(),
         ),
         onFalse: () => ListView.separated(
           controller: controller,

@@ -6,4 +6,8 @@ linter:
     non_constant_identifier_names: false
     unnecessary_null_in_if_null_operators: false
     unnecessary_string_interpolations: false
+    file_names: false
+    prefer_null_aware_operators: false
+    sized_box_for_whitespace: false
     prefer_if_null_operators: false
+    prefer_const_constructors: true
