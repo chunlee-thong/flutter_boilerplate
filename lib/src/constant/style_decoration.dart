@@ -9,7 +9,7 @@ const TextStyle kHeaderStyle = TextStyle(
 );
 const TextStyle kSubHeaderStyle = TextStyle(
   fontSize: 20,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w600,
 );
 const TextStyle kTitleStyle = TextStyle(
   fontSize: 18,
@@ -29,17 +29,15 @@ const TextStyle kOverLineStyle = TextStyle(
   fontSize: 10,
 );
 
-//extension
-
 extension StyleExtension on TextStyle {
-  TextStyle get black => apply(color: Colors.black);
-  TextStyle get white => apply(color: Colors.white);
-  TextStyle get red => apply(color: Colors.red);
-  TextStyle get grey => apply(color: Colors.grey);
-  TextStyle get green => apply(color: Colors.green);
-  TextStyle get primary => apply(color: AppColor.primary);
-  TextStyle get accent => apply(color: AppColor.accent);
-  TextStyle get underline => apply(decoration: TextDecoration.underline);
+  TextStyle get black => copyWith(color: Colors.black);
+  TextStyle get white => copyWith(color: Colors.white);
+  TextStyle get red => copyWith(color: Colors.red);
+  TextStyle get grey => copyWith(color: Colors.grey);
+  TextStyle get green => copyWith(color: Colors.green);
+  TextStyle get primary => copyWith(color: AppColor.primary);
+  TextStyle get accent => copyWith(color: AppColor.accent);
+  TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 }
 
 ///
@@ -57,7 +55,7 @@ final BoxShadow kGreyShadow4 = BoxShadow(
   offset: const Offset(0.0, 4.0),
 );
 
-///material textStyle
+///Material textStyle
 class MTS {
   static const TextStyle h1 = TextStyle(
     fontSize: 96,

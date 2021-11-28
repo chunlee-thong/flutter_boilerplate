@@ -5,12 +5,13 @@ import 'package:sentry/sentry.dart';
 
 import 'app.dart';
 import 'flavor.dart';
+import 'my_app.dart';
 import 'src/utils/logger.dart';
 
 void main() async {
   runZonedGuarded(() async {
     setupFlavorConfiguration(Flavor.staging);
-    await registerAppConfiguration();
+    await App.init();
     await Sentry.init(
       (options) {
         options.dsn = 'sentry-dns';

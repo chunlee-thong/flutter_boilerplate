@@ -26,7 +26,7 @@ class F {
   }
 }
 
-void setupFlavorConfiguration(Flavor flavor) {
+Future<void> setupFlavorConfiguration(Flavor flavor) async {
   AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
   F.flavor = flavor;
 }

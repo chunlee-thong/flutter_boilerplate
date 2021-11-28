@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../constant/locale_keys.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constant/locale_keys.dart';
 import '../../../providers/bottom_navigation_provider.dart';
 
 class RootBottomNavigation extends StatelessWidget {
@@ -10,6 +10,8 @@ class RootBottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<BottomNavigationProvider>(context);
+    //Add this line to update on locale change
+    context.locale;
     return BottomNavigationBar(
       currentIndex: state.currentIndex,
       type: BottomNavigationBarType.fixed,

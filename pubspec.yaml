@@ -6,7 +6,7 @@ version: 0.0.1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
-publish_to: none  
+publish_to: none
 
 dependencies:
   flutter:
@@ -34,7 +34,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   cached_network_image: ^3.1.0
   sura_flutter: ^0.5.0
-  sura_manager: ^0.1.1
+  sura_manager: ^0.1.2
   image_picker: ^0.8.4+3
   sentry: ^6.0.1
 
@@ -80,9 +80,15 @@ flutter:
         - asset: assets/fonts/GoogleSans-Medium.ttf
           weight: 500
 
-    - family: PreahVihear
+    - family: NotoSansKhmer
       fonts:
-        - asset: assets/fonts/Preahvihear-Regular.ttf
+        - asset: assets/fonts/NotoSansKhmer-Regular.ttf
+        - asset: assets/fonts/NotoSansKhmer-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NotoSansKhmer-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSansKhmer-Medium.ttf
+          weight: 500
 
 flavorizr:
   app:

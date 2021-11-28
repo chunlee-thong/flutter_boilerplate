@@ -1,6 +1,7 @@
 class AppConstant {}
 
 class ErrorMessage {
+  ErrorMessage._();
   static const String UNEXPECTED_ERROR = "An unexpected error occur!";
   static const String INTERNAL_SERVER_ERROR = "Internal server error, Please try again later.";
   static const String UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";

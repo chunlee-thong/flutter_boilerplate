@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/bottom_navigation_provider.dart';
 import '../../pages/home/home_page.dart';
 import '../../pages/user_profile/user_profile_page.dart';
+import '../../providers/bottom_navigation_provider.dart';
 import '../dummy/dummy_page.dart';
 import '../templates/template_pages.dart';
 import 'widgets/bottom_navigation.dart';
@@ -38,7 +37,6 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.locale;
     return ChangeNotifierProvider(
       create: (_) => BottomNavigationProvider(widget.startPageIndex),
       child: Consumer<BottomNavigationProvider>(
