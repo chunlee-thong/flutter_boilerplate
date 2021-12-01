@@ -52,7 +52,7 @@ class CustomErrorWidget extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(
                   FlutterIcons.refresh_faw,
-                  color: context.primaryColor,
+                  color: context.textTheme.bodyText1?.color,
                 ),
               ),
           ],

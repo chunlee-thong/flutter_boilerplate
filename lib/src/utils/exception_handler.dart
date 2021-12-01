@@ -27,22 +27,14 @@ class ExceptionHandler {
     } on UserCancelException catch (_) {
       return null;
     } catch (exception, stackTrace) {
-      String? message = "";
+      String message = "";
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.toString());
           AuthService.logOutUser(context, showConfirmation: false);
         }
       } else if (exception is PlatformException) {
-        message = exception.message;
-        // } else if (exception is FirebaseAuthException) {
-        //   message = exception.message;
-        //   if (exception.code == 'invalid-verification-code') {
-        //     message = "Invalid Code";
-        //   }
-        // }
-      } else if (exception is TypeError) {
-        message = exception.toString();
+        message = exception.message ?? exception.toString();
       } else {
         message = exception.toString();
       }
@@ -52,7 +44,7 @@ class ExceptionHandler {
       }
 
       ExceptionHandler.recordError(
-        message: exception.toString(),
+        message: message,
         stackTrace: stackTrace,
       );
       onError?.call(exception);

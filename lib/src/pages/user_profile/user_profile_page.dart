@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boiler_plate/src/widgets/common/ellipsis_text.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_manager/sura_manager.dart';
 
@@ -41,9 +42,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ready: (context, user) {
           return Column(
             children: [
-              ListTile(title: Text(user.firstName!), subtitle: Text(tr(LocaleKeys.first_name))),
-              ListTile(title: Text(user.lastName!), subtitle: Text(LocaleKeys.last_name.tr())),
-              ListTile(title: Text(user.email!), subtitle: Text(LocaleKeys.email.tr())),
+              ListTile(
+                title: EllipsisText(user.firstName!),
+                subtitle: Text(tr(LocaleKeys.first_name)),
+              ),
+              ListTile(
+                title: EllipsisText(user.lastName!),
+                subtitle: Text(LocaleKeys.last_name.tr()),
+              ),
+              ListTile(
+                title: EllipsisText("${user.email}"),
+                subtitle: Text(LocaleKeys.email.tr()),
+              ),
             ],
           );
         },

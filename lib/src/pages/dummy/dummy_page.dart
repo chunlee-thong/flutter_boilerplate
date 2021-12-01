@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/common/ellipsis_text.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../../api/index.dart';
@@ -66,7 +67,7 @@ class _DummyPageState extends State<DummyPage> {
                 ),
                 onTap: () {},
                 title: Text("${user.firstName} ${user.lastName}"),
-                subtitle: Text(user.email!),
+                subtitle: EllipsisText("${user.email}"),
               );
             },
             onGetMoreData: fetchData,

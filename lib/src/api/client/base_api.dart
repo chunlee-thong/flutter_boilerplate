@@ -85,14 +85,16 @@ dynamic _onOtherException(dynamic exception) {
   } else {
     stackTrace = exception?.stackTrace?.toString() ?? "";
   }
-  errorLog("Http Request Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
+  errorLog("Http Request Exception Error :=> ${exception.runtimeType}: "
+      "$exception"
+      "\nStackTrace:  $stackTrace");
   if (exception is Error) {
     return CustomErrorWrapper(
       "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
       exception.stackTrace,
     );
-  }else{
-   return ErrorMessage.UNEXPECTED_TYPE_ERROR;
+  } else {
+    return ErrorMessage.UNEXPECTED_TYPE_ERROR;
   }
 }
 

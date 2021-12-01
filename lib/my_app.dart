@@ -2,7 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/widgets/responsive_size.dart';
+import 'src/widgets/responsive_size.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const bool useDevicePreview = true;
+    const bool useDevicePreview = false;
     return DevicePreview(
       enabled: useDevicePreview,
       builder: (context) => MultiProvider(
