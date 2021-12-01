@@ -1,6 +1,6 @@
-abstract class BaseHttpException {}
+abstract class HttpRequestException {}
 
-class DioErrorException extends BaseHttpException {
+class DioErrorException extends HttpRequestException {
   final int? code;
   final String message;
 
@@ -11,7 +11,7 @@ class DioErrorException extends BaseHttpException {
   }
 }
 
-class SessionExpiredException extends BaseHttpException {
+class SessionExpiredException extends HttpRequestException {
   static const int code = 420;
   @override
   String toString() {

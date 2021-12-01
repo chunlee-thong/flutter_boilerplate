@@ -85,14 +85,15 @@ dynamic _onOtherException(dynamic exception) {
   } else {
     stackTrace = exception?.stackTrace?.toString() ?? "";
   }
-  errorLog("Http Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
+  errorLog("Http Request Exception Error :=> ${exception.runtimeType}: ${exception.toString()}\nStackTrace:  $stackTrace");
   if (exception is Error) {
     return CustomErrorWrapper(
       "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
       exception.stackTrace,
     );
+  }else{
+   return ErrorMessage.UNEXPECTED_TYPE_ERROR;
   }
-  return ErrorMessage.UNEXPECTED_TYPE_ERROR;
 }
 
 dynamic _onDioError(DioError exception) {
