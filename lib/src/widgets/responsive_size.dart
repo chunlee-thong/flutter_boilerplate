@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/utils/logger.dart';
+
+import '../utils/logger.dart';
 
 class ResponsiveSize {
-  static BuildContext? _context;
-
   static Size? _size;
 
   static void init(BuildContext ctx) {
-    _context = ctx;
     _size = MediaQuery.of(ctx).size;
     infoLog("Media query data: ${MediaQuery.of(ctx).toString()}");
   }

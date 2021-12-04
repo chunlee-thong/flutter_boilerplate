@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
+import '../../constant/app_assets.dart';
 import '../../constant/style_decoration.dart';
+import '../../widgets/images/svg_asset.dart';
 
 class NoDataWidget extends StatelessWidget {
   final double verticalMargin;
@@ -35,7 +35,7 @@ class NoDataWidget extends StatelessWidget {
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(
-                  FlutterIcons.refresh_faw,
+                  Icons.refresh,
                   color: context.primaryColor,
                 ),
               ),
@@ -46,10 +46,9 @@ class NoDataWidget extends StatelessWidget {
   }
 
   Widget _buildNoDataIcon() {
-    return const Icon(
-      FlutterIcons.cloud_off_mdi,
+    return const SvgAsset(
+      icon: AppAssets.EMPTY_BOX,
       size: 54,
-      color: AppColor.accent,
     );
   }
 }

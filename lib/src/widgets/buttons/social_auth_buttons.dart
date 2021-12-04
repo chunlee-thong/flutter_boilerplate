@@ -1,6 +1,6 @@
+import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
@@ -82,7 +82,7 @@ class SocialAuthButtons extends StatelessWidget {
           onPressed: () => onLoginWithFacebook(context),
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
           margin: margin,
-          startIcon: const Icon(FlutterIcons.facebook_ent),
+          startIcon: const Icon(AntIcons.facebookFilled),
           color: AppColor.fbColor,
           height: buttonHeight,
         ),
@@ -90,7 +90,7 @@ class SocialAuthButtons extends StatelessWidget {
           onPressed: () => onLoginWithGoogle(context),
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
           margin: margin,
-          startIcon: const Icon(FlutterIcons.google_ant),
+          startIcon: const Icon(AntIcons.googleCircleFilled),
           color: AppColor.googleRed,
           height: buttonHeight,
         ),
@@ -98,7 +98,7 @@ class SocialAuthButtons extends StatelessWidget {
           onPressed: () => onLoginWithApple(context),
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
           margin: margin,
-          startIcon: const Icon(FlutterIcons.apple1_ant),
+          startIcon: const Icon(AntIcons.appleFilled),
           color: AppColor.appleColor,
           height: buttonHeight,
         ),

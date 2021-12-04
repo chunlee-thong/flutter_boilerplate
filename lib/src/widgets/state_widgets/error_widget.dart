@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../constant/app_assets.dart';
 import '../../constant/style_decoration.dart';
+import '../../widgets/images/svg_asset.dart';
 import '../common/ellipsis_text.dart';
 import '../ui_helper.dart';
 
@@ -38,7 +39,7 @@ class CustomErrorWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildImage(),
+            _buildErrorIcon(),
             const SpaceY(16),
             EllipsisText(
               message.toString(),
@@ -51,7 +52,7 @@ class CustomErrorWidget extends StatelessWidget {
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(
-                  FlutterIcons.refresh_faw,
+                  Icons.refresh,
                   color: context.textTheme.bodyText1?.color,
                 ),
               ),
@@ -61,11 +62,10 @@ class CustomErrorWidget extends StatelessWidget {
     );
   }
 
-  Widget buildImage() {
-    return const Icon(
-      FlutterIcons.warning_ant,
+  Widget _buildErrorIcon() {
+    return const SvgAsset(
+      icon: AppAssets.ERROR_502,
       size: 54,
-      color: Colors.red,
     );
   }
 }
@@ -76,7 +76,7 @@ class FlutterCustomErrorRendering extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: Navigator.of(context).canPop() ? AppBar() : null,
       body: const Center(
         child: Text(
           'Rendering Error! Check stacktrace for more detail',

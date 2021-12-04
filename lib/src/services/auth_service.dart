@@ -9,7 +9,7 @@ import '../constant/app_constant.dart';
 import '../constant/locale_keys.dart';
 import '../models/others/user_credential.dart';
 import '../models/response/user/auth_response.dart';
-import '../pages/login_page/login_page.dart';
+import '../pages/sign_in_page/sign_in_page.dart';
 import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 import '../utils/logger.dart';
@@ -68,7 +68,7 @@ class AuthService {
       await LocalStorage.clear();
       UserCredential.instance.clearCredential();
       AuthProvider.getProvider(context).setLoginStatus(false);
-      SuraPageNavigator.pushAndRemove(context, const LoginPage());
+      SuraPageNavigator.pushAndRemove(context, const SignInPage());
     }
 
     if (!showConfirmation) {

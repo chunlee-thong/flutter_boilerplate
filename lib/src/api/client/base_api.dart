@@ -89,12 +89,12 @@ dynamic _onOtherException(dynamic exception) {
       "$exception"
       "\nStackTrace:  $stackTrace");
   if (exception is Error) {
-    return CustomErrorWrapper(
+    return HttpRequestErrorWrapper(
       "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
       exception.stackTrace,
     );
   } else {
-    return ErrorMessage.UNEXPECTED_TYPE_ERROR;
+    return HttpRequestErrorWrapper(ErrorMessage.UNEXPECTED_ERROR);
   }
 }
 

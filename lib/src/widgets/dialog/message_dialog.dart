@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../constant/app_assets.dart';
 import '../../constant/app_theme_color.dart';
 import '../../constant/style_decoration.dart';
+import '../../widgets/images/svg_asset.dart';
 
 class CustomMessageDialog extends StatelessWidget {
   final String message;
-  final String? title;
-  final double padding = 16.0;
-  final RoundedRectangleBorder shape = SuraDecoration.roundRect();
+  final String title;
   final bool _isError;
   final Color _color;
 
   CustomMessageDialog({
     Key? key,
-    this.title,
     required this.message,
+    this.title = "Information",
   })  : _isError = false,
         _color = AppColor.primary,
         super(key: key);
 
   CustomMessageDialog.error({
     Key? key,
-    this.title,
+    this.title = "Information",
     required this.message,
   })  : _isError = true,
         _color = const Color(0xFFE57373),
         super(key: key);
+
+  final RoundedRectangleBorder shape = SuraDecoration.roundRect();
+  final double padding = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class CustomMessageDialog extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    final iconData = _isError ? FlutterIcons.warning_ant : FlutterIcons.infocirlce_ant;
+    final iconData = _isError ? AppAssets.FATAL_ERROR : AppAssets.NOTIFICATION;
     return Container(
       padding: EdgeInsets.all(padding),
       alignment: Alignment.center,
@@ -53,13 +55,13 @@ class CustomMessageDialog extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                iconData,
-                color: _color,
+              SvgAsset(
+                icon: iconData,
                 size: 32,
+                iconColor: _isError ? Colors.red : Colors.green,
               ),
               const SpaceX(16),
-              Text(title ?? "Information", style: kSubHeaderStyle.medium),
+              Text(title, style: kSubHeaderStyle.medium),
             ],
           ),
           SpaceY(padding),

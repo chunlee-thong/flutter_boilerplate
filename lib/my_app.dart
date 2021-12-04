@@ -2,7 +2,6 @@ import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'src/widgets/responsive_size.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -13,6 +12,7 @@ import 'src/providers/auth_provider.dart';
 import 'src/providers/loading_provider.dart';
 import 'src/providers/theme_provider.dart';
 import 'src/providers/user_provider.dart';
+import 'src/widgets/responsive_size.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 import 'src/widgets/state_widgets/page_loading.dart';
@@ -70,16 +70,15 @@ class _MyAppState extends State<MyApp> {
                         useInheritedMediaQuery: useDevicePreview,
                         title: AppConfig.APP_NAME,
                         navigatorKey: SuraNavigator.navigatorKey,
-                        theme: themeProvider.getThemeData(),
+                        theme: themeProvider.getThemeData,
                         debugShowCheckedModeBanner: false,
                         localizationsDelegates: context.localizationDelegates,
                         supportedLocales: context.supportedLocales,
                         locale: context.locale,
                         builder: (context, child) {
                           ErrorWidget.builder = (detail) {
-                            if (kReleaseMode) {
-                              return const FlutterCustomErrorRendering();
-                            }
+                            return const FlutterCustomErrorRendering();
+                            if (kReleaseMode) {}
                             return ErrorWidget(detail.exception);
                           };
                           return Theme(

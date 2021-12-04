@@ -10,7 +10,7 @@ import '../../services/auth_service.dart';
 import '../../services/local_storage_service/local_storage_service.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
-import '../login_page/login_page.dart';
+import '../sign_in_page/sign_in_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     await Future.delayed(const Duration(seconds: 1));
     SuraPageNavigator.pushReplacement(
       context,
-      isLoggedIn ? const RootPage() : const LoginPage(),
+      isLoggedIn ? const RootPage() : const SignInPage(),
     );
     return true;
   }

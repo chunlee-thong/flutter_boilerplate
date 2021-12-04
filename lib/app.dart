@@ -9,7 +9,6 @@ import 'src/providers/theme_provider.dart';
 import 'src/services/local_storage_service/fss_storage_service.dart';
 import 'src/services/local_storage_service/local_storage_service.dart';
 import 'src/services/local_storage_service/spf_storage_service.dart';
-import 'src/utils/hive_db_adapter.dart';
 import 'src/utils/service_locator.dart';
 
 class App {
@@ -23,7 +22,6 @@ class App {
     await LocalStorage.initialize(isDesktop ? SharedPreferencesStorageService() : FssStorageService());
     await ThemeProvider.initializeTheme();
     DefaultHttpClient.init();
-    registerHiveAdapter();
     registerLocator();
   }
 }

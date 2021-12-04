@@ -1,13 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boiler_plate/src/widgets/common/ellipsis_text.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../../constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
+import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/ui_helper.dart';
 
@@ -26,7 +25,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         title: LocaleKeys.profile.tr(),
         actions: [
           IconButton(
-            icon: const Icon(FlutterIcons.log_out_ent),
+            icon: const Icon(Icons.logout),
             onPressed: () {
               AuthService.logOutUser(context);
             },
@@ -40,6 +39,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           onRefresh: UserProvider.getProvider(context).getUserInfo,
         ),
         ready: (context, user) {
+          String? data;
           return Column(
             children: [
               ListTile(

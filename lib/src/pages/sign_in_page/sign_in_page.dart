@@ -13,14 +13,14 @@ import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/form_input/primary_text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignInPage extends StatefulWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SuraFormMixin {
+class _SignInPageState extends State<SignInPage> with SuraFormMixin {
   late TextEditingController emailTC, passwordTC;
 
   void onLogin() async {

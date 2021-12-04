@@ -17,11 +17,8 @@ class AppColor {
   static final MaterialColor materialAccent = SuraColor.toMaterial(accent.value);
 }
 
-final ThemeData kLightTheme = _buildLightTheme();
-final ThemeData kDarkTheme = _buildDarkTheme();
-
-ThemeData _buildLightTheme() {
-  final ThemeData base = ThemeData(
+class AppTheme {
+  static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     tabBarTheme: TabBarTheme(
       labelColor: AppColor.materialAccent,
@@ -39,11 +36,8 @@ ThemeData _buildLightTheme() {
       ),
     ),
   );
-  return base;
-}
 
-ThemeData _buildDarkTheme() {
-  final ThemeData base = ThemeData(
+  static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColorDark: AppColor.materialPrimary,
     toggleableActiveColor: AppColor.materialAccent,
@@ -59,5 +53,4 @@ ThemeData _buildDarkTheme() {
       ),
     ),
   );
-  return base;
 }

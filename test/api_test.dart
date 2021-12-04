@@ -1,8 +1,9 @@
-import 'package:flutter_boiler_plate/src/api/client/base_api.dart';
-import 'package:flutter_boiler_plate/src/api/client/http_client.dart';
-import 'package:flutter_boiler_plate/src/models/others/user_credential.dart';
-import 'package:flutter_boiler_plate/src/utils/logger.dart';
 import 'package:test/test.dart';
+
+import '../lib/src/api/client/base_api.dart';
+import '../lib/src/api/client/http_client.dart';
+import '../lib/src/models/others/user_credential.dart';
+import '../lib/src/utils/logger.dart';
 
 void main() {
   test('Testing http request', () async {
