@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
-import '../lib/src/api/client/base_api.dart';
-import '../lib/src/api/client/http_client.dart';
+import '../lib/src/http/client/base_api.dart';
+import '../lib/src/http/client/http_client.dart';
 import '../lib/src/models/others/user_credential.dart';
 import '../lib/src/utils/logger.dart';
 
