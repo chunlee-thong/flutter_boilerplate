@@ -3,7 +3,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_assets.dart';
 import '../../constant/app_theme_color.dart';
-import '../../constant/style_decoration.dart';
+import '../../constant/app_style_decoration.dart';
 import '../../widgets/images/svg_asset.dart';
 
 class CustomMessageDialog extends StatelessWidget {

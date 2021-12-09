@@ -1,30 +1,98 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sura_flutter/sura_flutter.dart';
+
+import '../../constant/app_theme_color.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SvgAsset extends StatelessWidget {
   final String icon;
   final double size;
-  final EdgeInsets? padding;
-  final EdgeInsets? margin;
   final Color? iconColor;
-  final Color? bgColor;
+  final Color bgColor;
+  final EdgeInsets padding;
+  final ShapeBorder? shape;
+  final BorderSide? side;
+  final EdgeInsets? margin;
+  final VoidCallback? onTap;
+  final bool _iconOnly;
+  final double? width;
+  final double? height;
+  final Widget? placeholderError;
+
+  ///A Widget to handle a svg in our asset folder
   const SvgAsset({
     Key? key,
     required this.icon,
-    this.size = 18,
-    this.padding,
+    this.size = 24,
+    this.iconColor = AppColor.primary,
+    this.bgColor = Colors.white,
+    this.padding = const EdgeInsets.all(16.0),
+    this.shape,
+    this.side,
     this.margin,
-    this.iconColor,
-    this.bgColor,
-  }) : super(key: key);
+    this.onTap,
+    this.width,
+    this.height,
+    this.placeholderError,
+  })  : _iconOnly = false,
+        super(key: key);
+
+  const SvgAsset.iconOnly({
+    Key? key,
+    required this.icon,
+    this.size = 18,
+    this.iconColor = AppColor.primary,
+    this.bgColor = Colors.transparent,
+    this.padding = const EdgeInsets.all(0),
+    this.shape,
+    this.side,
+    this.margin,
+    this.onTap,
+    this.width,
+    this.height,
+    this.placeholderError,
+  })  : _iconOnly = true,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
+    final customShape = shape ?? SuraDecoration.roundRect();
+    //var iconSize = Size(width ?? size, height ?? size);
+    final iconChild = SvgPicture.asset(
       icon,
       width: size,
       height: size,
       color: iconColor,
+      placeholderBuilder: placeholderError != null
+          ? (context) {
+              return placeholderError!;
+            }
+          : null,
     );
+    // color: iconColor,
+    // width: size,
+    // height: size,
+
+    if (_iconOnly) {
+      return iconChild;
+    }
+    final child = Card(
+      shape: customShape,
+      color: bgColor,
+      elevation: 0.0,
+      margin: margin ?? EdgeInsets.zero,
+      child: InkWell(
+        onTap: onTap,
+        customBorder: customShape,
+        child: Padding(
+          padding: padding,
+          child: iconChild,
+        ),
+      ),
+    );
+    if (width != null && height != null) {
+      return SizedBox(width: width, height: height, child: child);
+    }
+    return child;
   }
 }

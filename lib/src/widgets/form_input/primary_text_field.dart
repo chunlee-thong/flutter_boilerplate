@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/style_decoration.dart';
+import '../../constant/app_style_decoration.dart';
 import '../../utils/form_validator.dart';
 
 class PrimaryTextField extends StatelessWidget {
@@ -61,8 +61,7 @@ class PrimaryTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium)
-                .paddingValue(horizontal: 4),
+            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
             const SpaceY(),
           ],
           TextFormField(

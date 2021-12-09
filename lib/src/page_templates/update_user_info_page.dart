@@ -4,7 +4,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
 import '../constant/locale_keys.dart';
-import '../constant/style_decoration.dart';
+import '../constant/app_style_decoration.dart';
 import '../utils/exception_handler.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_dropdown_button.dart';

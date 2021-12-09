@@ -7,7 +7,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../constant/app_theme_color.dart';
 import '../constant/locale_keys.dart';
 import '../constant/app_dimension.dart';
-import '../constant/style_decoration.dart';
+import '../constant/app_style_decoration.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
 import '../widgets/ui_helper.dart';
@@ -23,8 +23,7 @@ class ResetPasswordPage extends StatefulWidget {
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage>
-    with SuraFormMixin, CountdownMixin {
+class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixin, CountdownMixin {
   late TextEditingController emailTC, codeTC;
   VerificationStep step = VerificationStep.sendCode;
 
@@ -176,8 +175,7 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(tr(LocaleKeys.didnt_receive_code),
-            style: kSubtitleStyle.applyColor(Colors.grey)),
+        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.applyColor(Colors.grey)),
         SuraFlatButton(
           onPressed: resendCode,
           child: Text(LocaleKeys.resend_code.tr()),

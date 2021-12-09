@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
-import '../../constant/style_decoration.dart';
+import '../../constant/app_style_decoration.dart';
 import '../../utils/exception_handler.dart';
 import 'avatar_image.dart';
 

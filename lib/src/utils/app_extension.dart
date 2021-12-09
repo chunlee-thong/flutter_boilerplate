@@ -15,6 +15,7 @@ extension MapExtension on Map {
 
 extension FileExtensionMethod on FileSystemEntity {
   String get name => path.split("/").last;
+  String get fileExtension => path.split(".").last;
 }
 
 extension StringUtil on String {

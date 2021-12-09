@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sentry/sentry.dart';
 
-import '../api/client/http_exception.dart';
+import '../http/client/http_exception.dart';
 import '../services/auth_service.dart';
 import '../widgets/ui_helper.dart';
 import 'custom_exception.dart';

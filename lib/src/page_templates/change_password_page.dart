@@ -5,7 +5,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../constant/app_dimension.dart';
 import '../constant/locale_keys.dart';
 import '../utils/app_utils.dart';
-import '../constant/style_decoration.dart';
+import '../constant/app_style_decoration.dart';
 import '../utils/form_validator.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
@@ -18,8 +18,7 @@ class ChangePasswordPage extends StatefulWidget {
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage>
-    with SuraFormMixin {
+class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMixin {
   late TextEditingController oldPasswordTC;
   late TextEditingController newPasswordTC;
   late TextEditingController confirmNewPasswordTC;
@@ -91,8 +90,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
             controller: confirmNewPasswordTC,
             hint: LocaleKeys.confirm_new_password.tr(),
             obsecure: true,
-            validator: (value) => FormValidator.validateConfirmPassword(
-                value, newPasswordTC.text),
+            validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
           ),
           PrimaryButton(
             onPressed: onSubmit,

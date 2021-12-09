@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../api/client/http_client.dart';
+import '../http/client/http_client.dart';
 import '../constant/app_constant.dart';
 import '../constant/locale_keys.dart';
 import '../models/others/user_credential.dart';
