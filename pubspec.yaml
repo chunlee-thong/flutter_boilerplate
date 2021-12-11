@@ -24,7 +24,7 @@ dependencies:
   get_it: ^7.2.0
   easy_localization: ^3.0.0
   flutter_secure_storage: ^5.0.2
-  shared_preferences: ^2.0.9
+  shared_preferences: ^2.0.11
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   device_preview: ^1.0.0
@@ -34,9 +34,9 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   cached_network_image: ^3.2.0
   sura_flutter: ^0.5.1
-  sura_manager: ^0.1.4
+  sura_manager: ^0.1.5
   image_picker: ^0.8.4+4
-  sentry: ^6.1.2
+  sentry: ^6.2.1
   flutter_svg: ^1.0.0
   antdesign_icons: ^0.0.3
 

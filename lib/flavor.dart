@@ -12,13 +12,13 @@ class F {
   static String get title {
     switch (flavor) {
       case Flavor.dev:
-        return "Dev";
+        return "dev";
 
       case Flavor.staging:
-        return "Staging";
+        return "staging";
 
       case Flavor.production:
-        return "Production";
+        return "prod";
 
       default:
         return "";
@@ -27,6 +27,6 @@ class F {
 }
 
 Future<void> setupFlavorConfiguration(Flavor flavor) async {
-  AppConfig.BASE_URL = "https://express-boilerplate.chunleethong.com";
   F.flavor = flavor;
+  AppConfig.BASE_URL = "https://express-boilerplate-${F.title}.lynical.com";
 }

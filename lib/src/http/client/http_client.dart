@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../constant/app_config.dart';
 import '../../utils/logger.dart';
@@ -23,12 +24,21 @@ class DefaultHttpClient {
       receiveTimeout: _timeOut,
     );
     dio = Dio(options)..interceptors.add(defaultInterceptor);
+    (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
   }
+}
+
+_parseJson(String text) {
+  return compute(_parseAndDecode, text);
+}
+
+_parseAndDecode(String response) {
+  return jsonDecode(response);
 }
 
 const JsonDecoder decoder = JsonDecoder();
