@@ -19,13 +19,13 @@ class SessionExpiredException extends HttpRequestException {
   }
 }
 
+///A custom exception class to handle [Error] type in Http request
+///Because TypeError doesn't allow to override message
+///This class provide a custom message and stackTrace
 class HttpRequestErrorWrapper {
   final String message;
   final dynamic stackTrace;
 
-  ///A custom exception class to handle [Error] type in Http request
-  ///Because TypeError doesn't allow to override message
-  ///This class provide a custom message and stackTrace
   HttpRequestErrorWrapper(this.message, [this.stackTrace]);
 
   @override
