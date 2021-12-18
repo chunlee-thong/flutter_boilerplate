@@ -69,16 +69,15 @@ class API {
       }
       return onSuccess(response);
     } on DioError catch (e) {
-      throw _onDioError(e);
+      throw _handleDioError(e);
     } catch (e) {
-      throw _onOtherException(e);
+      throw _handleOtherError(e);
     }
   }
 }
 
-///Handle another type of exception that relate to runtime
-dynamic _onOtherException(dynamic exception) {
-  //Logic or syntax error on some condition
+///Handle another type of exception that relate to Error
+dynamic _handleOtherError(dynamic exception) {
   String? stackTrace = "";
   if (exception is Exception) {
     stackTrace = exception.toString();
@@ -98,7 +97,7 @@ dynamic _onOtherException(dynamic exception) {
   }
 }
 
-dynamic _onDioError(DioError exception) {
+dynamic _handleDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
     return DioErrorException(ErrorMessage.CONNECTION_ERROR);
