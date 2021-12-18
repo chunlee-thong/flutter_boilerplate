@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../http/index.dart';
 import '../../constant/locale_keys.dart';
+import '../../http/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';
@@ -38,8 +38,8 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
 
   @override
   void initState() {
-    emailTC = TextEditingController(text: "admin@gmail.com");
-    passwordTC = TextEditingController(text: "123456");
+    emailTC = TextEditingController(text: "");
+    passwordTC = TextEditingController(text: "");
     super.initState();
   }
 
@@ -60,12 +60,14 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
             children: <Widget>[
               PrimaryTextField(
+                key: const ValueKey("emailTC"),
                 textInputType: TextInputType.emailAddress,
                 controller: emailTC,
                 label: tr(LocaleKeys.email),
               ),
               const SpaceY(16),
               PrimaryTextField(
+                key: const ValueKey("passwordTC"),
                 textInputType: TextInputType.visiblePassword,
                 controller: passwordTC,
                 obsecure: true,

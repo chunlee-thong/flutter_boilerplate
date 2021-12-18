@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
+import '../constant/app_style_decoration.dart';
 import '../constant/locale_keys.dart';
 import '../utils/app_utils.dart';
-import '../constant/app_style_decoration.dart';
 import '../utils/form_validator.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
@@ -27,9 +27,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
     if (isFormValidated) {
       try {
         await AppUtils.waiting();
-        String oldPassword = oldPasswordTC.text.trim();
-        String newPassword = newPasswordTC.text.trim();
-        bool result = await Future.value(true);
+        String _ = oldPasswordTC.text.trim();
+        String __ = newPasswordTC.text.trim();
+        bool ___ = await Future.value(true);
       } catch (e) {
         UIHelper.showErrorDialog(context, e);
       }
@@ -62,7 +62,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(tr(LocaleKeys.change_password), style: kHeaderStyle),
-            SpaceY(24),
+            const SpaceY(24),
             buildForm(),
           ],
         ),

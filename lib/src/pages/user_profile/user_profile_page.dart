@@ -39,7 +39,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
           onRefresh: UserProvider.getProvider(context).getUserInfo,
         ),
         ready: (context, user) {
-          String? data;
           return Column(
             children: [
               ListTile(

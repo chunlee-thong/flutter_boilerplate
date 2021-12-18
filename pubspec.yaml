@@ -8,6 +8,9 @@ environment:
 
 publish_to: none
 
+dependency_overrides:
+  archive: 3.1.2 ## integration_test and flutter_flavorizr use different version
+
 dependencies:
   flutter:
     sdk: flutter
@@ -47,9 +50,10 @@ dev_dependencies:
   flutter_flavorizr: ^2.1.0
   flutter_lints: ^1.0.4
   mocktail: ^0.2.0
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
-
   flutter_localizations:
     sdk: flutter
 

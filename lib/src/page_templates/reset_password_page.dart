@@ -4,10 +4,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/app_theme_color.dart';
-import '../constant/locale_keys.dart';
 import '../constant/app_dimension.dart';
 import '../constant/app_style_decoration.dart';
+import '../constant/app_theme_color.dart';
+import '../constant/locale_keys.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
 import '../widgets/ui_helper.dart';
@@ -30,7 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
   Future<void> onSendVerificationCode() async {
     if (isFormValidated) {
       try {
-        String email = emailTC.text.trim();
+        String _ = emailTC.text.trim();
         await Future.delayed(const Duration(seconds: 2));
         startCountDownTimer();
         setState(() {

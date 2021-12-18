@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/app_dimension.dart';
-import '../constant/locale_keys.dart';
 import '../constant/app_style_decoration.dart';
+import '../constant/locale_keys.dart';
 import '../utils/exception_handler.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_dropdown_button.dart';
@@ -30,9 +30,9 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       await ExceptionHandler.run(context, () async {
-        String firstname = firstNameTC.text.trim();
-        String lastname = lastNameTC.text.trim();
-        String country = countryTC.text.trim();
+        String _ = firstNameTC.text.trim();
+        String __ = lastNameTC.text.trim();
+        String ___ = countryTC.text.trim();
       });
     }
   }

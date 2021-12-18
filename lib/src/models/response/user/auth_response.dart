@@ -10,8 +10,8 @@ class AuthResponse {
   String? refreshToken;
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
-        userId: json["user_id"] ?? null,
-        token: json["token"] ?? null,
-        refreshToken: json["refresh_token"] ?? null,
+        userId: json["user_id"],
+        token: json["token"],
+        refreshToken: json["refresh_token"],
       );
 }
