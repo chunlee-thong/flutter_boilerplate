@@ -6,7 +6,7 @@ import '../../pages/user_profile/user_profile_page.dart';
 import '../../providers/bottom_navigation_provider.dart';
 import '../dummy/dummy_page.dart';
 import '../templates/template_pages.dart';
-import 'widgets/bottom_navigation.dart';
+import 'bottom_navigation.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
