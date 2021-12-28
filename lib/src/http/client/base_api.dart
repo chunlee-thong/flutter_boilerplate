@@ -13,11 +13,11 @@ import 'http_exception.dart';
 class API {
   late final Dio dio;
 
-  API({Dio? dio}) {
-    if (dio == null) {
-      this.dio = DefaultHttpClient.dio;
+  API({Dio? customDio}) {
+    if (customDio == null) {
+      dio = DefaultHttpClient.dio;
     } else {
-      this.dio = dio;
+      dio = customDio;
     }
   }
 
@@ -107,23 +107,10 @@ dynamic _handleDioError(DioError exception) {
     case DioErrorType.connectTimeout:
       return DioErrorException(ErrorMessage.TIMEOUT_ERROR);
     case DioErrorType.response:
-      String serverMessage;
-      int statusCode = exception.response?.statusCode ?? 500;
-
-      if (statusCode >= 500) {
-        serverMessage = ErrorMessage.INTERNAL_SERVER_ERROR;
-      } else if (statusCode == SessionExpiredException.code) {
+      if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
-      } else if (exception.response!.data is Map) {
-        serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
-      } else {
-        serverMessage = ErrorMessage.UNEXPECTED_ERROR;
       }
-
-      return DioErrorException(
-        serverMessage,
-        code: exception.response!.statusCode,
-      );
+      return DioErrorException.response(exception.response!);
     default:
       return DioErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }

@@ -18,14 +18,6 @@ extension FileExtensionMethod on FileSystemEntity {
   String get fileExtension => path.split(".").last;
 }
 
-extension StringUtil on String {
-  String obscure([bool? condition]) => condition == true ? replaceAll(RegExp(r'.'), "*") : this;
-  String obscureLast([int length = 4]) => replaceAll(RegExp(".{$length}\$"), '*' * length);
-
-  bool isEmail() {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern as String);
-    return regex.hasMatch(this);
-  }
+extension StringExtension on String? {
+  bool get isNullOrEmpty => this == null || (this?.isEmpty ?? true);
 }

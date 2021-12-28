@@ -24,39 +24,43 @@ class CustomErrorWidget extends StatelessWidget {
     if (hasAppBar) {
       return Scaffold(
         appBar: UIHelper.CustomAppBar(title: ""),
-        body: buildErrorWidget(context),
+        body: _buildErrorWidget(),
       );
     }
-    return buildErrorWidget(context);
+    return _buildErrorWidget();
   }
 
-  Widget buildErrorWidget(BuildContext context) {
+  Widget _buildErrorWidget() {
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: verticalMargin),
         alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildErrorIcon(),
-            const SpaceY(16),
-            EllipsisText(
-              message.toString(),
-              style: kSubtitleStyle.normal,
-              maxLines: 4,
-              textAlign: TextAlign.center,
-            ),
-            if (onRefresh != null)
-              SuraIconButton(
-                onTap: () => onRefresh?.call(),
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                icon: Icon(
-                  Icons.refresh,
-                  color: context.textTheme.bodyText1?.color,
+        child: Builder(
+          builder: (context) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildErrorIcon(),
+                const SpaceY(16),
+                EllipsisText(
+                  message.toString(),
+                  style: kSubtitleStyle.normal,
+                  maxLines: 4,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-          ],
+                if (onRefresh != null)
+                  SuraIconButton(
+                    onTap: () => onRefresh?.call(),
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    icon: Icon(
+                      Icons.refresh,
+                      color: context.textTheme.bodyText1?.color,
+                    ),
+                  ),
+              ],
+            );
+          },
         ),
       ),
     );

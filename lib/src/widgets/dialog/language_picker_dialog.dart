@@ -26,7 +26,7 @@ class LanguagePickerDialog extends StatelessWidget {
             child: Text("Language", style: kSubHeaderStyle.applyColor(Colors.white)),
           ),
           const Divider0(),
-          ...APP_LOCALES.map((language) {
+          ...KAppLanguages.map((language) {
             return SuraListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(language.image),

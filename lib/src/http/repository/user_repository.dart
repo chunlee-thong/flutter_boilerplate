@@ -2,6 +2,7 @@ import '../../constant/app_constant.dart';
 import '../../models/others/user_credential.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
+import '../client/http_exception.dart';
 import '../client/base_api.dart';
 
 class UserRepository extends API {
@@ -39,8 +40,11 @@ class UserRepository extends API {
 
   Future<UserModel> fetchUserInfo() async {
     String? userId = UserCredential.instance.userId;
+    if (userId == null) {
+      throw SessionExpiredException();
+    }
     return httpRequest(
-      path: _GET_USER_INFO + "$userId",
+      path: _GET_USER_INFO + userId,
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);
       },

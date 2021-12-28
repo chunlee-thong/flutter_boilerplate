@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
   final Color color;
   final OutlinedBorder? shape;
   final EdgeInsets margin;
+  final double height;
   const PrimaryButton({
     Key? key,
     required this.onPressed,
@@ -20,6 +21,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColor.primary,
     this.shape,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
+    this.height = 46,
   }) : super(key: key);
 
   const PrimaryButton.accent({
@@ -30,6 +32,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColor.accent,
     this.shape,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
+    this.height = 46,
   }) : super(key: key);
 
   @override
@@ -42,7 +45,7 @@ class PrimaryButton extends StatelessWidget {
       margin: margin,
       shape: shape,
       textColor: Colors.white,
-      height: 46,
+      height: height,
     );
   }
 }

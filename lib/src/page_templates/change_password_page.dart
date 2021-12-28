@@ -78,18 +78,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
           PrimaryTextField(
             controller: oldPasswordTC,
             hint: LocaleKeys.old_password.tr(),
-            obsecure: true,
+            obscure: true,
           ),
           PrimaryTextField(
             controller: newPasswordTC,
             hint: LocaleKeys.new_password.tr(),
             lengthValidator: 6,
-            obsecure: true,
+            obscure: true,
           ),
           PrimaryTextField(
             controller: confirmNewPasswordTC,
             hint: LocaleKeys.confirm_new_password.tr(),
-            obsecure: true,
+            obscure: true,
             validator: (value) => FormValidator.validateConfirmPassword(value, newPasswordTC.text),
           ),
           PrimaryButton(

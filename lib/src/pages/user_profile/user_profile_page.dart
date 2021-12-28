@@ -20,6 +20,7 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
+    var userProvider = UserProvider.getProvider(context);
     return Scaffold(
       appBar: UIHelper.CustomAppBar(
         title: LocaleKeys.profile.tr(),
@@ -33,24 +34,24 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ],
       ),
       body: FutureManagerBuilder<UserModel>(
-        futureManager: UserProvider.getProvider(context).userManager,
+        futureManager: userProvider.userManager,
         error: (error) => CustomErrorWidget(
           message: error,
-          onRefresh: UserProvider.getProvider(context).getUserInfo,
+          onRefresh: userProvider.getUserInfo,
         ),
         ready: (context, user) {
           return Column(
             children: [
               ListTile(
-                title: EllipsisText(user.firstName!),
+                title: EllipsisText(user.firstName),
                 subtitle: Text(tr(LocaleKeys.first_name)),
               ),
               ListTile(
-                title: EllipsisText(user.lastName!),
+                title: EllipsisText(user.lastName),
                 subtitle: Text(LocaleKeys.last_name.tr()),
               ),
               ListTile(
-                title: EllipsisText("${user.email}"),
+                title: EllipsisText(user.email),
                 subtitle: Text(LocaleKeys.email.tr()),
               ),
             ],

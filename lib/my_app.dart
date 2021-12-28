@@ -27,7 +27,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Locale> languages = APP_LOCALES.map((lang) => lang.locale).toList();
+  List<Locale> languages = KAppLanguages.map((lang) => lang.locale).toList();
 
   ///Change font family base on locale
   ThemeData _customizeTheme(BuildContext context) {
@@ -48,59 +48,55 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => UserProvider()),
           ChangeNotifierProvider(create: (_) => AuthProvider()),
         ],
-        child: Builder(
-          builder: (context) => Consumer<ThemeProvider>(
-            builder: (context, themeProvider, child) {
-              return SuraProvider(
-                loadingWidget: const LoadingWidget(),
-                onFutureManagerError: (error, context) {
-                  if (error is SessionExpiredException) {
-                    AuthService.logOutUser(context, showConfirmation: false);
-                  }
-                },
-                errorWidget: (error, onRefresh) {
-                  return CustomErrorWidget(
-                    message: error,
-                    onRefresh: onRefresh,
-                  );
-                },
-                child: EasyLocalization(
-                  path: AppConfig.LANGUAGE_PATH,
-                  supportedLocales: languages,
-                  fallbackLocale: KH_LOCALE,
-                  startLocale: KH_LOCALE,
-                  child: Builder(
-                    builder: (context) {
-                      return MaterialApp(
-                        useInheritedMediaQuery: useDevicePreview,
-                        title: AppConfig.APP_NAME,
-                        navigatorKey: SuraNavigator.navigatorKey,
-                        theme: themeProvider.getThemeData,
-                        debugShowCheckedModeBanner: false,
-                        localizationsDelegates: context.localizationDelegates,
-                        supportedLocales: context.supportedLocales,
-                        locale: context.locale,
-                        builder: (context, child) {
-                          ErrorWidget.builder = (detail) {
-                            if (kReleaseMode) {
-                              return const FlutterCustomErrorRendering();
-                            }
-                            return ErrorWidget(detail.exception);
-                          };
-                          return Theme(
-                            child: ResponsiveBuilder(
-                              child: LoadingOverlay(child: child!),
-                            ),
-                            data: _customizeTheme(context),
-                          );
-                        },
-                        home: const SplashScreenPage(),
+        child: EasyLocalization(
+          path: AppConfig.LANGUAGE_PATH,
+          supportedLocales: languages,
+          fallbackLocale: KH_LOCALE,
+          startLocale: KH_LOCALE,
+          child: Builder(
+            builder: (context) => Consumer<ThemeProvider>(
+              builder: (context, themeProvider, child) {
+                return SuraProvider(
+                  loadingWidget: const LoadingWidget(),
+                  onFutureManagerError: (error, context) {
+                    if (error is SessionExpiredException) {
+                      AuthService.logOutUser(context, showConfirmation: false);
+                    }
+                  },
+                  errorWidget: (error, onRefresh) {
+                    return CustomErrorWidget(
+                      message: error,
+                      onRefresh: onRefresh,
+                    );
+                  },
+                  child: MaterialApp(
+                    useInheritedMediaQuery: useDevicePreview,
+                    title: AppConfig.APP_NAME,
+                    navigatorKey: SuraNavigator.navigatorKey,
+                    theme: themeProvider.getThemeData,
+                    debugShowCheckedModeBanner: false,
+                    localizationsDelegates: context.localizationDelegates,
+                    supportedLocales: context.supportedLocales,
+                    locale: context.locale,
+                    builder: (context, child) {
+                      ErrorWidget.builder = (detail) {
+                        if (kReleaseMode) {
+                          return const FlutterCustomErrorRendering();
+                        }
+                        return ErrorWidget(detail.exception);
+                      };
+                      return Theme(
+                        child: ResponsiveBuilder(
+                          child: LoadingOverlay(child: child!),
+                        ),
+                        data: _customizeTheme(context),
                       );
                     },
+                    home: const SplashScreenPage(),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

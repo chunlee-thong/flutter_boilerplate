@@ -26,9 +26,11 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
   void onLogin() async {
     if (isFormValidated) {
       await ExceptionHandler.run(context, () async {
+        var email = emailTC.text.trim();
+        var password = passwordTC.text.trim();
         AuthResponse loginResponse = await userRepository.loginUser(
-          email: emailTC.text.trim(),
-          password: passwordTC.text.trim(),
+          email: email,
+          password: password,
         );
         await AuthService.onLoginSuccess(context, loginResponse);
         SuraPageNavigator.pushReplacement(context, const RootPage());
@@ -70,14 +72,12 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                 key: const ValueKey("passwordTC"),
                 textInputType: TextInputType.visiblePassword,
                 controller: passwordTC,
-                obsecure: true,
+                obscure: true,
                 label: tr(LocaleKeys.password),
               ),
               PrimaryButton(
                 onPressed: onLogin,
-                child: EllipsisText(
-                  tr(LocaleKeys.login),
-                ),
+                child: EllipsisText(tr(LocaleKeys.login)),
               ),
               const SpaceY(100),
               SocialAuthButtons(onLoginCompleted: (data) {}),

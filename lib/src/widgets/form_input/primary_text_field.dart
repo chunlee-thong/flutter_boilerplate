@@ -18,7 +18,7 @@ class PrimaryTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final String? Function(String?)? validator;
   final bool isRequired;
-  final bool obsecure;
+  final bool obscure;
   final List<TextInputFormatter>? inputFormatters;
   final bool? readOnly;
   final int maxLines;
@@ -33,7 +33,7 @@ class PrimaryTextField extends StatelessWidget {
     required this.controller,
     this.hint,
     this.label,
-    this.obsecure = false,
+    this.obscure = false,
     this.isRequired = true,
     this.marginBottom = 16,
     this.textInputType = TextInputType.text,
@@ -76,7 +76,7 @@ class PrimaryTextField extends StatelessWidget {
             maxLines: maxLines,
             onChanged: onChanged,
             readOnly: readOnly ?? onTap != null ? true : false,
-            obscureText: obsecure,
+            obscureText: obscure,
             onTap: onTap,
             validator: isRequired
                 ? (value) {
