@@ -5,15 +5,21 @@ import '../../models/response/user/user_model.dart';
 import '../client/http_exception.dart';
 import '../client/base_api.dart';
 
-class UserRepository extends API {
-  //
-  static const String _LOGIN_USER = "/api/user/login";
-  static const String _GET_ALL_USER = "/api/user/all";
-  static const String _GET_USER_INFO = "/api/user/info/";
+abstract class IUserRepository {
+  static const String LOGIN_USER = "/api/user/login";
+  static const String GET_ALL_USER = "/api/user/all";
+  static const String GET_USER_INFO = "/api/user/info/";
 
+  Future<AuthResponse> loginUser({required String email, required String password});
+  Future<UserResponse> fetchUserList({int page, int count});
+  Future<UserModel> fetchUserInfo();
+}
+
+class UserRepository extends API implements IUserRepository {
+  @override
   Future<AuthResponse> loginUser({required String email, required String password}) async {
     return httpRequest(
-      path: _LOGIN_USER,
+      path: IUserRepository.LOGIN_USER,
       method: HttpMethod.POST,
       data: {
         "email": email,
@@ -25,9 +31,10 @@ class UserRepository extends API {
     );
   }
 
+  @override
   Future<UserResponse> fetchUserList({int page = 1, int count = 99999}) async {
     return httpRequest(
-      path: _GET_ALL_USER,
+      path: IUserRepository.GET_ALL_USER,
       query: {
         "page": page,
         "count": count,
@@ -38,13 +45,14 @@ class UserRepository extends API {
     );
   }
 
+  @override
   Future<UserModel> fetchUserInfo() async {
     String? userId = UserCredential.instance.userId;
     if (userId == null) {
       throw SessionExpiredException();
     }
     return httpRequest(
-      path: _GET_USER_INFO + userId,
+      path: IUserRepository.GET_USER_INFO + userId,
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);
       },
