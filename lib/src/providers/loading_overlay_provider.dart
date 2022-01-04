@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class LoadingOverlayProvider extends ChangeNotifier {
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  //
   static BuildContext? _context;
 
   ///Loading provider need a stable context, so it's best to initialize with
@@ -21,7 +24,7 @@ class LoadingOverlayProvider extends ChangeNotifier {
   }
 
   void _toggleLoading([bool? value]) {
-    isLoading = value ?? !isLoading;
+    _isLoading = value ?? !_isLoading;
     notifyListeners();
   }
 }

@@ -1,10 +1,10 @@
 ///Memory user credential
-class UserCredential {
+class UserSecret {
   String? jwtToken;
   String? userId;
 
-  UserCredential._();
-  static final UserCredential instance = UserCredential._();
+  UserSecret._();
+  static final UserSecret instance = UserSecret._();
 
   bool hasValidToken() {
     return jwtToken != null && jwtToken!.isNotEmpty;

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boiler_plate/src/constant/app_constant.dart';
+
+import '../../constant/app_constant.dart';
 
 abstract class HttpRequestException {}
 

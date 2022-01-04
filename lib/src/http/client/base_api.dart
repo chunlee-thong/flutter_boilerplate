@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_constant.dart';
-import '../../models/others/user_credential.dart';
+import '../../models/others/user_secret.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';
 import 'http_client.dart';
@@ -40,8 +40,8 @@ class API {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && UserCredential.instance.hasValidToken()) {
-        String? token = UserCredential.instance.jwtToken;
+      if (requiredToken && UserSecret.instance.hasValidToken()) {
+        String? token = UserSecret.instance.jwtToken;
         bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken();
