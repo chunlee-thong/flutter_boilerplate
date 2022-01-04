@@ -1,5 +1,5 @@
 import '../../constant/app_constant.dart';
-import '../../models/others/user_credential.dart';
+import '../../models/others/user_secret.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
 import '../client/http_exception.dart';
@@ -47,7 +47,7 @@ class UserRepository extends API implements IUserRepository {
 
   @override
   Future<UserModel> fetchUserInfo() async {
-    String? userId = UserCredential.instance.userId;
+    String? userId = UserSecret.instance.userId;
     if (userId == null) {
       throw SessionExpiredException();
     }

@@ -7,7 +7,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../http/client/http_client.dart';
 import '../constant/app_constant.dart';
 import '../constant/locale_keys.dart';
-import '../models/others/user_credential.dart';
+import '../models/others/user_secret.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/sign_in_page/sign_in_page.dart';
 import '../providers/auth_provider.dart';
@@ -38,7 +38,7 @@ class AuthService {
     infoLog("refresh token", refreshToken);
     infoLog("userId", userId);
 
-    UserCredential.instance.initLocalCredential(
+    UserSecret.instance.initLocalCredential(
       token: token,
       userId: userId,
     );
@@ -56,7 +56,7 @@ class AuthService {
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
     await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
-    UserCredential.instance.initLocalCredential(
+    UserSecret.instance.initLocalCredential(
       token: authResponse.token,
       userId: authResponse.userId,
     );
@@ -66,7 +66,7 @@ class AuthService {
   static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     Future onLogout() async {
       await LocalStorage.clear();
-      UserCredential.instance.clearCredential();
+      UserSecret.instance.clearCredential();
       AuthProvider.getProvider(context).setLoginStatus(false);
       SuraPageNavigator.pushAndRemove(context, const SignInPage());
     }
