@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
@@ -62,6 +61,8 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
 );
 
 void prettyPrintJson(dynamic input) {
-  var prettyString = encoder.convert(input);
-  prettyString.split('\n').forEach((element) => log(element));
+  if (kDebugMode) {
+    var prettyString = encoder.convert(input);
+    prettyString.split('\n').forEach((element) => debugPrint(element));
+  }
 }
