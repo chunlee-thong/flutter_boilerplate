@@ -78,23 +78,17 @@ class API {
 
 ///Handle another type of exception that relate to Error
 dynamic _handleOtherError(dynamic exception) {
-  String? stackTrace = "";
-  if (exception is Exception) {
-    stackTrace = exception.toString();
-  } else {
-    stackTrace = exception?.stackTrace?.toString() ?? "";
+  StackTrace? stackTrace;
+  if (exception is Error) {
+    stackTrace = exception.stackTrace;
   }
   errorLog("Http Request Exception Error :=> ${exception.runtimeType}: "
       "$exception"
-      "\nStackTrace:  $stackTrace");
-  if (exception is Error) {
-    return HttpRequestErrorWrapper(
-      "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
-      exception.stackTrace,
-    );
-  } else {
-    return HttpRequestErrorWrapper(ErrorMessage.UNEXPECTED_ERROR);
-  }
+      "\nStackTrace:  ${stackTrace.toString()}");
+  return HttpRequestErrorWrapper(
+    "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
+    stackTrace,
+  );
 }
 
 dynamic _handleDioError(DioError exception) {

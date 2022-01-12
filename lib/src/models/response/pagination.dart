@@ -5,9 +5,9 @@ class Pagination {
     required this.totalPage,
   });
 
-  num page;
-  num totalItems;
-  num totalPage;
+  int page;
+  int totalItems;
+  int totalPage;
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
         page: json["page"] ?? 0,

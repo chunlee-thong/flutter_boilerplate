@@ -1,4 +1,3 @@
-///Memory user credential
 class UserSecret {
   String? jwtToken;
   String? userId;
