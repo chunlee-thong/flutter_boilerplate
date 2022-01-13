@@ -28,50 +28,45 @@ class CustomMessageDialog extends StatelessWidget {
         _color = const Color(0xFFE57373),
         super(key: key);
 
-  final RoundedRectangleBorder shape = SuraDecoration.roundRect();
-  final double padding = 16.0;
+  final RoundedRectangleBorder shape = SuraDecoration.roundRect(16);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: shape,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildContent(),
-          _buildAction(context),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildContent(),
+            const SpaceY(12),
+            _buildAction(context),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildContent() {
     final iconData = _isError ? AppAssets.FATAL_ERROR : AppAssets.NOTIFICATION;
-    return Container(
-      padding: EdgeInsets.all(padding),
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgAsset(
-                icon: iconData,
-                size: 32,
-                iconColor: _isError ? Colors.red : Colors.green,
-              ),
-              const SpaceX(16),
-              Text(title, style: kSubHeaderStyle.medium),
-            ],
-          ),
-          SpaceY(padding),
-          Text(
-            message,
-            style: kSubtitleStyle.normal,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        SvgAsset(
+          icon: iconData,
+          size: 40,
+          padding: EdgeInsets.zero,
+          iconColor: _isError ? Colors.red : Colors.green,
+        ),
+        const SpaceY(16),
+        Text(title, style: kSubHeaderStyle.medium),
+        const SpaceY(4),
+        Text(
+          message,
+          style: kNormalStyle,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
@@ -79,18 +74,15 @@ class CustomMessageDialog extends StatelessWidget {
     final buttonText = _isError ? "Dismiss" : "Ok";
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(padding, 0, padding, padding),
-      child: Material(
-        elevation: 0.0,
-        color: _color,
-        child: InkWell(
-          onTap: () => Navigator.pop(context),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(buttonText, style: kSubtitleStyle.medium.white),
-            ),
-          ),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
+      child: ElevatedButton(
+        onPressed: () => Navigator.pop(context),
+        style: ElevatedButton.styleFrom(
+          primary: _color,
+        ),
+        child: Text(
+          buttonText,
+          style: kSubtitleStyle.medium.white,
         ),
       ),
     );

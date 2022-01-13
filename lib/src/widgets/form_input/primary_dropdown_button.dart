@@ -13,6 +13,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final bool isRequired;
   final double marginBottom;
+  final bool enabled;
 
   const PrimaryDropDownButton({
     Key? key,
@@ -24,6 +25,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
     this.isRequired = true,
     this.validator,
     this.marginBottom = 16.0,
+    this.enabled = true,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
                   ),
                 )
                 .toList(),
-            onChanged: onChanged,
+            onChanged: enabled ? onChanged : null,
           ),
         ],
       ),

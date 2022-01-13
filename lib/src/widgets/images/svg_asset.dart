@@ -7,17 +7,17 @@ import 'package:flutter_svg/svg.dart';
 class SvgAsset extends StatelessWidget {
   final String icon;
   final double size;
-  final Color? iconColor;
   final Color bgColor;
   final EdgeInsets padding;
+  final Color? iconColor;
+  final EdgeInsets? margin;
   final ShapeBorder? shape;
   final BorderSide? side;
-  final EdgeInsets? margin;
   final VoidCallback? onTap;
   final bool _iconOnly;
   final double? width;
   final double? height;
-  final Widget? placeholderError;
+  final Widget? errorPlaceholder;
 
   ///A Widget to handle a svg in our asset folder
   const SvgAsset({
@@ -33,7 +33,7 @@ class SvgAsset extends StatelessWidget {
     this.onTap,
     this.width,
     this.height,
-    this.placeholderError,
+    this.errorPlaceholder,
   })  : _iconOnly = false,
         super(key: key);
 
@@ -50,22 +50,21 @@ class SvgAsset extends StatelessWidget {
     this.onTap,
     this.width,
     this.height,
-    this.placeholderError,
+    this.errorPlaceholder,
   })  : _iconOnly = true,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final customShape = shape ?? SuraDecoration.roundRect();
-    //var iconSize = Size(width ?? size, height ?? size);
     final iconChild = SvgPicture.asset(
       icon,
       width: size,
       height: size,
       color: iconColor,
-      placeholderBuilder: placeholderError != null
+      placeholderBuilder: errorPlaceholder != null
           ? (context) {
-              return placeholderError!;
+              return errorPlaceholder!;
             }
           : null,
     );

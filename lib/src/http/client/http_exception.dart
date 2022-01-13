@@ -27,7 +27,7 @@ class DioErrorException extends HttpRequestException {
   //
   @override
   String toString() {
-    return code != null ? "$code: $message" : message;
+    return message;
   }
 }
 

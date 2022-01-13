@@ -27,6 +27,7 @@ class PrimaryTextField extends StatelessWidget {
   final int? maxLength;
   final bool autoCorrect;
   final FocusNode? focusNode;
+  final bool enabled;
 
   const PrimaryTextField({
     Key? key,
@@ -41,6 +42,7 @@ class PrimaryTextField extends StatelessWidget {
     this.maxLines = 1,
     this.autoFocus = false,
     this.autoCorrect = false,
+    this.enabled = true,
     this.prefixIcon,
     this.validator,
     this.onTap,
@@ -75,6 +77,7 @@ class PrimaryTextField extends StatelessWidget {
             autofocus: autoFocus,
             maxLines: maxLines,
             onChanged: onChanged,
+            enabled: enabled,
             readOnly: readOnly ?? onTap != null ? true : false,
             obscureText: obscure,
             onTap: onTap,

@@ -23,6 +23,7 @@ class DefaultHttpClient {
       receiveTimeout: _timeOut,
     );
     dio = Dio(options)..interceptors.add(defaultInterceptor);
+    //Use isolate cause a jank, still no idea why
     (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {

@@ -6,6 +6,7 @@ import 'package:sentry/sentry.dart';
 import 'app.dart';
 import 'flavor.dart';
 import 'my_app.dart';
+import 'src/utils/exception_handler.dart';
 import 'src/utils/logger.dart';
 
 void main() async {
@@ -20,6 +21,6 @@ void main() async {
     );
   }, (exception, stackTrace) async {
     errorLog("RunZonedGuard error: ", exception);
-    await Sentry.captureException(exception, stackTrace: stackTrace);
+    ExceptionHandler.recordError(message: exception, stackTrace: stackTrace);
   });
 }

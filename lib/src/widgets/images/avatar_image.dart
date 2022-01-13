@@ -7,9 +7,9 @@ import '../../utils/app_utils.dart';
 
 class AvatarImage extends StatelessWidget {
   final double radius;
+  final double elevation;
   final String? imageUrl;
   final ImageProvider? fileImage;
-  final double elevation;
   final IconData? placeHolderIcon;
   //
   const AvatarImage({

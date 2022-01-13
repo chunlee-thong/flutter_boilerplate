@@ -20,6 +20,5 @@ void main() async {
     );
   }, (exception, stackTrace) async {
     errorLog("RunZonedGuard error: ", exception);
-    //await Sentry.captureException(exception, stackTrace: stackTrace);
   });
 }

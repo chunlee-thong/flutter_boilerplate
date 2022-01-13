@@ -6,67 +6,30 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_theme_color.dart';
 import '../../constant/locale_keys.dart';
 import '../../models/response/user/social_auth_data.dart';
+import '../../providers/loading_overlay_provider.dart';
 import '../../services/social_auth_service.dart';
 import '../../utils/exception_handler.dart';
 
+typedef SocialSignIn = Future<SocialAuthData> Function();
+
 class SocialAuthButtons extends StatelessWidget {
   final void Function(SocialAuthData) onLoginCompleted;
-  final void Function(bool)? onAuthStateChange;
-  const SocialAuthButtons({
-    Key? key,
-    required this.onLoginCompleted,
-    this.onAuthStateChange,
-  }) : super(key: key);
+  const SocialAuthButtons({Key? key, required this.onLoginCompleted}) : super(key: key);
 
-  Future<void> onLoginWithFacebook(BuildContext context) async {
+  Future<void> onSocialSignIn({
+    required BuildContext context,
+    required SocialSignIn signInMethod,
+  }) async {
     await ExceptionHandler.run(
       context,
       () async {
         SocialAuthData data = await SocialAuthService.loginWithFacebook();
-        onAuthStateChange?.call(true);
+        LoadingOverlayProvider.toggleLoading(true);
         //Login to server
         //data.authResponse = await userApiService.......;
         //
+        LoadingOverlayProvider.toggleLoading(false);
         onLoginCompleted.call(data);
-      },
-      onDone: () {
-        onAuthStateChange?.call(false);
-      },
-    );
-  }
-
-  Future<void> onLoginWithGoogle(BuildContext context) async {
-    await ExceptionHandler.run(
-      context,
-      () async {
-        SocialAuthData data = await SocialAuthService.loginWithGoogle();
-
-        onAuthStateChange?.call(true);
-        //Login to server
-        //data.authResponse = await userApiService.......;
-        //
-        onLoginCompleted.call(data);
-      },
-      onDone: () {
-        onAuthStateChange?.call(false);
-      },
-    );
-  }
-
-  Future<void> onLoginWithApple(BuildContext context) async {
-    await ExceptionHandler.run(
-      context,
-      () async {
-        SocialAuthData data = await SocialAuthService.loginWithApple();
-
-        onAuthStateChange?.call(true);
-        //Login to server
-        //data.authResponse = await userApiService.......;
-        //
-        onLoginCompleted.call(data);
-      },
-      onDone: () {
-        onAuthStateChange?.call(false);
       },
     );
   }
@@ -79,7 +42,12 @@ class SocialAuthButtons extends StatelessWidget {
     return Column(
       children: [
         SuraAsyncButton(
-          onPressed: () => onLoginWithFacebook(context),
+          onPressed: () {
+            onSocialSignIn(
+              context: context,
+              signInMethod: SocialAuthService.loginWithFacebook,
+            );
+          },
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
           margin: margin,
           startIcon: const Icon(AntIcons.facebookFilled),
@@ -87,7 +55,12 @@ class SocialAuthButtons extends StatelessWidget {
           height: buttonHeight,
         ),
         SuraAsyncButton(
-          onPressed: () => onLoginWithGoogle(context),
+          onPressed: () {
+            onSocialSignIn(
+              context: context,
+              signInMethod: SocialAuthService.loginWithGoogle,
+            );
+          },
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
           margin: margin,
           startIcon: const Icon(AntIcons.googleCircleFilled),
@@ -95,7 +68,12 @@ class SocialAuthButtons extends StatelessWidget {
           height: buttonHeight,
         ),
         SuraAsyncButton(
-          onPressed: () => onLoginWithApple(context),
+          onPressed: () {
+            onSocialSignIn(
+              context: context,
+              signInMethod: SocialAuthService.loginWithApple,
+            );
+          },
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
           margin: margin,
           startIcon: const Icon(AntIcons.appleFilled),

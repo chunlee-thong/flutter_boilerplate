@@ -6,8 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../constant/app_config.dart';
 
 class AppUtils {
-  static void util() {}
-
+  ///Get real file url if some API doesn't response a full url
   static String getFileUrl(String? file) {
     if (file == null) return "";
     if (file.startsWith("http")) {

@@ -115,7 +115,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
                 gender = value;
               });
             },
-            hint: tr(LocaleKeys.gender.tr()),
+            hint: tr(LocaleKeys.gender),
           ),
           PrimaryButton(
             onPressed: onSubmit,

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../utils/logger.dart';
-
 class ResponsiveSize {
   static Size? _size;
 
   static void init(BuildContext ctx) {
     _size = MediaQuery.of(ctx).size;
-    infoLog("Media query data: ${MediaQuery.of(ctx).toString()}");
   }
 
-  static double responsiveSize(double phone, [double? tablet, double? laptop, double? smallPhone]) {
+  static double responsiveSize(double phone, [double? laptop, double? tablet, double? smallPhone]) {
     double width = _size?.width ?? 480;
-    infoLog(width);
     if (width >= 1024) {
       return laptop ?? phone;
     } else if (width >= 768) {

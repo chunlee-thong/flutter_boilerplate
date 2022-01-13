@@ -11,16 +11,15 @@ import 'custom_exception.dart';
 
 class ExceptionHandler {
   ///Record error to Analytic or Crashlytic
-  static void recordError({required String message, dynamic stackTrace}) {
+  static void recordError({required message, dynamic stackTrace}) {
     Sentry.captureException(message, stackTrace: stackTrace);
   }
 
   static Future<T?> run<T>(
-    ///context can be null
     BuildContext? context,
     FutureOr<T> Function() function, {
-    VoidCallback? onDone,
     void Function(dynamic)? onError,
+    VoidCallback? onDone,
   }) async {
     try {
       return await function();
@@ -43,10 +42,14 @@ class ExceptionHandler {
         UIHelper.showErrorDialog(context, message);
       }
 
-      ExceptionHandler.recordError(
-        message: message,
-        stackTrace: stackTrace,
-      );
+      //Only record error if it isn't an http exception
+      if (exception is! HttpRequestException) {
+        recordError(
+          message: message,
+          stackTrace: stackTrace,
+        );
+      }
+
       onError?.call(exception);
       return null;
     } finally {
@@ -61,13 +64,15 @@ class ExceptionHandler {
 
 ///Use this function on your AsyncSubjectManager or FutureManager
 ///To run some logic when there is an error
-void handleManagerError(dynamic exception, BuildContext context) {
+
+///This method is unsed for now because SuraProvider provide a method to handle this
+void _handleManagerError(dynamic exception, BuildContext context) {
   if (exception is SessionExpiredException) {
     UIHelper.showToast(context, exception.toString());
     AuthService.logOutUser(context, showConfirmation: false);
   }
   ExceptionHandler.recordError(
-    message: exception.toString(),
+    message: exception,
     stackTrace: exception.stackTrace,
   );
 }
