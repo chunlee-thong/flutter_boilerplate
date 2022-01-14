@@ -52,21 +52,12 @@ class API {
         httpOption.headers!['Authorization'] = "bearer $customToken";
       }
       httpOption.headers!.addAll(headers);
-      if (customDioClient != null) {
-        response = await customDioClient.request(
-          path,
-          options: httpOption,
-          queryParameters: query,
-          data: data,
-        );
-      } else {
-        response = await dio.request(
-          path,
-          options: httpOption,
-          queryParameters: query,
-          data: data,
-        );
-      }
+      response = await (customDioClient ?? dio).request(
+        path,
+        options: httpOption,
+        queryParameters: query,
+        data: data,
+      );
       return onSuccess(response);
     } on DioError catch (e) {
       throw _handleDioError(e);
@@ -76,8 +67,8 @@ class API {
   }
 }
 
-///Handle another type of exception that relate to Error
-dynamic _handleOtherError(dynamic exception) {
+///Handle another type of exception that relate to runtime exception
+HttpRequestErrorWrapper _handleOtherError(dynamic exception) {
   StackTrace? stackTrace;
   if (exception is Error) {
     stackTrace = exception.stackTrace;
@@ -91,7 +82,7 @@ dynamic _handleOtherError(dynamic exception) {
   );
 }
 
-dynamic _handleDioError(DioError exception) {
+HttpRequestException _handleDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
     return DioErrorException(ErrorMessage.CONNECTION_ERROR);
@@ -104,7 +95,7 @@ dynamic _handleDioError(DioError exception) {
       if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
       }
-      return DioErrorException.response(exception.response!);
+      return DioErrorException.response(exception.response);
     default:
       return DioErrorException(ErrorMessage.UNEXPECTED_ERROR);
   }

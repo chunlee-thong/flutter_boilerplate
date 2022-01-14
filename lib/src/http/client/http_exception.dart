@@ -10,7 +10,10 @@ class DioErrorException extends HttpRequestException {
 
   DioErrorException(this.message, {this.code});
 
-  factory DioErrorException.response(Response response) {
+  factory DioErrorException.response(Response? response) {
+    if (response == null) {
+      return DioErrorException("Invalid response");
+    }
     String errorMessage;
     int statusCode = response.statusCode ?? 500;
 
