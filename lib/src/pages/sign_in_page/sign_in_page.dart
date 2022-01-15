@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/locale_keys.dart';
-import '../../http/index.dart';
+import '../../http/repository/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../services/auth_service.dart';

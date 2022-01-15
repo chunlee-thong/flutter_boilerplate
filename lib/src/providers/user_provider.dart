@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_manager/sura_manager.dart';
 
-import '../http/index.dart';
+import '../http/repository/index.dart';
 import '../models/response/user/user_model.dart';
 
 class UserProvider extends ChangeNotifier {

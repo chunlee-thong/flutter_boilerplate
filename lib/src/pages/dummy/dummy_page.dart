@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../widgets/common/ellipsis_text.dart';
 import 'package:sura_manager/sura_manager.dart';
 
-import '../../http/index.dart';
+import '../../http/repository/index.dart';
 import '../../models/response/user/user_model.dart';
+import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {
