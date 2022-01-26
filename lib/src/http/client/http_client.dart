@@ -44,6 +44,13 @@ _parseAndDecode(String response) {
 const JsonDecoder decoder = JsonDecoder();
 const JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
+void prettyPrintJson(dynamic input) {
+  if (kDebugMode) {
+    var prettyString = encoder.convert(input);
+    prettyString.split('\n').forEach((element) => debugPrint(element));
+  }
+}
+
 final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler requestInterceptorHandler) async {
     httpLog("${options.method}: ${options.path},"
@@ -60,10 +67,3 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     errorInterceptorHandler.reject(error);
   },
 );
-
-void prettyPrintJson(dynamic input) {
-  if (kDebugMode) {
-    var prettyString = encoder.convert(input);
-    prettyString.split('\n').forEach((element) => debugPrint(element));
-  }
-}
