@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_assets.dart';
-import '../../constant/app_theme_color.dart';
 import '../../constant/app_style_decoration.dart';
+import '../../constant/app_theme_color.dart';
 import '../../widgets/images/svg_asset.dart';
 
 class CustomMessageDialog extends StatelessWidget {
@@ -49,7 +49,7 @@ class CustomMessageDialog extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    final iconData = _isError ? AppAssets.FATAL_ERROR : AppAssets.NOTIFICATION;
+    final iconData = _isError ? AppAssets.fatalError : AppAssets.notification;
     return Column(
       children: [
         SvgAsset(
