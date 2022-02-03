@@ -27,6 +27,15 @@ void generateFile() async {
 String generateImageAssetsClass(String path) {
   final String imageName = path.split("/").last.replaceAll("%20", " ");
   final String imagePath = path.replaceAll("%20", " ");
-  final String imageFieldName = imageName.replaceAll(RegExp(r'[-\s+\b|\b\s]'), "_").split(".").first.toUpperCase();
+  String imageFieldName = imageName.replaceAll(RegExp(r'[-\s+\b|\b\s]'), " ").split(".").first;
+  final List<String> words = imageFieldName.split(" ").map(_upperCaseFirstLetter).toList();
+  if (words.isNotEmpty) {
+    words[0] = words[0].toLowerCase();
+  }
+  imageFieldName = words.join("");
   return '\n  static const String $imageFieldName = "assets/$imagePath";';
+}
+
+String _upperCaseFirstLetter(String word) {
+  return '${word.substring(0, 1).toUpperCase()}${word.substring(1).toLowerCase()}';
 }

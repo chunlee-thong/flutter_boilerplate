@@ -68,7 +68,7 @@ class CustomErrorWidget extends StatelessWidget {
 
   Widget _buildErrorIcon() {
     return const SvgAsset(
-      icon: AppAssets.ERROR_502,
+      icon: AppAssets.error502,
       size: 54,
     );
   }

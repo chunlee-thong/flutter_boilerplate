@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: AppConfig.APP_NAME),
+      appBar: UIHelper.CustomAppBar(title: AppConfig.appName),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

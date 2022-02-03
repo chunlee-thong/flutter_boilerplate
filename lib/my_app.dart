@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import 'src/http/client/http_exception.dart';
 import 'src/constant/app_config.dart';
 import 'src/constant/app_locale.dart';
+import 'src/http/client/http_exception.dart';
 import 'src/pages/splash/splash_page.dart';
 import 'src/providers/auth_provider.dart';
 import 'src/providers/theme_provider.dart';
@@ -15,8 +15,8 @@ import 'src/providers/user_provider.dart';
 import 'src/services/auth_service.dart';
 import 'src/widgets/responsive_size.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
-import 'src/widgets/state_widgets/loading_widget.dart';
 import 'src/widgets/state_widgets/loading_overlay.dart';
+import 'src/widgets/state_widgets/loading_widget.dart';
 
 ///This widget can change to use your app name
 class MyApp extends StatefulWidget {
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   ///Change font family base on locale
   ThemeData _customizeTheme(BuildContext context) {
-    String fontName = context.locale == KH_LOCALE ? AppConfig.KH_FONT_NAME : AppConfig.EN_FONT_NAME;
+    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
     return Theme.of(context).copyWith(
       textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
     );
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => AuthProvider()),
         ],
         child: EasyLocalization(
-          path: AppConfig.LANGUAGE_PATH,
+          path: AppConfig.languageAssetPath,
           supportedLocales: languages,
           fallbackLocale: KH_LOCALE,
           startLocale: KH_LOCALE,
@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   child: MaterialApp(
                     useInheritedMediaQuery: useDevicePreview,
-                    title: AppConfig.APP_NAME,
+                    title: AppConfig.appName,
                     navigatorKey: SuraNavigator.navigatorKey,
                     theme: themeProvider.getThemeData,
                     debugShowCheckedModeBanner: false,

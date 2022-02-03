@@ -28,7 +28,7 @@ class AppTheme {
       buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
-    fontFamily: AppConfig.EN_FONT_NAME,
+    fontFamily: AppConfig.enFontName,
     colorScheme: const ColorScheme.light(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -45,7 +45,7 @@ class AppTheme {
       buttonColor: AppColor.primary,
       textTheme: ButtonTextTheme.primary,
     ),
-    fontFamily: AppConfig.EN_FONT_NAME,
+    fontFamily: AppConfig.enFontName,
     colorScheme: const ColorScheme.dark(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
