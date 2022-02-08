@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sentry/sentry.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'app.dart';
 import 'flavor.dart';
@@ -13,7 +13,7 @@ void main() async {
   runZonedGuarded(() async {
     setupFlavorConfiguration(Flavor.production);
     await App.init();
-    await Sentry.init(
+    await SentryFlutter.init(
       (options) {
         options.dsn = 'sentry-dns';
       },
