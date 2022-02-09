@@ -8,7 +8,7 @@
 PRODUCT_NAME = flutter_boiler_plate
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.chunleethong.flutterboilerplate.flutterBoilerPlate
+PRODUCT_BUNDLE_IDENTIFIER = com.chunleethong.flutterBoilerplate
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 com.chunleethong.flutter_boiler_plate. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.chunleethong. All rights reserved.

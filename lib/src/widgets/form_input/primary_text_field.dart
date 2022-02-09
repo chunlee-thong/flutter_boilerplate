@@ -28,6 +28,8 @@ class PrimaryTextField extends StatelessWidget {
   final bool autoCorrect;
   final FocusNode? focusNode;
   final bool enabled;
+  final bool _isPassword;
+  final ValueNotifier<bool>? obscureNotifier;
 
   const PrimaryTextField({
     Key? key,
@@ -53,7 +55,38 @@ class PrimaryTextField extends StatelessWidget {
     this.maxLength,
     this.suffixIcon,
     this.focusNode,
+    this.obscureNotifier,
   })  : assert(hint != null || label != null),
+        _isPassword = false,
+        super(key: key);
+
+  const PrimaryTextField.password({
+    Key? key,
+    required this.controller,
+    required this.obscureNotifier,
+    this.hint,
+    this.label,
+    this.obscure = true,
+    this.isRequired = true,
+    this.marginBottom = 16,
+    this.textInputType = TextInputType.visiblePassword,
+    this.textCapitalization = TextCapitalization.none,
+    this.maxLines = 1,
+    this.autoFocus = false,
+    this.autoCorrect = false,
+    this.enabled = true,
+    this.prefixIcon,
+    this.validator,
+    this.onTap,
+    this.readOnly,
+    this.lengthValidator,
+    this.onChanged,
+    this.inputFormatters,
+    this.maxLength,
+    this.suffixIcon,
+    this.focusNode,
+  })  : assert(hint != null || label != null),
+        _isPassword = true,
         super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -63,7 +96,7 @@ class PrimaryTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kTitleStyle.medium).paddingValue(horizontal: 4),
+            Text("$label ${isRequired ? "*" : ""}", style: kSubtitleStyle).paddingValue(horizontal: 4),
             const SpaceY(),
           ],
           TextFormField(
@@ -93,10 +126,16 @@ class PrimaryTextField extends StatelessWidget {
                 : null,
             decoration: InputDecoration(
               hintText: hint,
-              border: const OutlineInputBorder(),
               prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-              //labelText: label,
+              suffixIcon: _isPassword
+                  ? SuraIconButton(
+                      onTap: () {
+                        obscureNotifier?.value = !obscureNotifier!.value;
+                      },
+                      icon: Icon(obscure ? Icons.visibility : Icons.visibility_off),
+                      padding: const EdgeInsets.all(12),
+                    )
+                  : suffixIcon,
             ),
           ),
         ],

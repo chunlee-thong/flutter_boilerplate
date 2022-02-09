@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../widgets/ui_helper.dart';
 
@@ -14,6 +16,23 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: UIHelper.CustomAppBar(title: "About"),
+      body: Center(
+        child: SuraFutureHandler<PackageInfo>.function(
+          futureFunction: () async {
+            return PackageInfo.fromPlatform();
+          },
+          ready: (data) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Flutter Boilerplate"),
+                const SpaceY(),
+                Text("Version: ${data.version}"),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

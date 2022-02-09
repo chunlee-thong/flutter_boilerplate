@@ -55,6 +55,7 @@ A flutter boiler plate code for initial project setup
 
 - replace your icon file in **assets/image/app-icon.png**
 - run: **flutter pub run flutter_launcher_icons:main**
+- if there is an error, change *minSdkVersion* and *targetSdkVersion* in android app gradle to integer instead
 - note: this command will run all flutter_launcher_icon with flavor if you have any
 - App Icon isn't dynamic by flavor in ios. you need to replace a String ""$(ASSET_PREFIX)AppIcon";" to ""$(ASSET_PREFIX)AppIcon"-$(ASSET_PREFIX);" in ios/project.pbxproj
 

@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/constant/app_theme_color.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -51,8 +52,8 @@ class _MyAppState extends State<MyApp> {
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,
           supportedLocales: languages,
-          fallbackLocale: KH_LOCALE,
-          startLocale: KH_LOCALE,
+          fallbackLocale: EN_LOCALE,
+          startLocale: EN_LOCALE,
           child: Builder(
             builder: (context) => Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                     useInheritedMediaQuery: useDevicePreview,
                     title: AppConfig.appName,
                     navigatorKey: SuraNavigator.navigatorKey,
-                    theme: themeProvider.getThemeData,
+                    theme: AppTheme.primaryTheme(ThemeProvider.isDark),
                     debugShowCheckedModeBanner: false,
                     localizationsDelegates: context.localizationDelegates,
                     supportedLocales: context.supportedLocales,

@@ -41,7 +41,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       fullWidth: fullWidth,
-      color: color,
+      color: Theme.of(context).primaryColor,
       margin: margin,
       shape: shape,
       textColor: Colors.white,

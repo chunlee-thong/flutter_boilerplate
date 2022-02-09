@@ -6,7 +6,7 @@ import '../../pages/user_profile/user_profile_page.dart';
 import '../../providers/bottom_navigation_provider.dart';
 import '../dummy/dummy_page.dart';
 import '../templates/template_pages.dart';
-import 'bottom_navigation.dart';
+import 'root_bottom_navigation_bar.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
@@ -54,7 +54,7 @@ class _RootPageState extends State<RootPage> {
               physics: const NeverScrollableScrollPhysics(),
               children: pages,
             ),
-            bottomNavigationBar: const RootBottomNavigation(),
+            bottomNavigationBar: const RootBottomNavigationBar(),
           ),
         ),
       ),

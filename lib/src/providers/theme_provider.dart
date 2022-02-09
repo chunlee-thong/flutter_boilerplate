@@ -31,8 +31,6 @@ class ThemeProvider extends ChangeNotifier {
     LocalStorage.write(key: THEME_KEY, value: isDark ? themeValueString[0] : themeValueString[1]);
   }
 
-  ThemeData get getThemeData => isDark ? AppTheme.darkTheme : AppTheme.lightTheme;
-
   static bool _themeStringChecker(String value) {
     if (value == themeValueString[0]) return true;
     if (value == themeValueString[1]) return false;

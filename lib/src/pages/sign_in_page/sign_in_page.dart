@@ -1,5 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/constant/app_assets.dart';
+import 'package:flutter_boilerplate/src/constant/app_dimension.dart';
+import 'package:flutter_boilerplate/src/constant/app_theme_color.dart';
+import 'package:flutter_boilerplate/src/providers/theme_provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/locale_keys.dart';
@@ -56,33 +60,48 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
   Widget build(BuildContext context) {
     return KeyboardDismiss(
       child: Scaffold(
-        body: SafeArea(
+        body: Center(
           child: Form(
             key: formKey,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-              children: <Widget>[
-                PrimaryTextField(
-                  key: const ValueKey("emailTC"),
-                  textInputType: TextInputType.emailAddress,
-                  controller: emailTC,
-                  label: tr(LocaleKeys.email),
-                ),
-                const SpaceY(16),
-                PrimaryTextField(
-                  key: const ValueKey("passwordTC"),
-                  textInputType: TextInputType.visiblePassword,
-                  controller: passwordTC,
-                  obscure: true,
-                  label: tr(LocaleKeys.password),
-                ),
-                PrimaryButton(
-                  onPressed: onLogin,
-                  child: EllipsisText(tr(LocaleKeys.login)),
-                ),
-                const SpaceY(100),
-                SocialAuthButtons(onLoginCompleted: (data) {}),
-              ],
+            child: SingleChildScrollView(
+              padding: AppDimension.pageSpacing,
+              child: Column(
+                children: <Widget>[
+                  SuraIconButton(
+                    onTap: () {
+                      ThemeProvider.getProvider(context).switchTheme();
+                    },
+                    icon: const Icon(
+                      Icons.class_,
+                      color: AppColor.primary,
+                      size: 64,
+                    ),
+                  ),
+                  const SpaceY(24),
+                  PrimaryTextField(
+                    key: const ValueKey("emailTC"),
+                    textInputType: TextInputType.emailAddress,
+                    controller: emailTC,
+                    label: tr(LocaleKeys.email),
+                  ),
+                  PasswordTextFieldBuilder(
+                    builder: (obscure) => PrimaryTextField.password(
+                      obscureNotifier: passwordObscureNotifier,
+                      key: const ValueKey("passwordTC"),
+                      textInputType: TextInputType.visiblePassword,
+                      controller: passwordTC,
+                      obscure: obscure,
+                      label: tr(LocaleKeys.password),
+                    ),
+                  ),
+                  PrimaryButton(
+                    onPressed: onLogin,
+                    child: EllipsisText(tr(LocaleKeys.login)),
+                  ),
+                  const SpaceY(64),
+                  SocialAuthButtons(onLoginCompleted: (data) {}),
+                ],
+              ),
             ),
           ),
         ),

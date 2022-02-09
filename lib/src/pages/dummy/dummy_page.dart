@@ -50,7 +50,10 @@ class _DummyPageState extends State<DummyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Fetch all users with pagination")),
+      appBar: AppBar(
+        title: const Text("Pagination"),
+        centerTitle: false,
+      ),
       body: FutureManagerBuilder<UserResponse>(
         futureManager: userController,
         ready: (context, UserResponse response) {

@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../constant/locale_keys.dart';
 import '../../providers/bottom_navigation_provider.dart';
 
-class RootBottomNavigation extends StatelessWidget {
-  const RootBottomNavigation({Key? key}) : super(key: key);
+class RootBottomNavigationBar extends StatelessWidget {
+  const RootBottomNavigationBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<BottomNavigationProvider>(context);

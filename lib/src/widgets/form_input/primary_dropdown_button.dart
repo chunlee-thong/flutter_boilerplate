@@ -51,9 +51,6 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
                     );
                   }
                 : null,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-            ),
             items: options
                 .map(
                   (option) => DropdownMenuItem<T>(

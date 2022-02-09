@@ -14,7 +14,7 @@ void main() async {
     await App.init();
     await SentryFlutter.init(
       (options) {
-        options.dsn = 'https://e2af85f7d13e4c12a244a33b2941c59e@glitchtip.lynical.com/1';
+        options.dsn = '';
       },
       appRunner: () => runApp(const MyApp()),
     );

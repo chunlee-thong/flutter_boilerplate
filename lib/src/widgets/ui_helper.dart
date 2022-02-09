@@ -90,9 +90,9 @@ class UIHelper {
 
   static AppBar CustomAppBar({
     required String title,
-    double elevation = 2.0,
+    double elevation = 0.0,
     List<Widget>? actions,
-    bool centerTitle = false,
+    bool centerTitle = true,
     Color? backgroundColor,
   }) {
     return AppBar(
