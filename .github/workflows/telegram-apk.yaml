@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - build
+  workflow_dispatch:
+
 jobs:
   build:
     name: Build apk file and send to telegram group
