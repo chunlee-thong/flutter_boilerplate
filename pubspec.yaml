@@ -22,7 +22,6 @@ dependencies:
   device_preview: ^1.0.0
   dio: ^4.0.4
   easy_localization: ^3.0.0
-  flutter_launcher_icons: ^0.9.2
   flutter_secure_storage: ^5.0.2
   flutter_styled_toast: ^2.0.0
   flutter_svg: ^1.0.3
@@ -40,6 +39,7 @@ dependencies:
 dev_dependencies:
   flutter_flavorizr: ^2.1.0
   flutter_lints: ^1.0.4
+  flutter_launcher_icons: ^0.9.2
   flutter_localizations:
     sdk: flutter
   flutter_test:
