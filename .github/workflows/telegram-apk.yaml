@@ -14,12 +14,15 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.22.5"
+          channel: "stable"
+      - name: Check Flutter doctor
+      - run: flutter doctor -v
       - run: flutter pub get
-      - run: flutter build apk --release --flavor dev
-      - name: Rename Apk file
+      - name: Build apk file
+      - run: flutter build apk --release --flavor dev -t lib/main_dev.dart
+      - name: Rename apk file
         run: cd build/app/outputs/flutter-apk && mv app-dev-release.apk flutter-boiler-plate.apk
-      - name: send apk file
+      - name: Send apk file
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.CHAT_ID }}
