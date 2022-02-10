@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/constant/app_assets.dart';
 
 import '../models/others/language_model.dart';
 
@@ -11,11 +12,11 @@ const List<LanguageModel> KAppLanguages = [
   LanguageModel(
     locale: EN_LOCALE,
     name: "English",
-    image: "https://ecolebranchee.com/wp-content/uploads/2015/04/etats-unis-drapeau.gif",
+    image: AppAssets.usFlag,
   ),
   LanguageModel(
     locale: KH_LOCALE,
     name: "ខ្មែរ",
-    image: "https://wonderfulengineering.com/wp-content/uploads/2015/08/Cambodia-flag-3.gif",
+    image: AppAssets.cambodiaFlag,
   ),
 ];

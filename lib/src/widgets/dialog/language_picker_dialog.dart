@@ -29,7 +29,7 @@ class LanguagePickerDialog extends StatelessWidget {
           ...KAppLanguages.map((language) {
             return SuraListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(language.image),
+                backgroundImage: AssetImage(language.image),
               ),
               title: Text(language.name),
               separator: const Divider0(),

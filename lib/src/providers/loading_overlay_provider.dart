@@ -16,7 +16,7 @@ class LoadingOverlayProvider extends ChangeNotifier {
     _context = childContext;
   }
 
-  static void toggleLoading([bool? value]) {
+  static void toggle([bool? value]) {
     if (_context == null) {
       throw FlutterError("Please initialize a LoadingProvider with init() function");
     }

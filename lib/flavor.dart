@@ -7,23 +7,8 @@ enum Flavor {
 }
 
 class F {
-  static Flavor? flavor;
-
-  static String get title {
-    switch (flavor) {
-      case Flavor.dev:
-        return "dev";
-
-      case Flavor.staging:
-        return "staging";
-
-      case Flavor.production:
-        return "prod";
-
-      default:
-        return "";
-    }
-  }
+  static late Flavor flavor;
+  static String get title => flavor == Flavor.production ? "prod" : flavor.name;
 }
 
 Future<void> setupFlavorConfiguration(Flavor flavor) async {

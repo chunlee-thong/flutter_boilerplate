@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/providers/theme_provider.dart';
-import 'package:flutter_boilerplate/src/utils/logger.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import 'app_config.dart';

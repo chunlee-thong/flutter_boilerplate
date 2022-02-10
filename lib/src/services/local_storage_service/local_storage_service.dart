@@ -2,7 +2,6 @@ const String TOKEN_KEY = "key.token";
 const String REFRESH_TOKEN_KEY = "key.refresh.token";
 const String LOGIN_KEY = "key.login";
 const String ID_KEY = "key.id";
-const String THEME_KEY = "key.theme";
 
 abstract class LocalStorage {
   //Prevent initialization

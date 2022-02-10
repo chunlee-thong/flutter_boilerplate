@@ -24,11 +24,11 @@ class SocialAuthButtons extends StatelessWidget {
       context,
       () async {
         SocialAuthData data = await SocialAuthService.loginWithFacebook();
-        LoadingOverlayProvider.toggleLoading(true);
+        LoadingOverlayProvider.toggle(true);
         //Login to server
         //data.authResponse = await userApiService.......;
         //
-        LoadingOverlayProvider.toggleLoading(false);
+        LoadingOverlayProvider.toggle(false);
         onLoginCompleted.call(data);
       },
     );

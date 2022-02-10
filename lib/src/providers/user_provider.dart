@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../http/repository/index.dart';
@@ -10,15 +9,11 @@ class UserProvider extends ChangeNotifier {
 
   UserModel? get userData => userManager.data;
 
-  static UserProvider getProvider(BuildContext context, [bool listen = false]) => Provider.of<UserProvider>(
-        context,
-        listen: listen,
-      );
-
-  Future<void> getUserInfo() async {
+  Future<void> getUserInfo({bool throwError = false}) async {
     await userManager.asyncOperation(
       () => userRepository.fetchUserInfo(),
       reloading: true,
+      throwError: throwError,
     );
   }
 
