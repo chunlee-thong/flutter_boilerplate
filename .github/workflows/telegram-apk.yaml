@@ -16,10 +16,10 @@ jobs:
         with:
           channel: "stable"
       - name: Check Flutter doctor
-      - run: flutter doctor -v
+        run: flutter doctor -v
       - run: flutter pub get
       - name: Build apk file
-      - run: flutter build apk --release --flavor dev -t lib/main_dev.dart
+        run: flutter build apk --release --flavor dev -t lib/main_dev.dart
       - name: Rename apk file
         run: cd build/app/outputs/flutter-apk && mv app-dev-release.apk flutter-boiler-plate.apk
       - name: Send apk file
