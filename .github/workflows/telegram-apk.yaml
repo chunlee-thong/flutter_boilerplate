@@ -21,13 +21,13 @@ jobs:
         run: flutter doctor -v
       - run: flutter pub get
       - name: Build apk file
-        run: flutter build apk --release --flavor dev -t lib/main_dev.dart
+        run: flutter build apk --release --flavor dev -t lib/main_dev.dart --split-per-abi
       - name: Rename apk file
-        run: cd build/app/outputs/flutter-apk && mv app-dev-release.apk flutter-boiler-plate.apk
+        run: cd build/app/outputs/flutter-apk && mv app-arm64-v8a-dev-release.apk flutter-boilerplate.apk
       - name: Send apk file
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.BOT_TOKEN }}
           message: ${{github.event.head_commit.message}}
-          document: build/app/outputs/flutter-apk/flutter-boiler-plate.apk
+          document: build/app/outputs/flutter-apk/flutter-boilerplate.apk
