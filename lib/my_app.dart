@@ -11,12 +11,11 @@ import 'src/constant/app_locale.dart';
 import 'src/http/client/http_exception.dart';
 import 'src/pages/splash/splash_page.dart';
 import 'src/providers/auth_provider.dart';
+import 'src/providers/loading_overlay_provider.dart';
 import 'src/providers/theme_provider.dart';
 import 'src/providers/user_provider.dart';
 import 'src/services/auth_service.dart';
-import 'src/widgets/responsive_size.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
-import 'src/widgets/state_widgets/loading_overlay.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 
 ///This widget can change to use your app name
@@ -30,14 +29,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<Locale> languages = KAppLanguages.map((lang) => lang.locale).toList();
 
-  ///Change font family base on locale
-  ThemeData _customizeTheme(BuildContext context) {
-    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
-    return Theme.of(context).copyWith(
-      textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     const bool useDevicePreview = false;
@@ -48,6 +39,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
           ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (_) => LoadingOverlayProvider()),
         ],
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,
@@ -78,6 +70,7 @@ class _MyAppState extends State<MyApp> {
                     debugShowCheckedModeBanner: false,
                     localizationsDelegates: context.localizationDelegates,
                     supportedLocales: context.supportedLocales,
+                    home: const SplashScreenPage(),
                     locale: context.locale,
                     builder: (context, child) {
                       ErrorWidget.builder = (detail) {
@@ -86,19 +79,53 @@ class _MyAppState extends State<MyApp> {
                         }
                         return ErrorWidget(detail.exception);
                       };
-                      return Theme(
-                        child: ResponsiveBuilder(
-                          child: LoadingOverlay(child: child!),
-                        ),
-                        data: _customizeTheme(context),
-                      );
+                      return _AppWrapper(child: child!);
                     },
-                    home: const SplashScreenPage(),
                   ),
                 );
               },
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppWrapper extends StatelessWidget {
+  final Widget child;
+  const _AppWrapper({Key? key, required this.child}) : super(key: key);
+
+  ///Change font family base on locale
+  ThemeData _customizeFontFamily(BuildContext context) {
+    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
+    return Theme.of(context).copyWith(
+      textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
+    LoadingOverlayProvider.init(context);
+    return SuraResponsiveBuilder(
+      child: Theme(
+        data: _customizeFontFamily(context),
+        child: Stack(
+          children: [
+            child,
+            Consumer<LoadingOverlayProvider>(
+              builder: (context, provider, child) {
+                if (provider.isLoading) {
+                  return Container(
+                    child: const Center(child: CircularProgressIndicator()),
+                    color: color,
+                  );
+                }
+                return emptySizedBox;
+              },
+            ),
+          ],
         ),
       ),
     );
