@@ -29,14 +29,8 @@ const TextStyle kOverLineStyle = TextStyle(
 );
 
 extension StyleExtension on TextStyle {
-  TextStyle get black => copyWith(color: Colors.black);
-  TextStyle get white => copyWith(color: Colors.white);
-  TextStyle get red => copyWith(color: Colors.red);
-  TextStyle get grey => copyWith(color: Colors.grey);
-  TextStyle get green => copyWith(color: Colors.green);
   TextStyle get primary => copyWith(color: AppColor.primary);
   TextStyle get accent => copyWith(color: AppColor.accent);
-  TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 }
 
 ///

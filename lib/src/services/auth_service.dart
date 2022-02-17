@@ -33,7 +33,7 @@ class AuthService {
     String? userId = await LocalStorage.read<String>(key: ID_KEY);
 
     TokenPayload tokenPayload = SuraJwtDecoder.decode(token!);
-    infoLog("Token Expired date", tokenPayload.expiredDate.toLocal());
+    infoLog("Token Expired date", tokenPayload.expiredDate?.toLocal());
     infoLog("token", token);
     infoLog("refresh token", refreshToken);
     infoLog("userId", userId);
