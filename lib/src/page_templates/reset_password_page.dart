@@ -175,7 +175,7 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.applyColor(Colors.grey)),
+        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.setColor(Colors.grey)),
         SuraFlatButton(
           onPressed: resendCode,
           child: Text(LocaleKeys.resend_code.tr()),
