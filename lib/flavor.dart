@@ -11,6 +11,7 @@ class F {
   static String get title => flavor == Flavor.production ? "prod" : flavor.name;
 }
 
+///Must be call at main function
 Future<void> setupFlavorConfiguration(Flavor flavor) async {
   F.flavor = flavor;
   AppConfig.BASE_URL = "https://express-boilerplate-${F.title}.lynical.com";

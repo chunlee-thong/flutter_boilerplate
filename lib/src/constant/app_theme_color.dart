@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import 'app_config.dart';
+import 'app_locale.dart';
 
 class AppColor {
   //main
@@ -18,6 +20,36 @@ class AppColor {
 }
 
 class AppTheme {
+  ///Change font family base on App's locale
+  static ThemeData _customizeFontFamily(BuildContext context) {
+    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
+    return Theme.of(context).copyWith(
+      textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
+    );
+  }
+
+  ///Modified current theme after default theme has been set
+  static ThemeData modifiedTheme(BuildContext context) {
+    final ThemeData theme = _customizeFontFamily(context);
+    return theme.copyWith(
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(
+            double.infinity,
+            SuraResponsive.value(44, 54, 64),
+          ),
+        ),
+      ),
+      textTheme: theme.textTheme.copyWith(
+        button: theme.textTheme.button?.responsiveFontSize,
+        subtitle1: theme.textTheme.subtitle1?.responsiveFontSize,
+        subtitle2: theme.textTheme.subtitle2?.responsiveFontSize,
+        bodyMedium: theme.textTheme.bodyMedium?.responsiveFontSize,
+        bodySmall: theme.textTheme.bodySmall?.responsiveFontSize,
+      ),
+    );
+  }
+
   static ThemeData primaryTheme(bool isDark) {
     final Brightness brightness = isDark ? Brightness.dark : Brightness.light;
     final Color textFieldFilledColor = isDark ? Colors.white12 : const Color(0xFFDADADA);

@@ -96,38 +96,13 @@ class _AppWrapper extends StatelessWidget {
   final Widget child;
   const _AppWrapper({Key? key, required this.child}) : super(key: key);
 
-  ///Change font family base on locale
-  ThemeData _customizeFontFamily(BuildContext context) {
-    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
-    return Theme.of(context).copyWith(
-      textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
-    final ThemeData theme = _customizeFontFamily(context);
+    final color = context.theme.brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
     LoadingOverlayProvider.init(context);
     return SuraResponsiveBuilder(
       child: Theme(
-        data: theme.copyWith(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(
-                double.infinity,
-                SuraResponsive.value(44, 54, 64),
-              ),
-            ),
-          ),
-          textTheme: theme.textTheme.copyWith(
-            button: theme.textTheme.button?.responsiveFontSize,
-            subtitle1: theme.textTheme.subtitle1?.responsiveFontSize,
-            subtitle2: theme.textTheme.subtitle2?.responsiveFontSize,
-            bodyMedium: theme.textTheme.bodyMedium?.responsiveFontSize,
-            bodySmall: theme.textTheme.bodySmall?.responsiveFontSize,
-          ),
-        ),
+        data: AppTheme.modifiedTheme(context),
         child: Stack(
           children: [
             child,

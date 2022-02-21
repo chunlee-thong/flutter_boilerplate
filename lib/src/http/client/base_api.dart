@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_constant.dart';
 import '../../models/others/user_secret.dart';
 import '../../services/auth_service.dart';
 import '../../utils/logger.dart';

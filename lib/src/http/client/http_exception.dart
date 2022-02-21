@@ -1,6 +1,14 @@
 import 'package:dio/dio.dart';
 
-import '../../constant/app_constant.dart';
+class ErrorMessage {
+  ErrorMessage._();
+  static const String UNEXPECTED_ERROR = "An unexpected error occur!";
+  static const String INTERNAL_SERVER_ERROR = "Internal server error, Please try again later.";
+  static const String UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
+  static const String CONNECTION_ERROR =
+      "Error connecting to server. Please check your internet connection or Try again later!";
+  static const String TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
+}
 
 abstract class HttpRequestException {}
 
