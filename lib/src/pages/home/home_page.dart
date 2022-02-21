@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/utils/logger.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_config.dart';
 import '../../constant/locale_keys.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    infoLog(context.theme.appBarTheme.titleTextStyle);
     return Scaffold(
       appBar: UIHelper.CustomAppBar(title: AppConfig.appName),
       body: Padding(
@@ -57,7 +60,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: ElevatedButton(
+      floatingActionButton: SuraAsyncButton(
+        fullWidth: false,
+        height: 40,
         onPressed: () async {
           ThemeProvider.getProvider(context).switchTheme();
         },

@@ -18,6 +18,29 @@ class AppColor {
 }
 
 class AppTheme {
+  static ThemeData responsiveTheme(ThemeData oldTheme) {
+    return oldTheme.copyWith(
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(
+            64,
+            SuraResponsive.value(44, 54, 64),
+          ),
+        ),
+      ),
+      textTheme: oldTheme.textTheme.copyWith(
+        labelLarge: oldTheme.textTheme.labelLarge?.responsiveFontSize,
+        titleMedium: oldTheme.textTheme.titleMedium?.responsiveFontSize,
+        titleSmall: oldTheme.textTheme.titleSmall?.responsiveFontSize,
+        bodyMedium: oldTheme.textTheme.bodyMedium?.responsiveFontSize,
+        bodySmall: oldTheme.textTheme.bodySmall?.responsiveFontSize,
+      ),
+      appBarTheme: oldTheme.appBarTheme.copyWith(
+        titleTextStyle: oldTheme.textTheme.titleLarge?.responsiveFontSize,
+      ),
+    );
+  }
+
   static ThemeData primaryTheme(bool isDark) {
     final Brightness brightness = isDark ? Brightness.dark : Brightness.light;
     final Color textFieldFilledColor = isDark ? Colors.white12 : const Color(0xFFDADADA);

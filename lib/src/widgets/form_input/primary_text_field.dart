@@ -96,7 +96,10 @@ class PrimaryTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
-            Text("$label ${isRequired ? "*" : ""}", style: kSubtitleStyle).paddingValue(horizontal: 4),
+            Text(
+              "$label ${isRequired ? "*" : ""}",
+              style: kSubtitleStyle.responsiveFontSize,
+            ).paddingValue(horizontal: 4),
             const SpaceY(),
           ],
           TextFormField(

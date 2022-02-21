@@ -16,6 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  sura_flutter: ^1.0.5
+  sura_manager: ^1.0.0
   antdesign_icons: ^0.0.3
   cached_network_image: ^3.2.0
   cupertino_icons: ^1.0.4
@@ -33,8 +35,6 @@ dependencies:
   provider: ^6.0.2
   sentry_flutter: ^6.3.0
   shared_preferences: ^2.0.13
-  sura_flutter: ^1.0.4
-  sura_manager: ^1.0.0
 
 dev_dependencies:
   flutter_flavorizr: ^2.1.0
