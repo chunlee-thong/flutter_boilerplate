@@ -30,8 +30,8 @@ class AppTheme {
 
   ///Modified current theme after default theme has been set
   static ThemeData modifiedTheme(BuildContext context) {
-    final ThemeData theme = _customizeFontFamily(context);
-    return theme.copyWith(
+    final ThemeData newTheme = _customizeFontFamily(context);
+    return newTheme.copyWith(
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(
@@ -40,12 +40,15 @@ class AppTheme {
           ),
         ),
       ),
-      textTheme: theme.textTheme.copyWith(
-        button: theme.textTheme.button?.responsiveFontSize,
-        subtitle1: theme.textTheme.subtitle1?.responsiveFontSize,
-        subtitle2: theme.textTheme.subtitle2?.responsiveFontSize,
-        bodyMedium: theme.textTheme.bodyMedium?.responsiveFontSize,
-        bodySmall: theme.textTheme.bodySmall?.responsiveFontSize,
+      textTheme: newTheme.textTheme.copyWith(
+        labelLarge: newTheme.textTheme.labelLarge?.responsiveFontSize,
+        titleMedium: newTheme.textTheme.titleMedium?.responsiveFontSize,
+        titleSmall: newTheme.textTheme.titleSmall?.responsiveFontSize,
+        bodyMedium: newTheme.textTheme.bodyMedium?.responsiveFontSize,
+        bodySmall: newTheme.textTheme.bodySmall?.responsiveFontSize,
+      ),
+      appBarTheme: newTheme.appBarTheme.copyWith(
+        titleTextStyle: newTheme.textTheme.titleLarge?.responsiveFontSize,
       ),
     );
   }
