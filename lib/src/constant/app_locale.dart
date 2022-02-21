@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/constant/app_assets.dart';
 
+import '../constant/app_assets.dart';
 import '../models/others/language_model.dart';
 
 //

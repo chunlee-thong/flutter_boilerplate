@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 class AppDimension {
-  static const EdgeInsets pageSpacing = EdgeInsets.all(16);
+  static final EdgeInsets pageSpacing = EdgeInsets.all(SuraResponsive.value(16, 24, 32, 12));
 }

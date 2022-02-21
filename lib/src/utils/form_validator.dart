@@ -1,22 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import '../utils/app_extension.dart';
 
 import '../constant/locale_keys.dart';
+import '../utils/app_extension.dart';
 
 class FormValidator {
-  static const Pattern emailPattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  static final RegExp regex = RegExp(emailPattern as String);
-
-  static String? validateEmail(String? value) {
-    if (value.isNullOrEmpty) {
-      return tr(LocaleKeys.please_input_a, args: ["email"]);
-    }
-    if (!regex.hasMatch(value!)) {
-      return tr("Invalid email address");
-    }
-  }
-
   static String? validateField(String? value, {required String field, int? length}) {
     if (value.isNullOrEmpty) {
       return tr(LocaleKeys.please_input_a, args: [field]);

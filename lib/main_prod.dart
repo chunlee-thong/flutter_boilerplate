@@ -21,6 +21,6 @@ void main() async {
     );
   }, (exception, stackTrace) async {
     errorLog("RunZonedGuard error: ", exception);
-    ExceptionHandler.recordError(message: exception, stackTrace: stackTrace);
+    ExceptionHandler.recordError(exception, stackTrace: stackTrace);
   });
 }

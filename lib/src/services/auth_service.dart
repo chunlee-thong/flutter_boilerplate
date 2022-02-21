@@ -1,16 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/providers/index.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/locale_keys.dart';
 import '../http/client/http_client.dart';
-import '../http/client/http_exception.dart';
 import '../models/others/user_secret.dart';
 import '../models/response/user/auth_response.dart';
 import '../pages/sign_in_page/sign_in_page.dart';
 import '../providers/auth_provider.dart';
+import '../providers/index.dart';
 import '../providers/user_provider.dart';
 import '../utils/logger.dart';
 import 'local_storage_service/local_storage_service.dart';

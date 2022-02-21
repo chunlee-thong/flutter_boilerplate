@@ -1,15 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/constant/app_assets.dart';
-import 'package:flutter_boilerplate/src/constant/app_dimension.dart';
-import 'package:flutter_boilerplate/src/constant/app_theme_color.dart';
-import 'package:flutter_boilerplate/src/providers/theme_provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../constant/app_dimension.dart';
+import '../../constant/app_theme_color.dart';
 import '../../constant/locale_keys.dart';
 import '../../http/repository/index.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../pages/root_page/root_page.dart';
+import '../../providers/theme_provider.dart';
 import '../../services/auth_service.dart';
 import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';

@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/utils/logger.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_config.dart';
 import '../../constant/locale_keys.dart';
 import '../../providers/theme_provider.dart';
+import '../../utils/logger.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';

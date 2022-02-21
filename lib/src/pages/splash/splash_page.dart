@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/providers/index.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
+import '../..//providers/index.dart';
 import '../../constant/app_theme_color.dart';
 import '../../pages/root_page/root_page.dart';
 import '../../providers/auth_provider.dart';
