@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/constant/app_dimension.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_config.dart';
@@ -19,11 +20,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    infoLog(context.theme.appBarTheme.titleTextStyle);
+    infoLog(context.mediaQuery);
     return Scaffold(
       appBar: UIHelper.CustomAppBar(title: AppConfig.appName),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: AppDimension.pageSpacing,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

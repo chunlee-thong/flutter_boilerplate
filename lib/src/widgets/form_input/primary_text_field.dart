@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../constant/app_dimension.dart';
 import '../../constant/app_style_decoration.dart';
 import '../../utils/form_validator.dart';
 
@@ -12,7 +13,7 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final void Function(String)? onChanged;
-  final double marginBottom;
+  final double? marginBottom;
   final TextInputType textInputType;
   final TextCapitalization textCapitalization;
   final VoidCallback? onTap;
@@ -38,7 +39,6 @@ class PrimaryTextField extends StatelessWidget {
     this.label,
     this.obscure = false,
     this.isRequired = true,
-    this.marginBottom = 16,
     this.textInputType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
     this.maxLines = 1,
@@ -46,6 +46,7 @@ class PrimaryTextField extends StatelessWidget {
     this.autoCorrect = false,
     this.enabled = true,
     this.prefixIcon,
+    this.marginBottom,
     this.validator,
     this.onTap,
     this.readOnly,
@@ -68,13 +69,13 @@ class PrimaryTextField extends StatelessWidget {
     this.label,
     this.obscure = true,
     this.isRequired = true,
-    this.marginBottom = 16,
     this.textInputType = TextInputType.visiblePassword,
     this.textCapitalization = TextCapitalization.none,
     this.maxLines = 1,
     this.autoFocus = false,
     this.autoCorrect = false,
     this.enabled = true,
+    this.marginBottom,
     this.prefixIcon,
     this.validator,
     this.onTap,
@@ -91,7 +92,7 @@ class PrimaryTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: marginBottom),
+      margin: EdgeInsets.only(bottom: marginBottom ?? AppDimension.YSpace),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -130,6 +131,7 @@ class PrimaryTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hint,
               prefixIcon: prefixIcon,
+              contentPadding: EdgeInsets.all(SuraResponsive.value(16, 20, 24)),
               suffixIcon: _isPassword
                   ? SuraIconButton(
                       onTap: () {

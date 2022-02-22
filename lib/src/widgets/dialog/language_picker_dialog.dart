@@ -11,6 +11,7 @@ class LanguagePickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: EdgeInsets.all(SuraResponsive.value(40, 140, 240)),
       shape: SuraDecoration.roundRect(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -20,7 +21,7 @@ class LanguagePickerDialog extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: context.primaryColor,
-              borderRadius: SuraDecoration.radiusTop(4),
+              borderRadius: SuraDecoration.radiusTop(8),
             ),
             alignment: Alignment.center,
             child: Text("Language", style: kSubHeaderStyle.setColor(Colors.white)),
