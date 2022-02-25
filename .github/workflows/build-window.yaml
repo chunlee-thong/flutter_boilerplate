@@ -24,10 +24,8 @@ jobs:
         with:
           files: build/windows/runner/Release
           dest: app.zip
-      - name: Send zip file
-        uses: appleboy/telegram-action@master
+      - name: Upload to github release
+        uses: ncipollo/release-action@v1
         with:
-          to: ${{ secrets.CHAT_ID }}
-          token: ${{ secrets.BOT_TOKEN }}
-          message: ${{github.event.head_commit.message}}
-          document: app.zip
+          artifacts: "app.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
