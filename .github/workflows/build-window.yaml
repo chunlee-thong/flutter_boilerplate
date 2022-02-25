@@ -17,8 +17,8 @@ jobs:
       - name: Check Flutter doctor
         run: flutter doctor -v
       - run: flutter pub get
-      - name: Build apk file
-        run: flutter build windows
+      - name: Build exe release file
+        run: flutter build windows -t lib/main_dev.dart
       - name: Zip release folder
         uses: papeloto/action-zip@v1
         with:
