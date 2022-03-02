@@ -9,20 +9,20 @@ class GetItInjector<T extends Object> extends StatefulWidget {
   const GetItInjector({Key? key, required this.create, required this.child}) : super(key: key);
 
   @override
-  State<GetItInjector> createState() => _GetItInjectorState();
+  State<GetItInjector> createState() => _GetItInjectorState<T>();
 }
 
-class _GetItInjectorState extends State<GetItInjector> {
+class _GetItInjectorState<T extends Object> extends State<GetItInjector<T>> {
   late final instance = widget.create();
   @override
   void initState() {
-    GetIt.instance.registerSingleton(instance);
+    GetIt.instance.registerSingleton<T>(instance);
     super.initState();
   }
 
   @override
   void dispose() {
-    GetIt.instance.unregister(instance: instance);
+    GetIt.instance.unregister<T>(instance: instance);
     if (instance is ChangeNotifier) {
       (instance as ChangeNotifier).dispose();
       debugPrint("GetIt Injector Dispose");
