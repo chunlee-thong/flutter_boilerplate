@@ -24,7 +24,7 @@ class UserRepository extends API {
     );
   }
 
-  Future<UserResponse> fetchUserList({int page = 1, int count = 99999}) async {
+  Future<UserListResponse> fetchUserList({int page = 1, int count = 99999}) async {
     return httpRequest(
       path: _GET_ALL_USER,
       query: {
@@ -32,7 +32,7 @@ class UserRepository extends API {
         "count": count,
       },
       onSuccess: (response) {
-        return UserResponse.fromJson(response.data);
+        return UserListResponse.fromJson(response.data);
       },
     );
   }

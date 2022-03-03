@@ -22,7 +22,7 @@ class Pagination {
 class PaginationResponse<T> {
   final int totalRecord;
   List<T> data;
-  PaginationResponse(this.totalRecord, this.data);
+  PaginationResponse({required this.totalRecord, required this.data});
 }
 
 class PaginationHandler<T extends PaginationResponse<M>, M extends Object> {
@@ -47,4 +47,3 @@ class PaginationHandler<T extends PaginationResponse<M>, M extends Object> {
     return response;
   }
 }
-

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../../http/repository/index.dart';
+import '../../models/response/pagination.dart';
 import '../../models/response/user/user_model.dart';
 import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
@@ -13,25 +14,19 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  FutureManager<UserResponse> userController = FutureManager();
-  int currentPage = 1;
+  FutureManager<UserListResponse> userManager = FutureManager();
+  late PaginationHandler<UserListResponse, UserModel> userPagination = PaginationHandler(userManager);
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
-      currentPage = 1;
+      userPagination.reset();
     }
-    userController.asyncOperation(
+    userManager.asyncOperation(
       () => userRepository.fetchUserList(
         count: 20,
-        page: currentPage,
+        page: userPagination.page,
       ),
-      onSuccess: (response) {
-        if (userController.hasData) {
-          response.users = [...userController.data!.users, ...response.users];
-        }
-        currentPage += 1;
-        return response;
-      },
+      onSuccess: userPagination.handle,
       reloading: reload,
     );
   }
@@ -54,16 +49,16 @@ class _DummyPageState extends State<DummyPage> {
         title: const Text("Pagination"),
         centerTitle: false,
       ),
-      body: FutureManagerBuilder<UserResponse>(
-        futureManager: userController,
-        ready: (context, UserResponse response) {
+      body: FutureManagerBuilder<UserListResponse>(
+        futureManager: userManager,
+        ready: (context, UserListResponse response) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),
-            itemCount: response.users.length,
-            hasMoreData: response.hasMoreData,
-            hasError: userController.hasError,
+            itemCount: response.data.length,
+            hasMoreData: userPagination.hasMoreData,
+            hasError: userManager.hasError,
             itemBuilder: (context, index) {
-              final user = response.users[index];
+              final user = response.data[index];
               return ListTile(
                 leading: const CircleAvatar(
                   child: Icon(Icons.person),

@@ -5,5 +5,5 @@ class SocialAuthData {
   final String? accessToken;
   final String? authId;
 
-  SocialAuthData({this.authResponse, this.accessToken, this.authId});
+  SocialAuthData({this.authResponse, required this.accessToken, required this.authId});
 }
