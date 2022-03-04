@@ -7,7 +7,7 @@ import '../constant/locale_keys.dart';
 import '../http/client/http_client.dart';
 import '../models/others/user_secret.dart';
 import '../models/response/user/auth_response.dart';
-import '../pages/sign_in_page/sign_in_page.dart';
+import '../pages/sign_in/sign_in_page.dart';
 import '../providers/auth_provider.dart';
 import '../providers/index.dart';
 import '../providers/user_provider.dart';

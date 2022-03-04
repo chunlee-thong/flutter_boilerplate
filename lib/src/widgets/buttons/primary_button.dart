@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
   final Color color;
   final OutlinedBorder? shape;
   final EdgeInsets margin;
+  final Widget? startIcon;
 
   const PrimaryButton({
     Key? key,
@@ -21,6 +22,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColor.primary,
     this.shape,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
+    this.startIcon,
   }) : super(key: key);
 
   const PrimaryButton.accent({
@@ -30,12 +32,14 @@ class PrimaryButton extends StatelessWidget {
     this.fullWidth = true,
     this.color = AppColor.accent,
     this.shape,
+    this.startIcon,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SuraAsyncButton(
+      startIcon: startIcon,
       onPressed: onPressed,
       child: child,
       fullWidth: fullWidth,

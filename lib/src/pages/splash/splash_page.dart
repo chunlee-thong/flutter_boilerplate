@@ -4,14 +4,14 @@ import 'package:sura_manager/sura_manager.dart';
 
 import '../..//providers/index.dart';
 import '../../constant/app_theme_color.dart';
-import '../../pages/root_page/root_page.dart';
+import '../../pages/root/root_page.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
 import '../../services/local_storage_service/local_storage_service.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
-import '../sign_in_page/sign_in_page.dart';
+import '../sign_in/sign_in_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);

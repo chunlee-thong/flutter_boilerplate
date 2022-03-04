@@ -6,7 +6,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_config.dart';
 import '../../constant/locale_keys.dart';
 import '../../providers/theme_provider.dart';
-import '../../utils/logger.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';
@@ -20,7 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    infoLog(context.mediaQuery);
     return Scaffold(
       appBar: UIHelper.CustomAppBar(title: AppConfig.appName),
       body: Padding(
