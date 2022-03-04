@@ -76,7 +76,7 @@ HttpRequestErrorWrapper _handleOtherError(dynamic exception) {
       "$exception"
       "\nStackTrace:  ${stackTrace.toString()}");
   return HttpRequestErrorWrapper(
-    "Error: ${ErrorMessage.UNEXPECTED_TYPE_ERROR}",
+    "Error: ${HttpErrorMessage.UNEXPECTED_TYPE_ERROR}",
     stackTrace,
   );
 }
@@ -84,19 +84,19 @@ HttpRequestErrorWrapper _handleOtherError(dynamic exception) {
 HttpRequestException _handleDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
-    return DioErrorException(ErrorMessage.CONNECTION_ERROR);
+    return DioErrorException(HttpErrorMessage.CONNECTION_ERROR);
   }
 
   switch (exception.type) {
     case DioErrorType.connectTimeout:
-      return DioErrorException(ErrorMessage.TIMEOUT_ERROR);
+      return DioErrorException(HttpErrorMessage.TIMEOUT_ERROR);
     case DioErrorType.response:
       if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
       }
       return DioErrorException.response(exception.response);
     default:
-      return DioErrorException(ErrorMessage.UNEXPECTED_ERROR);
+      return DioErrorException(HttpErrorMessage.UNEXPECTED_ERROR);
   }
 }
 

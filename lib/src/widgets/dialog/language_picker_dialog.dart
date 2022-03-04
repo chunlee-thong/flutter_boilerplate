@@ -24,7 +24,7 @@ class LanguagePickerDialog extends StatelessWidget {
               borderRadius: SuraDecoration.radiusTop(8),
             ),
             alignment: Alignment.center,
-            child: Text("Language", style: kSubHeaderStyle.setColor(Colors.white)),
+            child: Text("Language", style: kSubHeaderStyle.white),
           ),
           const Divider0(),
           ...KAppLanguages.map((language) {

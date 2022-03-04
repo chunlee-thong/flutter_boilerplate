@@ -92,7 +92,7 @@ class PrimaryTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: marginBottom ?? AppDimension.YSpace),
+      margin: EdgeInsets.only(bottom: marginBottom ?? AppDimension.space16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

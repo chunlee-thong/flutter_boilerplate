@@ -34,7 +34,7 @@ class DefaultHttpClient {
     );
     dio = Dio(options)..interceptors.add(defaultInterceptor);
     //Use isolate cause a jank, still no idea why
-    (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
+    //(dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;

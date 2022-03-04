@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_theme_color.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SvgAsset extends StatelessWidget {
   final String icon;

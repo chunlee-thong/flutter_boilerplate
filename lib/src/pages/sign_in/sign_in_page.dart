@@ -70,7 +70,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                 children: <Widget>[
                   SuraIconButton(
                     onTap: () {
-                      ThemeProvider.getProvider(context).switchTheme();
+                      readThemeProvider(context).switchTheme();
                     },
                     icon: const Icon(
                       Icons.class_,

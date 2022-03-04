@@ -6,9 +6,9 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_theme_color.dart';
 import '../../constant/locale_keys.dart';
 import '../../models/response/user/social_auth_data.dart';
-import '../../providers/loading_overlay_provider.dart';
 import '../../services/social_auth_service.dart';
 import '../../utils/exception_handler.dart';
+import '../state_widgets/loading_overlay.dart';
 
 typedef SocialSignIn = Future<SocialAuthData> Function();
 

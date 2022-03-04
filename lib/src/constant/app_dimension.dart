@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 class AppDimension {
-  static final EdgeInsets pageSpacing = EdgeInsets.all(SuraResponsive.value(16, 24, 32, 12));
+  static const EdgeInsets pageSpacing = EdgeInsets.all(16);
 
-  static final double YSpace = SuraResponsive.value(16, 22, 28);
+  ///Responsive value for 8
+  static final double space8 = SuraResponsive.value(8, 14, 20);
+
+  ///Responsive value for 16
+  static final double space16 = SuraResponsive.value(16, 22, 28);
 }

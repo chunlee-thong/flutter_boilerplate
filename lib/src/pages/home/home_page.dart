@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
         fullWidth: false,
         height: 40,
         onPressed: () async {
-          ThemeProvider.getProvider(context).switchTheme();
+          readThemeProvider(context).switchTheme();
         },
         child: Text(LocaleKeys.switch_theme.tr()),
       ),
