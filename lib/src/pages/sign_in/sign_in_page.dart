@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/widgets/buttons/primary_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
@@ -14,6 +13,7 @@ import '../../pages/root/root_page.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/auth_service.dart';
 import '../../utils/exception_handler.dart';
+import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/form_input/primary_text_field.dart';

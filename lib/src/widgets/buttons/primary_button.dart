@@ -3,13 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
-
 class PrimaryButton extends StatelessWidget {
   final FutureOr<void> Function() onPressed;
   final Widget child;
   final bool fullWidth;
-  final Color color;
+  final Color? color;
   final OutlinedBorder? shape;
   final EdgeInsets margin;
   final Widget? startIcon;
@@ -19,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     required this.child,
     this.fullWidth = true,
-    this.color = AppColor.primary,
+    this.color,
     this.shape,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
     this.startIcon,
@@ -30,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     required this.child,
     this.fullWidth = true,
-    this.color = AppColor.accent,
+    this.color,
     this.shape,
     this.startIcon,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
@@ -43,7 +41,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       fullWidth: fullWidth,
-      color: Theme.of(context).primaryColor,
+      color: color,
       margin: margin,
       shape: shape,
       textColor: Colors.white,

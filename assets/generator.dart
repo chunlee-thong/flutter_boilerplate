@@ -37,5 +37,6 @@ String generateImageAssetsClass(String path) {
 }
 
 String _upperCaseFirstLetter(String word) {
-  return '${word.substring(0, 1).toUpperCase()}${word.substring(1).toLowerCase()}';
+  if (word.isEmpty) return "";
+  return '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}';
 }

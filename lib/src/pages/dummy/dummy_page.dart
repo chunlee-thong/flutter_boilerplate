@@ -21,11 +21,15 @@ class _DummyPageState extends State<DummyPage> {
     if (reload) {
       userPagination.reset();
     }
+
     userManager.asyncOperation(
-      () => userRepository.fetchUserList(
-        count: 20,
-        page: userPagination.page,
-      ),
+      () async {
+        // throw "Unable to connect to server, Please try again later!";
+        return userRepository.fetchUserList(
+          count: 20,
+          page: userPagination.page,
+        );
+      },
       onSuccess: userPagination.handle,
       reloading: reload,
     );

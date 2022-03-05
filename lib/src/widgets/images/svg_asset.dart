@@ -7,7 +7,7 @@ import '../../constant/app_theme_color.dart';
 class SvgAsset extends StatelessWidget {
   final String icon;
   final double size;
-  final Color bgColor;
+  final Color? bgColor;
   final EdgeInsets padding;
   final Color? iconColor;
   final EdgeInsets? margin;
@@ -25,7 +25,7 @@ class SvgAsset extends StatelessWidget {
     required this.icon,
     this.size = 24,
     this.iconColor = AppColor.primary,
-    this.bgColor = Colors.white,
+    this.bgColor = Colors.transparent,
     this.padding = const EdgeInsets.all(16.0),
     this.shape,
     this.side,

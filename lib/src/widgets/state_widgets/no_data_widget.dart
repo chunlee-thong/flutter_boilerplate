@@ -46,8 +46,8 @@ class NoDataWidget extends StatelessWidget {
   }
 
   Widget _buildNoDataIcon() {
-    return const SvgAsset(
-      icon: AppAssets.emptyBox,
+    return const SvgAsset.iconOnly(
+      icon: AppAssets.empty,
       size: 54,
     );
   }

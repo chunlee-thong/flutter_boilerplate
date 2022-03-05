@@ -35,7 +35,7 @@ class CustomMessageDialog extends StatelessWidget {
     return Dialog(
       shape: shape,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -49,10 +49,10 @@ class CustomMessageDialog extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    final iconData = _isError ? AppAssets.fatalError : AppAssets.notification;
+    final iconData = _isError ? AppAssets.error : AppAssets.info;
     return Column(
       children: [
-        SvgAsset(
+        SvgAsset.iconOnly(
           icon: iconData,
           size: 40,
           padding: EdgeInsets.zero,
@@ -71,19 +71,15 @@ class CustomMessageDialog extends StatelessWidget {
   }
 
   Widget _buildAction(context) {
-    final buttonText = _isError ? "Dismiss" : "Ok";
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 24),
-      child: ElevatedButton(
-        onPressed: () => Navigator.pop(context),
-        style: ElevatedButton.styleFrom(
-          primary: _color,
-        ),
-        child: Text(
-          buttonText,
-          style: kSubtitleStyle.medium.white,
-        ),
+    final buttonText = _isError ? "Dismiss" : "Okay";
+    return TextButton(
+      onPressed: () => Navigator.pop(context),
+      style: TextButton.styleFrom(
+        primary: _color,
+      ),
+      child: Text(
+        buttonText,
+        style: kSubtitleStyle.medium,
       ),
     );
   }
