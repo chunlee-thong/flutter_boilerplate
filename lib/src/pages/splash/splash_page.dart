@@ -27,7 +27,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     bool? isLoggedIn = await LocalStorage.read<bool>(key: LOGIN_KEY) ?? false;
     if (isLoggedIn) {
       await AuthService.initializeUserCredential();
-      readProvider<UserProvider>(context).getUserInfo();
+      readProvider<UserProvider>(context).getUserInfo(throwError: true);
     }
     AuthProvider.getProvider(context).setLoginStatus(isLoggedIn);
     await Future.delayed(const Duration(seconds: 1));

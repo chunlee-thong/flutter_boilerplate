@@ -36,7 +36,7 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           minimumSize: Size(
             64,
-            SuraResponsive.value(44, 54, 64),
+            SuraResponsive.value(40, 54, 64),
           ),
         ),
       ),
