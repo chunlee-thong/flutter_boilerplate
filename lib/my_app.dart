@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
@@ -67,9 +66,9 @@ class _MyAppState extends State<MyApp> {
                     home: const SplashScreenPage(),
                     locale: context.locale,
                     builder: (context, child) {
-                      ErrorWidget.builder = (detail) {
-                        return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
-                      };
+                      // ErrorWidget.builder = (detail) {
+                      //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
+                      // };
                       return _AppWrapper(child: child!);
                     },
                   ),

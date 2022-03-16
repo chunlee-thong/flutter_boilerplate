@@ -63,6 +63,9 @@ A flutter boiler plate code for initial project setup
 
 2. run **flutter packages pub run build_runner build** to generate Hive TypeAdapter model
 
+## Integration test
+*flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --flavor dev*
+
 ## Project folder structure
 
 ### lib/src

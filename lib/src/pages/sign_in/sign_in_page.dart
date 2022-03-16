@@ -45,8 +45,8 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
 
   @override
   void initState() {
-    emailTC = TextEditingController(text: "admin@gmail.com");
-    passwordTC = TextEditingController(text: "123456");
+    emailTC = TextEditingController(text: "");
+    passwordTC = TextEditingController(text: "");
     super.initState();
   }
 
