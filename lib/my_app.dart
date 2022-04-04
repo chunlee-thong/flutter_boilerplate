@@ -13,7 +13,6 @@ import 'src/providers/theme_provider.dart';
 import 'src/providers/user_provider.dart';
 import 'src/utils/exception_handler.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
-import 'src/widgets/state_widgets/loading_overlay.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 
 ///This widget can change to use your app name

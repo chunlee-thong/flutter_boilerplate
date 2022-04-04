@@ -894,7 +894,7 @@ packages:
       name: sura_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.1.0"
   sura_manager:
     dependency: "direct main"
     description:

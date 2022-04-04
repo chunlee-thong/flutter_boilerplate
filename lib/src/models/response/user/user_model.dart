@@ -1,4 +1,4 @@
-import '../../response/pagination.dart';
+import '../../pagination.dart';
 
 class UserListResponse extends PaginationResponse<UserModel> {
   UserListResponse({
