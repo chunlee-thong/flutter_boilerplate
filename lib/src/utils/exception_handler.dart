@@ -56,7 +56,6 @@ class ExceptionHandler {
         UIHelper.showErrorDialog(context, message);
       }
 
-      //Only record error if it isn't an http exception
       if (exception is! HttpRequestException) {
         recordError(exception, stackTrace: stackTrace);
       }

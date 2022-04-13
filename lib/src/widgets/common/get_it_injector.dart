@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
-import '../../utils/logger.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 ///Just a class to mark another class when using GetItInjector
 ///Since we're using both Provider and GetIt for DI

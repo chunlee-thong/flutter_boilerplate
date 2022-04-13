@@ -14,5 +14,5 @@ class F {
 ///Must be call at main function
 Future<void> setupFlavorConfiguration(Flavor flavor) async {
   F.flavor = flavor;
-  AppConfig.BASE_URL = "https://express-boilerplate-${F.title}.lynical.com";
+  AppConfig.baseApiUrl = "https://express-boilerplate-${F.title}.lynical.com";
 }

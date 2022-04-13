@@ -12,6 +12,8 @@ class PrimaryButton extends StatelessWidget {
   final EdgeInsets margin;
   final Widget? startIcon;
 
+  ///Primary button used in our app
+  ///Usually this is not necessary
   const PrimaryButton({
     Key? key,
     required this.onPressed,

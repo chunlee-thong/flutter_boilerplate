@@ -16,18 +16,12 @@ import 'src/widgets/state_widgets/error_widget.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 
 ///This widget can change to use your app name
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  List<Locale> languages = KAppLanguages.map((lang) => lang.locale).toList();
-
-  @override
   Widget build(BuildContext context) {
+    final List<Locale> languages = kAppLanguages.map((lang) => lang.locale).toList();
     const bool useDevicePreview = false;
     return DevicePreview(
       enabled: useDevicePreview,
@@ -40,8 +34,8 @@ class _MyAppState extends State<MyApp> {
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,
           supportedLocales: languages,
-          fallbackLocale: EN_LOCALE,
-          startLocale: EN_LOCALE,
+          fallbackLocale: enLocale,
+          startLocale: enLocale,
           child: Builder(
             builder: (context) => Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {

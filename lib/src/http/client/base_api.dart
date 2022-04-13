@@ -5,19 +5,14 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../models/others/user_secret.dart';
 import '../../services/auth_service.dart';
-import '../../utils/logger.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
 
 class API {
   late final Dio dio;
 
-  API({Dio? customDio}) {
-    if (customDio == null) {
-      dio = DefaultHttpClient.dio;
-    } else {
-      dio = customDio;
-    }
+  API({Dio? client}) {
+    dio = client ?? DefaultHttpClient.dio;
   }
 
   final String DATA_FIELD = "data";

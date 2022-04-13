@@ -4,7 +4,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_locale.dart';
 import '../../constant/app_style_decoration.dart';
-import '../common/divider0.dart';
 
 class LanguagePickerDialog extends StatelessWidget {
   const LanguagePickerDialog({Key? key}) : super(key: key);
@@ -27,8 +26,8 @@ class LanguagePickerDialog extends StatelessWidget {
             child: Text("Language", style: kSubHeaderStyle.white),
           ),
           const Divider0(),
-          ...KAppLanguages.map((language) {
-            return SuraListTile(
+          for (var language in kAppLanguages)
+            SuraListTile(
               leading: CircleAvatar(
                 backgroundImage: AssetImage(language.image),
               ),
@@ -38,8 +37,7 @@ class LanguagePickerDialog extends StatelessWidget {
                 context.setLocale(language.locale);
                 Navigator.of(context).pop(language.locale);
               },
-            );
-          }).toList(),
+            )
         ],
       ),
     );

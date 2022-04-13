@@ -12,7 +12,7 @@ class AppUtils {
     if (file.startsWith("http")) {
       return file;
     }
-    String image = "${AppConfig.BASE_URL}/uploads/$file";
+    String image = "${AppConfig.baseApiUrl}/uploads/$file";
     return image;
   }
 

@@ -4,18 +4,18 @@ import '../constant/app_assets.dart';
 import '../models/others/language_model.dart';
 
 //
-const Locale EN_LOCALE = Locale('en', 'US');
-const Locale KH_LOCALE = Locale('km', 'KH');
+const Locale enLocale = Locale('en', 'US');
+const Locale khLocale = Locale('km', 'KH');
 //
 
-const List<LanguageModel> KAppLanguages = [
+const List<LanguageModel> kAppLanguages = [
   LanguageModel(
-    locale: EN_LOCALE,
+    locale: enLocale,
     name: "English",
     image: AppAssets.usFlag,
   ),
   LanguageModel(
-    locale: KH_LOCALE,
+    locale: khLocale,
     name: "ខ្មែរ",
     image: AppAssets.cambodiaFlag,
   ),

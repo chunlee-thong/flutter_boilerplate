@@ -22,7 +22,7 @@ class AppColor {
 class AppTheme {
   ///Change font family base on App's locale
   static ThemeData _customizeFontFamily(BuildContext context) {
-    String fontName = context.locale == KH_LOCALE ? AppConfig.khFontName : AppConfig.enFontName;
+    String fontName = context.locale == khLocale ? AppConfig.khFontName : AppConfig.enFontName;
     return Theme.of(context).copyWith(
       textTheme: Theme.of(context).textTheme.apply(fontFamily: fontName),
     );

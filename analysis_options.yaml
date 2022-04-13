@@ -2,11 +2,5 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    unnecessary_null_in_if_null_operators: false
-    prefer_null_aware_operators: false
-    sized_box_for_whitespace: false
-    prefer_if_null_operators: false
-    prefer_const_constructors: true
-    avoid_relative_lib_imports: false
+     constant_identifier_names: false
+     non_constant_identifier_names: false

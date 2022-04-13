@@ -4,7 +4,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_assets.dart';
 import '../../constant/app_style_decoration.dart';
 import '../../widgets/images/svg_asset.dart';
-import '../common/ellipsis_text.dart';
 import '../ui_helper.dart';
 
 class CustomErrorWidget extends StatelessWidget {

@@ -8,5 +8,5 @@ class AppConfig {
   //
   static const String languageAssetPath = "assets/languages";
   //
-  static String BASE_URL = "https://express-boilerplate-dev.lynical.com";
+  static String baseApiUrl = "https://express-boilerplate-dev.lynical.com";
 }

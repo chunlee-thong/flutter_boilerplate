@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../../constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
-import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {

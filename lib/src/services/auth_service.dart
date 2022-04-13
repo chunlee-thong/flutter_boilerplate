@@ -11,7 +11,6 @@ import '../pages/sign_in/sign_in_page.dart';
 import '../providers/auth_provider.dart';
 import '../providers/index.dart';
 import '../providers/user_provider.dart';
-import '../utils/logger.dart';
 import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {

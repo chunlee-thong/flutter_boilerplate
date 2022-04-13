@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_config.dart';
-import '../../utils/logger.dart';
 import '../../utils/object_util.dart';
 
 class HttpMethod {
@@ -28,7 +28,7 @@ class DefaultHttpClient {
   ///Must be call when running app
   static void init() {
     final BaseOptions options = BaseOptions(
-      baseUrl: AppConfig.BASE_URL,
+      baseUrl: AppConfig.baseApiUrl,
       connectTimeout: _timeOut,
       receiveTimeout: _timeOut,
     );

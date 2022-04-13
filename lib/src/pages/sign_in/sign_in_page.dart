@@ -15,7 +15,6 @@ import '../../services/auth_service.dart';
 import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
-import '../../widgets/common/ellipsis_text.dart';
 import '../../widgets/form_input/primary_text_field.dart';
 
 class SignInPage extends StatefulWidget {
