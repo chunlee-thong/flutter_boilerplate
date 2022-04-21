@@ -20,7 +20,7 @@ dependencies:
   ##State manager
   provider: ^6.0.2
   get_it: ^7.2.0
-  sura_flutter: ^1.1.2
+  sura_flutter: ^1.1.3
   sura_manager: ^1.0.0
 
   ##Icon
@@ -41,7 +41,7 @@ dependencies:
   hive_flutter: ^1.1.0
   image_picker: ^0.8.5
   package_info_plus: ^1.4.2
-  sentry_flutter: ^6.4.0
+  sentry_flutter: ^6.5.0
   shared_preferences: ^2.0.13
 
 dev_dependencies:

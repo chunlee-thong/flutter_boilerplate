@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -32,9 +34,12 @@ class CustomMessageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///280 is a default dialog width from Material spec
+    final double dialogWidth = max(context.screenSize.width / 2, 280);
     return Dialog(
       shape: shape,
-      child: Padding(
+      child: Container(
+        width: dialogWidth,
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -77,10 +82,7 @@ class CustomMessageDialog extends StatelessWidget {
       style: TextButton.styleFrom(
         primary: _color,
       ),
-      child: Text(
-        buttonText,
-        style: kSubtitleStyle.medium,
-      ),
+      child: Text(buttonText),
     );
   }
 }

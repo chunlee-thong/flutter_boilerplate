@@ -11,7 +11,7 @@ import 'src/utils/service_locator.dart';
 class App {
   App._();
 
-  static Future init() async {
+  static Future bootstrap() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Hive.initFlutter();
     await EasyLocalization.ensureInitialized();

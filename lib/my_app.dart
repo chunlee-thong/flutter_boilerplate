@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Locale> languages = kAppLanguages.map((lang) => lang.locale).toList();
-    const bool useDevicePreview = false;
+    const bool useDevicePreview = true;
     return DevicePreview(
       enabled: useDevicePreview,
       builder: (context) => MultiProvider(
@@ -83,6 +83,7 @@ class _AppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return SuraResponsiveBuilder(
       builder: (context) {
+        infoLog(context.mediaQuery);
         return Theme(
           data: AppTheme.modifiedTheme(context),
           child: LoadingOverlayBuilder(child: child),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import 'app.dart';
+import 'bootstrap.dart';
 import 'flavor.dart';
 import 'my_app.dart';
 import 'src/utils/exception_handler.dart';
@@ -12,7 +12,7 @@ import 'src/utils/exception_handler.dart';
 void main() async {
   runZonedGuarded(() async {
     setupFlavorConfiguration(Flavor.staging);
-    await App.init();
+    await App.bootstrap();
     await SentryFlutter.init(
       (options) {
         options.dsn = 'sentry-dns';

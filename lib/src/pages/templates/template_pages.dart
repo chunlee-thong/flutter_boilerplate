@@ -28,16 +28,16 @@ class _TemplatePagesState extends State<TemplatePages> {
           ),
           ListTile(
             leading: const Icon(Icons.pages),
-            title: const Text("Update user info page"),
+            title: const Text("Reset password page"),
             onTap: () {
-              SuraPageNavigator.push(context, const UpdateUserInfoPage());
+              SuraPageNavigator.push(context, const ResetPasswordPage());
             },
           ),
           ListTile(
             leading: const Icon(Icons.pages),
-            title: const Text("Reset password page"),
+            title: const Text("Update user info page"),
             onTap: () {
-              SuraPageNavigator.push(context, const ResetPasswordPage());
+              SuraPageNavigator.push(context, const UpdateUserInfoPage());
             },
           ),
         ],

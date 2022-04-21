@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-
 import '../constant/app_config.dart';
 
 class AppUtils {
@@ -18,21 +15,5 @@ class AppUtils {
 
   static Future waiting([int second = 2]) async {
     await Future.delayed(Duration(seconds: second));
-  }
-}
-
-class Debouncer {
-  final int milliseconds;
-  VoidCallback? action;
-  Timer? _timer;
-
-  Debouncer({this.milliseconds = 800});
-
-  run(VoidCallback action) {
-    if (_timer != null) {
-      _timer!.cancel();
-    }
-
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
   }
 }
