@@ -1,13 +1,13 @@
 import 'dart:io';
 
-File resourceClass = File("../lib/src/constant/app_assets.dart");
-
 void main() {
   generateFile();
 }
 
 void generateFile() async {
-  Directory dir = Directory('./images');
+  final Directory dir = Directory('./images');
+  final File assetClassFile = File("../lib/src/constant/app_assets.dart");
+  //
   var buffer = StringBuffer();
   buffer.writeln("//this class is generated from assets/generator.dart");
   buffer.write("class AppAssets {");
@@ -19,9 +19,9 @@ void generateFile() async {
     } else {
       buffer.write(generateImageAssetsClass(fileSystem.uri.path));
     }
-    await resourceClass.writeAsString(buffer.toString());
+    assetClassFile.writeAsStringSync(buffer.toString());
   }
-  resourceClass.writeAsStringSync("\n}", mode: FileMode.append);
+  assetClassFile.writeAsStringSync("\n}", mode: FileMode.append);
 }
 
 String generateImageAssetsClass(String path) {

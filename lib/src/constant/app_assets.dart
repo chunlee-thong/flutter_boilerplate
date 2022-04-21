@@ -1,7 +1,6 @@
 //this class is generated from assets/generator.dart
 class AppAssets {
   static const String appIconDev = "assets/images/app-icon-dev.png";
-
   static const String usFlag = "assets/images/US-flag.jpg";
   static const String appIcon = "assets/images/app-icon.png";
   static const String undrawEmpty = "assets/images/Undraw-Empty.svg";
