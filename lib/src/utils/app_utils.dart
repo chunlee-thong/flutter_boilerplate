@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import '../constant/app_config.dart';
 
 class AppUtils {
@@ -11,9 +9,5 @@ class AppUtils {
     }
     String image = "${AppConfig.baseApiUrl}/uploads/$file";
     return image;
-  }
-
-  static Future waiting([int second = 2]) async {
-    await Future.delayed(Duration(seconds: second));
   }
 }

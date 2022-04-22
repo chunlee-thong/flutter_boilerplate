@@ -19,12 +19,14 @@ class Pagination {
       );
 }
 
+///Extend this class from your response with pagination
 class PaginationResponse<T> {
   final int totalRecord;
   List<T> data;
   PaginationResponse({required this.totalRecord, required this.data});
 }
 
+///Use this class with FutureManager to handle pagination automatically
 class PaginationHandler<T extends PaginationResponse<M>, M extends Object> {
   bool hasMoreData = true;
   int page = 1;

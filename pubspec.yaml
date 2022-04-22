@@ -41,7 +41,7 @@ dependencies:
   hive_flutter: ^1.1.0
   image_picker: ^0.8.5
   package_info_plus: ^1.4.2
-  sentry_flutter: ^6.5.0
+  sentry_flutter: ^6.5.1
   shared_preferences: ^2.0.13
 
 dev_dependencies:

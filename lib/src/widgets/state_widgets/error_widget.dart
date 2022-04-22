@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
@@ -9,7 +10,7 @@ import '../ui_helper.dart';
 class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
   final dynamic message;
-  final Future<void> Function()? onRefresh;
+  final AsyncCallback? onRefresh;
   final bool hasAppBar;
   const CustomErrorWidget({
     Key? key,
@@ -49,8 +50,8 @@ class CustomErrorWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 if (onRefresh != null)
-                  SuraIconButton(
-                    onTap: () => onRefresh?.call(),
+                  SuraAsyncIconButton(
+                    onTap: onRefresh,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     icon: Icon(
                       Icons.refresh,

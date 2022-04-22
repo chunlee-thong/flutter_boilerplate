@@ -24,7 +24,6 @@ class _DummyPageState extends State<DummyPage> {
 
     userManager.asyncOperation(
       () async {
-        // throw "Unable to connect to server, Please try again later!";
         return userRepository.fetchUserList(
           count: 20,
           page: userPagination.page,

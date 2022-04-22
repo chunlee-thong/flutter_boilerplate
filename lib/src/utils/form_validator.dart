@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/locale_keys.dart';
-import '../utils/app_extension.dart';
 
 class FormValidator {
   static String? validateField(String? value, {required String field, int? length}) {

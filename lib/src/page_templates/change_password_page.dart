@@ -5,7 +5,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../constant/app_dimension.dart';
 import '../constant/app_style_decoration.dart';
 import '../constant/locale_keys.dart';
-import '../utils/app_utils.dart';
 import '../utils/form_validator.dart';
 import '../widgets/buttons/primary_button.dart';
 import '../widgets/form_input/primary_text_field.dart';
@@ -26,7 +25,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        await AppUtils.waiting();
+        await SuraUtils.wait();
         String _ = oldPasswordTC.text.trim();
         String __ = newPasswordTC.text.trim();
         bool ___ = await Future.value(true);
