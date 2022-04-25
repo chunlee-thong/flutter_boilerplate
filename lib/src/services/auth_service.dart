@@ -44,13 +44,13 @@ class AuthService {
 
   static Future<String?> refreshUserToken() async {
     String? refreshToken = await LocalStorage.read(key: REFRESH_TOKEN_KEY);
-    Response response = await DefaultHttpClient.dio.request(
-      "/api/user/refresh-token",
-      options: Options(
-        headers: {"Authorization": "bearer $refreshToken"},
-        method: HttpMethod.POST,
-      ),
-    );
+    Response response = await DioHttpClient().dio.request(
+          "/api/user/refresh-token",
+          options: Options(
+            headers: {"Authorization": "bearer $refreshToken"},
+            method: HttpMethod.POST,
+          ),
+        );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
     await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);

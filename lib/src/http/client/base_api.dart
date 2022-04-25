@@ -10,9 +10,10 @@ import 'http_exception.dart';
 
 class API {
   late final Dio dio;
+  final CancelToken cancelToken = CancelToken();
 
   API({Dio? client}) {
-    dio = client ?? DefaultHttpClient.dio;
+    dio = client ?? DioHttpClient().dio;
   }
 
   final String DATA_FIELD = "data";
@@ -51,6 +52,7 @@ class API {
         options: httpOption,
         queryParameters: query,
         data: data,
+        cancelToken: cancelToken,
       );
       return onSuccess(response);
     } on DioError catch (e) {

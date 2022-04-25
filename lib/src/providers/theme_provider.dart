@@ -9,16 +9,16 @@ class ThemeProvider extends ChangeNotifier {
   static bool _isDark = false;
   static bool get isDark => _isDark;
 
-  static final List<String> themeValueString = ["dark", "light"];
-
-  static SharedPreferences? spf;
+  static const List<String> _themeValueString = ["dark", "light"];
   static const String _THEME_KEY = "key.theme";
+
+  static SharedPreferences? _spf;
 
   ///Intialize this method at main function to immediately get system brightness
   static Future<void> initializeTheme() async {
-    spf = await SharedPreferences.getInstance();
+    _spf = await SharedPreferences.getInstance();
     var systemBrightness = SchedulerBinding.instance!.window.platformBrightness.name;
-    String savedTheme = spf?.getString(_THEME_KEY) ?? systemBrightness;
+    String savedTheme = _spf?.getString(_THEME_KEY) ?? systemBrightness;
     _isDark = _themeStringChecker(savedTheme);
   }
 
@@ -30,13 +30,13 @@ class ThemeProvider extends ChangeNotifier {
   void switchTheme([bool? isDarkTheme]) async {
     //Change by provided theme or else switch between light or dark
     _isDark = isDarkTheme ?? !isDark;
-    spf?.setString(_THEME_KEY, isDark ? themeValueString[0] : themeValueString[1]);
+    _spf?.setString(_THEME_KEY, isDark ? _themeValueString[0] : _themeValueString[1]);
     notifyListeners();
   }
 
+  ///Convert theme brightness string to bool because systemBrightness from Flutter framework is a string
   static bool _themeStringChecker(String value) {
-    if (value == themeValueString[0]) return true;
-    if (value == themeValueString[1]) return false;
+    if (value == _themeValueString[0]) return true;
     return false;
   }
 }

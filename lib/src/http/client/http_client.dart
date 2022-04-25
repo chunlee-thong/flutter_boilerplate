@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_boilerplate/flavor.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_config.dart';
@@ -19,20 +20,19 @@ class HttpMethod {
   static const String DELETE = "delete";
 }
 
-class DefaultHttpClient {
-  static late final Dio dio;
-
+class DioHttpClient {
+  late final Dio dio;
   //20seconds timeout
   static const int _timeOut = 20000;
 
-  ///Must be call when running app
-  static void init() {
-    final BaseOptions options = BaseOptions(
-      baseUrl: AppConfig.baseApiUrl,
-      connectTimeout: _timeOut,
-      receiveTimeout: _timeOut,
-    );
-    dio = Dio(options)..interceptors.add(defaultInterceptor);
+  DioHttpClient({BaseOptions? options}) {
+    final BaseOptions defaultOptions = options ??
+        BaseOptions(
+          baseUrl: AppConfig.baseApiUrl[F.flavor]!,
+          connectTimeout: _timeOut,
+          receiveTimeout: _timeOut,
+        );
+    dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
     //Use isolate cause a jank, still no idea why
     //(dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
@@ -70,7 +70,6 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     requestInterceptorHandler.next(options);
   },
   onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
-    //prettyPrintJson(response.data);
     responseInterceptorHandler.next(response);
   },
   onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
