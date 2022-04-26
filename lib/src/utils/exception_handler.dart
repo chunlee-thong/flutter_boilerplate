@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sentry/sentry.dart';
+import 'package:sura_flutter/sura_flutter.dart';
+import 'package:sura_manager/sura_manager.dart';
 
 import '../http/client/http_exception.dart';
 import '../services/auth_service.dart';
@@ -19,12 +21,15 @@ class ExceptionHandler {
     }
   }
 
-  static void handleManagerError(dynamic exception, BuildContext context) {
-    if (exception is! HttpRequestException) {
-      recordError(exception);
+  static void handleManagerError(FutureManagerError error, BuildContext context) {
+    if (error.stackTrace != null) {
+      errorLog(error.stackTrace);
     }
-    if (exception is SessionExpiredException) {
-      UIHelper.showToast(context, exception.toString());
+    if (error.exception is! HttpRequestException) {
+      recordError(error.exception);
+    }
+    if (error.exception is SessionExpiredException) {
+      UIHelper.showToast(context, error.toString());
       AuthService.logOutUser(context, showConfirmation: false);
     }
   }

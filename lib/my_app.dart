@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
+import 'package:sura_manager/sura_manager.dart';
 
 import 'src/constant/app_config.dart';
 import 'src/constant/app_locale.dart';
@@ -39,31 +40,36 @@ class MyApp extends StatelessWidget {
           child: Builder(
             builder: (context) => Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
-                return SuraProvider(
-                  loadingWidget: const LoadingWidget(),
+                return SuraManagerProvider(
                   onFutureManagerError: ExceptionHandler.handleManagerError,
-                  errorWidget: (error, onRefresh) {
+                  errorBuilder: (error, onRefresh) {
                     return CustomErrorWidget(
                       message: error,
                       onRefresh: onRefresh,
                     );
                   },
-                  child: MaterialApp(
-                    useInheritedMediaQuery: useDevicePreview,
-                    title: AppConfig.appName,
-                    navigatorKey: SuraNavigator.navigatorKey,
-                    theme: AppTheme.primaryTheme(ThemeProvider.isDark),
-                    debugShowCheckedModeBanner: false,
-                    localizationsDelegates: context.localizationDelegates,
-                    supportedLocales: context.supportedLocales,
-                    home: const SplashScreenPage(),
-                    locale: context.locale,
-                    builder: (context, child) {
-                      // ErrorWidget.builder = (detail) {
-                      //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
-                      // };
-                      return _AppWrapper(child: child!);
+                  child: SuraProvider(
+                    loadingWidget: const LoadingWidget(),
+                    errorWidget: (error, context) {
+                      return CustomErrorWidget(message: error);
                     },
+                    child: MaterialApp(
+                      useInheritedMediaQuery: useDevicePreview,
+                      title: AppConfig.appName,
+                      navigatorKey: SuraNavigator.navigatorKey,
+                      theme: AppTheme.primaryTheme(ThemeProvider.isDark),
+                      debugShowCheckedModeBanner: false,
+                      localizationsDelegates: context.localizationDelegates,
+                      supportedLocales: context.supportedLocales,
+                      home: const SplashScreenPage(),
+                      locale: context.locale,
+                      builder: (context, child) {
+                        // ErrorWidget.builder = (detail) {
+                        //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
+                        // };
+                        return _AppWrapper(child: child!);
+                      },
+                    ),
                   ),
                 );
               },
