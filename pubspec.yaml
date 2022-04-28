@@ -21,7 +21,7 @@ dependencies:
   provider: ^6.0.2
   get_it: ^7.2.0
   sura_flutter: ^1.2.0
-  sura_manager: ^1.2.0
+  sura_manager: ^1.2.1
 
   ##Icon
   antdesign_icons: ^0.0.3
