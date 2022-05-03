@@ -3,13 +3,12 @@ import 'package:dio/dio.dart';
 abstract class HttpRequestException {}
 
 class HttpErrorMessage {
-  HttpErrorMessage._();
-  static const String UNEXPECTED_ERROR = "An unexpected error occur!";
-  static const String INTERNAL_SERVER_ERROR = "Internal server error, Please try again later.";
-  static const String UNEXPECTED_TYPE_ERROR = "An unexpected type error occur!";
-  static const String CONNECTION_ERROR =
+  static const unexpectedError = "An unexpected error occur!";
+  static const internalServerError = "Internal server error. Please try again later!";
+  static const unexpectedTypeError = "An unexpected type error occur!";
+  static const connectionError =
       "Error connecting to server. Please check your internet connection or Try again later!";
-  static const String TIMEOUT_ERROR = "Connection timeout. Please check your internet connection or Try again later!";
+  static const timeoutError = "Connection timeout. Please check your internet connection or Try again later!";
 }
 
 class DioErrorException extends HttpRequestException {
@@ -26,11 +25,11 @@ class DioErrorException extends HttpRequestException {
     int statusCode = response.statusCode ?? 500;
 
     if (statusCode >= 500) {
-      errorMessage = HttpErrorMessage.INTERNAL_SERVER_ERROR;
+      errorMessage = HttpErrorMessage.internalServerError;
     } else if (response.data is Map) {
-      errorMessage = response.data["message"] ?? HttpErrorMessage.UNEXPECTED_ERROR;
+      errorMessage = response.data["message"] ?? HttpErrorMessage.unexpectedError;
     } else {
-      errorMessage = HttpErrorMessage.UNEXPECTED_ERROR;
+      errorMessage = HttpErrorMessage.unexpectedError;
     }
     return DioErrorException(errorMessage, code: statusCode);
   }

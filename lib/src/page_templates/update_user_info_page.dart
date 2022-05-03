@@ -30,9 +30,9 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       await ExceptionHandler.run(context, () async {
-        String _ = firstNameTC.text.trim();
-        String __ = lastNameTC.text.trim();
-        String ___ = countryTC.text.trim();
+        String firstname = firstNameTC.text.trim();
+        String lastname = lastNameTC.text.trim();
+        String country = countryTC.text.trim();
       });
     }
   }

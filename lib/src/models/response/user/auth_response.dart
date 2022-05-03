@@ -1,13 +1,13 @@
 class AuthResponse {
   AuthResponse({
-    this.userId,
-    this.token,
-    this.refreshToken,
+    required this.userId,
+    required this.token,
+    required this.refreshToken,
   });
 
-  String? userId;
-  String? token;
-  String? refreshToken;
+  final String userId;
+  final String token;
+  final String refreshToken;
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         userId: json["user_id"],

@@ -14,7 +14,7 @@ import '../widgets/ui_helper.dart';
 
 enum VerificationStep {
   sendCode,
-  Verify,
+  verify,
 }
 
 class ResetPasswordPage extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
         await Future.delayed(const Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
-          step = VerificationStep.Verify;
+          step = VerificationStep.verify;
         });
         startCountDownTimer();
       } catch (e) {
@@ -80,7 +80,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
               PrimaryTextField(
                 controller: emailTC,
                 hint: tr(LocaleKeys.email),
-                readOnly: step == VerificationStep.Verify,
+                readOnly: step == VerificationStep.verify,
               ),
               if (step == VerificationStep.sendCode) ...[
                 PrimaryButton(

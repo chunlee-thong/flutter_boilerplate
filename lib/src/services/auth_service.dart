@@ -8,18 +8,22 @@ import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
   ///Save user credential to local storage
-  static Future saveUserCredential(AuthResponse authResponse) async {
-    await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
-    await LocalStorage.write(key: ID_KEY, value: authResponse.userId);
-    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
-    await LocalStorage.write<bool>(key: LOGIN_KEY, value: true);
+  static Future<void> saveUserCredential(AuthResponse authResponse) async {
+    await LocalStorage.write(key: kTokenKey, value: authResponse.token);
+    await LocalStorage.write(key: kIdKey, value: authResponse.userId);
+    await LocalStorage.write(key: kRefreshTokenKey, value: authResponse.refreshToken);
+    await LocalStorage.write<bool>(key: kLoginKey, value: true);
+    UserSecret.instance.initLocalCredential(
+      token: authResponse.token,
+      userId: authResponse.userId,
+    );
   }
 
   ///Init user credential to memory
   static Future<void> initializeUserCredential() async {
-    String? token = await LocalStorage.read<String>(key: TOKEN_KEY);
-    String? refreshToken = await LocalStorage.read<String>(key: REFRESH_TOKEN_KEY);
-    String? userId = await LocalStorage.read<String>(key: ID_KEY);
+    String? token = await LocalStorage.read<String>(key: kTokenKey);
+    String? refreshToken = await LocalStorage.read<String>(key: kRefreshTokenKey);
+    String? userId = await LocalStorage.read<String>(key: kIdKey);
 
     TokenPayload tokenPayload = SuraJwtDecoder.decode(token!);
     infoLog("Token Expired date", tokenPayload.expiredDate?.toLocal());
@@ -38,18 +42,21 @@ class AuthService {
   }
 
   static Future<String?> refreshUserToken(Dio dio) async {
-    String? refreshToken = await LocalStorage.read(key: REFRESH_TOKEN_KEY);
+    String? refreshToken = await LocalStorage.read(key: kRefreshTokenKey);
     Response response = await dio.request(
       "/api/user/refresh-token",
       options: Options(
         headers: {"Authorization": "bearer $refreshToken"},
-        method: HttpMethod.POST,
+        method: HttpMethod.post,
       ),
     );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
-    await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
-    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
-    await initializeUserCredential();
+    await LocalStorage.write(key: kTokenKey, value: authResponse.token);
+    await LocalStorage.write(key: kRefreshTokenKey, value: authResponse.refreshToken);
+    UserSecret.instance.initLocalCredential(
+      token: authResponse.token,
+      userId: authResponse.userId,
+    );
     return authResponse.token;
   }
 }

@@ -2,5 +2,4 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-     constant_identifier_names: false
-     non_constant_identifier_names: false
+    constant_identifier_names: false

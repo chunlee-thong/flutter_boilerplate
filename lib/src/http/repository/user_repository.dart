@@ -6,14 +6,14 @@ import '../client/http_client.dart';
 import '../client/http_exception.dart';
 
 class UserRepository extends API {
-  static const String _LOGIN_USER = "/api/user/login";
-  static const String _GET_ALL_USER = "/api/user/all";
-  static const String _GET_USER_INFO = "/api/user/info/";
+  static const String _loginUser = "/api/user/login";
+  static const String _getAllUser = "/api/user/all";
+  static const String _getUserInfo = "/api/user/info/";
 
   Future<AuthResponse> loginUser({required String email, required String password}) async {
     return httpRequest(
-      path: _LOGIN_USER,
-      method: HttpMethod.POST,
+      path: _loginUser,
+      method: HttpMethod.post,
       data: {
         "email": email,
         "password": password,
@@ -26,7 +26,7 @@ class UserRepository extends API {
 
   Future<UserListResponse> fetchUserList({int page = 1, int count = 99999}) async {
     return httpRequest(
-      path: _GET_ALL_USER,
+      path: _getAllUser,
       query: {
         "page": page,
         "count": count,
@@ -43,7 +43,7 @@ class UserRepository extends API {
       throw SessionExpiredException();
     }
     return httpRequest(
-      path: _GET_USER_INFO + userId,
+      path: _getUserInfo + userId,
       onSuccess: (response) {
         return UserModel.fromJson(response.data[DATA_FIELD]);
       },

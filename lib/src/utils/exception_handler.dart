@@ -46,6 +46,7 @@ class ExceptionHandler {
     } on UserCancelException catch (_) {
       return null;
     } catch (exception, stackTrace) {
+      errorLog(stackTrace);
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.toString());

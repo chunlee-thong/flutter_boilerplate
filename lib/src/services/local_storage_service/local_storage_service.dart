@@ -1,7 +1,7 @@
-const String TOKEN_KEY = "key.token";
-const String REFRESH_TOKEN_KEY = "key.refresh.token";
-const String LOGIN_KEY = "key.login";
-const String ID_KEY = "key.id";
+const String kTokenKey = "key.token";
+const String kRefreshTokenKey = "key.refresh.token";
+const String kLoginKey = "key.login";
+const String kIdKey = "key.id";
 
 abstract class LocalStorage {
   //Prevent initialization

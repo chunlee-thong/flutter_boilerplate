@@ -86,6 +86,7 @@ class UIHelper {
     );
   }
 
+  // ignore: non_constant_identifier_names
   static AppBar CustomAppBar({
     required String title,
     double elevation = 0.0,

@@ -8,23 +8,23 @@ import '../../services/auth_service.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
 
+const String DATA_FIELD = "data";
+const String MESSAGE_FIELD = "message";
+
 class API {
   late final Dio dio;
   final CancelToken cancelToken = CancelToken();
 
   API({Dio? client}) {
-    dio = client ?? DioHttpClient().dio;
+    dio = client ?? DioHttpClient.dioInstance;
   }
-
-  final String DATA_FIELD = "data";
-  final String ERROR_MESSAGE_FIELD = "message";
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
   Future<T> httpRequest<T>({
     required String path,
     required T Function(Response) onSuccess,
-    String method = HttpMethod.GET,
+    String method = HttpMethod.get,
     Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
@@ -39,7 +39,7 @@ class API {
         String? token = UserSecret.instance.jwtToken;
         bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
         if (isExpired) {
-          token = await AuthService.refreshUserToken(dio);
+          token = await AuthService.refreshUserToken(customDioClient ?? dio);
         }
         httpOption.headers!['Authorization'] = "bearer $token";
       }
@@ -69,7 +69,7 @@ HttpRequestErrorWrapper _handleOtherError(dynamic exception, StackTrace stackTra
       "$exception"
       "\nStackTrace:  ${stackTrace.toString()}");
   return HttpRequestErrorWrapper(
-    "Error: ${HttpErrorMessage.UNEXPECTED_TYPE_ERROR}",
+    "Error: ${HttpErrorMessage.unexpectedTypeError}",
     stackTrace,
   );
 }
@@ -77,19 +77,19 @@ HttpRequestErrorWrapper _handleOtherError(dynamic exception, StackTrace stackTra
 HttpRequestException _handleDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
-    return DioErrorException(HttpErrorMessage.CONNECTION_ERROR);
+    return DioErrorException(HttpErrorMessage.connectionError);
   }
 
   switch (exception.type) {
     case DioErrorType.connectTimeout:
-      return DioErrorException(HttpErrorMessage.TIMEOUT_ERROR);
+      return DioErrorException(HttpErrorMessage.timeoutError);
     case DioErrorType.response:
       if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
       }
       return DioErrorException.response(exception.response);
     default:
-      return DioErrorException(HttpErrorMessage.UNEXPECTED_ERROR);
+      return DioErrorException(HttpErrorMessage.unexpectedError);
   }
 }
 

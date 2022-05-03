@@ -13,30 +13,32 @@ import '../../utils/object_util.dart';
 class HttpMethod {
   HttpMethod._();
 
-  static const String GET = "get";
-  static const String POST = "post";
-  static const String PATCH = "patch";
-  static const String PUT = "put";
-  static const String DELETE = "delete";
+  static const String get = "get";
+  static const String post = "post";
+  static const String patch = "patch";
+  static const String put = "put";
+  static const String delete = "delete";
 }
 
 class DioHttpClient {
-  late final Dio dio;
+  late final Dio _dio;
   //20seconds timeout
   static const int _timeOut = 20000;
 
-  DioHttpClient({BaseOptions? options}) {
+  static final Dio dioInstance = DioHttpClient._()._dio;
+
+  DioHttpClient._({BaseOptions? options}) {
     final BaseOptions defaultOptions = options ??
         BaseOptions(
           baseUrl: AppConfig.baseApiUrl[F.flavor]!,
           connectTimeout: _timeOut,
           receiveTimeout: _timeOut,
         );
-    dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
+    _dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
     //Use isolate cause a jank, still no idea why
     //(dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };

@@ -26,9 +26,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
     if (isFormValidated) {
       try {
         await SuraUtils.wait();
-        String _ = oldPasswordTC.text.trim();
-        String __ = newPasswordTC.text.trim();
-        bool ___ = await Future.value(true);
+        String oldPassword = oldPasswordTC.text.trim();
+        String newPassword = newPasswordTC.text.trim();
       } catch (e) {
         UIHelper.showErrorDialog(context, e);
       }

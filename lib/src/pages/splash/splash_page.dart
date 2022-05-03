@@ -8,7 +8,6 @@ import '../../pages/root/root_page.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../services/auth_service.dart';
-import '../../services/local_storage_service/local_storage_service.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
 import '../sign_in/sign_in_page.dart';
@@ -22,14 +21,15 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
+  late final AuthProvider authProvider = AuthProvider.getProvider(context);
 
   Future<bool> onSplashing() async {
-    bool? isLoggedIn = await LocalStorage.read<bool>(key: LOGIN_KEY) ?? false;
+    bool isLoggedIn = await authProvider.checkLoginStatus();
     if (isLoggedIn) {
       await AuthService.initializeUserCredential();
       readProvider<UserProvider>(context).getUserInfo(throwError: true);
     }
-    AuthProvider.getProvider(context).setLoginStatus(isLoggedIn);
+    authProvider.setLoginStatus(isLoggedIn);
     await Future.delayed(const Duration(seconds: 1));
     SuraPageNavigator.pushAndRemove(
       context,

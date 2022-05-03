@@ -29,13 +29,17 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future checkLoginStatus() async {
+    String? token = await LocalStorage.read<String>(key: kTokenKey);
+    return token != null;
+  }
+
   Future<void> loginWithPassword(String email, String password) async {
     AuthResponse authResponse = await userRepository.loginUser(
       email: email,
       password: password,
     );
     await AuthService.saveUserCredential(authResponse);
-    await AuthService.initializeUserCredential();
     setLoginStatus(true);
     await userProvider.getUserInfo(throwError: true);
   }
@@ -43,7 +47,6 @@ class AuthProvider extends ChangeNotifier {
   Future<void> loginWithSocial(SocialAuthData authData) async {
     AuthResponse authResponse = authData.authResponse;
     await AuthService.saveUserCredential(authResponse);
-    await AuthService.initializeUserCredential();
     setLoginStatus(true);
     await userProvider.getUserInfo(throwError: true);
   }
