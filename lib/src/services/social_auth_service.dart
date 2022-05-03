@@ -1,52 +1,66 @@
 import '../models/response/user/social_auth_data.dart';
+import '../utils/custom_exception.dart';
 
 class SocialAuthService {
   //static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  //static final FacebookAuth _facebookAuth = FacebookAuth.instance;
 
   static Future<SocialAuthData> loginWithFacebook() async {
-    try {
-      //Login with facebook
-      return SocialAuthData(
-        accessToken: "",
-        authId: "",
-      );
-    } catch (exception) {
-      rethrow;
-    }
+    //await _facebookAuth.logOut();
+    // LoginResult result = await _facebookAuth.login(
+    //   loginBehavior: LoginBehavior.nativeWithFallback,
+    // );
+    // if (result.status == LoginStatus.success) {
+    //   return SocialAuthData(
+    //     accessToken: result.accessToken!.token,
+    //     authId: result.accessToken!.userId,
+    //   );
+    // } else if (result.status == LoginStatus.failed) {
+    //   throw result.message!;
+    // }
+    throw UserCancelException();
   }
 
   static Future<SocialAuthData> loginWithGoogle() async {
-    try {
-      // await _googleSignIn.signOut();
-      // GoogleSignInAccount? account = await _googleSignIn.signIn();
-      // if (account == null) throw UserCancelException();
-      // GoogleSignInAuthentication authentication = await account.authentication;
-      // return SocialAuthData(
-      //   accessToken: authentication.accessToken,
-      //   authId: authentication.idToken,
-      // );
-      return SocialAuthData(
-        accessToken: "",
-        authId: "",
-      );
-    } catch (exception) {
-      rethrow;
-    }
+    // await _googleSignIn.signOut();
+    // GoogleSignInAccount? account = await _googleSignIn.signIn();
+    // if (account == null) throw UserCancelException();
+    // GoogleSignInAuthentication authentication = await account.authentication;
+    // return SocialAuthData(
+    //   accessToken: authentication.accessToken,
+    //   authId: authentication.idToken,
+    // );
+    throw UserCancelException();
   }
 
   static Future<SocialAuthData> loginWithApple() async {
-    try {
-      //Login with Apple
-      return SocialAuthData(
-        accessToken: "",
-        authId: "",
-      );
-    } catch (exception) {
-      rethrow;
-    }
+    // try {
+    //   final credential = await SignInWithApple.getAppleIDCredential(
+    //     scopes: [
+    //       AppleIDAuthorizationScopes.email,
+    //       AppleIDAuthorizationScopes.fullName,
+    //     ],
+    //     nonce: nonce,
+    //   );
+    //   final loginData = SocialAuthData(
+    //     accessToken: credential.identityToken,
+    //     authId: credential.userIdentifier,
+    //   );
+    //   return loginData;
+    // } on SignInWithAppleAuthorizationException catch (ex) {
+    //   if (ex.code == AuthorizationErrorCode.canceled) {
+    //     throw UserCancelException();
+    //   } else {
+    //     throw ex.message;
+    //   }
+    // } catch (exception) {
+    //   rethrow;
+    // }
+    throw UserCancelException();
   }
 
   static Future<void> signOutAll() async {
     //await _googleSignIn.signOut();
+    //await _facebookAuth.logOut();
   }
 }

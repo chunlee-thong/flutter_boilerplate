@@ -3,8 +3,6 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart' as styled_toast;
 
 import 'dialog/message_dialog.dart';
 
-const emptySizedBox = SizedBox();
-
 class UIHelper {
   static Future<T?> showMessageDialog<T>(BuildContext context, dynamic message) async {
     return await showDialog(

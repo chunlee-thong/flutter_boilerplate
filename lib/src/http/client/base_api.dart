@@ -39,7 +39,7 @@ class API {
         String? token = UserSecret.instance.jwtToken;
         bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
         if (isExpired) {
-          token = await AuthService.refreshUserToken();
+          token = await AuthService.refreshUserToken(dio);
         }
         httpOption.headers!['Authorization'] = "bearer $token";
       }
@@ -57,18 +57,14 @@ class API {
       return onSuccess(response);
     } on DioError catch (e) {
       throw _handleDioError(e);
-    } catch (e) {
-      throw _handleOtherError(e);
+    } catch (e, stackTrace) {
+      throw _handleOtherError(e, stackTrace);
     }
   }
 }
 
 ///Handle another type of exception that relate to runtime exception
-HttpRequestErrorWrapper _handleOtherError(dynamic exception) {
-  StackTrace? stackTrace;
-  if (exception is Error) {
-    stackTrace = exception.stackTrace;
-  }
+HttpRequestErrorWrapper _handleOtherError(dynamic exception, StackTrace stackTrace) {
   errorLog("Http Request Exception Error :=> ${exception.runtimeType}: "
       "$exception"
       "\nStackTrace:  ${stackTrace.toString()}");

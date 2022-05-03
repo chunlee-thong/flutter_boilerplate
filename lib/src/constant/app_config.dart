@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_boilerplate/flavor.dart';
 
 class AppConfig {
@@ -18,5 +19,6 @@ class AppConfig {
     Flavor.production: "https://express-boilerplate-prod.lynical.com",
   };
 
-  static String sentryDsn = "";
+  ///Empty string if in debug mode
+  static String get sentryDsn => kDebugMode ? "" : "";
 }

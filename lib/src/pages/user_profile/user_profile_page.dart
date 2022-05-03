@@ -6,8 +6,8 @@ import 'package:sura_manager/sura_manager.dart';
 
 import '../../constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
-import '../../services/auth_service.dart';
 import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              AuthService.logOutUser(context);
+              AuthProvider.getProvider(context).logOutUser(context);
             },
           )
         ],

@@ -12,13 +12,13 @@ class ThemeProvider extends ChangeNotifier {
   static const List<String> _themeValueString = ["dark", "light"];
   static const String _THEME_KEY = "key.theme";
 
-  static SharedPreferences? _spf;
+  static late SharedPreferences _spf;
 
   ///Intialize this method at main function to immediately get system brightness
   static Future<void> initializeTheme() async {
     _spf = await SharedPreferences.getInstance();
     var systemBrightness = SchedulerBinding.instance!.window.platformBrightness.name;
-    String savedTheme = _spf?.getString(_THEME_KEY) ?? systemBrightness;
+    String savedTheme = _spf.getString(_THEME_KEY) ?? systemBrightness;
     _isDark = _themeStringChecker(savedTheme);
   }
 
@@ -30,7 +30,7 @@ class ThemeProvider extends ChangeNotifier {
   void switchTheme([bool? isDarkTheme]) async {
     //Change by provided theme or else switch between light or dark
     _isDark = isDarkTheme ?? !isDark;
-    _spf?.setString(_THEME_KEY, isDark ? _themeValueString[0] : _themeValueString[1]);
+    _spf.setString(_THEME_KEY, isDark ? _themeValueString[0] : _themeValueString[1]);
     notifyListeners();
   }
 

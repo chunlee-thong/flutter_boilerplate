@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
       builder: (context) => MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
-          ChangeNotifierProvider(create: (_) => UserProvider()),
-          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+          ChangeNotifierProvider(create: (context) => AuthProvider(userProvider: context.read<UserProvider>())),
         ],
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,

@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../constant/app_config.dart';
 
 class AppUtils {
@@ -9,5 +11,17 @@ class AppUtils {
     }
     String image = "${AppConfig.baseApiUrl}/uploads/$file";
     return image;
+  }
+
+  static String getReadableErrorMessage(Object exception) {
+    String? errorMessage;
+    if (exception is PlatformException) {
+      errorMessage = exception.message;
+    }
+    // if(exception is FirebaseAuthException){
+    //   errorMessage = exception.message;
+    // }
+
+    return errorMessage ?? exception.toString();
   }
 }

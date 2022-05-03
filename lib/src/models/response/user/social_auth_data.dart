@@ -1,9 +1,9 @@
 import 'auth_response.dart';
 
 class SocialAuthData {
-  AuthResponse? authResponse;
+  late AuthResponse authResponse;
   final String? accessToken;
   final String? authId;
 
-  SocialAuthData({this.authResponse, required this.accessToken, required this.authId});
+  SocialAuthData({required this.accessToken, required this.authId});
 }

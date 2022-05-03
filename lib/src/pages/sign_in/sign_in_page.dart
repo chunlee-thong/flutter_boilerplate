@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/providers/auth_provider.dart';
+import 'package:flutter_boilerplate/src/providers/index.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
@@ -7,11 +9,8 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../constant/app_dimension.dart';
 import '../../constant/app_theme_color.dart';
 import '../../constant/locale_keys.dart';
-import '../../http/repository/index.dart';
-import '../../models/response/user/auth_response.dart';
 import '../../pages/root/root_page.dart';
 import '../../providers/theme_provider.dart';
-import '../../services/auth_service.dart';
 import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
@@ -32,11 +31,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
       await ExceptionHandler.run(context, () async {
         var email = emailTC.text.trim();
         var password = passwordTC.text.trim();
-        AuthResponse loginResponse = await userRepository.loginUser(
-          email: email,
-          password: password,
-        );
-        await AuthService.onLoginSuccess(context, loginResponse);
+        await readProvider<AuthProvider>(context).loginWithPassword(email, password);
         SuraPageNavigator.pushReplacement(context, const RootPage());
       });
     }
@@ -102,7 +97,12 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                     child: EllipsisText(tr(LocaleKeys.login)),
                   ),
                   const SpaceY(64),
-                  SocialAuthButtons(onLoginCompleted: (data) {}),
+                  SocialAuthButtons(onLoginCompleted: (data) async {
+                    await ExceptionHandler.run(context, () async {
+                      await readProvider<AuthProvider>(context).loginWithSocial(data);
+                      SuraPageNavigator.pushReplacement(context, const RootPage());
+                    });
+                  }),
                 ],
               ),
             ),

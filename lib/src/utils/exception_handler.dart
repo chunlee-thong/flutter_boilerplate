@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_boilerplate/src/providers/auth_provider.dart';
+import 'package:flutter_boilerplate/src/utils/app_utils.dart';
 import 'package:sentry/sentry.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../http/client/http_exception.dart';
-import '../services/auth_service.dart';
 import '../widgets/ui_helper.dart';
 import 'custom_exception.dart';
 
@@ -26,11 +26,12 @@ class ExceptionHandler {
       errorLog(error.stackTrace);
     }
     if (error.exception is! HttpRequestException) {
-      recordError(error.exception);
+      recordError(error.exception, stackTrace: error.stackTrace);
     }
+
     if (error.exception is SessionExpiredException) {
       UIHelper.showToast(context, error.toString());
-      AuthService.logOutUser(context, showConfirmation: false);
+      AuthProvider.getProvider(context).logOutUser(context, showConfirmation: false);
     }
   }
 
@@ -45,26 +46,22 @@ class ExceptionHandler {
     } on UserCancelException catch (_) {
       return null;
     } catch (exception, stackTrace) {
-      String message = "";
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.toString());
-          AuthService.logOutUser(context, showConfirmation: false);
+          AuthProvider.getProvider(context).logOutUser(context, showConfirmation: false);
+          return null;
         }
-      } else if (exception is PlatformException) {
-        message = exception.message ?? exception.toString();
-      } else {
-        message = exception.toString();
       }
+      String errorMessage = AppUtils.getReadableErrorMessage(exception);
 
       if (context != null) {
-        UIHelper.showErrorDialog(context, message);
+        UIHelper.showErrorDialog(context, errorMessage);
       }
 
       if (exception is! HttpRequestException) {
         recordError(exception, stackTrace: stackTrace);
       }
-
       onError?.call(exception);
       return null;
     } finally {

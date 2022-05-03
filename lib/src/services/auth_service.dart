@@ -1,30 +1,21 @@
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/locale_keys.dart';
 import '../http/client/http_client.dart';
 import '../models/others/user_secret.dart';
 import '../models/response/user/auth_response.dart';
-import '../pages/sign_in/sign_in_page.dart';
-import '../providers/auth_provider.dart';
-import '../providers/index.dart';
-import '../providers/user_provider.dart';
 import 'local_storage_service/local_storage_service.dart';
 
 class AuthService {
-  //
-  static Future<void> onLoginSuccess(BuildContext context, AuthResponse loginResponse) async {
-    await LocalStorage.write(key: TOKEN_KEY, value: loginResponse.token);
-    await LocalStorage.write(key: ID_KEY, value: loginResponse.userId);
-    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: loginResponse.refreshToken);
+  ///Save user credential to local storage
+  static Future saveUserCredential(AuthResponse authResponse) async {
+    await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
+    await LocalStorage.write(key: ID_KEY, value: authResponse.userId);
+    await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
     await LocalStorage.write<bool>(key: LOGIN_KEY, value: true);
-    await initializeUserCredential();
-    AuthProvider.getProvider(context).setLoginStatus(true);
-    await readProvider<UserProvider>(context).getUserInfo(throwError: true);
   }
 
+  ///Init user credential to memory
   static Future<void> initializeUserCredential() async {
     String? token = await LocalStorage.read<String>(key: TOKEN_KEY);
     String? refreshToken = await LocalStorage.read<String>(key: REFRESH_TOKEN_KEY);
@@ -42,47 +33,23 @@ class AuthService {
     );
   }
 
-  static Future<String?> refreshUserToken() async {
+  static clearLocalCredential() {
+    UserSecret.instance.clearCredential();
+  }
+
+  static Future<String?> refreshUserToken(Dio dio) async {
     String? refreshToken = await LocalStorage.read(key: REFRESH_TOKEN_KEY);
-    Response response = await DioHttpClient().dio.request(
-          "/api/user/refresh-token",
-          options: Options(
-            headers: {"Authorization": "bearer $refreshToken"},
-            method: HttpMethod.POST,
-          ),
-        );
+    Response response = await dio.request(
+      "/api/user/refresh-token",
+      options: Options(
+        headers: {"Authorization": "bearer $refreshToken"},
+        method: HttpMethod.POST,
+      ),
+    );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: TOKEN_KEY, value: authResponse.token);
     await LocalStorage.write(key: REFRESH_TOKEN_KEY, value: authResponse.refreshToken);
-    UserSecret.instance.initLocalCredential(
-      token: authResponse.token,
-      userId: authResponse.userId,
-    );
+    await initializeUserCredential();
     return authResponse.token;
-  }
-
-  static void logOutUser(BuildContext context, {bool showConfirmation = true}) async {
-    Future onLogout() async {
-      await LocalStorage.clear();
-      UserSecret.instance.clearCredential();
-      AuthProvider.getProvider(context).setLoginStatus(false);
-      SuraPageNavigator.pushAndRemove(context, const SignInPage());
-    }
-
-    if (!showConfirmation) {
-      await onLogout.call();
-      return;
-    }
-
-    await showDialog(
-      context: context,
-      builder: (dialogContext) => SuraConfirmationDialog(
-        content: Text(LocaleKeys.are_you_want_logout.tr()),
-        title: LocaleKeys.confirmation.tr(),
-        onConfirm: onLogout,
-        confirmText: LocaleKeys.logout.tr(),
-        cancelText: tr(LocaleKeys.cancel),
-      ),
-    );
   }
 }
