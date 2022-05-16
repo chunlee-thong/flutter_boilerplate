@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/services/social_auth_service.dart';
-import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../constant/locale_keys.dart';
@@ -11,6 +9,7 @@ import '../models/response/user/social_auth_data.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../services/auth_service.dart';
 import '../services/local_storage_service/local_storage_service.dart';
+import '../services/social_auth_service.dart';
 import 'user_provider.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -19,10 +18,6 @@ class AuthProvider extends ChangeNotifier {
 
   bool _authenticated = false;
   bool get authenticated => _authenticated;
-
-  static AuthProvider getProvider(BuildContext context, [bool listen = false]) {
-    return Provider.of<AuthProvider>(context, listen: listen);
-  }
 
   Future<bool> initializeUser() async {
     bool isLoggedIn = await getLoginStatus();
@@ -41,7 +36,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> getLoginStatus() async {
     String? token = await LocalStorage.read<String>(key: kTokenKey);
-    return token != null;
+    bool? login = await LocalStorage.read<bool>(key: kLoginKey);
+    return token != null && login == true;
   }
 
   Future<void> loginWithPassword(String email, String password) async {

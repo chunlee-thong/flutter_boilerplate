@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'app_theme_color.dart';
 
+const TextStyle kBigHeaderStyle = TextStyle(
+  fontSize: 28,
+  fontWeight: FontWeight.bold,
+);
+
 const TextStyle kHeaderStyle = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.bold,

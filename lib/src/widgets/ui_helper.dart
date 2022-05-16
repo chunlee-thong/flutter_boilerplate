@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart' as styled_toast;
 
+import '../utils/app_utils.dart';
 import 'dialog/message_dialog.dart';
 
 class UIHelper {
-  static Future<T?> showMessageDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showMessageDialog<T>(BuildContext context, String message) async {
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog(
-        message: message.toString(),
+        message: message,
         title: "Information",
       ),
     );
   }
 
-  static Future<T?> showErrorDialog<T>(BuildContext context, dynamic message) async {
+  static Future<T?> showErrorDialog<T>(BuildContext context, Object error) async {
+    String errorMessage = AppUtils.getReadableErrorMessage(error);
+
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog.error(
-        message: message.toString(),
+        message: errorMessage,
         title: "Error",
       ),
     );

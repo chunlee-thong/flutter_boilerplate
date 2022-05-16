@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/providers/auth_provider.dart';
-import 'package:flutter_boilerplate/src/utils/app_utils.dart';
 import 'package:sentry/sentry.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
 
 import '../http/client/http_exception.dart';
+import '../providers/auth_provider.dart';
+import '../providers/index.dart';
 import '../widgets/ui_helper.dart';
 import 'custom_exception.dart';
 
@@ -31,7 +31,7 @@ class ExceptionHandler {
 
     if (error.exception is SessionExpiredException) {
       UIHelper.showToast(context, error.toString());
-      AuthProvider.getProvider(context).logOutUser(context, showConfirmation: false);
+      readProvider<AuthProvider>(context).logOutUser(context, showConfirmation: false);
     }
   }
 
@@ -50,14 +50,13 @@ class ExceptionHandler {
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.toString());
-          AuthProvider.getProvider(context).logOutUser(context, showConfirmation: false);
+          readProvider<AuthProvider>(context).logOutUser(context, showConfirmation: false);
           return null;
         }
       }
-      String errorMessage = AppUtils.getReadableErrorMessage(exception);
 
       if (context != null) {
-        UIHelper.showErrorDialog(context, errorMessage);
+        UIHelper.showErrorDialog(context, exception);
       }
 
       if (exception is! HttpRequestException) {

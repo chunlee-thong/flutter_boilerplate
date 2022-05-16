@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_boilerplate/flavor.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../../flavor.dart';
 import '../../constant/app_config.dart';
 import '../../utils/object_util.dart';
 

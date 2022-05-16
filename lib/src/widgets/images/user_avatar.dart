@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
 import '../../constant/app_style_decoration.dart';
+import '../../constant/app_theme_color.dart';
 import '../../utils/exception_handler.dart';
 import 'avatar_image.dart';
 
@@ -51,14 +51,18 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
   }
 
   Future onPickImage(ImageSource imageSource) async {
-    await ExceptionHandler.run(context, () async {
-      final pickedFile = await picker.pickImage(source: imageSource, maxWidth: 1000);
-      if (pickedFile != null) {
-        toggleValue(true);
-        await widget.onImageChanged?.call(selectedImage);
-        selectedImage = File(pickedFile.path);
-      }
-    }, onDone: () {});
+    await ExceptionHandler.run(
+      context,
+      () async {
+        final pickedFile = await picker.pickImage(source: imageSource, maxWidth: 1000);
+        if (pickedFile != null) {
+          toggleValue(true);
+          await widget.onImageChanged?.call(selectedImage);
+          selectedImage = File(pickedFile.path);
+        }
+      },
+      onDone: () {},
+    );
     toggleValue(false);
     setState(() {});
   }

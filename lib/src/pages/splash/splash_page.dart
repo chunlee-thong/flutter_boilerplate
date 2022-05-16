@@ -5,6 +5,7 @@ import 'package:sura_manager/sura_manager.dart';
 import '../../constant/app_theme_color.dart';
 import '../../pages/root/root_page.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/index.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
 import '../sign_in/sign_in_page.dart';
@@ -18,7 +19,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
-  late final AuthProvider authProvider = AuthProvider.getProvider(context);
+  late final AuthProvider authProvider = readProvider<AuthProvider>(context);
 
   Future<bool> onSplashing() async {
     bool isLoggedIn = await authProvider.initializeUser();
