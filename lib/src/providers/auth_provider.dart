@@ -24,12 +24,22 @@ class AuthProvider extends ChangeNotifier {
     return Provider.of<AuthProvider>(context, listen: listen);
   }
 
-  void setLoginStatus(bool status) {
+  Future<bool> initializeUser() async {
+    bool isLoggedIn = await getLoginStatus();
+    _setLoginStatus(isLoggedIn);
+    if (isLoggedIn) {
+      await AuthService.initializeUserCredential();
+      await userProvider.getUserInfo(throwError: true);
+    }
+    return isLoggedIn;
+  }
+
+  void _setLoginStatus(bool status) {
     _authenticated = status;
     notifyListeners();
   }
 
-  Future checkLoginStatus() async {
+  Future<bool> getLoginStatus() async {
     String? token = await LocalStorage.read<String>(key: kTokenKey);
     return token != null;
   }
@@ -40,14 +50,14 @@ class AuthProvider extends ChangeNotifier {
       password: password,
     );
     await AuthService.saveUserCredential(authResponse);
-    setLoginStatus(true);
+    _setLoginStatus(true);
     await userProvider.getUserInfo(throwError: true);
   }
 
   Future<void> loginWithSocial(SocialAuthData authData) async {
     AuthResponse authResponse = authData.authResponse;
     await AuthService.saveUserCredential(authResponse);
-    setLoginStatus(true);
+    _setLoginStatus(true);
     await userProvider.getUserInfo(throwError: true);
   }
 
@@ -57,7 +67,7 @@ class AuthProvider extends ChangeNotifier {
       await LocalStorage.clear();
       SocialAuthService.signOutAll();
       AuthService.clearLocalCredential();
-      setLoginStatus(false);
+      _setLoginStatus(false);
       SuraPageNavigator.pushAndRemove(context, const SignInPage());
     }
 
