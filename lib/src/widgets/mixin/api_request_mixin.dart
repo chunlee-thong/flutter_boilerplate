@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sura_manager/sura_manager.dart';
 
-mixin ApiRequestMixin<Page extends StatefulWidget, T> on State<Page> {
+mixin ApiRequestMixin<Page extends StatefulWidget, T extends Object> on State<Page> {
   late FutureManager<T> futureManager;
   Future<void> fetchData([bool reloading = false]);
   @override

@@ -8,7 +8,10 @@ import '../../services/auth_service.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
 
+///Data field from api response
 const String DATA_FIELD = "data";
+
+///Data field from api response
 const String MESSAGE_FIELD = "message";
 
 class API {

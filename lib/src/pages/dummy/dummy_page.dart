@@ -42,6 +42,7 @@ class _DummyPageState extends State<DummyPage> {
 
   @override
   void dispose() {
+    userManager.dispose();
     super.dispose();
   }
 

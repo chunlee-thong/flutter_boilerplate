@@ -61,70 +61,69 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
           selectedImage = File(pickedFile.path);
         }
       },
-      onDone: () {},
     );
     toggleValue(false);
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onChooseProfileImageSource,
-      child: Container(
-        padding: const EdgeInsets.all(2.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [kGreyShadow2],
-        ),
-        child: Stack(
-          children: [
-            selectedImage != null
-                ? AvatarImage.file(
-                    radius: widget.radius,
-                    fileImage: FileImage(selectedImage!),
-                  )
-                : AvatarImage(
-                    radius: widget.radius,
-                    imageUrl: widget.imageUrl,
+    return SuraNotifier<bool>(
+      valueNotifier: boolNotifier,
+      builder: (isLoading) => GestureDetector(
+        onTap: isLoading ? null : onChooseProfileImageSource,
+        child: Container(
+          padding: const EdgeInsets.all(2.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [kGreyShadow2],
+          ),
+          child: Stack(
+            children: [
+              ConditionalWidget(
+                condition: selectedImage != null,
+                onTrue: () => AvatarImage.file(
+                  radius: widget.radius,
+                  fileImage: FileImage(selectedImage!),
+                ),
+                onFalse: () => AvatarImage(
+                  radius: widget.radius,
+                  imageUrl: widget.imageUrl,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: ConditionalWidget(
+                  condition: isLoading,
+                  onTrue: () => const CircularProgressIndicator(),
+                  onFalse: () => emptySizedBox,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: ConditionalWidget(
+                  condition: isLoading,
+                  onTrue: () => emptySizedBox,
+                  onFalse: () => SuraIconButton(
+                    icon: Icon(
+                      widget.imageUrl == null ? Icons.add : Icons.edit,
+                      color: AppColor.primary,
+                      size: 20,
+                    ),
+                    padding: const EdgeInsets.all(4),
+                    onTap: onChooseProfileImageSource,
+                    borderRadius: 32,
+                    backgroundColor: Colors.white,
+                    elevation: 8,
                   ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: SuraIconButton(
-                icon: Icon(
-                  widget.imageUrl == null ? Icons.add : Icons.edit,
-                  color: AppColor.primary,
-                  size: 20,
-                ),
-                padding: const EdgeInsets.all(4),
-                onTap: onChooseProfileImageSource,
-                borderRadius: 32,
-                backgroundColor: Colors.white,
-                elevation: 8,
-              ),
-            ),
-            Positioned(
-              right: 0,
-              left: 0,
-              top: 0,
-              bottom: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SuraNotifier<bool>(
-                  valueNotifier: boolNotifier,
-                  builder: (isLoading) {
-                    return ConditionalWidget(
-                      condition: isLoading,
-                      onTrue: () => const CircularProgressIndicator(),
-                      onFalse: () => const SizedBox(),
-                    );
-                  },
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

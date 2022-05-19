@@ -34,7 +34,7 @@ class UIHelper {
     );
   }
 
-  static Future showToast(BuildContext context, dynamic message) async {
+  static Future showToast(BuildContext context, String message) async {
     styled_toast.showToastWidget(
       Container(
         decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class UIHelper {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         margin: const EdgeInsets.only(bottom: 64),
-        child: Text(message.toString(), style: const TextStyle(color: Colors.white)),
+        child: Text(message, style: const TextStyle(color: Colors.white)),
       ),
       context: context,
       animDuration: Duration.zero,
@@ -51,7 +51,7 @@ class UIHelper {
     );
   }
 
-  static Future showTopSnackBar(BuildContext context, dynamic message) async {
+  static Future showTopSnackBar(BuildContext context, String message) async {
     styled_toast.showToastWidget(
       Container(
         decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class UIHelper {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         margin: const EdgeInsets.only(top: 64, left: 8, right: 8),
         child: Text(
-          message.toString(),
+          message,
           style: const TextStyle(color: Colors.white, fontSize: 14),
         ),
         width: double.infinity,
@@ -77,11 +77,11 @@ class UIHelper {
     );
   }
 
-  static void showSnackBar(BuildContext context, dynamic message) {
+  static void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message.toString()),
+        content: Text(message),
         margin: const EdgeInsets.all(8),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.red,
