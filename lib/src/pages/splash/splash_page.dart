@@ -52,7 +52,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         loading: const LoadingWidget(color: Colors.white),
         error: (error) {
           return CustomErrorWidget(
-            message: error,
+            error: error,
             hasAppBar: true,
             onRefresh: () => onSplashing(),
           );

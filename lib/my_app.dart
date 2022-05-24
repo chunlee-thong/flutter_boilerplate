@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Locale> languages = kAppLanguages.map((lang) => lang.locale).toList();
-    const bool useDevicePreview = true;
+    const bool useDevicePreview = false;
     return DevicePreview(
       enabled: useDevicePreview,
       builder: (context) => MultiProvider(
@@ -44,14 +44,14 @@ class MyApp extends StatelessWidget {
                   onFutureManagerError: ExceptionHandler.handleManagerError,
                   errorBuilder: (error, onRefresh) {
                     return CustomErrorWidget(
-                      message: error,
+                      error: error,
                       onRefresh: onRefresh,
                     );
                   },
                   child: SuraProvider(
                     loadingWidget: const LoadingWidget(),
                     errorWidget: (error, context) {
-                      return CustomErrorWidget(message: error);
+                      return CustomErrorWidget(error: error);
                     },
                     child: MaterialApp(
                       useInheritedMediaQuery: useDevicePreview,

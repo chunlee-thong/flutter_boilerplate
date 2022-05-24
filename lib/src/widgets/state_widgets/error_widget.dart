@@ -4,21 +4,24 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../constant/app_assets.dart';
 import '../../constant/app_style_decoration.dart';
+import '../../utils/app_utils.dart';
 import '../../widgets/images/svg_asset.dart';
 import '../ui_helper.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
-  final dynamic message;
+  final Object error;
   final AsyncCallback? onRefresh;
   final bool hasAppBar;
-  const CustomErrorWidget({
+  final String _errorMessage;
+  CustomErrorWidget({
     Key? key,
-    required this.message,
+    required this.error,
     this.hasAppBar = false,
     this.verticalMargin = 0.0,
     this.onRefresh,
-  }) : super(key: key);
+  })  : _errorMessage = AppUtils.getReadableErrorMessage(error),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     if (hasAppBar) {
@@ -44,7 +47,7 @@ class CustomErrorWidget extends StatelessWidget {
                 _buildErrorIcon(),
                 const SpaceY(16),
                 EllipsisText(
-                  message.toString(),
+                  _errorMessage,
                   style: kSubtitleStyle.normal,
                   maxLines: 4,
                   textAlign: TextAlign.center,
