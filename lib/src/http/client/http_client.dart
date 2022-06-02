@@ -8,7 +8,6 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../../flavor.dart';
 import '../../constant/app_config.dart';
-import '../../utils/object_util.dart';
 
 class HttpMethod {
   HttpMethod._();
@@ -68,7 +67,7 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     httpLog("${options.method}: ${options.path},"
         "query: ${options.queryParameters},"
         "data: ${options.data},"
-        "token: ${ObjectUtils.getLastIndexString(options.headers["authorization"])}");
+        "token: ${_getLastIndexString(options.headers["authorization"])}");
     requestInterceptorHandler.next(options);
   },
   onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
@@ -78,3 +77,8 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     errorInterceptorHandler.reject(error);
   },
 );
+
+String _getLastIndexString(String? data, [int length = 2]) {
+  if (data == null || data == "null") return "null";
+  return data.substring(data.length - length);
+}

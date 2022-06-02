@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../http/client/http_client.dart';
-import '../models/others/user_secret.dart';
 import '../models/response/user/auth_response.dart';
 import 'local_storage_service/local_storage_service.dart';
 
@@ -13,10 +12,6 @@ class AuthService {
     await LocalStorage.write(key: kIdKey, value: authResponse.userId);
     await LocalStorage.write(key: kRefreshTokenKey, value: authResponse.refreshToken);
     await LocalStorage.write<bool>(key: kLoginKey, value: true);
-    UserSecret.instance.initLocalCredential(
-      token: authResponse.token,
-      userId: authResponse.userId,
-    );
   }
 
   ///Init user credential to memory
@@ -30,15 +25,6 @@ class AuthService {
     infoLog("token", token);
     infoLog("refresh token", refreshToken);
     infoLog("userId", userId);
-
-    UserSecret.instance.initLocalCredential(
-      token: token,
-      userId: userId,
-    );
-  }
-
-  static clearLocalCredential() {
-    UserSecret.instance.clearCredential();
   }
 
   static Future<String?> refreshUserToken(Dio dio) async {
@@ -53,10 +39,6 @@ class AuthService {
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);
     await LocalStorage.write(key: kTokenKey, value: authResponse.token);
     await LocalStorage.write(key: kRefreshTokenKey, value: authResponse.refreshToken);
-    UserSecret.instance.initLocalCredential(
-      token: authResponse.token,
-      userId: authResponse.userId,
-    );
     return authResponse.token;
   }
 }

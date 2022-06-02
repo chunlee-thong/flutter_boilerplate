@@ -1,6 +1,6 @@
-import '../../models/others/user_secret.dart';
 import '../../models/response/user/auth_response.dart';
 import '../../models/response/user/user_model.dart';
+import '../../services/local_storage_service/local_storage_service.dart';
 import '../client/base_api.dart';
 import '../client/http_client.dart';
 import '../client/http_exception.dart';
@@ -19,7 +19,7 @@ class UserRepository extends API {
         "password": password,
       },
       onSuccess: (response) {
-        return AuthResponse.fromJson(response.data[DATA_FIELD]);
+        return AuthResponse.fromJson(response.data[kDataField]);
       },
     );
   }
@@ -38,14 +38,14 @@ class UserRepository extends API {
   }
 
   Future<UserModel> fetchUserInfo() async {
-    String? userId = UserSecret.instance.userId;
+    String? userId = await LocalStorage.read(key: kIdKey);
     if (userId == null) {
       throw SessionExpiredException();
     }
     return httpRequest(
       path: _getUserInfo + userId,
       onSuccess: (response) {
-        return UserModel.fromJson(response.data[DATA_FIELD]);
+        return UserModel.fromJson(response.data[kDataField]);
       },
     );
   }

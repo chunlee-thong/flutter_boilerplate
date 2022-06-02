@@ -1,24 +1,25 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate/src/services/local_storage_service/local_storage_service.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../models/others/user_secret.dart';
 import '../../services/auth_service.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
 
 ///Data field from api response
-const String DATA_FIELD = "data";
+const String kDataField = "data";
 
 ///Data field from api response
-const String MESSAGE_FIELD = "message";
+const String kMessageField = "message";
 
 class API {
   late final Dio dio;
+  final bool authorization;
   final CancelToken cancelToken = CancelToken();
 
-  API({Dio? client}) {
+  API({Dio? client, this.authorization = true}) {
     dio = client ?? DioHttpClient.dioInstance;
   }
 
@@ -31,16 +32,18 @@ class API {
     Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
-    bool requiredToken = true,
+    bool? requiredToken,
     String? customToken,
     Dio? customDioClient,
   }) async {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      if (requiredToken && UserSecret.instance.hasValidToken()) {
-        String? token = UserSecret.instance.jwtToken;
-        bool isExpired = SuraJwtDecoder.decode(token!).isExpired;
+      final bool needToken = requiredToken ?? authorization;
+      if (needToken) {
+        String? token = await LocalStorage.read(key: kTokenKey);
+        if (token == null) throw Exception("Invalid Token");
+        bool isExpired = SuraJwtDecoder.decode(token).isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken(customDioClient ?? dio);
         }

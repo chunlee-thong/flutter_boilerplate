@@ -89,7 +89,6 @@ class _AppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return SuraResponsiveBuilder(
       builder: (context) {
-        infoLog(context.mediaQuery);
         return Theme(
           data: AppTheme.modifiedTheme(context),
           child: LoadingOverlayBuilder(child: child),

@@ -62,7 +62,6 @@ class AuthProvider extends ChangeNotifier {
     Future onLogout() async {
       await LocalStorage.clear();
       SocialAuthService.signOutAll();
-      AuthService.clearLocalCredential();
       _setLoginStatus(false);
       SuraPageNavigator.pushAndRemove(context, const SignInPage());
     }
