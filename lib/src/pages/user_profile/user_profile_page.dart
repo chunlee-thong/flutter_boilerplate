@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/widgets/images/user_avatar.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:sura_manager/sura_manager.dart';
@@ -10,6 +9,7 @@ import '../../models/response/user/user_model.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/index.dart';
 import '../../providers/user_provider.dart';
+import '../../widgets/images/user_avatar.dart';
 import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {
