@@ -69,7 +69,7 @@ class _DummyPageState extends State<DummyPage> {
                 ),
                 onTap: () {},
                 title: Text("${user.firstName} ${user.lastName}"),
-                subtitle: EllipsisText("${user.email}"),
+                subtitle: EllipsisText(user.email),
               );
             },
             onGetMoreData: fetchData,
