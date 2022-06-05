@@ -17,7 +17,6 @@ const String kMessageField = "message";
 class API {
   late final Dio dio;
   final bool authorization;
-  final CancelToken cancelToken = CancelToken();
 
   API({Dio? client, this.authorization = true}) {
     dio = client ?? DioHttpClient.dioInstance;
@@ -28,6 +27,7 @@ class API {
   Future<T> httpRequest<T>({
     required String path,
     required T Function(Response) onSuccess,
+    CancelToken? cancelToken,
     String method = HttpMethod.get,
     Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
@@ -39,8 +39,8 @@ class API {
     Response? response;
     try {
       final httpOption = Options(method: method, headers: {});
-      final bool needToken = requiredToken ?? authorization;
-      if (needToken) {
+      final bool requiredAuthorization = requiredToken ?? authorization;
+      if (requiredAuthorization) {
         String? token = await LocalStorage.read(key: kTokenKey);
         if (token == null) throw Exception("Invalid Token");
         bool isExpired = SuraJwtDecoder.decode(token).isExpired;
