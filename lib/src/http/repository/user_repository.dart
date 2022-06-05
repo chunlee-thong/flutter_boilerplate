@@ -13,6 +13,7 @@ class UserRepository extends API {
   Future<AuthResponse> loginUser({required String email, required String password}) async {
     return httpRequest(
       path: _loginUser,
+      requiredToken: false,
       method: HttpMethod.post,
       data: {
         "email": email,

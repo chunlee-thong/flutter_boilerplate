@@ -36,8 +36,8 @@ class UserModel {
   final String firstName;
   final String lastName;
   final String email;
-  final String profileImg;
-  final String phoneNumber;
+  final String? profileImg;
+  final String? phoneNumber;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
