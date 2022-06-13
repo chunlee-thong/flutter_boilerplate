@@ -17,7 +17,7 @@ class ThemeProvider extends ChangeNotifier {
   ///Intialize this method at main function to immediately get system brightness
   static Future<void> initializeTheme() async {
     _spf = await SharedPreferences.getInstance();
-    var systemBrightness = SchedulerBinding.instance!.window.platformBrightness.name;
+    var systemBrightness = SchedulerBinding.instance.window.platformBrightness.name;
     String savedTheme = _spf.getString(kThemeKey) ?? systemBrightness;
     _isDark = _themeStringChecker(savedTheme);
   }
