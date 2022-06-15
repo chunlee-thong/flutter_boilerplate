@@ -14,6 +14,7 @@ class App {
   static Future bootstrap(Flavor flavor) async {
     setupFlavorConfiguration(flavor);
     WidgetsFlutterBinding.ensureInitialized();
+    await clearSecureStorageOnFirstRun();
     await Hive.initFlutter();
     await EasyLocalization.ensureInitialized();
     await LocalStorage.initialize(FssStorageService());

@@ -14,7 +14,6 @@ class AuthService {
     await LocalStorage.write<bool>(key: kLoginKey, value: true);
   }
 
-  ///Init user credential to memory
   static Future<void> initializeUserCredential() async {
     String? token = await LocalStorage.read<String>(key: kTokenKey);
     String? refreshToken = await LocalStorage.read<String>(key: kRefreshTokenKey);

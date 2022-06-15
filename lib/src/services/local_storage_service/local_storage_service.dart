@@ -1,3 +1,6 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 const String kTokenKey = "key.token";
 const String kRefreshTokenKey = "key.refresh.token";
 const String kLoginKey = "key.login";
@@ -46,4 +49,16 @@ abstract class LocalStorage {
   static Future<void> clear() async {
     _localStorage.clearImpl();
   }
+}
+
+///Clear FlutterSecureStorage on First run and return a value
+Future<bool> clearSecureStorageOnFirstRun() async {
+  const String key = "app_first_run";
+  final spf = await SharedPreferences.getInstance();
+  bool firstRun = spf.getBool(key) ?? true;
+  if (firstRun) {
+    await const FlutterSecureStorage().deleteAll();
+    await spf.setBool(key, false);
+  }
+  return firstRun;
 }
