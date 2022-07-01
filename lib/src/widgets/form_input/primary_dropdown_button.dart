@@ -43,10 +43,10 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
             value: value,
             hint: hint != null ? Text(hint!) : null,
             validator: isRequired
-                ? (_value) {
-                    if (validator != null) return validator?.call(_value);
+                ? (value) {
+                    if (validator != null) return validator?.call(value);
                     return FormValidator.validateValue(
-                      _value,
+                      value,
                       field: label ?? hint ?? "",
                     );
                   }
@@ -54,8 +54,8 @@ class PrimaryDropDownButton<T> extends StatelessWidget {
             items: options
                 .map(
                   (option) => DropdownMenuItem<T>(
-                    child: Text(option.toString()),
                     value: option,
+                    child: Text(option.toString()),
                   ),
                 )
                 .toList(),

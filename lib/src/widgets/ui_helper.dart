@@ -60,11 +60,11 @@ class UIHelper {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         margin: const EdgeInsets.only(top: 64, left: 8, right: 8),
+        width: double.infinity,
         child: Text(
           message,
           style: const TextStyle(color: Colors.white, fontSize: 14),
         ),
-        width: double.infinity,
       ),
       context: context,
       animDuration: const Duration(milliseconds: 200),

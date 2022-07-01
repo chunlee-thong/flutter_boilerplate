@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sentry/sentry.dart';
+import 'package:future_manager/future_manager.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:sura_manager/sura_manager.dart';
 
 import '../http/client/http_exception.dart';
 import '../providers/auth_provider.dart';

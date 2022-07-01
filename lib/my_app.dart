@@ -1,9 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:sura_manager/sura_manager.dart';
 
 import 'src/constant/app_config.dart';
 import 'src/constant/app_locale.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           child: Builder(
             builder: (context) => Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
-                return SuraManagerProvider(
+                return FutureManagerProvider(
                   onFutureManagerError: ExceptionHandler.handleManagerError,
                   errorBuilder: (error, onRefresh) {
                     return CustomErrorWidget(
@@ -91,7 +91,7 @@ class _AppWrapper extends StatelessWidget {
       builder: (context) {
         return Theme(
           data: AppTheme.modifiedTheme(context),
-          child: LoadingOverlayBuilder(child: child),
+          child: LoadingOverlayProvider.builder(child: child),
         );
       },
     );

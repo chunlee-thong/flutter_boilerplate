@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:future_manager/future_manager.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:sura_manager/sura_manager.dart';
 
 import '../../constant/app_theme_color.dart';
 import '../../pages/root/root_page.dart';
@@ -33,7 +33,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   void initState() {
-    splashManager.asyncOperation(() => onSplashing());
+    splashManager.execute(() => onSplashing());
     super.initState();
   }
 

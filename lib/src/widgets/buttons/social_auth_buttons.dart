@@ -60,10 +60,10 @@ class SocialAuthButtons extends StatelessWidget {
               signInMethod: SocialSignIn.facebook,
             );
           },
-          child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
           margin: margin,
           startIcon: const Icon(AntIcons.facebookFilled),
           color: AppColor.fbColor,
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
         ),
         SuraAsyncButton(
           onPressed: () {
@@ -72,10 +72,10 @@ class SocialAuthButtons extends StatelessWidget {
               signInMethod: SocialSignIn.google,
             );
           },
-          child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
           margin: margin,
           startIcon: const Icon(AntIcons.googleCircleFilled),
           color: AppColor.googleRed,
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
         ),
         SuraAsyncButton(
           onPressed: () {
@@ -84,10 +84,10 @@ class SocialAuthButtons extends StatelessWidget {
               signInMethod: SocialSignIn.apple,
             );
           },
-          child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
           margin: margin,
           startIcon: const Icon(AntIcons.appleFilled),
           color: AppColor.appleColor,
+          child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
         ),
       ],
     );

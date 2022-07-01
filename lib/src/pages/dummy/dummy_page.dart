@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:future_manager/future_manager.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:sura_manager/sura_manager.dart';
 
 import '../../http/repository/index.dart';
 import '../../models/pagination.dart';
@@ -22,7 +22,7 @@ class _DummyPageState extends State<DummyPage> {
       userPagination.reset();
     }
 
-    userManager.asyncOperation(
+    userManager.execute(
       () async {
         return userRepository.fetchUserList(
           count: 20,

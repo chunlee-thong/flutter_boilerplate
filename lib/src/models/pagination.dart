@@ -1,5 +1,5 @@
 import 'package:flutter/rendering.dart';
-import 'package:sura_manager/sura_manager.dart';
+import 'package:future_manager/future_manager.dart';
 
 class Pagination {
   Pagination({

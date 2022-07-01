@@ -30,7 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SuraFormMixi
   Future<void> onSendVerificationCode() async {
     if (isFormValidated) {
       try {
-        String _ = emailTC.text.trim();
+        String email = emailTC.text.trim();
         await Future.delayed(const Duration(seconds: 2));
         startCountDownTimer();
         setState(() {
@@ -178,8 +178,8 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
         Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.setColor(Colors.grey)),
         SuraFlatButton(
           onPressed: resendCode,
-          child: Text(LocaleKeys.resend_code.tr()),
           textColor: AppColor.primary,
+          child: Text(LocaleKeys.resend_code.tr()),
         ),
       ],
     );

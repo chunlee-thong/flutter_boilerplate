@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'flavor.dart';
 import 'src/http/repository/index.dart';
@@ -15,7 +14,6 @@ class App {
     setupFlavorConfiguration(flavor);
     WidgetsFlutterBinding.ensureInitialized();
     await clearSecureStorageOnFirstRun();
-    await Hive.initFlutter();
     await EasyLocalization.ensureInitialized();
     await LocalStorage.initialize(FssStorageService());
     await ThemeProvider.initializeTheme();

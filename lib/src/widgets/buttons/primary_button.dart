@@ -41,12 +41,12 @@ class PrimaryButton extends StatelessWidget {
     return SuraAsyncButton(
       startIcon: startIcon,
       onPressed: onPressed,
-      child: child,
       fullWidth: fullWidth,
       color: color,
       margin: margin,
       shape: shape,
       textColor: Colors.white,
+      child: child,
     );
   }
 }
