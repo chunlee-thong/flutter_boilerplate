@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_style_decoration.dart';
-import '../../constant/app_theme_color.dart';
-import '../../utils/exception_handler.dart';
+import '../../core/style/color.dart';
+import '../../core/style/decoration.dart';
+import '../../core/utilities/exception_handler.dart';
 import 'avatar_image.dart';
 
 class UserAvatar extends StatefulWidget {

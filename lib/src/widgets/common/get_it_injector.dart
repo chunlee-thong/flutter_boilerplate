@@ -6,7 +6,9 @@ import 'package:sura_flutter/sura_flutter.dart';
 ///Since we're using both Provider and GetIt for DI
 ///We need a quick way to see which method that class use
 ///We can do something fancy with this class later
-abstract class GetItInjectable {}
+abstract class GetItInjectable {
+  void dispose() {}
+}
 
 class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
   final T Function() create;

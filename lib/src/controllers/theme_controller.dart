@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-ThemeProvider readThemeProvider(BuildContext context) => Provider.of<ThemeProvider>(context, listen: false);
-
-class ThemeProvider extends ChangeNotifier {
+class ThemeController extends ChangeNotifier {
   static bool _isDark = false;
   static bool get isDark => _isDark;
 

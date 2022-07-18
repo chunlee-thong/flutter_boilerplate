@@ -2,19 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/locale_keys.dart';
-import '../http/repository/index.dart';
+import '../core/constant/locale_keys.dart';
 import '../models/response/user/auth_response.dart';
 import '../models/response/user/social_auth_data.dart';
 import '../pages/sign_in/sign_in_page.dart';
+import '../repository/index.dart';
 import '../services/auth_service.dart';
 import '../services/local_storage_service/local_storage_service.dart';
 import '../services/social_auth_service.dart';
-import 'user_provider.dart';
+import 'user_controller.dart';
 
-class AuthProvider extends ChangeNotifier {
-  final UserProvider userProvider;
-  AuthProvider({required this.userProvider});
+class AuthController extends ChangeNotifier {
+  final UserController userProvider;
+  AuthController({required this.userProvider});
 
   bool _authenticated = false;
   bool get authenticated => _authenticated;

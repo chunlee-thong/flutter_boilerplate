@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 
-import '../http/repository/index.dart';
 import '../models/response/user/user_model.dart';
+import '../repository/index.dart';
 
-class UserProvider extends ChangeNotifier {
+class UserController extends ChangeNotifier {
   final FutureManager<UserModel> userManager = FutureManager<UserModel>();
 
   UserModel? get userData => userManager.data;

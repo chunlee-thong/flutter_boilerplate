@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../../flavor.dart';
+import '../../../flavor.dart';
 
 class AppConfig {
   //

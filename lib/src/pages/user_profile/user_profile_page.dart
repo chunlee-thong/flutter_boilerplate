@@ -4,11 +4,11 @@ import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/locale_keys.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/index.dart';
+import '../../controllers/user_controller.dart';
+import '../../core/constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
-import '../../providers/auth_provider.dart';
-import '../../providers/index.dart';
-import '../../providers/user_provider.dart';
 import '../../widgets/images/user_avatar.dart';
 import '../../widgets/ui_helper.dart';
 
@@ -22,7 +22,7 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = context.read<UserProvider>();
+    final userController = context.read<UserController>();
     return Scaffold(
       appBar: UIHelper.CustomAppBar(
         title: LocaleKeys.profile.tr(),
@@ -30,13 +30,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              readProvider<AuthProvider>(context).logOutUser(context);
+              readProvider<AuthController>(context).logOutUser(context);
             },
           )
         ],
       ),
       body: FutureManagerBuilder<UserModel>(
-        futureManager: userProvider.userManager,
+        futureManager: userController.userManager,
         ready: (context, user) {
           return Column(
             children: [

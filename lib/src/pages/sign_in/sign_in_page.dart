@@ -4,14 +4,14 @@ import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_dimension.dart';
-import '../../constant/app_theme_color.dart';
-import '../../constant/locale_keys.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/index.dart';
+import '../../controllers/theme_controller.dart';
+import '../../core/constant/locale_keys.dart';
+import '../../core/style/color.dart';
+import '../../core/style/dimension.dart';
+import '../../core/utilities/exception_handler.dart';
 import '../../pages/root/root_page.dart';
-import '../../providers/auth_provider.dart';
-import '../../providers/index.dart';
-import '../../providers/theme_provider.dart';
-import '../../utils/exception_handler.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/buttons/social_auth_buttons.dart';
 import '../../widgets/form_input/primary_text_field.dart';
@@ -31,7 +31,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
       await ExceptionHandler.run(context, () async {
         var email = emailTC.text.trim();
         var password = passwordTC.text.trim();
-        await readProvider<AuthProvider>(context).loginWithPassword(email, password);
+        await readProvider<AuthController>(context).loginWithPassword(email, password);
         SuraPageNavigator.pushReplacement(context, const RootPage());
       });
     }
@@ -64,7 +64,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                 children: <Widget>[
                   SuraIconButton(
                     onTap: () {
-                      readThemeProvider(context).switchTheme();
+                      readProvider<ThemeController>(context).switchTheme();
                     },
                     icon: const Icon(
                       Icons.class_,
@@ -99,7 +99,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                   const SpaceY(64),
                   SocialAuthButtons(onLoginCompleted: (data) async {
                     await ExceptionHandler.run(context, () async {
-                      await readProvider<AuthProvider>(context).loginWithSocial(data);
+                      await readProvider<AuthController>(context).loginWithSocial(data);
                       SuraPageNavigator.pushReplacement(context, const RootPage());
                     });
                   }),

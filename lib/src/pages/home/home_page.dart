@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/controllers/index.dart';
+import 'package:flutter_boilerplate/src/controllers/theme_controller.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_config.dart';
-import '../../constant/app_dimension.dart';
-import '../../constant/locale_keys.dart';
-import '../../providers/theme_provider.dart';
+import '../../core/constant/app_config.dart';
+import '../../core/constant/locale_keys.dart';
+import '../../core/style/dimension.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         fullWidth: false,
         height: 40,
         onPressed: () async {
-          readThemeProvider(context).switchTheme();
+          readProvider<ThemeController>(context).switchTheme();
         },
         child: Text(LocaleKeys.switch_theme.tr()),
       ),

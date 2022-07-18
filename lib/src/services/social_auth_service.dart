@@ -1,5 +1,5 @@
+import '../core/utilities/custom_exception.dart';
 import '../models/response/user/social_auth_data.dart';
-import '../utils/custom_exception.dart';
 
 class SocialAuthService {
   //static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);

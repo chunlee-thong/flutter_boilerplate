@@ -2,14 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/app_dimension.dart';
-import '../constant/app_style_decoration.dart';
-import '../constant/locale_keys.dart';
-import '../utils/exception_handler.dart';
-import '../widgets/buttons/primary_button.dart';
-import '../widgets/form_input/primary_dropdown_button.dart';
-import '../widgets/form_input/primary_text_field.dart';
-import '../widgets/ui_helper.dart';
+import '../../../core/constant/locale_keys.dart';
+import '../../../core/style/dimension.dart';
+import '../../../core/style/textstyle.dart';
+import '../../../core/utilities/exception_handler.dart';
+import '../../../widgets/buttons/primary_button.dart';
+import '../../../widgets/form_input/primary_dropdown_button.dart';
+import '../../../widgets/form_input/primary_text_field.dart';
+import '../../../widgets/ui_helper.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   const UpdateUserInfoPage({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
           PrimaryDropDownButton(
             options: genders,
             value: gender,
-            onChanged: (dynamic value) {
+            onChanged: (String? value) {
               setState(() {
                 gender = value;
               });

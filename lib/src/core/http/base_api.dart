@@ -14,13 +14,11 @@ const String kDataField = "data";
 ///Data field from api response
 const String kMessageField = "message";
 
-class API {
-  late final Dio dio;
+abstract class API {
+  final HttpClient httpClient;
   final bool authorization;
 
-  API({Dio? client, this.authorization = true}) {
-    dio = client ?? DioHttpClient.dioInstance;
-  }
+  API({required this.httpClient, this.authorization = true});
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
@@ -45,7 +43,7 @@ class API {
         if (token == null) throw Exception("Invalid Token");
         bool isExpired = SuraJwtDecoder.decode(token).isExpired;
         if (isExpired) {
-          token = await AuthService.refreshUserToken(customDioClient ?? dio);
+          token = await AuthService.refreshUserToken(customDioClient ?? httpClient.dio);
         }
         httpOption.headers!['Authorization'] = "bearer $token";
       }
@@ -53,7 +51,7 @@ class API {
         httpOption.headers!['Authorization'] = "bearer $customToken";
       }
       httpOption.headers!.addAll(headers);
-      response = await (customDioClient ?? dio).request(
+      response = await (customDioClient ?? httpClient.dio).request(
         path,
         options: httpOption,
         queryParameters: query,

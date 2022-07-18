@@ -1,6 +1,15 @@
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import '../constant/app_config.dart';
+
+///Ensure that widget is react to locale change
+void ensuredLocalize(BuildContext context) {
+  context.locale;
+}
 
 class AppUtils {
   ///Get real file url if some API doesn't response a full url
@@ -18,8 +27,19 @@ class AppUtils {
     if (exception is PlatformException) {
       errorMessage = exception.message;
     }
-    // if(exception is FirebaseAuthException){
+
+    if (exception is SocketException) {
+      errorMessage = "No internet connection";
+    }
+    // if (exception is FirebaseAuthException) {
     //   errorMessage = exception.message;
+    // }
+    // if (exception is FirebaseException) {
+    //   if (exception.code == "not-found") {
+    //     errorMessage = "Action failed. Post might have been deleted.";
+    //   } else {
+    //     errorMessage = exception.message;
+    //   }
     // }
 
     return errorMessage ?? exception.toString();

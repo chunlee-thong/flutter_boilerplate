@@ -3,11 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
-import '../../constant/locale_keys.dart';
+import '../../core/constant/locale_keys.dart';
+import '../../core/style/color.dart';
+import '../../core/utilities/exception_handler.dart';
 import '../../models/response/user/social_auth_data.dart';
 import '../../services/social_auth_service.dart';
-import '../../utils/exception_handler.dart';
 
 // typedef SocialSignIn = Future<SocialAuthData> Function();
 

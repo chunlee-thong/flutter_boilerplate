@@ -90,7 +90,7 @@ A flutter boiler plate code for initial project setup
 
 - a template for commonly used screen or page functioanlity in an app, example: change password page, setting page....
 
-#### providers
+#### controllers
 
 - store your provider or riverpod class
 

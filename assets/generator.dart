@@ -6,7 +6,7 @@ void main() {
 
 void generateFile() async {
   final Directory dir = Directory('./images');
-  final File assetClassFile = File("../lib/src/constant/app_assets.dart");
+  final File assetClassFile = File("../lib/src/core/constant/app_assets.dart");
   //
   var buffer = StringBuffer();
   buffer.writeln("//this class is generated from assets/generator.dart");
@@ -43,4 +43,3 @@ String _upperCaseFirstLetter(String word) {
   if (word.isEmpty) return "";
   return '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}';
 }
-

@@ -1,11 +1,13 @@
-import '../../models/response/user/auth_response.dart';
-import '../../models/response/user/user_model.dart';
-import '../../services/local_storage_service/local_storage_service.dart';
-import '../client/base_api.dart';
-import '../client/http_client.dart';
-import '../client/http_exception.dart';
+import '../core/http/base_api.dart';
+import '../core/http/http_client.dart';
+import '../core/http/http_exception.dart';
+import '../models/response/user/auth_response.dart';
+import '../models/response/user/user_model.dart';
+import '../services/local_storage_service/local_storage_service.dart';
 
 class UserRepository extends API {
+  UserRepository() : super(httpClient: DefaultDioClient());
+
   static const String _loginUser = "/api/user/login";
   static const String _getAllUser = "/api/user/all";
   static const String _getUserInfo = "/api/user/info/";

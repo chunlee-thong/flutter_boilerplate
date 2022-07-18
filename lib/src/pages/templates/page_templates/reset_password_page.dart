@@ -4,13 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/app_dimension.dart';
-import '../constant/app_style_decoration.dart';
-import '../constant/app_theme_color.dart';
-import '../constant/locale_keys.dart';
-import '../widgets/buttons/primary_button.dart';
-import '../widgets/form_input/primary_text_field.dart';
-import '../widgets/ui_helper.dart';
+import '../../../core/constant/locale_keys.dart';
+import '../../../core/style/color.dart';
+import '../../../core/style/dimension.dart';
+import '../../../core/style/textstyle.dart';
+import '../../../widgets/buttons/primary_button.dart';
+import '../../../widgets/form_input/primary_text_field.dart';
+import '../../../widgets/ui_helper.dart';
 
 enum VerificationStep {
   sendCode,

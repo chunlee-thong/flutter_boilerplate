@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/index.dart';
+import '../../core/style/color.dart';
 import '../../pages/root/root_page.dart';
-import '../../providers/auth_provider.dart';
-import '../../providers/index.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 import '../../widgets/state_widgets/loading_widget.dart';
 import '../sign_in/sign_in_page.dart';
@@ -19,10 +19,10 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
-  late final AuthProvider authProvider = readProvider<AuthProvider>(context);
+  late final AuthController authController = readProvider<AuthController>(context);
 
   Future<bool> onSplashing() async {
-    bool isLoggedIn = await authProvider.initializeUser();
+    bool isLoggedIn = await authController.initializeUser();
     await Future.delayed(const Duration(seconds: 1));
     SuraPageNavigator.pushAndRemove(
       context,

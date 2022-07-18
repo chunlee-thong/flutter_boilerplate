@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../http/repository/index.dart';
 import '../../models/pagination.dart';
 import '../../models/response/user/user_model.dart';
+import '../../repository/index.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {

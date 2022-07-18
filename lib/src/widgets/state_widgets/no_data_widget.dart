@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_assets.dart';
-import '../../constant/app_style_decoration.dart';
+import '../../core/constant/app_assets.dart';
+import '../../core/style/textstyle.dart';
 import '../../widgets/images/svg_asset.dart';
 
 class NoDataWidget extends StatelessWidget {

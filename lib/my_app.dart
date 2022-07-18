@@ -5,18 +5,18 @@ import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import 'src/constant/app_config.dart';
-import 'src/constant/app_locale.dart';
-import 'src/constant/app_theme_color.dart';
+import 'src/controllers/auth_controller.dart';
+import 'src/controllers/theme_controller.dart';
+import 'src/controllers/user_controller.dart';
+import 'src/core/constant/app_config.dart';
+import 'src/core/constant/app_locale.dart';
+import 'src/core/style/theme.dart';
+import 'src/core/utilities/exception_handler.dart';
 import 'src/pages/splash/splash_page.dart';
-import 'src/providers/auth_provider.dart';
-import 'src/providers/theme_provider.dart';
-import 'src/providers/user_provider.dart';
-import 'src/utils/exception_handler.dart';
+import 'src/widgets/common/bottom_navigation_widget.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
 
-///This widget can change to use your app name
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -28,9 +28,10 @@ class MyApp extends StatelessWidget {
       enabled: useDevicePreview,
       builder: (context) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => ThemeProvider()),
-          ChangeNotifierProvider(create: (context) => UserProvider()),
-          ChangeNotifierProvider(create: (context) => AuthProvider(userProvider: context.read<UserProvider>())),
+          ChangeNotifierProvider(create: (_) => ThemeController()),
+          ChangeNotifierProvider(create: (_) => BottomNavigationController()),
+          ChangeNotifierProvider(create: (context) => UserController()),
+          ChangeNotifierProvider(create: (context) => AuthController(userProvider: context.read<UserController>())),
         ],
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: enLocale,
           startLocale: enLocale,
           child: Builder(
-            builder: (context) => Consumer<ThemeProvider>(
+            builder: (context) => Consumer<ThemeController>(
               builder: (context, themeProvider, child) {
                 return FutureManagerProvider(
                   onFutureManagerError: ExceptionHandler.handleManagerError,
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                       useInheritedMediaQuery: useDevicePreview,
                       title: AppConfig.appName,
                       navigatorKey: SuraNavigator.navigatorKey,
-                      theme: AppTheme.primaryTheme(ThemeProvider.isDark),
+                      theme: AppTheme.primaryTheme(ThemeController.isDark),
                       debugShowCheckedModeBanner: false,
                       localizationsDelegates: context.localizationDelegates,
                       supportedLocales: context.supportedLocales,

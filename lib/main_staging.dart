@@ -7,8 +7,8 @@ import 'package:sura_flutter/sura_flutter.dart';
 import 'bootstrap.dart';
 import 'flavor.dart';
 import 'my_app.dart';
-import 'src/constant/app_config.dart';
-import 'src/utils/exception_handler.dart';
+import 'src/core/constant/app_config.dart';
+import 'src/core/utilities/exception_handler.dart';
 
 void main() async {
   runZonedGuarded(() async {

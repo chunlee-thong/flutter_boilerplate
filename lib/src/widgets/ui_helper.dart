@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart' as styled_toast;
 
-import '../utils/app_utils.dart';
+import '../core/utilities/app_utils.dart';
 import 'dialog/message_dialog.dart';
 
 class UIHelper {
@@ -17,7 +17,6 @@ class UIHelper {
 
   static Future<T?> showErrorDialog<T>(BuildContext context, Object error) async {
     String errorMessage = AppUtils.getReadableErrorMessage(error);
-
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog.error(

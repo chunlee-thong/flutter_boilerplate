@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_theme_color.dart';
-import '../../utils/app_utils.dart';
+import '../../core/style/color.dart';
+import '../../core/utilities/app_utils.dart';
 
 class AvatarImage extends StatelessWidget {
   final double radius;

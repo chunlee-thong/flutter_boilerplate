@@ -3,10 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../pages/home/home_page.dart';
 import '../../pages/user_profile/user_profile_page.dart';
-import '../../providers/bottom_navigation_provider.dart';
+import '../../widgets/common/bottom_navigation_widget.dart';
 import '../dummy/dummy_page.dart';
 import '../templates/template_pages.dart';
-import 'root_bottom_navigation_bar.dart';
 
 class RootPage extends StatefulWidget {
   final int startPageIndex;
@@ -37,9 +36,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => BottomNavigationProvider(widget.startPageIndex),
-      child: Consumer<BottomNavigationProvider>(
+    return Consumer<BottomNavigationController>(
         builder: (context, state, child) => WillPopScope(
           onWillPop: () async {
             if (state.currentIndex != 0) {
@@ -54,10 +51,10 @@ class _RootPageState extends State<RootPage> {
               physics: const NeverScrollableScrollPhysics(),
               children: pages,
             ),
-            bottomNavigationBar: const RootBottomNavigationBar(),
+            bottomNavigationBar: const BottomNavigationWidget(),
           ),
         ),
-      ),
+      
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_style_decoration.dart';
-import '../../utils/form_validator.dart';
+import '../../core/style/textstyle.dart';
+import '../../core/utilities/form_validator.dart';
 
 class PrimaryDropDownButton<T> extends StatelessWidget {
   final List<T> options;

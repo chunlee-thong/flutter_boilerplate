@@ -6,10 +6,10 @@ import 'package:future_manager/future_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../http/client/http_exception.dart';
-import '../providers/auth_provider.dart';
-import '../providers/index.dart';
-import '../widgets/ui_helper.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/index.dart';
+import '../../widgets/ui_helper.dart';
+import '../http/http_exception.dart';
 import 'custom_exception.dart';
 
 class ExceptionHandler {
@@ -31,7 +31,7 @@ class ExceptionHandler {
 
     if (error.exception is SessionExpiredException) {
       UIHelper.showToast(context, error.toString());
-      readProvider<AuthProvider>(context).logOutUser(context, showConfirmation: false);
+      readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
     }
   }
 
@@ -50,7 +50,7 @@ class ExceptionHandler {
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.toString());
-          readProvider<AuthProvider>(context).logOutUser(context, showConfirmation: false);
+          readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
           return null;
         }
       }

@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../constant/app_dimension.dart';
-import '../constant/app_style_decoration.dart';
-import '../constant/locale_keys.dart';
-import '../utils/form_validator.dart';
-import '../widgets/buttons/primary_button.dart';
-import '../widgets/form_input/primary_text_field.dart';
-import '../widgets/ui_helper.dart';
+import '../../../core/constant/locale_keys.dart';
+import '../../../core/style/dimension.dart';
+import '../../../core/style/textstyle.dart';
+import '../../../core/utilities/form_validator.dart';
+import '../../../widgets/buttons/primary_button.dart';
+import '../../../widgets/form_input/primary_text_field.dart';
+import '../../../widgets/ui_helper.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);

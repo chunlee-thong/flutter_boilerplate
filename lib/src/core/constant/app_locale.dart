@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constant/app_assets.dart';
-import '../models/others/language_model.dart';
+import '../../models/others/language_model.dart';
+import 'app_assets.dart';
 
 //
 const Locale enLocale = Locale('en', 'US');

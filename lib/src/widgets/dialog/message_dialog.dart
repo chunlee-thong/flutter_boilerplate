@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../../constant/app_assets.dart';
-import '../../constant/app_style_decoration.dart';
-import '../../constant/app_theme_color.dart';
+import '../../core/constant/app_assets.dart';
+import '../../core/style/color.dart';
+import '../../core/style/textstyle.dart';
 import '../../widgets/images/svg_asset.dart';
 
 class CustomMessageDialog extends StatelessWidget {

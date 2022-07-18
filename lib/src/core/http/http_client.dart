@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../../flavor.dart';
-import '../../constant/app_config.dart';
+import '../constant/app_config.dart';
 
 class HttpMethod {
   HttpMethod._();
@@ -19,28 +19,37 @@ class HttpMethod {
   static const String delete = "delete";
 }
 
-class DioHttpClient {
-  late final Dio _dio;
+abstract class HttpClient {
+  Dio get dio;
+}
+
+class DefaultDioClient extends HttpClient {
   //20seconds timeout
   static const int _timeOut = 20000;
 
-  static final Dio dioInstance = DioHttpClient._()._dio;
+  static final DefaultDioClient _instance = DefaultDioClient._();
 
-  DioHttpClient._({BaseOptions? options}) {
-    final BaseOptions defaultOptions = options ??
-        BaseOptions(
-          baseUrl: AppConfig.baseApiUrl[F.flavor]!,
-          connectTimeout: _timeOut,
-          receiveTimeout: _timeOut,
-        );
-    _dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
+  factory DefaultDioClient() {
+    return _instance;
+  }
+  DefaultDioClient._();
+
+  @override
+  Dio get dio {
+    final BaseOptions defaultOptions = BaseOptions(
+      baseUrl: AppConfig.baseApiUrl[F.flavor]!,
+      connectTimeout: _timeOut,
+      receiveTimeout: _timeOut,
+    );
+    final dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
     //Use isolate still cause a jank, still no idea why
     //(dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
 
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
+    return dio;
   }
 }
 
