@@ -10,7 +10,7 @@ import '../ui_helper.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
-  final Object error;
+  final dynamic error;
   final AsyncCallback? onRefresh;
   final bool hasAppBar;
   final String _errorMessage;

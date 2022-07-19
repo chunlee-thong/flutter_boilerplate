@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/controllers/index.dart';
-import 'package:flutter_boilerplate/src/controllers/theme_controller.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
+import '../../controllers/index.dart';
+import '../../controllers/theme_controller.dart';
 import '../../core/constant/app_config.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../core/style/dimension.dart';

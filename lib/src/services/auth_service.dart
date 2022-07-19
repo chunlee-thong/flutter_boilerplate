@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
-import '../http/http_client.dart';
+import '../core/http/http_client.dart';
 import '../models/response/user/auth_response.dart';
 import 'local_storage_service/local_storage_service.dart';
 

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ThemeController()),
           ChangeNotifierProvider(create: (_) => BottomNavigationController()),
           ChangeNotifierProvider(create: (context) => UserController()),
-          ChangeNotifierProvider(create: (context) => AuthController(userProvider: context.read<UserController>())),
+          ChangeNotifierProvider(create: (context) => AuthController(userController: context.read<UserController>())),
         ],
         child: EasyLocalization(
           path: AppConfig.languageAssetPath,
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                   onFutureManagerError: ExceptionHandler.handleManagerError,
                   errorBuilder: (error, onRefresh) {
                     return CustomErrorWidget(
-                      error: error,
+                      error: error.exception,
                       onRefresh: onRefresh,
                     );
                   },

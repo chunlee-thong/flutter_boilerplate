@@ -13,8 +13,8 @@ import '../services/social_auth_service.dart';
 import 'user_controller.dart';
 
 class AuthController extends ChangeNotifier {
-  final UserController userProvider;
-  AuthController({required this.userProvider});
+  final UserController userController;
+  AuthController({required this.userController});
 
   bool _authenticated = false;
   bool get authenticated => _authenticated;
@@ -24,7 +24,7 @@ class AuthController extends ChangeNotifier {
     _setLoginStatus(isLoggedIn);
     if (isLoggedIn) {
       await AuthService.initializeUserCredential();
-      await userProvider.getUserInfo(throwError: true);
+      await userController.getUserInfo(throwError: true);
     }
     return isLoggedIn;
   }
@@ -47,14 +47,14 @@ class AuthController extends ChangeNotifier {
     );
     await AuthService.saveUserCredential(authResponse);
     _setLoginStatus(true);
-    await userProvider.getUserInfo(throwError: true);
+    await userController.getUserInfo(throwError: true);
   }
 
   Future<void> loginWithSocial(SocialAuthData authData) async {
     AuthResponse authResponse = authData.authResponse;
     await AuthService.saveUserCredential(authResponse);
     _setLoginStatus(true);
-    await userProvider.getUserInfo(throwError: true);
+    await userController.getUserInfo(throwError: true);
   }
 
   Future<void> logOutUser(BuildContext context, {bool showConfirmation = true}) async {

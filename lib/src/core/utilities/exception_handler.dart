@@ -46,10 +46,10 @@ class ExceptionHandler {
     } on UserCancelException catch (_) {
       return null;
     } catch (exception, stackTrace) {
-      errorLog(stackTrace);
+      errorLog(exception.runtimeType, stackTrace);
       if (exception is SessionExpiredException) {
         if (context != null) {
-          UIHelper.showToast(context, exception.toString());
+          UIHelper.showToast(context, exception.message);
           readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
           return null;
         }

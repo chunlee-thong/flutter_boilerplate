@@ -43,6 +43,8 @@ class DioErrorException extends HttpRequestException {
 
 class SessionExpiredException extends HttpRequestException {
   static const int code = 420;
+
+  final String message = "Session expired, Please login again";
   @override
   String toString() {
     return "Session expired, Please login again";

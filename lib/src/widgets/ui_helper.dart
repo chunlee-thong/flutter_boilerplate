@@ -15,7 +15,7 @@ class UIHelper {
     );
   }
 
-  static Future<T?> showErrorDialog<T>(BuildContext context, Object error) async {
+  static Future<T?> showErrorDialog<T>(BuildContext context, error) async {
     String errorMessage = AppUtils.getReadableErrorMessage(error);
     return await showDialog(
       context: context,
