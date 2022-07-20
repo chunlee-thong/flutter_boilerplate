@@ -8,7 +8,7 @@ class AppConfig {
   static const String appVersion = "0.0.1";
   //
   static const String enFontName = "GoogleSans";
-  static const String khFontName = "NotoSansKhmer";
+  static const String khFontName = "KantumruyPro";
   //
   static const String languageAssetPath = "assets/languages";
   //
