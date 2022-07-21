@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeController()),
           ChangeNotifierProvider(create: (_) => BottomNavigationController()),
-          ChangeNotifierProvider(create: (context) => UserController()),
+          Provider(create: (context) => UserController()),
           ChangeNotifierProvider(create: (context) => AuthController(userController: context.read<UserController>())),
         ],
         child: EasyLocalization(

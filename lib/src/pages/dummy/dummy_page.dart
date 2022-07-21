@@ -4,7 +4,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 
 import '../../models/pagination.dart';
 import '../../models/response/user/user_model.dart';
-import '../../repository/index.dart';
+import '../../repositories/index.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
 
 class DummyPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class DummyPage extends StatefulWidget {
 }
 
 class _DummyPageState extends State<DummyPage> {
-  FutureManager<UserListResponse> userManager = FutureManager();
+  FutureManager<UserListResponse> userManager = FutureManager(reloading: false);
   late PaginationHandler<UserListResponse, UserModel> userPagination = PaginationHandler(userManager);
 
   Future fetchData([bool reload = false]) async {
@@ -30,7 +30,6 @@ class _DummyPageState extends State<DummyPage> {
         );
       },
       onSuccess: userPagination.handle,
-      reloading: reload,
     );
   }
 
@@ -52,9 +51,17 @@ class _DummyPageState extends State<DummyPage> {
       appBar: AppBar(
         title: const Text("Pagination"),
         centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () => fetchData(true),
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: FutureManagerBuilder<UserListResponse>(
         futureManager: userManager,
+        onError: (err) {},
+        onRefreshing: () => const RefreshProgressIndicator(),
         ready: (context, UserListResponse response) {
           return PullRefreshListViewBuilder.paginated(
             onRefresh: () => fetchData(true),

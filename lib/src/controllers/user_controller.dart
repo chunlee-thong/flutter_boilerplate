@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/core/mixin/index.dart';
 import 'package:future_manager/future_manager.dart';
 
 import '../models/response/user/user_model.dart';
-import '../repository/index.dart';
+import '../repositories/index.dart';
 
-class UserController extends ChangeNotifier {
+class UserController extends RequiredDisposeMixin {
   final FutureManager<UserModel> userManager = FutureManager<UserModel>();
 
   UserModel? get userData => userManager.data;
@@ -20,6 +20,5 @@ class UserController extends ChangeNotifier {
   @override
   void dispose() {
     userManager.dispose();
-    super.dispose();
   }
 }

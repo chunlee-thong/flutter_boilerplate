@@ -6,7 +6,7 @@ import '../core/constant/locale_keys.dart';
 import '../models/response/user/auth_response.dart';
 import '../models/response/user/social_auth_data.dart';
 import '../pages/sign_in/sign_in_page.dart';
-import '../repository/index.dart';
+import '../repositories/index.dart';
 import '../services/auth_service.dart';
 import '../services/local_storage_service/local_storage_service.dart';
 import '../services/social_auth_service.dart';

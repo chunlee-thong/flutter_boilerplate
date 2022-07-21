@@ -40,7 +40,7 @@ class PaginationHandler<T extends PaginationResponse<M>, M extends Object> {
   }
 
   T handle(T response) {
-    if (manager.hasData) {
+    if (manager.hasData && page > 1) {
       response.data = [...manager.data!.data, ...response.data];
     }
     hasMoreData = response.data.length < response.totalRecord && response.data.isNotEmpty;

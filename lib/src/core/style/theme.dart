@@ -76,6 +76,7 @@ class AppTheme {
       ),
     );
 
+    //Modified AppBar Theme base on existing Theme
     theme = theme.copyWith(
       appBarTheme: AppBarTheme(
         centerTitle: true,

@@ -40,11 +40,12 @@ class BottomNavigationWidget extends StatelessWidget {
 }
 
 class BottomNavigationController extends ChangeNotifier {
-  int currentIndex = 0;
-  late PageController pageController;
   BottomNavigationController([this.currentIndex = 0]) {
     pageController = PageController(initialPage: currentIndex);
   }
+
+  int currentIndex = 0;
+  late PageController pageController;
 
   void changeIndex(int index) {
     if (pageController.hasClients) {

@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate/src/services/local_storage_service/spf_stora
 
 import 'flavor.dart';
 import 'src/controllers/theme_controller.dart';
-import 'src/repository/index.dart';
+import 'src/repositories/index.dart';
 import 'src/services/local_storage_service/fss_storage_service.dart';
 import 'src/services/local_storage_service/local_storage_service.dart';
 

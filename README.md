@@ -70,14 +70,14 @@ A flutter boiler plate code for initial project setup
 
 ### lib/src
 
-#### api
+#### controllers
+- Controllers to manage app state
 
-- store your repository class which extends BaseApiService
-- store your http client and http configuration
-
-#### constant
-
-- store your constant file here such as Configuration, TextStyle, Color, Theme, Asset path, LocaleKeys, Enum, Height, Dimension.....
+#### core
+- constant
+- http configuration
+- app style (color, theme, textstyle, decoration, size)
+- utilities and helper class
 
 #### model
 
@@ -86,13 +86,15 @@ A flutter boiler plate code for initial project setup
 - db: model for hive or any database's model
 - others: custom object model
 
-#### page_template
+#### pages
 
-- a template for commonly used screen or page functioanlity in an app, example: change password page, setting page....
+- Each page has their own folder
+- Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
 
-#### controllers
 
-- store your provider or riverpod class
+#### repository
+
+- class that use to fetch data from Data source
 
 #### services
 
@@ -102,18 +104,10 @@ A flutter boiler plate code for initial project setup
     - database or storage service
     - auth service .....
 
-#### pages
-
-- Each page has their own folder
-- Each folder has a .dart file and a widgets folder that contains a widget that only use specifally in this page
 
 #### widgets
 
-- global reusable widget and divide to into folder of category such as Dialog,Card,Button,Loading.....etc
-
-#### utils
-
-- utility function and class
+- global reusable widget and divide to into folder of category such as Dialog, Card, Button, Layout.....etc
 
 ### assets
 
