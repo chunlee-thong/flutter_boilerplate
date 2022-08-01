@@ -26,7 +26,7 @@ abstract class API {
     required String path,
     required T Function(Response) onSuccess,
     CancelToken? cancelToken,
-    String method = HttpMethod.get,
+    HttpMethod method = HttpMethod.get,
     Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
@@ -36,7 +36,7 @@ abstract class API {
   }) async {
     Response? response;
     try {
-      final httpOption = Options(method: method, headers: {});
+      final httpOption = Options(method: method.value, headers: {});
       final bool requiredAuthorization = requiredToken ?? authorization;
       if (requiredAuthorization) {
         String? token = await LocalStorage.read(key: kTokenKey);

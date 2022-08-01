@@ -32,7 +32,7 @@ class AuthService {
       "/api/user/refresh-token",
       options: Options(
         headers: {"Authorization": "bearer $refreshToken"},
-        method: HttpMethod.post,
+        method: HttpMethod.post.value,
       ),
     );
     AuthResponse authResponse = AuthResponse.fromJson(response.data["data"]);

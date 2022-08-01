@@ -5,7 +5,6 @@ import '../../../flavor.dart';
 class AppConfig {
   //
   static const String appName = "Flutter Boilerplate";
-  static const String appVersion = "0.0.1";
   //
   static const String enFontName = "GoogleSans";
   static const String khFontName = "KantumruyPro";

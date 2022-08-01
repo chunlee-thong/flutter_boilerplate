@@ -9,14 +9,14 @@ import 'package:sura_flutter/sura_flutter.dart';
 import '../../../flavor.dart';
 import '../constant/app_config.dart';
 
-class HttpMethod {
-  HttpMethod._();
+enum HttpMethod {
+  get,
+  post,
+  patch,
+  put,
+  delete;
 
-  static const String get = "get";
-  static const String post = "post";
-  static const String patch = "patch";
-  static const String put = "put";
-  static const String delete = "delete";
+  String get value => name.toUpperCase();
 }
 
 abstract class HttpClient {
