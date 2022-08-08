@@ -49,7 +49,6 @@ class DefaultDioClient extends HttpClient {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
-    debugPrint(dio.hashCode.toString());
     return dio;
   }
 }

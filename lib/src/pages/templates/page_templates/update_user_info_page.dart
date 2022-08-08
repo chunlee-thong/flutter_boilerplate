@@ -6,12 +6,10 @@ import '../../../core/constant/locale_keys.dart';
 import '../../../core/style/dimension.dart';
 import '../../../core/style/textstyle.dart';
 import '../../../core/utilities/exception_handler.dart';
-import '../../../repositories/index.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/form_input/primary_dropdown_button.dart';
 import '../../../widgets/form_input/primary_text_field.dart';
 import '../../../widgets/ui_helper.dart';
-import '../template_pages.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   const UpdateUserInfoPage({Key? key}) : super(key: key);
@@ -54,8 +52,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMi
 
   @override
   void initState() {
-    var userCtl = getIt<UpdateUserController>();
-    firstNameTC = TextEditingController(text: userCtl.username);
+    firstNameTC = TextEditingController();
     lastNameTC = TextEditingController();
     dobTC = TextEditingController();
     countryTC = TextEditingController();

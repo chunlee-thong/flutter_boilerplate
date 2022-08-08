@@ -14,7 +14,11 @@ class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
   final Widget child;
 
   ///Inject your instance that has a lifetime as this widget life cycle
-  const GetItInjector({Key? key, required this.create, required this.child}) : super(key: key);
+  const GetItInjector({
+    Key? key,
+    required this.create,
+    required this.child,
+  }) : super(key: key);
 
   @override
   State<GetItInjector> createState() => _GetItInjectorState<T>();
@@ -23,7 +27,7 @@ class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
 class _GetItInjectorState<T extends GetItInjectable> extends State<GetItInjector<T>> {
   late final instance = widget.create();
 
-  void inject() {
+  void _inject() {
     try {
       GetIt.instance.registerSingleton<T>(instance);
       debugPrint("GetIt Inject: ${instance.runtimeType}");
@@ -35,22 +39,27 @@ class _GetItInjectorState<T extends GetItInjectable> extends State<GetItInjector
     }
   }
 
-  @override
-  void initState() {
-    inject();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
+  void _eject() {
     if (GetIt.I.isRegistered(instance: instance)) {
       GetIt.instance.unregister<T>(instance: instance);
       debugPrint("GetIt Unregister: ${instance.runtimeType}");
+      instance.dispose();
       if (instance is ChangeNotifier) {
         (instance as ChangeNotifier).dispose();
         debugPrint("GetIt Dispose: ${instance.runtimeType}");
       }
     }
+  }
+
+  @override
+  void initState() {
+    _inject();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _eject();
     super.dispose();
   }
 
