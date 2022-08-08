@@ -23,7 +23,7 @@ class ExceptionHandler {
 
   static void handleManagerError(FutureManagerError error, BuildContext context) {
     if (error.stackTrace != null) {
-      errorLog(error.stackTrace);
+      errorLog("Manager error occur: ", error.stackTrace);
     }
     if (error.exception is! HttpRequestException) {
       recordError(error.exception, stackTrace: error.stackTrace);
