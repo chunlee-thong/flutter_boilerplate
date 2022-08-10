@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 ///We need a quick way to see which method that class use
 ///We can do something fancy with this class later
 abstract class GetItInjectable {
-  void dispose() {}
+  void dispose();
 }
 
 class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
@@ -14,11 +14,7 @@ class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
   final Widget child;
 
   ///Inject your instance that has a lifetime as this widget life cycle
-  const GetItInjector({
-    Key? key,
-    required this.create,
-    required this.child,
-  }) : super(key: key);
+  const GetItInjector({Key? key, required this.create, required this.child}) : super(key: key);
 
   @override
   State<GetItInjector> createState() => _GetItInjectorState<T>();
@@ -27,39 +23,41 @@ class GetItInjector<T extends GetItInjectable> extends StatefulWidget {
 class _GetItInjectorState<T extends GetItInjectable> extends State<GetItInjector<T>> {
   late final instance = widget.create();
 
-  void _inject() {
+  void inject() {
     try {
       GetIt.instance.registerSingleton<T>(instance);
       debugPrint("GetIt Inject: ${instance.runtimeType}");
     } catch (ex) {
-      //The exception is expect when we inject 2 type of instance
-      //Catch the error here so only Top-most inject type is registered
-      //This is useful for when we can inject mock dependency for testing
+      //The exception is expected when we inject 2 type of instance
+      //Catch the error here so only Top-most injected type is registered
+      //This is useful for when we want to inject a mock dependency for testing
+      //Tip: When inject dependency for Testing, You must specific Base class Type in the Constructor type
+      //Example: MyMockRepo is a class that extends MyRepo
+      //GetItInjector<MyRepo>(
+      //  create: ()=> MyMockRepo(),
+      //  child: GetItInjector(
+      //    create: ()=> MyRepo(),
+      //    child: const MyWidget(),
+      //  )
+      // )
+      //MyMockRepo will replace MyRepo below
       debugPrint("Expected GetItInjector Error: $ex");
-    }
-  }
-
-  void _eject() {
-    if (GetIt.I.isRegistered(instance: instance)) {
-      GetIt.instance.unregister<T>(instance: instance);
-      debugPrint("GetIt Unregister: ${instance.runtimeType}");
-      instance.dispose();
-      if (instance is ChangeNotifier) {
-        (instance as ChangeNotifier).dispose();
-        debugPrint("GetIt Dispose: ${instance.runtimeType}");
-      }
     }
   }
 
   @override
   void initState() {
-    _inject();
+    inject();
     super.initState();
   }
 
   @override
   void dispose() {
-    _eject();
+    if (GetIt.I.isRegistered(instance: instance)) {
+      GetIt.instance.unregister<T>(instance: instance);
+      debugPrint("GetIt Unregister: ${instance.runtimeType}");
+      instance.dispose();
+    }
     super.dispose();
   }
 
