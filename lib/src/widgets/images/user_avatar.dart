@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skadi/skadi.dart';
@@ -30,22 +32,22 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
   final picker = ImagePicker();
 
   void onChooseProfileImageSource() async {
-    // showCupertinoModalPopup(
-    //   context: context,
-    //   builder: (context) => SuraActionSheet(
-    //     title: tr("Please choose your image source"),
-    //     cancelText: tr("Cancel"),
-    //     builder: (String option, index) => Text(option),
-    //     onSelected: (String name, index) {
-    //       if (index == 0) {
-    //         onPickImage(ImageSource.camera);
-    //       } else if (index == 1) {
-    //         onPickImage(ImageSource.gallery);
-    //       }
-    //     },
-    //     options: [tr("Camera"), tr("Gallery")],
-    //   ),
-    // );
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => SkadiActionSheet<String>(
+        title: tr("Please choose your image source"),
+        cancelText: tr("Cancel"),
+        builder: (String option, index) => Text(option),
+        onSelected: (String name, index) {
+          if (index == 0) {
+            onPickImage(ImageSource.camera);
+          } else if (index == 1) {
+            onPickImage(ImageSource.gallery);
+          }
+        },
+        options: [tr("Camera"), tr("Gallery")],
+      ),
+    );
   }
 
   Future onPickImage(ImageSource imageSource) async {

@@ -158,10 +158,7 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
             if (time <= resendDuration) child!,
             if (codeTimer?.isActive == true)
               Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("($time)"),
-                ),
+                child: Text("($time)"),
               ),
           ],
         );
