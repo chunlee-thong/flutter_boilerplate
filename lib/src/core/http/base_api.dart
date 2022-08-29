@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../services/auth_service.dart';
 import '../../services/local_storage_service/local_storage_service.dart';
@@ -38,18 +38,20 @@ abstract class API {
     try {
       final httpOption = Options(method: method.value, headers: {});
       final bool requiredAuthorization = requiredToken ?? authorization;
-      if (requiredAuthorization) {
+
+      ///Bearer token authorization logic
+      if (customToken != null) {
+        httpOption.headers!['Authorization'] = "bearer $customToken";
+      } else if (requiredAuthorization) {
         String? token = await LocalStorage.read(key: kTokenKey);
         if (token == null) throw Exception("Invalid Token");
-        bool isExpired = SuraJwtDecoder.decode(token).isExpired;
+        bool isExpired = JwtDecoder.decode(token).isExpired;
         if (isExpired) {
           token = await AuthService.refreshUserToken(customDioClient ?? httpClient.dio);
         }
         httpOption.headers!['Authorization'] = "bearer $token";
       }
-      if (customToken != null) {
-        httpOption.headers!['Authorization'] = "bearer $customToken";
-      }
+
       httpOption.headers!.addAll(headers);
       response = await (customDioClient ?? httpClient.dio).request(
         path,
