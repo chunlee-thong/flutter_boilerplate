@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../widgets/ui_helper.dart';
 import 'page_templates/change_password_page.dart';
@@ -23,21 +23,21 @@ class _TemplatePagesState extends State<TemplatePages> {
             leading: const Icon(Icons.pages),
             title: const Text("Change password page"),
             onTap: () {
-              SuraPageNavigator.push(context, const ChangePasswordPage());
+              SkadiNavigator.push(context, const ChangePasswordPage());
             },
           ),
           ListTile(
             leading: const Icon(Icons.pages),
             title: const Text("Reset password page"),
             onTap: () {
-              SuraPageNavigator.push(context, const ResetPasswordPage());
+              SkadiNavigator.push(context, const ResetPasswordPage());
             },
           ),
           ListTile(
             leading: const Icon(Icons.pages),
             title: const Text("Update user info page"),
             onTap: () {
-              SuraPageNavigator.push(context, const UpdateUserInfoPage());
+              SkadiNavigator.push(context, const UpdateUserInfoPage());
             },
           ),
         ],

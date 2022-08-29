@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/style/color.dart';
 import '../../core/style/decoration.dart';
@@ -32,22 +30,22 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
   final picker = ImagePicker();
 
   void onChooseProfileImageSource() async {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => SuraActionSheet(
-        title: tr("Please choose your image source"),
-        cancelText: tr("Cancel"),
-        builder: (String option, index) => Text(option),
-        onSelected: (String name, index) {
-          if (index == 0) {
-            onPickImage(ImageSource.camera);
-          } else if (index == 1) {
-            onPickImage(ImageSource.gallery);
-          }
-        },
-        options: [tr("Camera"), tr("Gallery")],
-      ),
-    );
+    // showCupertinoModalPopup(
+    //   context: context,
+    //   builder: (context) => SuraActionSheet(
+    //     title: tr("Please choose your image source"),
+    //     cancelText: tr("Cancel"),
+    //     builder: (String option, index) => Text(option),
+    //     onSelected: (String name, index) {
+    //       if (index == 0) {
+    //         onPickImage(ImageSource.camera);
+    //       } else if (index == 1) {
+    //         onPickImage(ImageSource.gallery);
+    //       }
+    //     },
+    //     options: [tr("Camera"), tr("Gallery")],
+    //   ),
+    // );
   }
 
   Future onPickImage(ImageSource imageSource) async {
@@ -67,9 +65,9 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SuraNotifier<bool>(
-      valueNotifier: boolNotifier,
-      builder: (isLoading) => GestureDetector(
+    return ValueListenableBuilder<bool>(
+      valueListenable: boolNotifier,
+      builder: (context, isLoading, child) => GestureDetector(
         onTap: isLoading ? null : onChooseProfileImageSource,
         child: Container(
           padding: const EdgeInsets.all(2.0),
@@ -108,7 +106,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
                 child: ConditionalWidget(
                   condition: isLoading,
                   onTrue: () => emptySizedBox,
-                  onFalse: () => SuraIconButton(
+                  onFalse: () => SkadiIconButton(
                     icon: Icon(
                       widget.imageUrl == null ? Icons.add : Icons.edit,
                       color: AppColor.primary,

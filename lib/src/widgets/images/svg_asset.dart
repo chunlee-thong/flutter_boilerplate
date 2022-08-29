@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/style/color.dart';
 
@@ -56,7 +56,7 @@ class SvgAsset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final customShape = shape ?? SuraDecoration.roundRect();
+    final customShape = shape ?? SkadiDecoration.roundRect();
     final iconChild = SvgPicture.asset(
       icon,
       width: size,

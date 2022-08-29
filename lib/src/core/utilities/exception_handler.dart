@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
@@ -12,9 +12,11 @@ import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
 import 'custom_exception.dart';
 
-class ExceptionHandler {
+abstract class ExceptionHandler {
+  ExceptionHandler._();
+
   ///Record error to Analytic or Crashlytic
-  static void recordError(dynamic exception, {StackTrace? stackTrace}) {
+  static void recordError(dynamic exception, [StackTrace? stackTrace]) {
     stackTrace ??= exception is Error ? exception.stackTrace : null;
     if (kReleaseMode) {
       Sentry.captureException(exception, stackTrace: stackTrace);
@@ -26,7 +28,7 @@ class ExceptionHandler {
       errorLog("Manager error occur: ", error.stackTrace);
     }
     if (error.exception is! HttpRequestException) {
-      recordError(error.exception, stackTrace: error.stackTrace);
+      recordError(error.exception, error.stackTrace);
     }
 
     if (error.exception is SessionExpiredException) {
@@ -60,7 +62,7 @@ class ExceptionHandler {
       }
 
       if (exception is! HttpRequestException) {
-        recordError(exception, stackTrace: stackTrace);
+        recordError(exception, stackTrace);
       }
       onError?.call(exception);
       return null;

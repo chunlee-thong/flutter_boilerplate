@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import 'bootstrap.dart';
 import 'flavor.dart';
@@ -21,6 +21,6 @@ void main() async {
     );
   }, (exception, stackTrace) async {
     errorLog("RunZonedGuard error: ", exception);
-    ExceptionHandler.recordError(exception, stackTrace: stackTrace);
+    ExceptionHandler.recordError(exception, stackTrace);
   });
 }

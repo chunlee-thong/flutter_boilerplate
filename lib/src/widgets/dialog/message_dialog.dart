@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/constant/app_assets.dart';
 import '../../core/style/color.dart';
@@ -30,7 +30,7 @@ class CustomMessageDialog extends StatelessWidget {
         _color = const Color(0xFFE57373),
         super(key: key);
 
-  final RoundedRectangleBorder shape = SuraDecoration.roundRect(16);
+  final RoundedRectangleBorder shape = SkadiDecoration.roundRect(16);
 
   @override
   Widget build(BuildContext context) {

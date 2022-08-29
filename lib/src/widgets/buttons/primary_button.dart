@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 class PrimaryButton extends StatelessWidget {
   final FutureOr<void> Function() onPressed;
@@ -38,7 +38,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SuraAsyncButton(
+    return SkadiAsyncButton(
       startIcon: startIcon,
       onPressed: onPressed,
       fullWidth: fullWidth,

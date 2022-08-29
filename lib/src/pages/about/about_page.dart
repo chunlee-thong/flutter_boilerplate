@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../widgets/ui_helper.dart';
 
@@ -17,7 +17,7 @@ class _AboutPageState extends State<AboutPage> {
     return Scaffold(
       appBar: UIHelper.CustomAppBar(title: "About"),
       body: Center(
-        child: SuraFutureHandler<PackageInfo>.function(
+        child: SkadiFutureHandler<PackageInfo>.function(
           futureFunction: () async {
             return PackageInfo.fromPlatform();
           },

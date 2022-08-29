@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../core/constant/locale_keys.dart';
 import '../models/response/user/auth_response.dart';
@@ -63,7 +63,7 @@ class AuthController extends ChangeNotifier {
       await LocalStorage.clear();
       SocialAuthService.signOutAll();
       _setLoginStatus(false);
-      SuraPageNavigator.pushAndRemove(context, const SignInPage());
+      SkadiNavigator.pushAndRemove(context, const SignInPage());
     }
 
     if (!showConfirmation) {
@@ -73,7 +73,7 @@ class AuthController extends ChangeNotifier {
 
     await showDialog(
       context: context,
-      builder: (dialogContext) => SuraConfirmationDialog(
+      builder: (dialogContext) => SkadiConfirmationDialog.danger(
         content: Text(LocaleKeys.are_you_want_logout.tr()),
         title: LocaleKeys.confirmation.tr(),
         onConfirm: onLogout,

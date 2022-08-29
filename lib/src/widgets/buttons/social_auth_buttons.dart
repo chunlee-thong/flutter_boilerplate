@@ -1,7 +1,7 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/constant/locale_keys.dart';
 import '../../core/style/color.dart';
@@ -53,7 +53,7 @@ class SocialAuthButtons extends StatelessWidget {
     //final buttonHeight = 40.0;
     return Column(
       children: [
-        SuraAsyncButton(
+        SkadiAsyncButton(
           onPressed: () {
             onSocialSignIn(
               context: context,
@@ -65,7 +65,7 @@ class SocialAuthButtons extends StatelessWidget {
           color: AppColor.fbColor,
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
         ),
-        SuraAsyncButton(
+        SkadiAsyncButton(
           onPressed: () {
             onSocialSignIn(
               context: context,
@@ -77,7 +77,7 @@ class SocialAuthButtons extends StatelessWidget {
           color: AppColor.googleRed,
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
         ),
-        SuraAsyncButton(
+        SkadiAsyncButton(
           onPressed: () {
             onSocialSignIn(
               context: context,

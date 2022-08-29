@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
@@ -23,7 +23,7 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> with SuraFormMixin {
+class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
   late TextEditingController emailTC, passwordTC;
 
   void onLogin() async {
@@ -32,7 +32,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
         var email = emailTC.text.trim();
         var password = passwordTC.text.trim();
         await readProvider<AuthController>(context).loginWithPassword(email, password);
-        SuraPageNavigator.pushReplacement(context, const RootPage());
+        SkadiNavigator.pushReplacement(context, const RootPage());
       });
     }
   }
@@ -62,7 +62,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
               padding: AppDimension.pageSpacing,
               child: Column(
                 children: <Widget>[
-                  SuraIconButton(
+                  SkadiIconButton(
                     onTap: readProvider<ThemeController>(context).switchTheme,
                     icon: const Icon(
                       Icons.class_,
@@ -98,7 +98,7 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
                   SocialAuthButtons(onLoginCompleted: (data) async {
                     await ExceptionHandler.run(context, () async {
                       await readProvider<AuthController>(context).loginWithSocial(data);
-                      SuraPageNavigator.pushReplacement(context, const RootPage());
+                      SkadiNavigator.pushReplacement(context, const RootPage());
                     });
                   }),
                 ],

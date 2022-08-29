@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../controllers/index.dart';
 import '../../controllers/theme_controller.dart';
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: SuraAsyncButton(
+      floatingActionButton: SkadiAsyncButton(
         fullWidth: false,
         height: 40,
         onPressed: () async {

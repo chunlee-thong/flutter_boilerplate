@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/constant/app_assets.dart';
 import '../../core/style/textstyle.dart';
@@ -53,7 +53,7 @@ class CustomErrorWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 if (onRefresh != null)
-                  SuraAsyncIconButton(
+                  SkadiAsyncIconButton(
                     onTap: onRefresh,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     icon: Icon(

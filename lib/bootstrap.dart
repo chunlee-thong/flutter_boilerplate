@@ -10,7 +10,7 @@ import 'src/repositories/index.dart';
 import 'src/services/local_storage_service/fss_storage_service.dart';
 import 'src/services/local_storage_service/local_storage_service.dart';
 
-class App {
+abstract class App {
   App._();
 
   static Future bootstrap(Flavor flavor) async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/style/dimension.dart';
 import '../../core/style/textstyle.dart';
@@ -131,9 +131,9 @@ class PrimaryTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hint,
               prefixIcon: prefixIcon,
-              contentPadding: EdgeInsets.all(SuraResponsive.value(16, 20, 24)),
+              contentPadding: EdgeInsets.all(SkadiResponsive.value(16, 20, 24)),
               suffixIcon: _isPassword
-                  ? SuraIconButton(
+                  ? SkadiIconButton(
                       onTap: () {
                         obscureNotifier?.value = !obscureNotifier!.value;
                       },

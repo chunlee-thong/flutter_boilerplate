@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import 'src/controllers/auth_controller.dart';
 import 'src/controllers/theme_controller.dart';
@@ -49,15 +49,17 @@ class MyApp extends StatelessWidget {
                       onRefresh: onRefresh,
                     );
                   },
-                  child: SuraProvider(
+                  child: SkadiProvider(
                     loadingWidget: const LoadingWidget(),
                     errorWidget: (error, context) {
                       return CustomErrorWidget(error: error);
                     },
                     child: MaterialApp(
+                      navigatorObservers: [
+                        SkadiRouteObserver(),
+                      ],
                       useInheritedMediaQuery: useDevicePreview,
                       title: AppConfig.appName,
-                      navigatorKey: SuraNavigator.navigatorKey,
                       theme: AppTheme.primaryTheme(ThemeController.isDark),
                       debugShowCheckedModeBanner: false,
                       localizationsDelegates: context.localizationDelegates,
@@ -88,7 +90,7 @@ class _AppWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SuraResponsiveBuilder(
+    return SkadiResponsiveBuilder(
       builder: (context) {
         return Theme(
           data: AppTheme.modifiedTheme(context),

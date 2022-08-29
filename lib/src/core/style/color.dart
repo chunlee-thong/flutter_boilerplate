@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 class AppColor {
   //main
@@ -11,6 +11,6 @@ class AppColor {
   static const Color appleColor = Color(0xFF555555);
   static const Color twitterColor = Color(0xFF1DA1F2);
   //material
-  static final MaterialColor materialPrimary = SuraColor.toMaterial(primary.value);
-  static final MaterialColor materialAccent = SuraColor.toMaterial(accent.value);
+  static final MaterialColor materialPrimary = SkadiColor.toMaterial(primary);
+  static final MaterialColor materialAccent = SkadiColor.toMaterial(accent);
 }

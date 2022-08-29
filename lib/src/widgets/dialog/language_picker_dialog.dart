@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/constant/app_locale.dart';
 import '../../core/style/textstyle.dart';
@@ -10,8 +10,8 @@ class LanguagePickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.all(SuraResponsive.value(40, 140, 240)),
-      shape: SuraDecoration.roundRect(),
+      insetPadding: EdgeInsets.all(SkadiResponsive.value(40, 140, 240)),
+      shape: SkadiDecoration.roundRect(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -20,19 +20,18 @@ class LanguagePickerDialog extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: context.primaryColor,
-              borderRadius: SuraDecoration.radiusTop(8),
+              borderRadius: SkadiDecoration.radiusTop(8),
             ),
             alignment: Alignment.center,
             child: Text("Language", style: kSubHeaderStyle.white),
           ),
-          const Divider0(),
+          const Divider(),
           for (var language in kAppLanguages)
-            SuraListTile(
+            ListTile(
               leading: CircleAvatar(
                 backgroundImage: AssetImage(language.image),
               ),
               title: Text(language.name),
-              separator: const Divider0(),
               onTap: () {
                 context.setLocale(language.locale);
                 Navigator.of(context).pop(language.locale);

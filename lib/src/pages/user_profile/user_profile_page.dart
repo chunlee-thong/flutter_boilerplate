@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
@@ -41,7 +41,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           return Column(
             children: [
               UserAvatar(
-                imageUrl: SuraUtils.picsumImage(),
+                imageUrl: SkadiUtils.picsumImage(),
                 onImageChanged: (file) async {},
                 radius: 50,
               ),

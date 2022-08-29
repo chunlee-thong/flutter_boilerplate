@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../core/constant/app_assets.dart';
 import '../../core/style/textstyle.dart';
@@ -31,7 +31,7 @@ class NoDataWidget extends StatelessWidget {
             const SpaceY(16),
             Text(message, style: kSubtitleStyle.normal),
             if (onRefresh != null)
-              SuraIconButton(
+              SkadiIconButton(
                 onTap: () => onRefresh?.call(),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 icon: Icon(

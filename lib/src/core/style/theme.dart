@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../constant/app_config.dart';
 import '../constant/app_locale.dart';
@@ -23,7 +23,7 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           minimumSize: Size(
             64,
-            SuraResponsive.value(40, 54, 64),
+            SkadiResponsive.value(40, 54, 64),
           ),
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../state_widgets/loading_widget.dart';
 import '../state_widgets/no_data_widget.dart';
@@ -62,7 +62,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
       onRefresh: onRefresh,
       child: ConditionalWidget(
         condition: onGetMoreData != null,
-        onTrue: () => SuraPaginatedList(
+        onTrue: () => SkadiPaginatedListView(
           padding: padding ?? EdgeInsets.zero,
           scrollController: controller,
           hasMoreData: hasMoreData,

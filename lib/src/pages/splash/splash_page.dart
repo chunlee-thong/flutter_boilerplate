@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
@@ -24,7 +24,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   Future<bool> onSplashing() async {
     bool isLoggedIn = await authController.initializeUser();
     await Future.delayed(const Duration(seconds: 1));
-    SuraPageNavigator.pushAndRemove(
+    SkadiNavigator.pushAndRemove(
       context,
       isLoggedIn ? const RootPage() : const SignInPage(),
     );

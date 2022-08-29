@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../../core/constant/locale_keys.dart';
 import '../../../core/style/dimension.dart';
@@ -17,7 +17,7 @@ class ChangePasswordPage extends StatefulWidget {
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMixin {
+class _ChangePasswordPageState extends State<ChangePasswordPage> with SkadiFormMixin {
   late TextEditingController oldPasswordTC;
   late TextEditingController newPasswordTC;
   late TextEditingController confirmNewPasswordTC;
@@ -25,7 +25,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SuraFormMi
   Future<void> onSubmit() async {
     if (isFormValidated) {
       try {
-        await SuraUtils.wait();
+        await SkadiUtils.wait();
         String oldPassword = oldPasswordTC.text.trim();
         String newPassword = newPasswordTC.text.trim();
       } catch (e) {

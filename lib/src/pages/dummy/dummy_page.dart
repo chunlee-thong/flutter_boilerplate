@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../models/pagination.dart';
 import '../../models/response/user/user_model.dart';

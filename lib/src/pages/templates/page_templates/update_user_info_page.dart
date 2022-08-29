@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sura_flutter/sura_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 import '../../../core/constant/locale_keys.dart';
 import '../../../core/style/dimension.dart';
@@ -17,7 +17,7 @@ class UpdateUserInfoPage extends StatefulWidget {
   _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
 }
 
-class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SuraFormMixin, AfterBuildMixin {
+class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SkadiFormMixin, AfterBuildMixin {
   late TextEditingController firstNameTC;
   late TextEditingController lastNameTC;
   late TextEditingController dobTC;
