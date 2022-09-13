@@ -42,7 +42,7 @@ dependencies:
   sentry_flutter: ^6.9.1
   shared_preferences: ^2.0.15
   matomo_tracker: ^1.4.0
-  logging: ^1.0.2
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   #  flutter_flavorizr: ^2.1.3
