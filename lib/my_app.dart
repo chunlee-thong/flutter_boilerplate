@@ -13,6 +13,7 @@ import 'src/core/constant/app_locale.dart';
 import 'src/core/style/theme.dart';
 import 'src/core/utilities/exception_handler.dart';
 import 'src/pages/splash/splash_page.dart';
+import 'src/services/analytic_service.dart';
 import 'src/widgets/common/bottom_navigation_widget.dart';
 import 'src/widgets/state_widgets/error_widget.dart';
 import 'src/widgets/state_widgets/loading_widget.dart';
@@ -56,7 +57,10 @@ class MyApp extends StatelessWidget {
                     },
                     child: MaterialApp(
                       navigatorObservers: [
-                        SkadiRouteObserver(),
+                        SkadiRouteObserver(
+                          log: true,
+                          analyticCallBack: logScreen,
+                        ),
                       ],
                       useInheritedMediaQuery: useDevicePreview,
                       title: AppConfig.appName,

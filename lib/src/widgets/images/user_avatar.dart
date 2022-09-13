@@ -34,6 +34,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
   void onChooseProfileImageSource() async {
     showCupertinoModalPopup(
       context: context,
+      routeSettings: const RouteSettings(name: "choose_image_source"),
       builder: (context) => SkadiActionSheet<String>(
         title: tr("Please choose your image source"),
         cancelText: tr("Cancel"),

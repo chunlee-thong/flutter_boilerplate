@@ -7,6 +7,7 @@ import '../../controllers/theme_controller.dart';
 import '../../core/constant/app_config.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../core/style/dimension.dart';
+import '../../services/analytic_service.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/dialog/language_picker_dialog.dart';
 import '../../widgets/ui_helper.dart';
@@ -65,6 +66,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         onPressed: () async {
           readProvider<ThemeController>(context).switchTheme();
+          logClickEvent(AppAnalyticEvent.change_theme);
         },
         child: Text(LocaleKeys.switch_theme.tr()),
       ),

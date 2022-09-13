@@ -46,16 +46,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 radius: 50,
               ),
               ListTile(
-                title: EllipsisText(user.firstName),
-                subtitle: Text(tr(LocaleKeys.first_name)),
+                subtitle: EllipsisText(user.firstName),
+                title: Text(tr(LocaleKeys.first_name)),
               ),
               ListTile(
-                title: EllipsisText(user.lastName),
-                subtitle: Text(LocaleKeys.last_name.tr()),
+                subtitle: EllipsisText(user.lastName),
+                title: Text(LocaleKeys.last_name.tr()),
               ),
               ListTile(
-                title: EllipsisText(user.email),
-                subtitle: Text(LocaleKeys.email.tr()),
+                subtitle: EllipsisText(user.email),
+                title: Text(LocaleKeys.email.tr()),
               ),
             ],
           );

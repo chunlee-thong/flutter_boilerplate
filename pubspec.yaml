@@ -20,7 +20,7 @@ dependencies:
   ##State manager
   provider: ^6.0.3
   get_it: ^7.2.0
-  skadi: ^0.0.2
+  skadi: ^0.1.2
   future_manager: ^1.0.0+1
 
   ##Icon
@@ -41,6 +41,8 @@ dependencies:
   package_info_plus: ^1.4.3+1
   sentry_flutter: ^6.9.1
   shared_preferences: ^2.0.15
+  matomo_tracker: ^1.4.0
+  logging: ^1.0.2
 
 dev_dependencies:
   #  flutter_flavorizr: ^2.1.3

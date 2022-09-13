@@ -25,7 +25,6 @@ class LanguagePickerDialog extends StatelessWidget {
             alignment: Alignment.center,
             child: Text("Language", style: kSubHeaderStyle.white),
           ),
-          const Divider(),
           for (var language in kAppLanguages)
             ListTile(
               leading: CircleAvatar(
