@@ -10,7 +10,6 @@ import '../../controllers/user_controller.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
 import '../../widgets/images/user_avatar.dart';
-import '../../widgets/ui_helper.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -24,8 +23,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     final userController = context.read<UserController>();
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(
-        title: LocaleKeys.profile.tr(),
+      appBar: AppBar(
+        title: Text(LocaleKeys.profile.tr()),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

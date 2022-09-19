@@ -6,7 +6,6 @@ import '../../core/constant/app_assets.dart';
 import '../../core/style/textstyle.dart';
 import '../../core/utilities/app_utils.dart';
 import '../../widgets/images/svg_asset.dart';
-import '../ui_helper.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final double verticalMargin;
@@ -26,7 +25,7 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (hasAppBar) {
       return Scaffold(
-        appBar: UIHelper.CustomAppBar(title: ""),
+        appBar: AppBar(title: const Text("")),
         body: _buildErrorWidget(),
       );
     }

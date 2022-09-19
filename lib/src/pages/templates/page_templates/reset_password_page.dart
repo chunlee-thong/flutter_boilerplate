@@ -66,7 +66,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: AppBar(title: const Text("")),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Form(

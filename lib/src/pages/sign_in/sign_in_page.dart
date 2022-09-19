@@ -28,12 +28,16 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
 
   void onLogin() async {
     if (isFormValidated) {
-      await ExceptionHandler.run(context, () async {
-        var email = emailTC.text.trim();
-        var password = passwordTC.text.trim();
-        await readProvider<AuthController>(context).loginWithPassword(email, password);
-        SkadiNavigator.pushReplacement(context, const RootPage());
-      });
+      await ExceptionHandler.run(
+        context,
+        () async {
+          var email = emailTC.text.trim();
+          var password = passwordTC.text.trim();
+          await readProvider<AuthController>(context).loginWithPassword(email, password);
+          SkadiNavigator.pushReplacement(context, const RootPage());
+        },
+        errorType: ErrorWidgetType.dialog,
+      );
     }
   }
 

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/controllers/index.dart';
+import 'package:flutter_boilerplate/src/widgets/common/bottom_navigation_widget.dart';
 import 'package:skadi/skadi.dart';
 
 import '../core/constant/locale_keys.dart';
@@ -63,6 +65,7 @@ class AuthController extends ChangeNotifier {
       await LocalStorage.clear();
       SocialAuthService.signOutAll();
       _setLoginStatus(false);
+      readProvider<BottomNavigationController>(context).resetIndex();
       SkadiNavigator.pushAndRemove(context, const SignInPage());
     }
 

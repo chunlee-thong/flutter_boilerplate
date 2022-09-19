@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
-import '../../widgets/ui_helper.dart';
 import 'page_templates/change_password_page.dart';
 import 'page_templates/reset_password_page.dart';
 import 'page_templates/update_user_info_page.dart';
@@ -16,7 +15,7 @@ class _TemplatePagesState extends State<TemplatePages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "Templates"),
+      appBar: AppBar(title: const Text("Templates")),
       body: Column(
         children: [
           ListTile(

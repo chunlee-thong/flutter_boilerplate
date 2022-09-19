@@ -4,7 +4,7 @@ import 'package:oktoast/oktoast.dart';
 import '../core/utilities/app_utils.dart';
 import 'dialog/message_dialog.dart';
 
-class UIHelper {
+abstract class UIHelper {
   static Future<T?> showMessageDialog<T>(BuildContext context, String message) async {
     return await showDialog(
       context: context,
@@ -33,6 +33,7 @@ class UIHelper {
     );
   }
 
+  ///Show a simple toast at bottom position
   static Future showToast(BuildContext context, String message) async {
     showToastWidget(
       Container(
@@ -44,19 +45,25 @@ class UIHelper {
         margin: const EdgeInsets.only(bottom: 64),
         child: Text(message, style: const TextStyle(color: Colors.white)),
       ),
+      position: ToastPosition.bottom,
       dismissOtherToast: true,
     );
   }
 
-  static Future showTopSnackBar(BuildContext context, String message) async {
+  ///Show an error toast at Top position
+  static Future showErrorToast(
+    BuildContext context,
+    String message, {
+    ToastPosition position = ToastPosition.top,
+  }) async {
     showToastWidget(
       Container(
+        margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.red,
           borderRadius: BorderRadius.circular(4),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        margin: const EdgeInsets.only(top: 64, left: 8, right: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         width: double.infinity,
         child: Text(
           message,
@@ -65,7 +72,7 @@ class UIHelper {
       ),
       context: context,
       duration: const Duration(seconds: 3),
-      position: ToastPosition.top,
+      position: position,
       dismissOtherToast: true,
     );
   }
@@ -79,23 +86,6 @@ class UIHelper {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.red,
       ),
-    );
-  }
-
-  // ignore: non_constant_identifier_names
-  static AppBar CustomAppBar({
-    required String title,
-    double elevation = 0.0,
-    List<Widget>? actions,
-    bool centerTitle = true,
-    Color? backgroundColor,
-  }) {
-    return AppBar(
-      title: Text(title),
-      elevation: elevation,
-      actions: actions,
-      centerTitle: centerTitle,
-      backgroundColor: backgroundColor,
     );
   }
 }

@@ -55,6 +55,8 @@ class BottomNavigationController extends ChangeNotifier {
     }
   }
 
+  void resetIndex() => changeIndex(0);
+
   @override
   void dispose() {
     pageController.dispose();

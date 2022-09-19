@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:skadi/skadi.dart';
 
@@ -12,6 +13,11 @@ import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
 import 'app_utils.dart';
 import 'custom_exception.dart';
+
+enum ErrorWidgetType {
+  dialog,
+  toast,
+}
 
 abstract class ExceptionHandler {
   ExceptionHandler._();
@@ -42,6 +48,7 @@ abstract class ExceptionHandler {
     BuildContext? context,
     FutureOr<T> Function() function, {
     void Function(dynamic)? onError,
+    ErrorWidgetType errorType = ErrorWidgetType.toast,
     VoidCallback? onDone,
   }) async {
     try {
@@ -60,7 +67,18 @@ abstract class ExceptionHandler {
 
       if (context != null) {
         String errorMessage = AppUtils.getReadableErrorMessage(exception);
-        UIHelper.showToast(context, errorMessage);
+        if (errorType == ErrorWidgetType.toast) {
+          UIHelper.showErrorToast(
+            context,
+            errorMessage,
+            position: ToastPosition.bottom,
+          );
+        } else {
+          UIHelper.showErrorDialog(
+            context,
+            errorMessage,
+          );
+        }
       }
 
       if (exception is! HttpRequestException) {

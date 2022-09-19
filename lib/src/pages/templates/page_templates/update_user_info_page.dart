@@ -9,7 +9,6 @@ import '../../../core/utilities/exception_handler.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/form_input/primary_dropdown_button.dart';
 import '../../../widgets/form_input/primary_text_field.dart';
-import '../../../widgets/ui_helper.dart';
 
 class UpdateUserInfoPage extends StatefulWidget {
   const UpdateUserInfoPage({Key? key}) : super(key: key);
@@ -74,7 +73,7 @@ class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SkadiFormM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: AppBar(title: const Text("")),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(

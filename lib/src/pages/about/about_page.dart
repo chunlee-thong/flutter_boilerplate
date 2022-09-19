@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:skadi/skadi.dart';
 
-import '../../widgets/ui_helper.dart';
-
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
 
@@ -15,7 +13,7 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: "About"),
+      appBar: AppBar(title: const Text("About")),
       body: Center(
         child: SkadiFutureHandler<PackageInfo>.function(
           futureFunction: () async {

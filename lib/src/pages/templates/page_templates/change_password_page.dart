@@ -53,7 +53,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SkadiFormM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIHelper.CustomAppBar(title: ""),
+      appBar: AppBar(title: const Text("")),
       body: SingleChildScrollView(
         padding: AppDimension.pageSpacing,
         child: Column(
