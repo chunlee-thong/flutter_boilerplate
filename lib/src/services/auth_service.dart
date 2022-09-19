@@ -14,6 +14,7 @@ abstract class AuthService {
     await LocalStorage.write<bool>(key: kLoginKey, value: true);
   }
 
+  ///Just use to display saved user's data
   static Future<void> initializeUserCredential() async {
     String? token = await LocalStorage.read<String>(key: kTokenKey);
     String? refreshToken = await LocalStorage.read<String>(key: kRefreshTokenKey);
@@ -26,6 +27,7 @@ abstract class AuthService {
     infoLog("userId", userId);
   }
 
+  ///Refresh user token and save to storage
   static Future<String?> refreshUserToken(Dio dio) async {
     String? refreshToken = await LocalStorage.read(key: kRefreshTokenKey);
     Response response = await dio.request(

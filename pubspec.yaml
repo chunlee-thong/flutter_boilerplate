@@ -21,14 +21,14 @@ dependencies:
   provider: ^6.0.3
   get_it: ^7.2.0
   skadi: ^0.1.2
-  future_manager: ^1.0.0+1
+  future_manager: ^1.0.1
 
   ##Icon
   antdesign_icons: ^0.0.3
   ionicons: ^0.1.2
   line_icons: ^2.0.1
   ##UI
-  flutter_styled_toast: ^2.1.3
+  oktoast: ^3.3.0
   flutter_svg: ^1.1.4
   cached_network_image: ^3.2.1
 

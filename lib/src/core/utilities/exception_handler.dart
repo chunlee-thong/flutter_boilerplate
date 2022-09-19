@@ -10,6 +10,7 @@ import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
 import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
+import 'app_utils.dart';
 import 'custom_exception.dart';
 
 abstract class ExceptionHandler {
@@ -58,7 +59,8 @@ abstract class ExceptionHandler {
       }
 
       if (context != null) {
-        UIHelper.showErrorDialog(context, exception);
+        String errorMessage = AppUtils.getReadableErrorMessage(exception);
+        UIHelper.showToast(context, errorMessage);
       }
 
       if (exception is! HttpRequestException) {

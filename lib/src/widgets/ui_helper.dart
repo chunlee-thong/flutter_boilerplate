@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart' as styled_toast;
+import 'package:oktoast/oktoast.dart';
 
 import '../core/utilities/app_utils.dart';
 import 'dialog/message_dialog.dart';
@@ -34,7 +34,7 @@ class UIHelper {
   }
 
   static Future showToast(BuildContext context, String message) async {
-    styled_toast.showToastWidget(
+    showToastWidget(
       Container(
         decoration: BoxDecoration(
           color: Colors.black54,
@@ -44,14 +44,12 @@ class UIHelper {
         margin: const EdgeInsets.only(bottom: 64),
         child: Text(message, style: const TextStyle(color: Colors.white)),
       ),
-      context: context,
-      animDuration: Duration.zero,
       dismissOtherToast: true,
     );
   }
 
   static Future showTopSnackBar(BuildContext context, String message) async {
-    styled_toast.showToastWidget(
+    showToastWidget(
       Container(
         decoration: BoxDecoration(
           color: Colors.red,
@@ -66,12 +64,8 @@ class UIHelper {
         ),
       ),
       context: context,
-      animDuration: const Duration(milliseconds: 200),
       duration: const Duration(seconds: 3),
-      position: styled_toast.StyledToastPosition.top,
-      animationBuilder: (context, controller, duration, child) {
-        return FadeTransition(opacity: controller, child: child);
-      },
+      position: ToastPosition.top,
       dismissOtherToast: true,
     );
   }

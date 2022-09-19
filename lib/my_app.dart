@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
@@ -34,52 +35,54 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => UserController()),
           ChangeNotifierProvider(create: (context) => AuthController(userController: context.read<UserController>())),
         ],
-        child: EasyLocalization(
-          path: AppConfig.languageAssetPath,
-          supportedLocales: languages,
-          fallbackLocale: enLocale,
-          startLocale: enLocale,
-          child: Builder(
-            builder: (context) => Consumer<ThemeController>(
-              builder: (context, themeProvider, child) {
-                return FutureManagerProvider(
-                  onFutureManagerError: ExceptionHandler.handleManagerError,
-                  errorBuilder: (error, onRefresh) {
-                    return CustomErrorWidget(
-                      error: error.exception,
-                      onRefresh: onRefresh,
-                    );
-                  },
-                  child: SkadiProvider(
-                    loadingWidget: const LoadingWidget(),
-                    errorWidget: (error, context) {
-                      return CustomErrorWidget(error: error);
+        child: OKToast(
+          child: EasyLocalization(
+            path: AppConfig.languageAssetPath,
+            supportedLocales: languages,
+            fallbackLocale: enLocale,
+            startLocale: enLocale,
+            child: Builder(
+              builder: (context) => Consumer<ThemeController>(
+                builder: (context, themeProvider, child) {
+                  return FutureManagerProvider(
+                    onFutureManagerError: ExceptionHandler.handleManagerError,
+                    errorBuilder: (error, onRefresh) {
+                      return CustomErrorWidget(
+                        error: error.exception,
+                        onRefresh: onRefresh,
+                      );
                     },
-                    child: MaterialApp(
-                      navigatorObservers: [
-                        SkadiRouteObserver(
-                          log: true,
-                          analyticCallBack: logScreen,
-                        ),
-                      ],
-                      useInheritedMediaQuery: useDevicePreview,
-                      title: AppConfig.appName,
-                      theme: AppTheme.primaryTheme(ThemeController.isDark),
-                      debugShowCheckedModeBanner: false,
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      home: const SplashScreenPage(),
-                      locale: context.locale,
-                      builder: (context, child) {
-                        // ErrorWidget.builder = (detail) {
-                        //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
-                        // };
-                        return _AppWrapper(child: child!);
+                    child: SkadiProvider(
+                      loadingWidget: const LoadingWidget(),
+                      errorWidget: (error, context) {
+                        return CustomErrorWidget(error: error);
                       },
+                      child: MaterialApp(
+                        navigatorObservers: [
+                          SkadiRouteObserver(
+                            log: true,
+                            analyticCallBack: logScreen,
+                          ),
+                        ],
+                        useInheritedMediaQuery: useDevicePreview,
+                        title: AppConfig.appName,
+                        theme: AppTheme.primaryTheme(ThemeController.isDark),
+                        debugShowCheckedModeBanner: false,
+                        localizationsDelegates: context.localizationDelegates,
+                        supportedLocales: context.supportedLocales,
+                        home: const SplashScreenPage(),
+                        locale: context.locale,
+                        builder: (context, child) {
+                          // ErrorWidget.builder = (detail) {
+                          //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
+                          // };
+                          return _AppWrapper(child: child!);
+                        },
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
