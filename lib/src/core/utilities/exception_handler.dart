@@ -9,6 +9,7 @@ import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/index.dart';
+import '../../models/response/user/user_model.dart';
 import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
 import 'app_utils.dart';
@@ -26,8 +27,21 @@ abstract class ExceptionHandler {
   static void recordError(dynamic exception, [StackTrace? stackTrace]) {
     stackTrace ??= exception is Error ? exception.stackTrace : null;
     if (kReleaseMode) {
-      Sentry.captureException(exception, stackTrace: stackTrace);
+      Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
     }
+  }
+
+  static void configScope(UserModel user) async {
+    await Sentry.configureScope((scope) {
+      SentryUser sentryUser = SentryUser(
+        id: user.id,
+        email: user.email,
+      );
+      scope.setUser(sentryUser);
+    });
   }
 
   static void handleManagerError(FutureManagerError error, BuildContext context) {
