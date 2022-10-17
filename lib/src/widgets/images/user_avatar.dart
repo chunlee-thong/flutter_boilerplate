@@ -24,7 +24,7 @@ class UserAvatar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _UserAvatarState createState() => _UserAvatarState();
+  State<UserAvatar> createState() => _UserAvatarState();
 }
 
 class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {

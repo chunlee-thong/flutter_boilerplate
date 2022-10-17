@@ -80,7 +80,7 @@ class CustomMessageDialog extends StatelessWidget {
     return TextButton(
       onPressed: () => Navigator.pop(context),
       style: TextButton.styleFrom(
-        primary: _color,
+        foregroundColor: _color,
       ),
       child: Text(buttonText),
     );

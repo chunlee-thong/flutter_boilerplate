@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
@@ -13,7 +15,7 @@ import '../../../widgets/form_input/primary_text_field.dart';
 class UpdateUserInfoPage extends StatefulWidget {
   const UpdateUserInfoPage({Key? key}) : super(key: key);
   @override
-  _UpdateUserInfoPageState createState() => _UpdateUserInfoPageState();
+  State<UpdateUserInfoPage> createState() => _UpdateUserInfoPageState();
 }
 
 class _UpdateUserInfoPageState extends State<UpdateUserInfoPage> with SkadiFormMixin, AfterBuildMixin {

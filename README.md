@@ -22,7 +22,7 @@ A flutter boiler plate code for initial project setup
 
 ## Getting Started
 
-1. create your own project with Android studio or **flutter create** command
+1. create your own project with Android Studio or **flutter create** command
 
 2. copy these files and folder into your new project
 

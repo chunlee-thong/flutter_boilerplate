@@ -15,7 +15,7 @@ class RootPage extends StatefulWidget {
   const RootPage({Key? key, this.startPageIndex = 0}) : super(key: key);
 
   @override
-  _RootPageState createState() => _RootPageState();
+  State<RootPage> createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {

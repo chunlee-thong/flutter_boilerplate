@@ -1,5 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/core/utilities/exception_handler.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../../core/constant/locale_keys.dart';
@@ -8,13 +11,12 @@ import '../../../core/style/textstyle.dart';
 import '../../../core/utilities/form_validator.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/form_input/primary_text_field.dart';
-import '../../../widgets/ui_helper.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ChangePasswordPageState createState() => _ChangePasswordPageState();
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> with SkadiFormMixin {
@@ -24,13 +26,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with SkadiFormM
 
   Future<void> onSubmit() async {
     if (isFormValidated) {
-      try {
+      ExceptionHandler.run(context, () async {
         await SkadiUtils.wait();
         String oldPassword = oldPasswordTC.text.trim();
         String newPassword = newPasswordTC.text.trim();
-      } catch (e) {
-        UIHelper.showErrorDialog(context, e);
-      }
+      });
     }
   }
 

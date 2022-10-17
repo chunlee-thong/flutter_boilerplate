@@ -62,7 +62,7 @@ class SocialAuthButtons extends StatelessWidget {
           },
           margin: margin,
           startIcon: const Icon(AntIcons.facebookFilled),
-          color: AppColor.fbColor,
+          primary: AppColor.fbColor,
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Facebook"])),
         ),
         SkadiAsyncButton(
@@ -74,7 +74,7 @@ class SocialAuthButtons extends StatelessWidget {
           },
           margin: margin,
           startIcon: const Icon(AntIcons.googleCircleFilled),
-          color: AppColor.googleRed,
+          primary: AppColor.googleRed,
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Google"])),
         ),
         SkadiAsyncButton(
@@ -86,7 +86,7 @@ class SocialAuthButtons extends StatelessWidget {
           },
           margin: margin,
           startIcon: const Icon(AntIcons.appleFilled),
-          color: AppColor.appleColor,
+          primary: AppColor.appleColor,
           child: Text(tr(LocaleKeys.sign_in_with, args: ["Apple"])),
         ),
       ],

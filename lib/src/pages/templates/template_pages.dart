@@ -8,7 +8,7 @@ import 'page_templates/update_user_info_page.dart';
 class TemplatePages extends StatefulWidget {
   const TemplatePages({Key? key}) : super(key: key);
   @override
-  _TemplatePagesState createState() => _TemplatePagesState();
+  State<TemplatePages> createState() => _TemplatePagesState();
 }
 
 class _TemplatePagesState extends State<TemplatePages> {

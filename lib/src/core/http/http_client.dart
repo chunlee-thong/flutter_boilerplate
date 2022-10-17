@@ -53,6 +53,7 @@ class DefaultDioClient extends HttpClient {
   }
 }
 
+// ignore: unused_element
 _parseJson(String text) {
   return compute(_parseAndDecode, text);
 }

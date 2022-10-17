@@ -19,7 +19,7 @@ enum VerificationStep {
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
   @override
-  _ResetPasswordPageState createState() => _ResetPasswordPageState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMixin, CountdownMixin {
@@ -29,7 +29,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMix
   Future<void> onSendVerificationCode() async {
     if (isFormValidated) {
       try {
-        String email = emailTC.text.trim();
+        String _ = emailTC.text.trim();
         await Future.delayed(const Duration(seconds: 2));
         startCountDownTimer();
         setState(() {

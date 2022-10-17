@@ -62,7 +62,7 @@ class AppTheme {
       fontFamily: AppConfig.enFontName,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
+          foregroundColor: Colors.white,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
