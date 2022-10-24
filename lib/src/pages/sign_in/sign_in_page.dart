@@ -77,7 +77,7 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
                   const SpaceY(24),
                   PrimaryTextField(
                     key: const ValueKey("emailTC"),
-                    textInputType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
                     controller: emailTC,
                     label: tr(LocaleKeys.email),
                     prefixIcon: const Icon(LineIcons.envelopeAlt),
@@ -86,7 +86,7 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
                     builder: (obscure) => PrimaryTextField.password(
                       obscureNotifier: passwordObscureNotifier,
                       key: const ValueKey("passwordTC"),
-                      textInputType: TextInputType.visiblePassword,
+                      keyboardType: TextInputType.visiblePassword,
                       controller: passwordTC,
                       obscure: obscure,
                       label: tr(LocaleKeys.password),

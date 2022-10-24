@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../../core/constant/locale_keys.dart';
@@ -47,12 +48,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMix
     startCountDownTimer();
   }
 
-  Future<void> onVerifyCode(String code) async {}
+  Future<void> onVerifyCode(String code) async {
+    await SkadiUtils.wait();
+    showToast("Success");
+  }
 
   @override
   void initState() {
     codeTC = TextEditingController();
-    emailTC = TextEditingController(text: "email");
+    emailTC = TextEditingController(text: "chunlee@email.com");
     super.initState();
   }
 
@@ -78,6 +82,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMix
               const SpaceY(24),
               PrimaryTextField(
                 controller: emailTC,
+                autoFocus: true,
+                keyboardType: TextInputType.emailAddress,
                 hint: tr(LocaleKeys.email),
                 readOnly: step == VerificationStep.verify,
               ),
@@ -88,9 +94,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with SkadiFormMix
                 ),
               ] else ...[
                 Text(LocaleKeys.we_have_send_code.tr()),
-                Text(emailTC.text.trim(), style: kTitleStyle.red),
+                const SpaceY(4),
+                Text(emailTC.text.trim(), style: kSubtitleStyle.red),
                 const SpaceY(16),
                 PrimaryTextField(
+                  keyboardType: TextInputType.number,
+                  maxLength: 6,
                   hint: LocaleKeys.code.tr(),
                   controller: codeTC,
                   isRequired: false,
@@ -151,15 +160,12 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       child: _buildResendInfo(),
       builder: (context, time, child) {
         if (codeTimer == null) {
-          return const SizedBox();
+          return emptySizedBox;
         }
         return Column(
           children: [
             if (time <= resendDuration) child!,
-            if (codeTimer?.isActive == true)
-              Center(
-                child: Text("($time)"),
-              ),
+            if (codeTimer?.isActive == true) Center(child: Text("($time)")),
           ],
         );
       },
@@ -171,10 +177,12 @@ mixin CountdownMixin<T extends StatefulWidget> on State<T> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(tr(LocaleKeys.didnt_receive_code), style: kSubtitleStyle.setColor(Colors.grey)),
+        Text(
+          tr(LocaleKeys.didnt_receive_code),
+          style: kSubtitleStyle.grey,
+        ),
         TextButton(
           onPressed: resendCode,
-          // textColor: AppColor.primary,
           child: Text(LocaleKeys.resend_code.tr()),
         ),
       ],

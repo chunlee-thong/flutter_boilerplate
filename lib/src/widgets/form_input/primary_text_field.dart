@@ -14,7 +14,7 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final void Function(String)? onChanged;
   final double? marginBottom;
-  final TextInputType textInputType;
+  final TextInputType keyboardType;
   final TextCapitalization textCapitalization;
   final VoidCallback? onTap;
   final String? Function(String?)? validator;
@@ -39,7 +39,7 @@ class PrimaryTextField extends StatelessWidget {
     this.label,
     this.obscure = false,
     this.isRequired = true,
-    this.textInputType = TextInputType.text,
+    this.keyboardType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
     this.maxLines = 1,
     this.autoFocus = false,
@@ -69,7 +69,7 @@ class PrimaryTextField extends StatelessWidget {
     this.label,
     this.obscure = true,
     this.isRequired = true,
-    this.textInputType = TextInputType.visiblePassword,
+    this.keyboardType = TextInputType.visiblePassword,
     this.textCapitalization = TextCapitalization.none,
     this.maxLines = 1,
     this.autoFocus = false,
@@ -105,7 +105,7 @@ class PrimaryTextField extends StatelessWidget {
           ],
           TextFormField(
             focusNode: focusNode,
-            keyboardType: textInputType,
+            keyboardType: keyboardType,
             textCapitalization: textCapitalization,
             controller: controller,
             maxLength: maxLength,
