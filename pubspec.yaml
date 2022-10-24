@@ -20,7 +20,7 @@ dependencies:
   ##State manager
   provider: ^6.0.4
   get_it: ^7.2.0
-  skadi: ^0.2.0
+  skadi: ^1.0.0
   future_manager: ^1.0.1
 
   ##Icon

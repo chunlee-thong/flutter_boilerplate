@@ -42,10 +42,10 @@ class PrimaryButton extends StatelessWidget {
       startIcon: startIcon,
       onPressed: onPressed,
       fullWidth: fullWidth,
-      primary: color,
+      backgroundColor: color,
+      foregroundColor: Colors.white,
       margin: margin,
       shape: shape,
-      onPrimary: Colors.white,
       child: child,
     );
   }
