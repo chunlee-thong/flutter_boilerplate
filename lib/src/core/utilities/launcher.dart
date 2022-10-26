@@ -3,46 +3,58 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../widgets/ui_helper.dart';
+bool _isSocialLink(String url) {
+  return url.contains("instagram") || url.contains("twitter") || url.contains("youtube");
+}
 
-Future launchExternalUrl(String url, BuildContext? context) async {
+void launchInAppBrowserTab(String url, BuildContext? context) async {
   if (!url.contains("http") && !url.contains("https")) {
     url = "https://$url";
   }
-  try {
-    // await launch(
-    //   url,
-    //   customTabsOption: const CustomTabsOption(
-    //     toolbarColor: AppColor.primary,
-    //     enableDefaultShare: true,
-    //     enableUrlBarHiding: true,
-    //     showPageTitle: true,
-    //   ),
-    //   safariVCOption: const SafariViewControllerOption(
-    //     // preferredBarTintColor: Theme.of(context).primaryColor,
-    //     preferredControlTintColor: Colors.white,
-    //     barCollapsingEnabled: true,
-    //     entersReaderIfAvailable: false,
-    //     dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
-    //   ),
-    // );
-  } catch (e) {
-    if (context != null) {
-      UIHelper.showErrorDialog(context, e);
-    }
+  if (_isSocialLink(url)) {
+    launchExternalUrl(url);
+    return;
   }
+
+  // try {
+  //   await launch(
+  //     url,
+  //     customTabsOption: const CustomTabsOption(
+  //       toolbarColor: AppColor.primary,
+  //       enableDefaultShare: true,
+  //       enableUrlBarHiding: true,
+  //       showPageTitle: true,
+  //     ),
+  //     safariVCOption: const SafariViewControllerOption(
+  //       preferredControlTintColor: Colors.white,
+  //       barCollapsingEnabled: true,
+  //       entersReaderIfAvailable: false,
+  //       dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+  //     ),
+  //   );
+  // } catch (e) {
+  //   if (context != null) {
+  //     UIHelper.showErrorMessageDialog(context, e);
+  //   }
+  // }
 }
 
-Future launchFacebookApp(String? pageId, String fallbackUrl) async {
+void launchFacebookApp(String? pageId, String fallbackUrl) async {
   if (pageId == null) {
-    launchExternalUrl(fallbackUrl, null);
+    launchInAppBrowserTab(fallbackUrl, null);
     return;
   }
   String fbProtocolUrl;
 
   ///on Android,
-  if (Platform.isAndroid && pageId.length < 15) {
-    fbProtocolUrl = 'fb://page/$pageId';
+  if (Platform.isAndroid) {
+    if (pageId.length < 15) {
+      fbProtocolUrl = 'fb://page/$pageId';
+    } else if (pageId.length > 15) {
+      fbProtocolUrl = 'fb://group/$pageId';
+    } else {
+      fbProtocolUrl = 'fb://profile/$pageId';
+    }
   } else {
     fbProtocolUrl = 'fb://profile/$pageId';
   }
@@ -53,14 +65,14 @@ Future launchFacebookApp(String? pageId, String fallbackUrl) async {
       mode: LaunchMode.externalApplication,
     );
   } catch (e) {
-    await launchUrlString(
+    launchUrlString(
       fallbackUrl,
       mode: LaunchMode.externalApplication,
     );
   }
 }
 
-Future launchOtherSocialApp(String url) async {
+void launchExternalUrl(String url) async {
   await launchUrlString(
     url,
     mode: LaunchMode.externalApplication,
