@@ -1,18 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 bool _isSocialLink(String url) {
   return url.contains("instagram") || url.contains("twitter") || url.contains("youtube");
 }
 
-void launchInAppBrowserTab(String url, BuildContext? context) async {
+void launchInAppBrowerTabUrl(String url, BuildContext? context) async {
   if (!url.contains("http") && !url.contains("https")) {
     url = "https://$url";
   }
   if (_isSocialLink(url)) {
-    launchExternalUrl(url);
+    launchExternalBrowerUrl(url);
     return;
   }
 
@@ -41,7 +42,7 @@ void launchInAppBrowserTab(String url, BuildContext? context) async {
 
 void launchFacebookApp(String? pageId, String fallbackUrl) async {
   if (pageId == null) {
-    launchInAppBrowserTab(fallbackUrl, null);
+    launchInAppBrowerTabUrl(fallbackUrl, null);
     return;
   }
   String fbProtocolUrl;
@@ -65,6 +66,7 @@ void launchFacebookApp(String? pageId, String fallbackUrl) async {
       mode: LaunchMode.externalApplication,
     );
   } catch (e) {
+    errorLog(e);
     launchUrlString(
       fallbackUrl,
       mode: LaunchMode.externalApplication,
@@ -72,7 +74,7 @@ void launchFacebookApp(String? pageId, String fallbackUrl) async {
   }
 }
 
-void launchExternalUrl(String url) async {
+void launchExternalBrowerUrl(String url) async {
   await launchUrlString(
     url,
     mode: LaunchMode.externalApplication,
