@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/controllers/index.dart';
-import 'package:flutter_boilerplate/src/widgets/common/bottom_navigation_widget.dart';
 import 'package:skadi/skadi.dart';
 
 import '../core/constant/locale_keys.dart';
@@ -12,6 +10,8 @@ import '../repositories/index.dart';
 import '../services/auth_service.dart';
 import '../services/local_storage_service/local_storage_service.dart';
 import '../services/social_auth_service.dart';
+import '../widgets/common/bottom_navigation_widget.dart';
+import 'index.dart';
 import 'user_controller.dart';
 
 class AuthController extends ChangeNotifier {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/widgets/state_widgets/error_widget.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:skadi/skadi.dart';
@@ -8,6 +7,7 @@ import '../../models/pagination.dart';
 import '../../models/response/user/user_model.dart';
 import '../../repositories/index.dart';
 import '../../widgets/common/pull_refresh_listview.dart';
+import '../../widgets/state_widgets/error_widget.dart';
 
 class DummyPage extends StatefulWidget {
   const DummyPage({Key? key}) : super(key: key);

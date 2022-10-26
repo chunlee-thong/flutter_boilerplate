@@ -2,12 +2,12 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/core/utilities/exception_handler.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../../core/constant/locale_keys.dart';
 import '../../../core/style/dimension.dart';
 import '../../../core/style/textstyle.dart';
+import '../../../core/utilities/exception_handler.dart';
 import '../../../core/utilities/form_validator.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/form_input/primary_text_field.dart';

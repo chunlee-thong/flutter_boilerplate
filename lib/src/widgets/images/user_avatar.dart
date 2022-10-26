@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/core/constant/locale_keys.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:skadi/skadi.dart';
 
+import '../../core/constant/locale_keys.dart';
 import '../../core/style/color.dart';
 import '../../core/style/decoration.dart';
 import '../../core/utilities/exception_handler.dart';

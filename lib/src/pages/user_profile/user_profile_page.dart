@@ -10,6 +10,7 @@ import '../../controllers/user_controller.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
 import '../../widgets/images/user_avatar.dart';
+import '../about/about_page.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -27,11 +28,17 @@ class _UserProfilePageState extends State<UserProfilePage> {
         title: Text(LocaleKeys.profile.tr()),
         actions: [
           IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              SkadiNavigator.push(context, const AboutPage());
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               readProvider<AuthController>(context).logOutUser(context);
             },
-          )
+          ),
         ],
       ),
       body: FutureManagerBuilder<UserModel>(

@@ -1,7 +1,7 @@
-import 'package:flutter_boilerplate/src/core/mixin/index.dart';
-import 'package:flutter_boilerplate/src/core/utilities/exception_handler.dart';
 import 'package:future_manager/future_manager.dart';
 
+import '../core/mixin/index.dart';
+import '../core/utilities/exception_handler.dart';
 import '../models/response/user/user_model.dart';
 import '../repositories/index.dart';
 
