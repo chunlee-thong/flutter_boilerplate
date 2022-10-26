@@ -13,12 +13,14 @@ class CustomErrorWidget extends StatelessWidget {
   final AsyncCallback? onRefresh;
   final bool hasAppBar;
   final String _errorMessage;
+  final bool hasIcon;
   CustomErrorWidget({
     Key? key,
     required this.error,
     this.hasAppBar = false,
     this.verticalMargin = 0.0,
     this.onRefresh,
+    this.hasIcon = true,
   })  : _errorMessage = AppUtils.getReadableErrorMessage(error),
         super(key: key);
   @override
@@ -43,8 +45,10 @@ class CustomErrorWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildErrorIcon(),
-                const SpaceY(16),
+                if (hasIcon) ...[
+                  _buildErrorIcon(),
+                  const SpaceY(16),
+                ],
                 EllipsisText(
                   _errorMessage,
                   style: kSubtitleStyle.normal,

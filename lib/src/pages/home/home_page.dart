@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         onPressed: () async {
           readProvider<ThemeController>(context).switchTheme();
-          logClickEvent(AppAnalyticEvent.change_theme);
+          logClickEvent(AnalyticEvent.change_theme);
         },
         child: Text(LocaleKeys.switch_theme.tr()),
       ),

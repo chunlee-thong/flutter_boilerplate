@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/widgets/state_widgets/error_widget.dart';
 import 'package:future_manager/future_manager.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../models/pagination.dart';
@@ -67,12 +69,20 @@ class _DummyPageState extends State<DummyPage> {
             onRefresh: () => fetchData(true),
             itemCount: response.data.length,
             hasMoreData: userPagination.hasMoreData,
-            hasError: userManager.hasError,
+            error: userManager.error,
+            errorWidget: () => CustomErrorWidget(
+              error: userManager.error,
+              onRefresh: () async {
+                userManager.clearError();
+                fetchData();
+              },
+              hasIcon: false,
+            ),
             itemBuilder: (context, index) {
               final user = response.data[index];
               return ListTile(
                 leading: const CircleAvatar(
-                  child: Icon(Icons.person),
+                  child: Icon(LineIcons.userCheck),
                 ),
                 onTap: () {},
                 title: Text("${user.firstName} ${user.lastName}"),

@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/core/constant/locale_keys.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../core/style/color.dart';
@@ -36,8 +38,8 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
       context: context,
       routeSettings: const RouteSettings(name: "choose_image_source"),
       builder: (context) => SkadiActionSheet<String>(
-        title: tr("Please choose your image source"),
-        cancelText: tr("Cancel"),
+        title: tr(LocaleKeys.please_choose_image_source),
+        cancelText: tr(LocaleKeys.cancel),
         builder: (String option, index) => Text(option),
         onSelected: (String name, index) {
           if (index == 0) {
@@ -46,7 +48,10 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
             onPickImage(ImageSource.gallery);
           }
         },
-        options: [tr("Camera"), tr("Gallery")],
+        options: [
+          tr(LocaleKeys.camera),
+          tr(LocaleKeys.gallery),
+        ],
       ),
     );
   }
@@ -111,7 +116,7 @@ class _UserAvatarState extends State<UserAvatar> with BoolNotifierMixin {
                   onTrue: () => emptySizedBox,
                   onFalse: () => SkadiIconButton(
                     icon: Icon(
-                      widget.imageUrl == null ? Icons.add : Icons.edit,
+                      widget.imageUrl == null ? Icons.add_a_photo_outlined : LineIcons.edit,
                       color: AppColor.primary,
                       size: 20,
                     ),

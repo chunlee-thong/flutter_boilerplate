@@ -22,7 +22,7 @@ class AppUtils {
     return image;
   }
 
-  static String getReadableErrorMessage(Object exception) {
+  static String getReadableErrorMessage(Object? exception) {
     String? errorMessage;
     if (exception is PlatformException) {
       errorMessage = exception.message;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 
 import 'color.dart';
 
@@ -35,5 +36,8 @@ const TextStyle kOverLineStyle = TextStyle(
 
 extension StyleExtension on TextStyle {
   TextStyle get primary => copyWith(color: AppColor.primary);
+  TextStyle primaryFont(BuildContext context) => copyWith(
+        fontFamily: context.textTheme.bodyText1?.fontFamily,
+      );
   TextStyle get accent => copyWith(color: AppColor.accent);
 }

@@ -24,7 +24,7 @@ abstract class HttpClient {
 }
 
 class DefaultDioClient extends HttpClient {
-  //20seconds timeout
+  ///20 seconds timeout
   static const int _timeOut = 20000;
 
   static final DefaultDioClient _instance = DefaultDioClient._();

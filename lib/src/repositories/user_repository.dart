@@ -6,11 +6,15 @@ import '../models/response/user/user_model.dart';
 import '../services/local_storage_service/local_storage_service.dart';
 
 class UserRepository extends API {
-  UserRepository() : super(httpClient: DefaultDioClient());
+  UserRepository()
+      : super(
+          httpClient: DefaultDioClient(),
+          pathPrefix: "/api/user",
+        );
 
-  static const String _loginUser = "/api/user/login";
-  static const String _getAllUser = "/api/user/all";
-  static const String _getUserInfo = "/api/user/info/";
+  static const String _loginUser = "/login";
+  static const String _getAllUser = "/all";
+  static const String _getUserInfo = "/info/";
 
   Future<AuthResponse> loginUser({required String email, required String password}) async {
     return httpRequest(

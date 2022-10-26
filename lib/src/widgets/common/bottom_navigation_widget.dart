@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constant/locale_keys.dart';
@@ -19,19 +20,19 @@ class BottomNavigationWidget extends StatelessWidget {
       },
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(Icons.home),
+          icon: const Icon(LineIcons.home),
           label: LocaleKeys.home.tr(),
         ),
         const BottomNavigationBarItem(
-          icon: Icon(Icons.group),
+          icon: Icon(LineIcons.users),
           label: "Dummy",
         ),
         const BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard_customize),
+          icon: Icon(LineIcons.terminal),
           label: "Templates",
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
+          icon: const Icon(LineIcons.user),
           label: tr(LocaleKeys.profile),
         )
       ],

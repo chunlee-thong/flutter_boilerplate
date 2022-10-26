@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-enum AppAnalyticEvent {
+enum AnalyticEvent {
   change_theme,
   change_language,
 }
 
-void logClickEvent(AppAnalyticEvent event) {
+void logClickEvent(AnalyticEvent event) {
   if (MatomoTracker.instance.initialized) {
     MatomoTracker.instance.trackEvent(
       eventCategory: "Setting",

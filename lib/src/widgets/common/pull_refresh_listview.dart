@@ -7,17 +7,18 @@ import '../state_widgets/no_data_widget.dart';
 class PullRefreshListViewBuilder extends StatelessWidget {
   final Future<void> Function() onRefresh;
   final int itemCount;
-  final Widget Function(BuildContext, int) itemBuilder;
+  final IndexedWidgetBuilder itemBuilder;
   final bool hasMoreData;
   final bool hasRefreshButtonWhenEmpty;
   final Future<void> Function()? onGetMoreData;
   final EdgeInsets? padding;
   final Axis? scrollDirection;
-  final Widget? separator;
+  final IndexedWidgetBuilder? separatorBuilder;
   final bool shrinkWrap;
   final Widget? onEmpty;
   final ScrollController? controller;
-  final bool? hasError;
+  final dynamic error;
+  final Widget Function()? errorWidget;
   //
   const PullRefreshListViewBuilder({
     required this.onRefresh,
@@ -28,12 +29,13 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.onGetMoreData,
     this.hasMoreData = false,
     this.scrollDirection,
-    this.separator,
+    this.separatorBuilder,
     this.shrinkWrap = false,
     this.onEmpty,
     this.controller,
     this.hasRefreshButtonWhenEmpty = true,
-    this.hasError,
+    this.error,
+    this.errorWidget,
   }) : super(key: key);
 
   const PullRefreshListViewBuilder.paginated({
@@ -45,12 +47,13 @@ class PullRefreshListViewBuilder extends StatelessWidget {
     this.padding,
     this.hasMoreData = false,
     this.scrollDirection,
-    this.separator,
+    this.separatorBuilder,
     this.shrinkWrap = false,
     this.onEmpty,
     this.controller,
     this.hasRefreshButtonWhenEmpty = true,
-    this.hasError,
+    this.error,
+    this.errorWidget,
   }) : super(key: key);
 
   @override
@@ -71,13 +74,14 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           shrinkWrap: shrinkWrap,
           scrollDirection: scrollDirection ?? Axis.vertical,
           itemCount: itemCount,
-          separator: separator ?? const SizedBox(),
-          hasError: hasError ?? false,
+          separatorBuilder: separatorBuilder,
+          hasError: error != null,
           loadingWidget: const LoadingWidget(),
+          errorWidget: errorWidget?.call(),
         ),
         onFalse: () => ListView.separated(
           controller: controller,
-          separatorBuilder: (c, i) => separator ?? const SizedBox(),
+          separatorBuilder: separatorBuilder ?? (c, i) => emptySizedBox,
           padding: padding ?? EdgeInsets.zero,
           itemBuilder: itemBuilder,
           itemCount: itemCount,

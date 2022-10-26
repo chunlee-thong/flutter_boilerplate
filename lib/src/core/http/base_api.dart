@@ -17,8 +17,13 @@ const String kMessageField = "message";
 abstract class API {
   final HttpClient httpClient;
   final bool authorization;
+  final String? pathPrefix;
 
-  API({required this.httpClient, this.authorization = true});
+  API({
+    required this.httpClient,
+    this.authorization = true,
+    this.pathPrefix,
+  });
 
   ///Create an Http request method that required path and a callback functions [onSuccess]
   ///default Http method is [GET]
@@ -53,6 +58,9 @@ abstract class API {
       }
 
       httpOption.headers!.addAll(headers);
+      if (pathPrefix != null) {
+        path = pathPrefix! + path;
+      }
       response = await (customDioClient ?? httpClient.dio).request(
         path,
         options: httpOption,
