@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 import '../constant/app_config.dart';
 
@@ -20,28 +17,5 @@ class AppUtils {
     }
     String image = "${AppConfig.baseApiUrl}/uploads/$file";
     return image;
-  }
-
-  static String getReadableErrorMessage(Object? exception) {
-    String? errorMessage;
-    if (exception is PlatformException) {
-      errorMessage = exception.message;
-    }
-
-    if (exception is SocketException) {
-      errorMessage = "No internet connection";
-    }
-    // if (exception is FirebaseAuthException) {
-    //   errorMessage = exception.message;
-    // }
-    // if (exception is FirebaseException) {
-    //   if (exception.code == "not-found") {
-    //     errorMessage = "Action failed. Post might have been deleted.";
-    //   } else {
-    //     errorMessage = exception.message;
-    //   }
-    // }
-
-    return errorMessage ?? exception.toString();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:skadi_extender/skadi_extender.dart';
 
-import '../core/utilities/app_utils.dart';
 import 'dialog/message_dialog.dart';
 
 abstract class UIHelper {
@@ -16,7 +16,7 @@ abstract class UIHelper {
   }
 
   static Future<T?> showErrorDialog<T>(BuildContext context, error) async {
-    String errorMessage = AppUtils.getReadableErrorMessage(error);
+    String errorMessage = SkadiError.getReadableErrorMessage(error);
     return await showDialog(
       context: context,
       builder: (context) => CustomMessageDialog.error(
@@ -53,9 +53,11 @@ abstract class UIHelper {
   ///Show an error toast at Top position
   static Future showErrorToast(
     BuildContext context,
-    String message, {
+    Object? exception, {
     ToastPosition position = ToastPosition.top,
   }) async {
+    String errorMessage = SkadiError.getReadableErrorMessage(exception);
+
     showToastWidget(
       Container(
         margin: const EdgeInsets.all(16),
@@ -66,7 +68,7 @@ abstract class UIHelper {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         width: double.infinity,
         child: Text(
-          message,
+          errorMessage,
           style: const TextStyle(color: Colors.white, fontSize: 14),
         ),
       ),

@@ -12,7 +12,6 @@ import '../../controllers/index.dart';
 import '../../models/response/user/user_model.dart';
 import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
-import 'app_utils.dart';
 import 'custom_exception.dart';
 
 enum ErrorWidgetType {
@@ -23,10 +22,54 @@ enum ErrorWidgetType {
 abstract class ExceptionHandler {
   ExceptionHandler._();
 
+  static Future<T?> run<T>(
+    BuildContext? context,
+    FutureOr<T> Function() function, {
+    void Function(dynamic)? onError,
+    ErrorWidgetType errorType = ErrorWidgetType.toast,
+    VoidCallback? onDone,
+  }) async {
+    try {
+      return await function();
+    } on UserCancelException catch (_) {
+      return null;
+    } catch (exception, stackTrace) {
+      if (exception is SessionExpiredException) {
+        if (context != null) {
+          UIHelper.showToast(context, exception.message);
+          readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
+          return null;
+        }
+      }
+
+      if (context != null) {
+        if (errorType == ErrorWidgetType.toast) {
+          UIHelper.showErrorToast(
+            context,
+            exception,
+            position: ToastPosition.bottom,
+          );
+        } else {
+          UIHelper.showErrorDialog(
+            context,
+            exception,
+          );
+        }
+      }
+      recordError(exception, stackTrace);
+      onError?.call(exception);
+      return null;
+    } finally {
+      onDone?.call();
+    }
+  }
+
   ///Record error to Analytic or Crashlytic
   static void recordError(dynamic exception, [StackTrace? stackTrace]) {
+    errorLog(exception, stackTrace);
+    bool condition = exception is! HttpRequestException;
     stackTrace ??= exception is Error ? exception.stackTrace : null;
-    if (kReleaseMode) {
+    if (kReleaseMode && condition) {
       Sentry.captureException(
         exception,
         stackTrace: stackTrace,
@@ -45,63 +88,10 @@ abstract class ExceptionHandler {
   }
 
   static void handleManagerError(FutureManagerError error, BuildContext context) {
-    if (error.stackTrace != null) {
-      errorLog("Manager error occur: ", error.stackTrace);
-    }
-    if (error.exception is! HttpRequestException) {
-      recordError(error.exception, error.stackTrace);
-    }
-
+    recordError(error.exception, error.stackTrace);
     if (error.exception is SessionExpiredException) {
       UIHelper.showToast(context, error.toString());
       readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
-    }
-  }
-
-  static Future<T?> run<T>(
-    BuildContext? context,
-    FutureOr<T> Function() function, {
-    void Function(dynamic)? onError,
-    ErrorWidgetType errorType = ErrorWidgetType.toast,
-    VoidCallback? onDone,
-  }) async {
-    try {
-      return await function();
-    } on UserCancelException catch (_) {
-      return null;
-    } catch (exception, stackTrace) {
-      errorLog(exception.runtimeType, stackTrace);
-      if (exception is SessionExpiredException) {
-        if (context != null) {
-          UIHelper.showToast(context, exception.message);
-          readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
-          return null;
-        }
-      }
-
-      if (context != null) {
-        String errorMessage = AppUtils.getReadableErrorMessage(exception);
-        if (errorType == ErrorWidgetType.toast) {
-          UIHelper.showErrorToast(
-            context,
-            errorMessage,
-            position: ToastPosition.bottom,
-          );
-        } else {
-          UIHelper.showErrorDialog(
-            context,
-            errorMessage,
-          );
-        }
-      }
-
-      if (exception is! HttpRequestException) {
-        recordError(exception, stackTrace);
-      }
-      onError?.call(exception);
-      return null;
-    } finally {
-      onDone?.call();
     }
   }
 }

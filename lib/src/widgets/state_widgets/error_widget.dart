@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
+import 'package:skadi_extender/skadi_extender.dart';
 
 import '../../core/constant/app_assets.dart';
-import '../../core/style/textstyle.dart';
-import '../../core/utilities/app_utils.dart';
 import '../../widgets/images/svg_asset.dart';
 
 class CustomErrorWidget extends StatelessWidget {
@@ -21,7 +20,7 @@ class CustomErrorWidget extends StatelessWidget {
     this.verticalMargin = 0.0,
     this.onRefresh,
     this.hasIcon = true,
-  })  : _errorMessage = AppUtils.getReadableErrorMessage(error),
+  })  : _errorMessage = SkadiError.getReadableErrorMessage(error),
         super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class CustomErrorWidget extends StatelessWidget {
                 ],
                 EllipsisText(
                   _errorMessage,
-                  style: kSubtitleStyle.normal,
+                  style: kTs16,
                   maxLines: 4,
                   textAlign: TextAlign.center,
                 ),
