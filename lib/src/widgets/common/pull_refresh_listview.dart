@@ -77,7 +77,7 @@ class PullRefreshListViewBuilder extends StatelessWidget {
           separatorBuilder: separatorBuilder,
           hasError: error != null,
           loadingWidget: const LoadingWidget(),
-          errorWidget: errorWidget?.call(),
+          errorWidget: errorWidget != null ? () => errorWidget!.call() : null,
         ),
         onFalse: () => ListView.separated(
           controller: controller,
