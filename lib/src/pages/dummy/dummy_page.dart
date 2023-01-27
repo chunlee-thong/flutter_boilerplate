@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:skadi/skadi.dart';
+import 'package:skadi_plus/skadi_plus.dart';
 
-import '../../models/pagination.dart';
 import '../../models/response/user/user_model.dart';
 import '../../repositories/index.dart';
-import '../../widgets/common/pull_refresh_listview.dart';
 import '../../widgets/state_widgets/error_widget.dart';
 
 class DummyPage extends StatefulWidget {
@@ -65,17 +64,13 @@ class _DummyPageState extends State<DummyPage> {
         onError: (err) {},
         onRefreshing: () => const RefreshProgressIndicator(),
         ready: (context, UserListResponse response) {
-          return PullRefreshListViewBuilder.paginated(
+          return SkadiPaginatedListViewPlus(
             onRefresh: () => fetchData(true),
             itemCount: response.data.length,
-            hasMoreData: userPagination.hasMoreData,
-            error: userManager.error,
-            errorWidget: () => CustomErrorWidget(
-              error: userManager.error,
-              onRefresh: () async {
-                userManager.clearError();
-                fetchData();
-              },
+            paginationHandler: userPagination,
+            errorWidget: (onRefresh, error) => CustomErrorWidget(
+              error: error,
+              onRefresh: onRefresh,
               hasIcon: false,
             ),
             itemBuilder: (context, index) {

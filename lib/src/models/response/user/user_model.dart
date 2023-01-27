@@ -1,4 +1,4 @@
-import '../../pagination.dart';
+import 'package:skadi_plus/skadi_plus.dart';
 
 class UserListResponse extends PaginationResponse<UserModel> {
   UserListResponse({
