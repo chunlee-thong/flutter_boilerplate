@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
-import 'package:skadi_extender/skadi_extender.dart';
+import 'package:skadi_plus/skadi_plus.dart';
 
 import '../../core/constant/app_assets.dart';
 import '../../widgets/images/svg_asset.dart';

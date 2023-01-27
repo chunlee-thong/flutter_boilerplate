@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:skadi_extender/skadi_extender.dart';
+import 'package:skadi_plus/skadi_plus.dart';
 
 import 'dialog/message_dialog.dart';
 

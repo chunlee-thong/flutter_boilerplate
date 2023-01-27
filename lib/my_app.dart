@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/widgets/state_widgets/no_data_widget.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
                     },
                     child: SkadiProvider(
                       loadingWidget: const LoadingWidget(),
+                      noDataWidget: ((p0) => NoDataWidget(onRefresh: p0)),
                       errorWidget: (error, context) {
                         return CustomErrorWidget(error: error);
                       },

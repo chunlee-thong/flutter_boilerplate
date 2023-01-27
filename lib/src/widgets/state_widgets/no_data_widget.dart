@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
@@ -8,7 +9,7 @@ import '../../widgets/images/svg_asset.dart';
 class NoDataWidget extends StatelessWidget {
   final double verticalMargin;
   final String message;
-  final Future<void> Function()? onRefresh;
+  final AsyncCallback? onRefresh;
 
   const NoDataWidget({
     Key? key,
