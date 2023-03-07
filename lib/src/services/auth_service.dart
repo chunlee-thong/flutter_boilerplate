@@ -5,9 +5,9 @@ import '../core/http/http_client.dart';
 import '../models/response/user/auth_response.dart';
 import 'local_storage_service/local_storage_service.dart';
 
-abstract class AuthService {
+class AuthService {
   ///Save user credential to local storage
-  static Future<void> saveUserCredential(AuthResponse authResponse) async {
+  Future<void> saveUserCredential(AuthResponse authResponse) async {
     await LocalStorage.write(key: kTokenKey, value: authResponse.token);
     await LocalStorage.write(key: kIdKey, value: authResponse.userId);
     await LocalStorage.write(key: kRefreshTokenKey, value: authResponse.refreshToken);
@@ -15,7 +15,7 @@ abstract class AuthService {
   }
 
   ///Just use to display saved user's data
-  static Future<void> initializeUserCredential() async {
+  Future<void> initializeUserCredential() async {
     String? token = await LocalStorage.read<String>(key: kTokenKey);
     String? refreshToken = await LocalStorage.read<String>(key: kRefreshTokenKey);
     String? userId = await LocalStorage.read<String>(key: kIdKey);
@@ -28,7 +28,7 @@ abstract class AuthService {
   }
 
   ///Refresh user token and save to storage
-  static Future<String?> refreshUserToken(Dio dio) async {
+  Future<String?> refreshUserToken(Dio dio) async {
     String? refreshToken = await LocalStorage.read(key: kRefreshTokenKey);
     Response response = await dio.request(
       "/api/user/refresh-token",

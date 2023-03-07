@@ -7,7 +7,7 @@ import '../../core/constant/locale_keys.dart';
 import '../../core/style/color.dart';
 import '../../core/utilities/exception_handler.dart';
 import '../../models/response/user/social_auth_data.dart';
-import '../../services/social_auth_service.dart';
+import '../../services/index.dart';
 
 // typedef SocialSignIn = Future<SocialAuthData> Function();
 
@@ -28,15 +28,15 @@ class SocialAuthButtons extends StatelessWidget {
         LoadingOverlayProvider.toggle(true);
         switch (signInMethod) {
           case SocialSignIn.facebook:
-            socialAuthData = await SocialAuthService.loginWithFacebook();
+            socialAuthData = await socialAuthService.loginWithFacebook();
             // socialAuthData.authResponse = userRepository.loginWithFaceBook();
             break;
           case SocialSignIn.google:
-            socialAuthData = await SocialAuthService.loginWithGoogle();
+            socialAuthData = await socialAuthService.loginWithGoogle();
             // socialAuthData.authResponse = userRepository.loginWithGoogle();
             break;
           case SocialSignIn.apple:
-            socialAuthData = await SocialAuthService.loginWithApple();
+            socialAuthData = await socialAuthService.loginWithApple();
             // socialAuthData.authResponse = userRepository.loginWithApple();
             break;
         }

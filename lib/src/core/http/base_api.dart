@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate/src/services/index.dart';
 import 'package:skadi/skadi.dart';
 
-import '../../services/auth_service.dart';
 import '../../services/local_storage_service/local_storage_service.dart';
 import 'http_client.dart';
 import 'http_exception.dart';
@@ -19,6 +19,8 @@ abstract class API {
   final bool authorization;
   final String? pathPrefix;
 
+  final Map<String, CancelToken> _cancelTokens = {};
+
   API({
     required this.httpClient,
     this.authorization = true,
@@ -30,13 +32,11 @@ abstract class API {
   Future<T> httpRequest<T>({
     required String path,
     required T Function(Response) onSuccess,
-    CancelToken? cancelToken,
     HttpMethod method = HttpMethod.get,
     Map<String, dynamic>? query,
     Map<String, dynamic> headers = const {},
     dynamic data = const {},
     bool? requiredToken,
-    String? customToken,
     Dio? customDioClient,
   }) async {
     Response? response;
@@ -45,14 +45,12 @@ abstract class API {
       final bool requiredAuthorization = requiredToken ?? authorization;
 
       ///Bearer token authorization logic
-      if (customToken != null) {
-        httpOption.headers!['Authorization'] = "bearer $customToken";
-      } else if (requiredAuthorization) {
+      if (requiredAuthorization) {
         String? token = await LocalStorage.read(key: kTokenKey);
-        if (token == null) throw Exception("Invalid Token");
+        if (token == null) throw SessionExpiredException();
         bool isExpired = JwtDecoder.decode(token).isExpired;
         if (isExpired) {
-          token = await AuthService.refreshUserToken(customDioClient ?? httpClient.dio);
+          token = await authService.refreshUserToken(customDioClient ?? httpClient.dio);
         }
         httpOption.headers!['Authorization'] = "bearer $token";
       }
@@ -61,49 +59,58 @@ abstract class API {
       if (pathPrefix != null) {
         path = pathPrefix! + path;
       }
+
+      ///Create cancel token
+      final cancelTokenKey = path;
+      _cancelTokens[cancelTokenKey] = CancelToken();
+
       response = await (customDioClient ?? httpClient.dio).request(
         path,
         options: httpOption,
         queryParameters: query,
         data: data,
-        cancelToken: cancelToken,
+        cancelToken: _cancelTokens[cancelTokenKey],
       );
       return onSuccess(response);
     } on DioError catch (e) {
       throw _handleDioError(e);
-    } catch (e, stackTrace) {
-      throw _handleOtherError(e, stackTrace);
+    } catch (e) {
+      rethrow;
     }
   }
-}
 
-///Handle another type of exception that relate to runtime exception
-HttpRequestErrorWrapper _handleOtherError(dynamic exception, StackTrace stackTrace) {
-  errorLog("Http Request Exception Error :=> ${exception.runtimeType}: "
-      "$exception"
-      "\nStackTrace:  ${stackTrace.toString()}");
-  return HttpRequestErrorWrapper(
-    "Error: ${HttpErrorMessage.unexpectedTypeError}",
-    stackTrace,
-  );
+  ///
+  void cancelRequest([String? key]) {
+    const reason = 'User cancel request';
+    if (key != null) {
+      _cancelTokens[key]?.cancel(reason);
+    }
+    for (var token in _cancelTokens.values) {
+      token.cancel(reason);
+    }
+  }
 }
 
 HttpRequestException _handleDioError(DioError exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
-    return DioErrorException(HttpErrorMessage.connectionError);
+    return NoInternetException();
   }
 
   switch (exception.type) {
     case DioErrorType.connectTimeout:
-      return DioErrorException(HttpErrorMessage.timeoutError);
+    case DioErrorType.receiveTimeout:
+    case DioErrorType.sendTimeout:
+      return DioErrorException.timeout();
     case DioErrorType.response:
       if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
       }
       return DioErrorException.response(exception.response);
-    default:
+    case DioErrorType.other:
       return DioErrorException(HttpErrorMessage.unexpectedError);
+    case DioErrorType.cancel:
+      return RequestCancelException();
   }
 }
 

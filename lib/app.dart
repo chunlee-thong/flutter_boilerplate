@@ -1,3 +1,4 @@
+
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +76,6 @@ class MyApp extends StatelessWidget {
                         home: const SplashScreenPage(),
                         locale: context.locale,
                         builder: (context, child) {
-                          // ErrorWidget.builder = (detail) {
-                          //   return kReleaseMode ? const FlutterCustomErrorRendering() : ErrorWidget(detail.exception);
-                          // };
                           return _AppWrapper(child: child!);
                         },
                       ),

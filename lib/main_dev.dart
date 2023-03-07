@@ -5,7 +5,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'bootstrap.dart';
 import 'flavor.dart';
-import 'my_app.dart';
+import 'app.dart';
 import 'src/core/constant/app_config.dart';
 
 Future main() async {

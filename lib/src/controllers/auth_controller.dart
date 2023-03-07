@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/services/index.dart';
+import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
 import '../core/constant/locale_keys.dart';
@@ -7,11 +9,8 @@ import '../models/response/user/auth_response.dart';
 import '../models/response/user/social_auth_data.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../repositories/index.dart';
-import '../services/auth_service.dart';
 import '../services/local_storage_service/local_storage_service.dart';
-import '../services/social_auth_service.dart';
 import '../widgets/common/bottom_navigation_widget.dart';
-import 'index.dart';
 import 'user_controller.dart';
 
 class AuthController extends ChangeNotifier {
@@ -25,7 +24,7 @@ class AuthController extends ChangeNotifier {
     bool isLoggedIn = await getLoginStatus();
     _setLoginStatus(isLoggedIn);
     if (isLoggedIn) {
-      await AuthService.initializeUserCredential();
+      await authService.initializeUserCredential();
       await userController.getUserInfo(throwError: true);
     }
     return isLoggedIn;
@@ -47,25 +46,23 @@ class AuthController extends ChangeNotifier {
       email: email,
       password: password,
     );
-    await AuthService.saveUserCredential(authResponse);
+    await authService.saveUserCredential(authResponse);
     _setLoginStatus(true);
-    await userController.getUserInfo(throwError: true);
   }
 
   Future<void> loginWithSocial(SocialAuthData authData) async {
     AuthResponse authResponse = authData.authResponse;
-    await AuthService.saveUserCredential(authResponse);
+    await authService.saveUserCredential(authResponse);
     _setLoginStatus(true);
-    await userController.getUserInfo(throwError: true);
   }
 
   Future<void> logOutUser(BuildContext context, {bool showConfirmation = true}) async {
     //
     Future onLogout() async {
-      await LocalStorage.clear();
-      SocialAuthService.signOutAll();
       _setLoginStatus(false);
-      readProvider<BottomNavigationController>(context).resetIndex();
+      LocalStorage.clear();
+      socialAuthService.signOutAll();
+      context.read<BottomNavigationController>().resetIndex();
       SkadiNavigator.pushAndRemove(context, const SignInPage());
     }
 

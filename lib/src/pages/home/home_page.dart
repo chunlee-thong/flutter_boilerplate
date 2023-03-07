@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
-import '../../controllers/index.dart';
 import '../../controllers/theme_controller.dart';
 import '../../core/constant/app_config.dart';
 import '../../core/constant/locale_keys.dart';
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         fullWidth: false,
         height: 40,
         onPressed: () async {
-          readProvider<ThemeController>(context).switchTheme();
+          context.read<ThemeController>().switchTheme();
           logClickEvent(AnalyticEvent.change_theme);
         },
         child: Text(LocaleKeys.switch_theme.tr()),

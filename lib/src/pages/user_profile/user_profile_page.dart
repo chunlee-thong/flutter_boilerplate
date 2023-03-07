@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
-import '../../controllers/index.dart';
 import '../../controllers/user_controller.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../models/response/user/user_model.dart';
@@ -36,7 +35,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              readProvider<AuthController>(context).logOutUser(context);
+              context.read<AuthController>().logOutUser(context);
             },
           ),
         ],

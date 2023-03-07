@@ -12,10 +12,18 @@ class HttpErrorMessage {
 }
 
 class DioErrorException extends HttpRequestException {
-  final int? code;
+  final int? statusCode;
   final String message;
+  final bool _timeout;
 
-  DioErrorException(this.message, {this.code});
+  DioErrorException(this.message, {this.statusCode}) : _timeout = false;
+
+  DioErrorException.timeout()
+      : _timeout = true,
+        statusCode = null,
+        message = HttpErrorMessage.timeoutError;
+
+  bool get isTimeOut => _timeout;
 
   factory DioErrorException.response(Response? response) {
     if (response == null) {
@@ -29,15 +37,27 @@ class DioErrorException extends HttpRequestException {
     } else if (response.data is Map) {
       errorMessage = response.data["message"] ?? HttpErrorMessage.unexpectedError;
     } else {
-      errorMessage = HttpErrorMessage.unexpectedError;
+      errorMessage = HttpErrorMessage.unexpectedTypeError;
     }
-    return DioErrorException(errorMessage, code: statusCode);
+    return DioErrorException(errorMessage, statusCode: statusCode);
   }
 
   //
   @override
+  String toString() => message;
+}
+
+class NoInternetException extends HttpRequestException {
+  @override
   String toString() {
-    return message;
+    return HttpErrorMessage.connectionError;
+  }
+}
+
+class RequestCancelException extends HttpRequestException {
+  @override
+  String toString() {
+    return "Cancel the http request via cancel token";
   }
 }
 
@@ -48,20 +68,5 @@ class SessionExpiredException extends HttpRequestException {
   @override
   String toString() {
     return "Session expired, Please login again";
-  }
-}
-
-///A custom exception class to handle [Error] type in Http request
-///Because TypeError doesn't allow to override message
-///This class provide a custom message and stackTrace
-class HttpRequestErrorWrapper {
-  final String message;
-  final dynamic stackTrace;
-
-  HttpRequestErrorWrapper(this.message, [this.stackTrace]);
-
-  @override
-  String toString() {
-    return message;
   }
 }

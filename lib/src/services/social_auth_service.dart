@@ -5,7 +5,7 @@ class SocialAuthService {
   //static final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   //static final FacebookAuth _facebookAuth = FacebookAuth.instance;
 
-  static Future<SocialAuthData> loginWithFacebook() async {
+  Future<SocialAuthData> loginWithFacebook() async {
     //await _facebookAuth.logOut();
     // LoginResult result = await _facebookAuth.login(
     //   loginBehavior: LoginBehavior.nativeWithFallback,
@@ -21,7 +21,7 @@ class SocialAuthService {
     throw UserCancelException();
   }
 
-  static Future<SocialAuthData> loginWithGoogle() async {
+  Future<SocialAuthData> loginWithGoogle() async {
     // await _googleSignIn.signOut();
     // GoogleSignInAccount? account = await _googleSignIn.signIn();
     // if (account == null) throw UserCancelException();
@@ -33,7 +33,7 @@ class SocialAuthService {
     throw UserCancelException();
   }
 
-  static Future<SocialAuthData> loginWithApple() async {
+  Future<SocialAuthData> loginWithApple() async {
     // try {
     //   final credential = await SignInWithApple.getAppleIDCredential(
     //     scopes: [
@@ -59,7 +59,7 @@ class SocialAuthService {
     throw UserCancelException();
   }
 
-  static Future<void> signOutAll() async {
+  Future<void> signOutAll() async {
     //await _googleSignIn.signOut();
     //await _facebookAuth.logOut();
   }

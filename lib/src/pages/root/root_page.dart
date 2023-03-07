@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/controllers/user_controller.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +39,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   void initState() {
+    context.read<UserController>().getUserInfo();
     initializeMatomo();
     super.initState();
   }

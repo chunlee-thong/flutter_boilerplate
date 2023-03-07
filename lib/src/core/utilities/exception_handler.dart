@@ -4,11 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
-import '../../controllers/index.dart';
 import '../../models/response/user/user_model.dart';
 import '../../widgets/ui_helper.dart';
 import '../http/http_exception.dart';
@@ -37,7 +37,7 @@ abstract class ExceptionHandler {
       if (exception is SessionExpiredException) {
         if (context != null) {
           UIHelper.showToast(context, exception.message);
-          readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
+          context.read<AuthController>().logOutUser(context, showConfirmation: false);
           return null;
         }
       }
@@ -90,8 +90,8 @@ abstract class ExceptionHandler {
   static void handleManagerError(FutureManagerError error, BuildContext context) {
     recordError(error.exception, error.stackTrace);
     if (error.exception is SessionExpiredException) {
-      UIHelper.showToast(context, error.toString());
-      readProvider<AuthController>(context).logOutUser(context, showConfirmation: false);
+      UIHelper.showToast(context, error.exception.toString());
+      context.read<AuthController>().logOutUser(context, showConfirmation: false);
     }
   }
 }

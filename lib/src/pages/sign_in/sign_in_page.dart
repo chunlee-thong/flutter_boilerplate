@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
-import '../../controllers/index.dart';
 import '../../controllers/theme_controller.dart';
 import '../../core/constant/locale_keys.dart';
 import '../../core/style/color.dart';
@@ -33,7 +33,7 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
         () async {
           var email = emailTC.text.trim();
           var password = passwordTC.text.trim();
-          await readProvider<AuthController>(context).loginWithPassword(email, password);
+          await context.read<AuthController>().loginWithPassword(email, password);
           SkadiNavigator.pushReplacement(context, const RootPage());
         },
         errorType: ErrorWidgetType.dialog,
@@ -67,7 +67,7 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
               child: Column(
                 children: <Widget>[
                   SkadiIconButton(
-                    onTap: readProvider<ThemeController>(context).switchTheme,
+                    onTap: context.read<ThemeController>().switchTheme,
                     icon: const Icon(
                       Icons.class_,
                       color: AppColor.primary,
@@ -101,7 +101,7 @@ class _SignInPageState extends State<SignInPage> with SkadiFormMixin {
                   const SpaceY(64),
                   SocialAuthButtons(onLoginCompleted: (data) async {
                     await ExceptionHandler.run(context, () async {
-                      await readProvider<AuthController>(context).loginWithSocial(data);
+                      await context.read<AuthController>().loginWithSocial(data);
                       SkadiNavigator.pushReplacement(context, const RootPage());
                     });
                   }),

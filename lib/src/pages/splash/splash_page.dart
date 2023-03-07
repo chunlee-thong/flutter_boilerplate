@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:future_manager/future_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
 
 import '../../controllers/auth_controller.dart';
-import '../../controllers/index.dart';
 import '../../core/style/color.dart';
 import '../../pages/root/root_page.dart';
 import '../../widgets/state_widgets/error_widget.dart';
@@ -19,7 +19,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
-  late final AuthController authController = readProvider<AuthController>(context);
+  late final AuthController authController = context.read<AuthController>();
 
   Future<bool> onSplashing() async {
     bool isLoggedIn = await authController.initializeUser();

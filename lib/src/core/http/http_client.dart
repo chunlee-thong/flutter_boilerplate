@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:skadi/skadi.dart';
 
 import '../../../flavor.dart';
 import '../constant/app_config.dart';
+import '../utilities/logger.dart';
 
 enum HttpMethod {
   get,
@@ -42,9 +40,6 @@ class DefaultDioClient extends HttpClient {
       receiveTimeout: _timeOut,
     );
     final dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
-    //Use isolate still cause a jank, still no idea why
-    //(dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
-
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
@@ -53,31 +48,16 @@ class DefaultDioClient extends HttpClient {
   }
 }
 
-// ignore: unused_element
-_parseJson(String text) {
-  return compute(_parseAndDecode, text);
-}
-
-_parseAndDecode(String response) {
-  return jsonDecode(response);
-}
-
-const JsonDecoder decoder = JsonDecoder();
-const JsonEncoder encoder = JsonEncoder.withIndent('  ');
-
-void prettyPrintJson(dynamic input) {
-  if (kDebugMode) {
-    var prettyString = encoder.convert(input);
-    prettyString.split('\n').forEach((element) => debugPrint(element));
-  }
-}
-
 final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler requestInterceptorHandler) async {
-    httpLog("${options.method}: ${options.path},"
-        "query: ${options.queryParameters},"
-        "data: ${options.data},"
-        "token: ${_getLastIndexString(options.headers["authorization"])}");
+    final token = _getLastIndexString(options.headers["Authorization"]);
+    Map logString = {
+      options.method: options.baseUrl + options.path,
+      "query": options.queryParameters,
+      "data": options.data,
+      "authorization": token,
+    };
+    logger.i(logString);
     requestInterceptorHandler.next(options);
   },
   onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {

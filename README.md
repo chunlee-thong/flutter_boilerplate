@@ -16,7 +16,9 @@ A flutter boiler plate code for initial project setup
 - [easy_localization](https://pub.dev/packages/easy_localization) for localization
 - [Provider](https://pub.dev/packages/provider) for State management and context based DI
 - [Dio](https://pub.dev/packages/dio) for http client
-- [Hive](https://pub.dev/packages/hive) database for structural local storage and [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) and [shared_preferences](https://pub.dev/packages/shared_preferences) for key value local storage
+- [Hive](https://pub.dev/packages/hive) database for structural local storage and
+- [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
+- [shared_preferences](https://pub.dev/packages/shared_preferences) for key value local storage
 - [get_it](https://pub.dev/packages/get_it) for service locator and DI
 - Some others useful packages
 
