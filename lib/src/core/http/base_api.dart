@@ -72,7 +72,7 @@ abstract class API {
         cancelToken: _cancelTokens[cancelTokenKey],
       );
       return onSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw _handleDioError(e);
     } catch (e) {
       rethrow;
@@ -91,30 +91,33 @@ abstract class API {
   }
 }
 
-HttpRequestException _handleDioError(DioError exception) {
+HttpRequestException _handleDioError(DioException exception) {
   _logDioError(exception);
   if (exception.error is SocketException) {
     return NoInternetException();
   }
 
   switch (exception.type) {
-    case DioErrorType.connectTimeout:
-    case DioErrorType.receiveTimeout:
-    case DioErrorType.sendTimeout:
+    case DioExceptionType.connectionError:
+      return NoInternetException();
+    case DioExceptionType.connectionTimeout:
+    case DioExceptionType.receiveTimeout:
+    case DioExceptionType.sendTimeout:
       return DioErrorException.timeout();
-    case DioErrorType.response:
+    case DioExceptionType.badResponse:
       if (exception.response!.statusCode == SessionExpiredException.code) {
         return SessionExpiredException();
       }
       return DioErrorException.response(exception.response);
-    case DioErrorType.other:
+    case DioExceptionType.unknown:
+    case DioExceptionType.badCertificate:
       return DioErrorException(HttpErrorMessage.unexpectedError);
-    case DioErrorType.cancel:
+    case DioExceptionType.cancel:
       return RequestCancelException();
   }
 }
 
-void _logDioError(DioError exception) {
+void _logDioError(DioException exception) {
   String errorMessage = "Dio error :=> ${exception.requestOptions.path}";
   if (exception.response != null) {
     errorMessage += ", Response: ${exception.response?.statusCode} => ${exception.response!.data.toString()}";

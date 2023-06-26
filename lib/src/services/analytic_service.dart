@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
 
 enum AnalyticEvent {
   change_theme,
@@ -7,23 +6,23 @@ enum AnalyticEvent {
 }
 
 void logClickEvent(AnalyticEvent event) {
-  if (MatomoTracker.instance.initialized) {
-    MatomoTracker.instance.trackEvent(
-      eventCategory: "Setting",
-      action: "Click",
-      eventName: event.name,
-    );
-  }
+  // if (MatomoTracker.instance.initialized) {
+  //   MatomoTracker.instance.trackEvent(
+  //     eventCategory: "Setting",
+  //     action: "Click",
+  //     eventName: event.name,
+  //   );
+  // }
 }
 
 void logScreen(Route route) {
-  if (MatomoTracker.instance.initialized) {
-    String? screenName = route.settings.name;
-    if (screenName != null) {
-      MatomoTracker.instance.trackScreenWithName(
-        widgetName: screenName,
-        eventName: "screen",
-      );
-    }
-  }
+  // if (MatomoTracker.instance.initialized) {
+  //   String? screenName = route.settings.name;
+  //   if (screenName != null) {
+  //     MatomoTracker.instance.trackScreenWithName(
+  //       widgetName: screenName,
+  //       eventName: "screen",
+  //     );
+  //   }
+  // }
 }

@@ -60,7 +60,7 @@ class CustomErrorWidget extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     icon: Icon(
                       Icons.refresh,
-                      color: context.textTheme.bodyText1?.color,
+                      color: context.textTheme.bodyLarge?.color,
                     ),
                   ),
               ],

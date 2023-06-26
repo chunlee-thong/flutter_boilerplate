@@ -1,7 +1,5 @@
-import 'dart:io';
-
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 
 import '../../../flavor.dart';
 import '../constant/app_config.dart';
@@ -23,7 +21,7 @@ abstract class HttpClient {
 
 class DefaultDioClient extends HttpClient {
   ///20 seconds timeout
-  static const int _timeOut = 20000;
+  static const Duration _timeOut = Duration(seconds: 20);
 
   static final DefaultDioClient _instance = DefaultDioClient._();
 
@@ -40,9 +38,8 @@ class DefaultDioClient extends HttpClient {
       receiveTimeout: _timeOut,
     );
     final dio = Dio(defaultOptions)..interceptors.add(defaultInterceptor);
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-      return client;
+    (dio.httpClientAdapter as IOHttpClientAdapter).validateCertificate = (certificate, host, port) {
+      return true;
     };
     return dio;
   }
@@ -63,7 +60,7 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
   onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
     responseInterceptorHandler.next(response);
   },
-  onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
+  onError: (DioException error, ErrorInterceptorHandler errorInterceptorHandler) async {
     errorInterceptorHandler.reject(error);
   },
 );

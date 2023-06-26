@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/core/utilities/localization_asset_loader.dart';
 import 'package:future_manager/future_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:skadi/skadi.dart';
@@ -20,8 +22,10 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   FutureManager<bool> splashManager = FutureManager();
   late final AuthController authController = context.read<AuthController>();
+  late var easyLocalizationController = EasyLocalization.of(context)!.delegate.localizationController!;
 
   Future<bool> onSplashing() async {
+    await easyLocalizationController.updateAssetLoader(context, const HttpAssetLoader());
     bool isLoggedIn = await authController.initializeUser();
     await Future.delayed(const Duration(seconds: 1));
     SkadiNavigator.pushAndRemove(

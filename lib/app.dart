@@ -1,4 +1,3 @@
-
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
                             analyticCallBack: logScreen,
                           ),
                         ],
-                        useInheritedMediaQuery: useDevicePreview,
                         title: AppConfig.appName,
                         theme: AppTheme.primaryTheme(ThemeController.isDark),
                         debugShowCheckedModeBanner: false,

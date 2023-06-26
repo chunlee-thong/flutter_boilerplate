@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeController extends ChangeNotifier {
@@ -14,7 +13,7 @@ class ThemeController extends ChangeNotifier {
   ///Intialize this method at main function to immediately get system brightness
   static Future<void> initializeTheme() async {
     _spf = await SharedPreferences.getInstance();
-    var systemBrightness = SchedulerBinding.instance.window.platformBrightness.name;
+    var systemBrightness = PlatformDispatcher.instance.platformBrightness.name;
     String savedTheme = _spf.getString(kThemeKey) ?? systemBrightness;
     _isDark = _themeStringChecker(savedTheme);
   }

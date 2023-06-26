@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/controllers/user_controller.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:provider/provider.dart';
 
 import '../../pages/home/home_page.dart';
@@ -30,11 +29,11 @@ class _RootPageState extends State<RootPage> {
   void initializeMatomo() async {
     String userId = await LocalStorage.read(key: kIdKey);
     String matomoId = userId.substring(userId.length - 16);
-    await MatomoTracker.instance.initialize(
-      siteId: 123,
-      url: "url",
-      visitorId: matomoId,
-    );
+    // await MatomoTracker.instance.initialize(
+    //   siteId: 123,
+    //   url: "url",
+    //   visitorId: matomoId,
+    // );
   }
 
   @override

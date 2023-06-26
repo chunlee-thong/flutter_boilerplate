@@ -82,7 +82,7 @@ class AppTheme {
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: theme.scaffoldBackgroundColor,
-        foregroundColor: theme.textTheme.bodyText1?.color,
+        foregroundColor: theme.textTheme.bodyLarge?.color,
       ),
     );
     return theme;

@@ -37,7 +37,7 @@ const TextStyle kOverLineStyle = TextStyle(
 extension StyleExtension on TextStyle {
   TextStyle get primary => copyWith(color: AppColor.primary);
   TextStyle primaryFont(BuildContext context) => copyWith(
-        fontFamily: context.textTheme.bodyText1?.fontFamily,
+        fontFamily: context.textTheme.bodyLarge?.fontFamily,
       );
   TextStyle get accent => copyWith(color: AppColor.accent);
 }
